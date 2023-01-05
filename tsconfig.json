@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es2017",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -14,18 +14,17 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "baseUrl": ".",
+    "baseUrl": "./src/",
     "paths": {
-      "@components/*": ["./src/components/*"],
-      "@icons/*": ["./src/components/icons/*"],
-      "@utils/*": ["./src/utils/*"],
+      "@components/*": ["./components/*"],
+      "@icons/*": ["./components/icons/*"],
+      "@utils/*": ["./utils/*"],
       "@styles/*": ["./styles/*"],
-      "@hooks/*": ["./src/hooks/*"],
-      "@common/*": ["./src/common/*"],
-      "@api/*": ["./src/api/*"],
+      "@hooks/*": ["./hooks/*"],
+      "@api/*": ["./api/*"],
       "@providers/*": ["src/app-providers/*"],
-      "@pages/*": ["./src/pages/*"],
-      "@lib/*": ["./src/lib/*"]
+      "@pages/*": ["./pages/*"],
+      "@lib/*": ["./lib/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

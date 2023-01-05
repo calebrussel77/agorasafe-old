@@ -1,3 +1,8 @@
+/**
+ * CSS Import statements 
+ */
+@import '../src/components/lib/spinner/spinner.style.css';
+
 :root {
   /* #354cd0 => blue */
   --color-brand-50: 241 244 253;

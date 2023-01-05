@@ -44,40 +44,42 @@ export default function MyApp({Component, pageProps}: AppPropsWithLayout) {
   return (
     <>
       <DefaultSeo
-        defaultTitle="Photoboard - Commandez pour transformer vos photos sous forme de tableau"
-        titleTemplate="%s | Photoboard - Commandez pour transformer vos photos sous forme de tableau"
+        defaultTitle="Coiffureauthen. - Localisez et prenez rendez-vous auprès de vos coiffeurs en ligne"
+        titleTemplate="%s | Coiffureauthen. - Localisez et prenez rendez-vous auprès de vos coiffeurs en ligne"
         languageAlternates={[
-          {href: 'https://www.photoboard.com/', hrefLang: 'en'},
-          {href: 'https://www.photoboard.com/fr', hrefLang: 'fr'},
+          {href: 'https://www.Coiffureauthen.com/', hrefLang: 'en'},
+          {href: 'https://www.Coiffureauthen.com/fr', hrefLang: 'fr'},
         ]}
-        description="Transformez vos photos sous forme de tableau de tous types (bois, verres, etc.), pour votre maison. Nous vous proposons également la conception de bâches, ainsi que des traitements photos."
+        description="Localisez et prenez rendez-vous auprès de vos coiffeurs où que vous soyez et quand vous le
+        souhaitez. Pour les professionels/amateurs de coiffure nous
+        facilitons votre réferencement sur le web tout en vous donnant la flexibilité de manager vos rendez-vous"
         openGraph={{
           type: 'website',
           locale: 'fr_FR',
-          url: 'https://www.photoboard.com/',
+          url: 'https://www.Coiffureauthen.com/',
           images: [
             {
-              url: 'https://res.cloudinary.com/lerussecaleb/image/upload/v1666462290/photoboard-preview_iyontu.png',
+              url: 'https://res.cloudinary.com/lerussecaleb/image/upload/v1666462290/Coiffureauthen.-preview_iyontu.png',
               width: 500,
               height: 500,
-              alt: 'Photoboard preview',
+              alt: 'Coiffureauthen. preview',
               type: 'image/png',
             },
           ],
-          site_name: 'Photoboard',
+          site_name: 'Coiffureauthen.',
         }}
       />
       <Head>
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="application-name" content="Photoboard" />
-        <meta name="apple-mobile-web-app-title" content="Photoboard" />
+        <meta name="application-name" content="Coiffureauthen." />
+        <meta name="apple-mobile-web-app-title" content="Coiffureauthen." />
         <meta name="theme-color" content="#ffff" />
         <meta name="msapplication-navbutton-color" content="#ffff" />
         <meta name="author" content="Caleb russel" />
         <meta
           name="keywords"
-          content="Photoboard, photos, images, tableau en bois, bâches, perciglace, vente, shop "
+          content="Coiffureauthen., photos, images, tableau en bois, bâches, perciglace, vente, shop "
         />
         <meta
           name="apple-mobile-web-app-status-bar-style"
