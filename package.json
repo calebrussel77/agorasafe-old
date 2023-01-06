@@ -8,6 +8,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "type-check": "tsc",
     "lint": "next lint --ignore-path .gitignore .",
     "test": "jest",
     "pre-commit": "lint-staged",

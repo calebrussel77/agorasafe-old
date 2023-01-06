@@ -2,6 +2,8 @@
 import clsx from 'clsx';
 import {ElementType, MouseEventHandler, ReactNode} from 'react';
 
+import {composeUniqueKey} from '@utils/avatar';
+
 import {Avatar, AvatarProps, AvatarSize} from '../avatar/avatar';
 import {Popover} from '../popover/popover';
 import {usePopoverState} from '../popover/usePopoverState';
@@ -35,7 +37,7 @@ export interface AvatarGroupProps {
   /**
    * Component used to render each avatar
    */
-  avatar?: ElementType<AvatarMoreProps>;
+  avatar?: ElementType<AvatarProps>;
 
   /**
    * The maximum number of avatars allowed in the list.
@@ -60,7 +62,7 @@ export interface AvatarGroupProps {
    * Array of avatar data passed to each `avatar` component.
    * These props will be spread on to the component passed into avatar.
    */
-  data: Array<AvatarProps>;
+  data: Array<AvatarMoreProps>;
 
   /**
    * Handle the click event on the avatar item.
@@ -178,7 +180,7 @@ function getOverrides(
 
 const AvatarGroup = ({
   appearance = 'stack',
-  avatar = Avatar,
+  avatar = Avatar as any,
   data,
   isTooltipDisabled,
   maxCount,
@@ -311,10 +313,3 @@ const AvatarGroup = ({
 };
 
 export default AvatarGroup;
-
-export const composeUniqueKey = (props: AvatarProps, index: number) => {
-  if (props.key) {
-    return props.key;
-  }
-  return index;
-};

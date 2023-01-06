@@ -3,7 +3,7 @@ import {type VariantProps, cva} from 'class-variance-authority';
 import React from 'react';
 import {twMerge} from 'tailwind-merge';
 
-import {BtnSpinner} from '../spinner/Spinner';
+import {BtnSpinner} from '../spinner/spinner';
 
 const button = cva('gap-2 transition ease-in-out duration-300', {
   variants: {

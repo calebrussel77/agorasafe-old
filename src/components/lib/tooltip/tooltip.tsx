@@ -12,7 +12,7 @@ export type TooltipProps = React.HTMLAttributes<HTMLDivElement> &
   TooltipOptions &
   PopupProps;
 
-export const TooltipUI = forwardRef<any, TooltipProps>(
+export const Tooltip = forwardRef<any, TooltipProps>(
   (props, ref): React.ReactElement => {
     const {
       children,
@@ -52,4 +52,4 @@ export const TooltipUI = forwardRef<any, TooltipProps>(
   }
 );
 
-TooltipUI.displayName = 'TooltipUI';
+Tooltip.displayName = 'Tooltip';

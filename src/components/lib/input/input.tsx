@@ -2,7 +2,7 @@ import {type VariantProps, cva} from 'class-variance-authority';
 import clsx from 'clsx';
 import React, {ReactElement, forwardRef} from 'react';
 
-import {BtnSpinner} from '../spinner/Spinner';
+import {BtnSpinner} from '../spinner/spinner';
 
 const inputToken = cva(
   [
@@ -88,7 +88,6 @@ export const Input = forwardRef<HTMLInputElement, InputGlobalProps>(
         )}
         <input
           ref={ref}
-          value={props.value}
           onChange={handleOnchange}
           className={inputToken({
             variant,

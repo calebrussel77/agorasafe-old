@@ -2,7 +2,7 @@ import {type VariantProps, cva} from 'class-variance-authority';
 import clsx from 'clsx';
 import React, {ReactElement, forwardRef} from 'react';
 
-import {BtnSpinner} from '../spinner/Spinner';
+import {BtnSpinner} from '../spinner/spinner';
 
 const textarea = cva(
   [
