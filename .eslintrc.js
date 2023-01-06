@@ -29,11 +29,16 @@ module.exports = {
   ],
   ignorePatterns: ['.eslintrc.js', '**/*.config.js'],
   plugins: ['react', '@typescript-eslint'],
-
   rules: {
     '@typescript-eslint/no-unsafe-assignment': 'off',
     'react/no-unknown-property': 0,
     'no-unused-vars': [1, {args: 'after-used', varsIgnorePattern: '^_'}],
+    'react/no-unescaped-entities': 0,
+    // "linebreak-style": ["error", "unix"],
+    // "semi": ["error", "always"],
+    'no-console': 'off',
+    'react/no-unknown-property': 0,
+    'no-unsafe-optional-chaining': 0,
     '@typescript-eslint/no-unsafe-call': 'off',
     'testing-library/no-render-in-setup': [
       'error',
