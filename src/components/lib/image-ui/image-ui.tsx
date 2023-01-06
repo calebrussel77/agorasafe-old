@@ -74,7 +74,7 @@ export const ImageUI = forwardRef<HTMLDivElement, ImageUIProps>(
     const imageSize = sizes[size];
     const imageFontSize = fontSize || `calc(${imageSize} / 2.5)`;
     const [error, setError] = useState(false);
-
+    const hasImage = src && !error;
     const imageSrc = noNeedApiPrefix
       ? src
       : `${process.env.NEXT_PUBLIC_BASE_UPLOAD_URL}/${src}`;
@@ -93,7 +93,7 @@ export const ImageUI = forwardRef<HTMLDivElement, ImageUIProps>(
       <div
         aria-label={name}
         style={{
-          background: backgroundColor,
+          background: hasImage ? 'transparent' : backgroundColor,
           alignItems: 'center',
           justifyContent: 'center',
           position: 'relative',
@@ -110,15 +110,23 @@ export const ImageUI = forwardRef<HTMLDivElement, ImageUIProps>(
         }}
         ref={ref}
         role="img"
-        className={clsx(className, `flex`)}
+        className={clsx(className, `flex overflow-hidden`)}
         {...rest}
       >
-        {src && !error && (
+        {hasImage && (
           <Image
             alt={name}
             src={imageSrc}
             blurDataURL={blurDataURL()}
             layout="fill"
+            style={{
+              borderRadius:
+                shape === 'circle'
+                  ? '9999px'
+                  : shape === 'square'
+                  ? '0px'
+                  : '0.375rem',
+            }}
             placeholder="blur"
             onError={() => setError(true)}
             className={classes}

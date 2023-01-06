@@ -12,7 +12,7 @@ const progress = new ProgressBar({
   size: 2,
   className: 'bar-of-progress',
   delay: 100,
-  color: '#eab308',
+  color: '#354CD0',
 });
 
 // this fixes safari jumping to the bottom of the page
@@ -44,11 +44,11 @@ export default function MyApp({Component, pageProps}: AppPropsWithLayout) {
   return (
     <>
       <DefaultSeo
-        defaultTitle="Coiffureauthen. - Localisez et prenez rendez-vous auprès de vos coiffeurs en ligne"
-        titleTemplate="%s | Coiffureauthen. - Localisez et prenez rendez-vous auprès de vos coiffeurs en ligne"
+        defaultTitle="agorasafe. - Localisez et prenez rendez-vous auprès de vos coiffeurs en ligne"
+        titleTemplate="%s | agorasafe. - Localisez et prenez rendez-vous auprès de vos coiffeurs en ligne"
         languageAlternates={[
-          {href: 'https://www.Coiffureauthen.com/', hrefLang: 'en'},
-          {href: 'https://www.Coiffureauthen.com/fr', hrefLang: 'fr'},
+          {href: 'https://www.agorasafe.com/', hrefLang: 'en'},
+          {href: 'https://www.agorasafe.com/fr', hrefLang: 'fr'},
         ]}
         description="Localisez et prenez rendez-vous auprès de vos coiffeurs où que vous soyez et quand vous le
         souhaitez. Pour les professionels/amateurs de coiffure nous
@@ -56,30 +56,30 @@ export default function MyApp({Component, pageProps}: AppPropsWithLayout) {
         openGraph={{
           type: 'website',
           locale: 'fr_FR',
-          url: 'https://www.Coiffureauthen.com/',
+          url: 'https://www.agorasafe.com/',
           images: [
             {
-              url: 'https://res.cloudinary.com/lerussecaleb/image/upload/v1666462290/Coiffureauthen.-preview_iyontu.png',
+              url: 'https://res.cloudinary.com/lerussecaleb/image/upload/v1666462290/agorasafe.-preview_iyontu.png',
               width: 500,
               height: 500,
-              alt: 'Coiffureauthen. preview',
+              alt: 'agorasafe. preview',
               type: 'image/png',
             },
           ],
-          site_name: 'Coiffureauthen.',
+          site_name: 'agorasafe.',
         }}
       />
       <Head>
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="application-name" content="Coiffureauthen." />
-        <meta name="apple-mobile-web-app-title" content="Coiffureauthen." />
+        <meta name="application-name" content="agorasafe." />
+        <meta name="apple-mobile-web-app-title" content="agorasafe." />
         <meta name="theme-color" content="#ffff" />
         <meta name="msapplication-navbutton-color" content="#ffff" />
         <meta name="author" content="Caleb russel" />
         <meta
           name="keywords"
-          content="Coiffureauthen., photos, images, tableau en bois, bâches, perciglace, vente, shop "
+          content="agorasafe., photos, images, tableau en bois, bâches, perciglace, vente, shop "
         />
         <meta
           name="apple-mobile-web-app-status-bar-style"

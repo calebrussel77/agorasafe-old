@@ -1,8 +1,11 @@
 // button.tsx
 import {type VariantProps, cva} from 'class-variance-authority';
 import React from 'react';
+import {twMerge} from 'tailwind-merge';
 
-const button = cva('', {
+import {BtnSpinner} from '../spinner/Spinner';
+
+const button = cva('gap-2 transition ease-in-out duration-300', {
   variants: {
     variant: {
       primary: [
@@ -32,11 +35,11 @@ const button = cva('', {
         'bg-white',
         'text-gray-900',
         'border-gray-400',
-        'hover:underline',
+        'hover:bg-gray-100',
       ],
     },
     size: {
-      sm: ['text-sm', 'py-1.5', 'px-2'],
+      sm: ['text-base', 'py-1.5', 'px-3'],
       md: ['text-base', 'py-2', 'px-3'],
       lg: ['text-lg', 'py-2.5', 'px-4'],
       xl: ['text-xl', 'py-3', 'px-5'],
@@ -57,17 +60,30 @@ const button = cva('', {
 
 export interface ButtonProps
   extends React.HTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof button> {}
+    VariantProps<typeof button> {
+  isLoding?: boolean;
+}
 
 export const Button: React.FC<ButtonProps> = ({
   className,
   variant,
   size,
   shape,
+  isLoding,
+  children,
   ...props
 }) => (
   <button
-    className={button({variant, size, shape, class: className})}
+    className={twMerge(button({variant, size, shape}), className)}
     {...props}
-  />
+  >
+    {isLoding ? (
+      <>
+        <BtnSpinner className="h-5 w-5" />
+        <span>Loading...</span>
+      </>
+    ) : (
+      children
+    )}
+  </button>
 );

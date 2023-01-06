@@ -6,7 +6,7 @@ import {BtnSpinner} from '../spinner/Spinner';
 
 const textarea = cva(
   [
-    'w-full focus:caret-primary-500 focus:outline-none focus:border-0 disabled:cursor-not-allowed disabled:bg-gray-200',
+    'w-full focus:caret-primary-500 focus:outline-none rounded-md focus:border-0 disabled:cursor-not-allowed disabled:bg-gray-200',
     'disabled:opacity-70 disabled:cursor-not-allowed',
     'transition duration-300 ease-in-out',
   ],
@@ -27,7 +27,7 @@ const textarea = cva(
       size: {
         xs: ['text-xs', 'py-1', 'px-2'],
         sm: ['text-sm', 'py-1.5', 'px-2'],
-        md: ['text-[13px]', 'py-2.5', 'px-2'],
+        md: ['text-base', 'py-1.5', 'px-2'],
         lg: ['text-lg', 'py-3', 'px-4'],
         xl: ['text-xl', 'py-3', 'px-4'],
       },
