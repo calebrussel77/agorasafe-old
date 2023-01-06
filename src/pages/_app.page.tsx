@@ -44,42 +44,40 @@ export default function MyApp({Component, pageProps}: AppPropsWithLayout) {
   return (
     <>
       <DefaultSeo
-        defaultTitle="agorasafe. - Localisez et prenez rendez-vous auprès de vos coiffeurs en ligne"
-        titleTemplate="%s | agorasafe. - Localisez et prenez rendez-vous auprès de vos coiffeurs en ligne"
+        defaultTitle="agorasafe - Trouvez les meilleurs services freelance pour n'importe quel travail."
+        titleTemplate="%s | agorasafe - Trouvez les meilleurs services freelance pour n'importe quel travail."
         languageAlternates={[
           {href: 'https://www.agorasafe.com/', hrefLang: 'en'},
           {href: 'https://www.agorasafe.com/fr', hrefLang: 'fr'},
         ]}
-        description="Localisez et prenez rendez-vous auprès de vos coiffeurs où que vous soyez et quand vous le
-        souhaitez. Pour les professionels/amateurs de coiffure nous
-        facilitons votre réferencement sur le web tout en vous donnant la flexibilité de manager vos rendez-vous"
+        description="Trouvez les meilleurs services freelance pour n'importe quel travail."
         openGraph={{
           type: 'website',
           locale: 'fr_FR',
           url: 'https://www.agorasafe.com/',
           images: [
             {
-              url: 'https://res.cloudinary.com/lerussecaleb/image/upload/v1666462290/agorasafe.-preview_iyontu.png',
+              url: 'https://res.cloudinary.com/lerussecaleb/image/upload/v1673026579/preview-agorasafe_mfysvz.png',
               width: 500,
               height: 500,
-              alt: 'agorasafe. preview',
+              alt: 'agorasafe preview',
               type: 'image/png',
             },
           ],
-          site_name: 'agorasafe.',
+          site_name: 'agorasafe',
         }}
       />
       <Head>
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="application-name" content="agorasafe." />
-        <meta name="apple-mobile-web-app-title" content="agorasafe." />
+        <meta name="application-name" content="agorasafe" />
+        <meta name="apple-mobile-web-app-title" content="agorasafe" />
         <meta name="theme-color" content="#ffff" />
         <meta name="msapplication-navbutton-color" content="#ffff" />
         <meta name="author" content="Caleb russel" />
         <meta
           name="keywords"
-          content="agorasafe., photos, images, tableau en bois, bâches, perciglace, vente, shop "
+          content="agorasafe, photos, images, tableau en bois, bâches, perciglace, vente, shop "
         />
         <meta
           name="apple-mobile-web-app-status-bar-style"
