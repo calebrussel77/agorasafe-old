@@ -22,11 +22,12 @@ const HeroSection = () => {
               </h1>
               <p className="w-full max-w-lg mx-auto lg:mx-0 text-base sm:text-lg text-gray-500">
                 Recherchez facilement des prestataires près de chez vous, qui
-                seront ravis d'éffectuer vos travaux à des coûts très
-                accessible.
+                seront ravis d'éffectuer vos travaux à des coûts très accessible
               </p>
               <div className="mt-8">
-                <GlobalSearch />
+                <div className="max-w-xl w-full">
+                  <GlobalSearch />
+                </div>
                 <div className="mt-10">
                   <h3 className="uppercase text-xs mb-3 font-medium text-gray-500">
                     Ils nous font confiance
