@@ -2,6 +2,9 @@
  * CSS Import statements 
  */
 @import '../src/components/lib/spinner/spinner.style.css';
+@import 'swiper/css';
+@import 'swiper/css/effect-cube';
+@import 'swiper/css/pagination';
 
 :root {
   /* #354cd0 => blue */

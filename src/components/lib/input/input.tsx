@@ -6,7 +6,7 @@ import {BtnSpinner} from '../spinner/spinner';
 
 const inputToken = cva(
   [
-    'w-full focus:caret-primary-500 focus:outline-none rounded focus:border-0 disabled:cursor-not-allowed disabled:bg-gray-200',
+    'w-full rounded ',
     'disabled:opacity-70 disabled:cursor-not-allowed',
     'transition duration-300 ease-in-out',
   ],
@@ -14,19 +14,19 @@ const inputToken = cva(
     variants: {
       variant: {
         primary: [
-          'border-2 border-gray-300 placeholder:text-[#9ca3af]',
+          'border border-gray-300 placeholder:text-[#9ca3af]',
           'hover:bg-gray-100 disabled:hover:bg-gray-200',
-          'required:border-red-500 focus:bg-transparent focus:ring-2 focus:ring-primary-500 focus:border-primary-500',
+          'focus:outline-none focus:caret-primary-500 required:border-red-500 focus:bg-transparent focus:ring-1 focus:ring-primary-500 focus:border-primary-500',
         ],
         secondary: [
-          'border-2 border-gray-300 placeholder:text-[#9ca3af]',
+          'border border-gray-300 placeholder:text-[#9ca3af]',
           'hover:bg-gray-100 disabled:hover:bg-gray-200',
-          'required:border-red-500 focus:bg-transparent focus:ring-2 focus:ring-secondary-500 focus:border-secondary-500',
+          'focus:outline-none focus:caret-secondary-500 required:border-red-500 focus:bg-transparent focus:ring-1 focus:ring-secondary-500 focus:border-secondary-500',
         ],
         subtle: [
           'bg-transparent border-none border-0 placeholder:text-[#9ca3af]',
           'hover:bg-slate-50 disabled:hover:bg-transparent',
-          'required:border-red-500 focus:border-0 focus:ring-0 focus-within:border-0',
+          'focus:outline-none required:border-red-500 focus:border-0 focus:ring-0 focus-within:border-0',
         ],
       },
       size: {

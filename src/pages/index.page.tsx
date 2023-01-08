@@ -3,20 +3,22 @@ import React, {ReactElement} from 'react';
 
 import {Layout} from '@components/layouts/layouts';
 
+import {CtaSection} from './__components/cta-section/cta-section';
 import {FeatureSection} from './__components/feature-section/feature-section';
 import {HeroSection} from './__components/hero-section/hero-section';
 import {HomeBackground} from './__components/home-background/home-background';
+import {PopularProviderServicesSection} from './__components/popular-provider-services-section/popular-provider-services-section';
+import {PopularServicesSection} from './__components/popular-services-section/popular-services-section';
 
 const Home = () => {
   return (
     <div className="isolate overflow-x-hidden">
       <HomeBackground />
-      <section className="relative pt-4 lg:overflow-hidden lg:pb-14">
-        <div className="mx-auto max-w-screen-2xl lg:px-8">
-          <HeroSection />
-        </div>
-      </section>
+      <HeroSection />
+      <PopularServicesSection />
       <FeatureSection />
+      <PopularProviderServicesSection />
+      <CtaSection />
     </div>
   );
 };

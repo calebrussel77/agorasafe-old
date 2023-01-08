@@ -44,13 +44,15 @@ export default function MyApp({Component, pageProps}: AppPropsWithLayout) {
   return (
     <>
       <DefaultSeo
-        defaultTitle="agorasafe - Trouvez les meilleurs services freelance pour n'importe quel travail."
-        titleTemplate="%s | agorasafe - Trouvez les meilleurs services freelance pour n'importe quel travail."
+        defaultTitle="AgoraSafe - Trouvez les meilleurs services adaptés pour n'importe quel travail."
+        titleTemplate="%s | AgoraSafe - Trouvez les meilleurs services adaptés pour n'importe quel travail."
         languageAlternates={[
           {href: 'https://www.agorasafe.com/', hrefLang: 'en'},
           {href: 'https://www.agorasafe.com/fr', hrefLang: 'fr'},
         ]}
-        description="Trouvez les meilleurs services freelance pour n'importe quel travail."
+        description="Recherchez facilement des prestataires près de chez vous, qui
+        seront ravis d'éffectuer vos travaux à des coûts très
+        accessible."
         openGraph={{
           type: 'website',
           locale: 'fr_FR',

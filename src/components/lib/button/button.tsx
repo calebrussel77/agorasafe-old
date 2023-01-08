@@ -21,9 +21,9 @@ const button = cva('gap-2 transition ease-in-out duration-300', {
         'hover:bg-secondary-700 focus:ring-2 focus:ring-secondary-500',
       ],
       subtle: [
-        'bg-gray-900/5 border border-sm',
+        'bg-white shadow-md',
         'text-gray-900',
-        'hover:bg-gray-900/10 focus:ring-2 focus:ring-gray-500',
+        'hover:bg-gray-100 focus:ring-2 focus:ring-gray-500',
       ],
       link: [
         'bg-white',
@@ -32,7 +32,7 @@ const button = cva('gap-2 transition ease-in-out duration-300', {
         'hover:underline hover:text-primary-500',
       ],
       'subtle-link': [
-        'bg-white',
+        'bg-transparent',
         'text-gray-900',
         'border-gray-400',
         'hover:bg-gray-100',
@@ -58,11 +58,9 @@ const button = cva('gap-2 transition ease-in-out duration-300', {
   },
 });
 
-export interface ButtonProps
-  extends React.HTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof button> {
-  isLoding?: boolean;
-}
+export type ButtonProps = React.HTMLAttributes<HTMLButtonElement> &
+  VariantProps<typeof button> &
+  React.ComponentPropsWithRef<'button'> & {isLoding?: boolean};
 
 export const Button: React.FC<ButtonProps> = ({
   className,

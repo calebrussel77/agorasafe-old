@@ -1,41 +1,12 @@
 import Link from 'next/link';
 import {FaChevronRight} from 'react-icons/fa';
-import {
-  FaChartArea,
-  FaHeart,
-  FaInbox,
-  FaPenSquare,
-  FaStickyNote,
-  FaTrash,
-  FaUsers,
-} from 'react-icons/fa';
+import {FaChartArea, FaInbox, FaPenSquare, FaTrash} from 'react-icons/fa';
 
 import {LogoIcon} from '@components/icons/logo-icon/logo-icon';
+import {headerNavigations} from '@components/layouts/header/header';
 
 import {HomeBackground} from './__components/home-background/home-background';
 
-const links = [
-  {
-    title: 'Coiffeurs',
-    description: 'Learn how to integrate our tools with your app',
-    icon: FaChartArea,
-  },
-  {
-    title: 'Market place',
-    description: 'A complete API reference for our libraries',
-    icon: FaPenSquare,
-  },
-  {
-    title: 'Inpsirations coiffure',
-    description: 'Installation guides that cover popular setups',
-    icon: FaTrash,
-  },
-  {
-    title: 'Localisation',
-    description: 'Read our latest news and articles',
-    icon: FaInbox,
-  },
-];
 const social = [
   {
     name: 'Facebook',
@@ -104,11 +75,11 @@ export default function Example() {
   return (
     <div className="isolate overflow-hidden">
       <HomeBackground className="absolute right-[4rem] left-3 -z-10 transform-gpu overflow-hidden blur-3xl sm:right-[10rem] -top-10" />
-      <main className="mx-auto w-full max-w-7xl px-6 lg:px-8">
+      <main className="mx-auto max-w-screen-xl px-8">
         <div className="flex-shrink-0 pt-12">
           <Link href="/">
             <a>
-              <LogoIcon className="mx-auto h-10 w-auto" />
+              <LogoIcon className="mx-auto h-8 w-auto" />
             </a>
           </Link>
         </div>
@@ -130,7 +101,7 @@ export default function Example() {
               role="list"
               className="mt-4 divide-y divide-gray-200 border-t border-b border-gray-200"
             >
-              {links.map((link, linkIdx) => (
+              {headerNavigations.map((link, linkIdx) => (
                 <li
                   key={linkIdx}
                   className="relative flex items-start space-x-4 py-6"
@@ -151,7 +122,7 @@ export default function Example() {
                             className="absolute inset-0"
                             aria-hidden="true"
                           />
-                          {link.title}
+                          {link.name}
                         </a>
                       </span>
                     </h3>
@@ -179,10 +150,10 @@ export default function Example() {
           </div>
         </div>
       </main>
-      <footer className="mx-auto w-full max-w-7xl px-6 lg:px-8">
+      <footer className="mx-auto max-w-screen-xl px-8">
         <div className="border-t border-gray-200 py-6 text-center md:flex md:justify-between">
           <p className="text-base text-gray-400">
-            &copy; Agorasafe, Inc. Tous droits réservés.
+            &copy; {new Date().getFullYear()} AgoraSafe. Tous droits réservés.
           </p>
           <div className="mt-6 flex justify-center space-x-8 md:mt-0">
             {social.map((item, itemIdx) => (

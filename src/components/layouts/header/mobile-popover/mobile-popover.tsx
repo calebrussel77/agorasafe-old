@@ -1,5 +1,5 @@
 import {FC, forwardRef} from 'react';
-import {FaTimes} from 'react-icons/fa';
+import {HiOutlineX} from 'react-icons/hi';
 
 import {LogoIcon} from '@components/icons/logo-icon/logo-icon';
 import {Button} from '@components/lib/button/button';
@@ -7,6 +7,7 @@ import {Button} from '@components/lib/button/button';
 type navigationItem = {
   name: string;
   href: string;
+  icon: any;
 };
 
 type MobilePopoverProps = {
@@ -23,12 +24,9 @@ const MobilePopover = forwardRef<HTMLDivElement, MobilePopoverProps>(
             <LogoIcon className="h-6 w-auto" />
           </div>
           <div className="-mr-2">
-            <Button
-              onClick={onClose}
-              className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-secondary-600"
-            >
+            <Button onClick={onClose} variant="subtle" className="shadow-none">
               <span className="sr-only">Close menu</span>
-              <FaTimes className="h-6 w-6" aria-hidden="true" />
+              <HiOutlineX className="h-6 w-6" aria-hidden="true" />
             </Button>
           </div>
         </div>
@@ -38,25 +36,23 @@ const MobilePopover = forwardRef<HTMLDivElement, MobilePopoverProps>(
               <a
                 key={item.name}
                 href={item.href}
-                className="block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-50"
+                className="rounded-md flex items-center gap-2 px-3 py-2 text-base text-gray-700 font-semibold hover:bg-gray-50"
               >
-                {item.name}
+                {<item.icon className="h-5 w-5" />}
+                <span>{item.name}</span>
               </a>
             ))}
           </div>
-          <div className="mt-6 px-5">
-            <a
-              href="#"
-              className="block w-full rounded-md bg-gradient-to-r from-primary-500 to-secondary-600 py-3 px-4 text-center font-medium shadow hover:from-primary-600 hover:to-secondary-700"
-            >
-              Start free trial
-            </a>
+          <div className="mt-6 px-5 w-full">
+            <Button variant="secondary" className="whitespace-nowrap w-full">
+              Proposer un service
+            </Button>
           </div>
           <div className="mt-6 px-5">
             <p className="text-center text-base font-medium text-gray-500">
-              Existing customer?{' '}
+              Client existant ?{' '}
               <a href="#" className="text-gray-900 hover:underline">
-                Login
+                Connexion
               </a>
             </p>
           </div>

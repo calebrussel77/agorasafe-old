@@ -1,138 +1,289 @@
+import {
+  HiBolt,
+  HiChatBubbleBottomCenterText,
+  HiEnvelope,
+  HiGlobeAlt,
+  HiScale,
+} from 'react-icons/hi2';
+
 import {ImageUI} from '@components/lib/image-ui/image-ui';
 
-const blogPosts = [
+const transferFeatures = [
   {
     id: 1,
-    title: 'Boost your conversion rate',
-    href: '#',
-    date: 'Mar 16, 2020',
-    datetime: '2020-03-16',
-    category: {name: 'Article', href: '#'},
-    imageUrl:
-      'https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80',
-    preview:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto accusantium praesentium eius, ut atque fuga culpa, similique sequi cum eos quis dolorum.',
-    author: {
-      name: 'Roel Aufderehar',
-      imageUrl:
-        'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      href: '#',
-    },
-    readingLength: '6 min',
+    name: 'Prix ultra compétitifs',
+    description:
+      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+    icon: HiGlobeAlt,
   },
   {
     id: 2,
-    title: 'How to use search engine optimization to drive sales',
-    href: '#',
-    date: 'Mar 10, 2020',
-    datetime: '2020-03-10',
-    category: {name: 'Video', href: '#'},
-    imageUrl:
-      'https://images.unsplash.com/photo-1547586696-ea22b4d4235d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80',
-    preview:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit facilis asperiores porro quaerat doloribus, eveniet dolore. Adipisci tempora aut inventore optio animi., tempore temporibus quo laudantium.',
-    author: {
-      name: 'Brenna Goyette',
-      imageUrl:
-        'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      href: '#',
-    },
-    readingLength: '4 min',
+    name: 'Avis et commentaire de la communauté nécessaires pour la prise de décision',
+    description:
+      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+    icon: HiScale,
   },
   {
     id: 3,
-    title: 'Improve your customer experience',
-    href: '#',
-    date: 'Feb 12, 2020',
-    datetime: '2020-02-12',
-    category: {name: 'Case Study', href: '#'},
-    imageUrl:
-      'https://images.unsplash.com/photo-1492724441997-5dc865305da7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80',
-    preview:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint harum rerum voluptatem quo recusandae magni placeat saepe molestiae, sed excepturi cumque corporis perferendis hic.',
-    author: {
-      name: 'Daniela Metz',
-      imageUrl:
-        'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      href: '#',
-    },
-    readingLength: '11 min',
+    name: 'Commandez et localisez facilement',
+    description:
+      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+    icon: HiBolt,
+  },
+];
+const communicationFeatures = [
+  {
+    id: 1,
+    name: 'Gérez vos commandes facilement',
+    description:
+      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+    icon: HiChatBubbleBottomCenterText,
+  },
+  {
+    id: 2,
+    name: "Bénéficiez d'un réferencement gratuit de vos services sur le web",
+    description:
+      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+    icon: HiEnvelope,
+  },
+  {
+    id: 3,
+    name: 'Gagnez en notoriété en fournissant un service de qualité',
+    description:
+      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+    icon: HiEnvelope,
   },
 ];
 
 export function FeatureSection() {
   return (
-    <div className="relative bg-gray-50 py-16 sm:py-20">
-      <div className="relative">
-        <div className="mx-auto max-w-md px-6 text-center sm:max-w-3xl lg:max-w-7xl lg:px-8">
-          <h2 className="text-lg font-semibold text-primary-600">Populaires</h2>
-          <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-            Helpful Resources
-          </p>
-          <p className="mx-auto mt-5 max-w-prose text-xl text-gray-500">
-            Phasellus lorem quam molestie id quisque diam aenean nulla in.
-            Accumsan in quis quis nunc, ullamcorper malesuada. Eleifend
-            condimentum id viverra nulla.
+    <div className="overflow-hidden py-16">
+      <div className="relative mx-auto max-w-screen-xl px-6 lg:px-8">
+        <svg
+          className="absolute left-full hidden -translate-x-1/2 -translate-y-1/4 transform lg:block"
+          width={404}
+          height={784}
+          fill="none"
+          viewBox="0 0 404 784"
+          aria-hidden="true"
+        >
+          <defs>
+            <pattern
+              id="b1e6e422-73f8-40a6-b5d9-c8586e37e0e7"
+              x={0}
+              y={0}
+              width={20}
+              height={20}
+              patternUnits="userSpaceOnUse"
+            >
+              <rect
+                x={0}
+                y={0}
+                width={4}
+                height={4}
+                className="text-gray-200"
+                fill="currentColor"
+              />
+            </pattern>
+          </defs>
+          <rect
+            width={404}
+            height={784}
+            fill="url(#b1e6e422-73f8-40a6-b5d9-c8586e37e0e7)"
+          />
+        </svg>
+        <div className="relative">
+          <h2 className="text-center text-3xl font-bold leading-8 tracking-tight text-gray-900 sm:text-4xl">
+            La meilleure manière de faciliter les échanges
+          </h2>
+          <p className="mx-auto mt-4 max-w-3xl text-center text-xl text-gray-500">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus
+            magnam voluptatum cupiditate veritatis in, accusamus quisquam.
           </p>
         </div>
-        <div className="mx-auto mt-12 grid max-w-md gap-8 px-6 sm:max-w-lg lg:max-w-7xl lg:grid-cols-3 lg:px-8">
-          {blogPosts.map(post => (
-            <div
-              key={post.id}
-              className="flex flex-col overflow-hidden rounded-lg shadow-lg"
-            >
-              <ImageUI
-                className="h-48 w-full object-cover"
-                noNeedApiPrefix
-                src={post.imageUrl}
-                alt=""
-                name=""
-              />
-              <div className="flex flex-1 flex-col justify-between bg-white p-6">
-                <div className="flex-1">
-                  <p className="text-sm font-medium text-cyan-600">
-                    <a href={post.category.href} className="hover:underline">
-                      {post.category.name}
-                    </a>
-                  </p>
-                  <a href={post.href} className="mt-2 block">
-                    <p className="text-xl font-semibold text-gray-900">
-                      {post.title}
-                    </p>
-                    <p className="mt-3 text-base text-gray-500">
-                      {post.preview}
-                    </p>
-                  </a>
-                </div>
-                <div className="mt-6 flex items-center">
-                  <div className="flex-shrink-0">
-                    <a href={post.author.href}>
-                      <ImageUI
-                        className="h-10 w-10"
-                        shape="circle"
-                        noNeedApiPrefix
-                        src={post.author.imageUrl}
-                        alt={post.author.name}
-                        name={post.author.name}
-                      />
-                    </a>
-                  </div>
-                  <div className="ml-3">
-                    <p className="text-sm font-medium text-gray-900">
-                      <a href={post.author.href} className="hover:underline">
-                        {post.author.name}
-                      </a>
-                    </p>
-                    <div className="flex space-x-1 text-sm text-gray-500">
-                      <time dateTime={post.datetime}>{post.date}</time>
-                      <span aria-hidden="true">&middot;</span>
-                      <span>{post.readingLength} read</span>
+
+        <div className="relative mt-12 lg:mt-24 lg:grid lg:grid-cols-2 lg:items-center lg:gap-8">
+          <div className="relative">
+            <h3 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+              Trouvez rapidement la solution à votre problème
+            </h3>
+            <p className="mt-3 text-lg text-gray-500">
+              Bénéficiez de notre large catalogue de vendeurs, pour trouver
+              celui qui répondra parfaitement à votre besoin
+            </p>
+
+            <dl className="mt-10 space-y-10">
+              {transferFeatures.map(item => (
+                <div key={item.id} className="relative">
+                  <dt>
+                    <div className="absolute flex h-12 w-12 items-center justify-center rounded-xl bg-primary-600 text-white">
+                      <item.icon className="h-8 w-8" aria-hidden="true" />
                     </div>
-                  </div>
+                    <p className="ml-16 text-lg font-medium leading-6 text-gray-900">
+                      {item.name}
+                    </p>
+                  </dt>
+                  <dd className="mt-2 ml-16 text-base text-gray-500">
+                    {item.description}
+                  </dd>
                 </div>
-              </div>
+              ))}
+            </dl>
+          </div>
+
+          <div className="relative -mx-4 mt-10 lg:mt-0" aria-hidden="true">
+            <svg
+              className="absolute left-1/2 -translate-x-1/2 translate-y-16 transform lg:hidden"
+              width={784}
+              height={404}
+              fill="none"
+              viewBox="0 0 784 404"
+            >
+              <defs>
+                <pattern
+                  id="ca9667ae-9f92-4be7-abcb-9e3d727f2941"
+                  x={0}
+                  y={0}
+                  width={20}
+                  height={20}
+                  patternUnits="userSpaceOnUse"
+                >
+                  <rect
+                    x={0}
+                    y={0}
+                    width={4}
+                    height={4}
+                    className="text-gray-200"
+                    fill="currentColor"
+                  />
+                </pattern>
+              </defs>
+              <rect
+                width={784}
+                height={404}
+                fill="url(#ca9667ae-9f92-4be7-abcb-9e3d727f2941)"
+              />
+            </svg>
+            <ImageUI
+              noNeedApiPrefix
+              className="relative shadow-md mx-auto h-[480px] w-[430px]"
+              src="/images/maman-africaine-phone.jpg"
+              alt=""
+              name="Mama africaine"
+              shape="rounded"
+            />
+          </div>
+        </div>
+
+        <svg
+          className="absolute right-full hidden translate-x-1/2 translate-y-12 transform lg:block"
+          width={404}
+          height={784}
+          fill="none"
+          viewBox="0 0 404 784"
+          aria-hidden="true"
+        >
+          <defs>
+            <pattern
+              id="64e643ad-2176-4f86-b3d7-f2c5da3b6a6d"
+              x={0}
+              y={0}
+              width={20}
+              height={20}
+              patternUnits="userSpaceOnUse"
+            >
+              <rect
+                x={0}
+                y={0}
+                width={4}
+                height={4}
+                className="text-gray-200"
+                fill="currentColor"
+              />
+            </pattern>
+          </defs>
+          <rect
+            width={404}
+            height={784}
+            fill="url(#64e643ad-2176-4f86-b3d7-f2c5da3b6a6d)"
+          />
+        </svg>
+
+        <div className="relative mt-12 sm:mt-16 lg:mt-24">
+          <div className="lg:grid lg:grid-flow-row-dense lg:grid-cols-2 lg:items-center lg:gap-8">
+            <div className="lg:col-start-2">
+              <h3 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+                Proposez vos services
+              </h3>
+              <p className="mt-3 text-lg text-gray-500">
+                Bénéficiez d'une large communauté d'utilisateurs, pour proposez
+                vos services et produits, tout en restant dans votre périmètre
+                d'action et ce de manière gratuite.
+              </p>
+
+              <dl className="mt-10 space-y-10">
+                {communicationFeatures.map(item => (
+                  <div key={item.id} className="relative">
+                    <dt>
+                      <div className="absolute flex h-12 w-12 items-center justify-center rounded-xl bg-secondary-600 text-white">
+                        <item.icon className="h-8 w-8" aria-hidden="true" />
+                      </div>
+                      <p className="ml-16 text-lg font-medium leading-6 text-gray-900">
+                        {item.name}
+                      </p>
+                    </dt>
+                    <dd className="mt-2 ml-16 text-base text-gray-500">
+                      {item.description}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
             </div>
-          ))}
+
+            <div className="relative -mx-4 mt-10 lg:col-start-1 lg:mt-0">
+              <svg
+                className="absolute left-1/2 -translate-x-1/2 translate-y-16 transform lg:hidden"
+                width={784}
+                height={404}
+                fill="none"
+                viewBox="0 0 784 404"
+                aria-hidden="true"
+              >
+                <defs>
+                  <pattern
+                    id="e80155a9-dfde-425a-b5ea-1f6fadd20131"
+                    x={0}
+                    y={0}
+                    width={20}
+                    height={20}
+                    patternUnits="userSpaceOnUse"
+                  >
+                    <rect
+                      x={0}
+                      y={0}
+                      width={4}
+                      height={4}
+                      className="text-gray-200"
+                      fill="currentColor"
+                    />
+                  </pattern>
+                </defs>
+                <rect
+                  width={784}
+                  height={404}
+                  fill="url(#e80155a9-dfde-425a-b5ea-1f6fadd20131)"
+                />
+              </svg>
+              <ImageUI
+                noNeedApiPrefix
+                className="relative shadow-md mx-auto h-[480px] w-[430px]"
+                src="/images/femme-menage.jpg"
+                alt=""
+                name="femme menage"
+                shape="rounded"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>

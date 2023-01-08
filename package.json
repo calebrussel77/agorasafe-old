@@ -19,6 +19,7 @@
   "dependencies": {
     "@badrap/bar-of-progress": "^0.2.2",
     "@headlessui/react": "^1.7.3",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/line-clamp": "^0.4.2",
     "@tailwindcss/typography": "^0.5.7",
@@ -36,6 +37,7 @@
     "react-select": "^5.6.1",
     "react-use": "^17.4.0",
     "reactjs-popup": "^2.0.5",
+    "swiper": "^8.4.5",
     "tailwind-merge": "^1.8.1",
     "whatwg-fetch": "^3.6.2"
   },
