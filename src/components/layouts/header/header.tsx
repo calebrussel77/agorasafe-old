@@ -1,5 +1,7 @@
 import {Popover, Transition} from '@headlessui/react';
+import {useAppearOnTarget} from '@hooks/use-appear-on-target/use-appear-on-target';
 import Axios from 'axios';
+import axios from 'axios';
 import clsx from 'clsx';
 import {Fragment, useEffect, useRef, useState} from 'react';
 import {
@@ -41,9 +43,10 @@ export const headerNavigations = [
   },
 ];
 
-const sectionOneOptions = {
+const options = {
   rootMargin: '-300px 0px 0px 0px',
 };
+const classNameList = ['border-b', 'border-gray-300', 'bg-white'];
 
 const FormSubscription = ({onSubmit, formRef}) => {
   const [email, setEmail] = useState('');
@@ -82,12 +85,14 @@ const FormSubscription = ({onSubmit, formRef}) => {
 };
 
 const SubscriberLaunchModal = ({dialog}) => {
-  const {mutate, isLoading, isSuccess} = useMutation(formData => {
-    return fetch('https://app.convertkit.com/forms/3997673/subscriptions', {
-      method: 'POST',
-      body: formData as any,
-      headers: {'content-type': 'multipart/form-data'},
-    });
+  const {mutate, isLoading, isSuccess} = useMutation((formData: FormData) => {
+    return axios.post(
+      'https://app.convertkit.com/forms/3997673/subscriptions',
+      formData,
+      {
+        headers: {'content-type': 'multipart/form-data'},
+      }
+    );
   });
 
   const formRef = useRef<HTMLFormElement>(null);
@@ -97,7 +102,7 @@ const SubscriberLaunchModal = ({dialog}) => {
     formData.append('email_address', email_subscription);
     formData.append('fields[first_name]', name_subscription);
     formData.append('user', 'd506b01f-b95b-4c4e-945e-f35dfa9f6a9d');
-    mutate(formData as any);
+    mutate(formData);
   };
 
   return (
@@ -107,7 +112,7 @@ const SubscriberLaunchModal = ({dialog}) => {
         <Modal.Body>
           <div className="my-6 p-2 bg-green-50 text-green-500 flex gap-2 items-center">
             <HiCheckCircle className="h-5 w-5" />
-            <span> Merci d'avoir souscris à l'enregistrement !</span>
+            <span> Merci d'avoir souscrit à l'enregistrement !</span>
           </div>
         </Modal.Body>
       ) : (
@@ -132,31 +137,15 @@ const SubscriberLaunchModal = ({dialog}) => {
 };
 
 const Header = () => {
-  const [viewBgHeader, setViewBgHeader] = useState(false);
   const headerRef = useRef<HTMLDivElement>(null);
   const dialog = useModalState();
+  const targetedSelector = '#home__primary__title'; //Correspond of the first title of the home page
 
-  useEffect(() => {
-    const sectionOne = document.querySelector('#home__primary__title');
-    const classNameList = ['border-b', 'border-gray-300'];
-    const sectionOneObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) {
-          setViewBgHeader(true);
-          headerRef?.current?.classList?.add(...classNameList);
-          headerRef?.current?.classList?.add('bg-opacity-100');
-          headerRef?.current?.classList?.add('bg-white');
-          headerRef?.current?.classList?.remove('bg-opacity-0');
-        } else {
-          setViewBgHeader(false);
-          headerRef?.current?.classList?.remove(...classNameList);
-          headerRef?.current?.classList?.remove('bg-opacity-100');
-          headerRef?.current?.classList?.add('bg-opacity-0');
-          headerRef?.current?.classList?.remove('bg-white');
-        }
-      });
-    }, sectionOneOptions);
-    sectionOneObserver?.observe(sectionOne);
+  const {isAppear} = useAppearOnTarget({
+    elementRef: headerRef,
+    targetedSelector,
+    classNameList,
+    options,
   });
 
   return (
@@ -185,10 +174,7 @@ const Header = () => {
                 </SectionMessageAction>
               </p>
             </SectionMessage>
-            <Navbar
-              navigations={headerNavigations}
-              viewBgHeader={viewBgHeader}
-            />
+            <Navbar navigations={headerNavigations} viewBgHeader={isAppear} />
             <Transition
               as={Fragment}
               enter="duration-150 ease-out"
