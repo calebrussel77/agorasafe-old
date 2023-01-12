@@ -16,17 +16,17 @@ const inputToken = cva(
         primary: [
           'border border-gray-300 placeholder:text-[#9ca3af]',
           'hover:bg-gray-100 disabled:hover:bg-gray-200',
-          'focus:outline-none focus:caret-primary-500 required:border-red-500 focus:bg-transparent focus:ring-1 focus:ring-primary-500 focus:border-primary-500',
+          'focus:outline-none focus:caret-primary-500 focus:bg-transparent focus:ring-1 focus:ring-primary-500 focus:border-primary-500',
         ],
         secondary: [
           'border border-gray-300 placeholder:text-[#9ca3af]',
           'hover:bg-gray-100 disabled:hover:bg-gray-200',
-          'focus:outline-none focus:caret-secondary-500 required:border-red-500 focus:bg-transparent focus:ring-1 focus:ring-secondary-500 focus:border-secondary-500',
+          'focus:outline-none focus:caret-secondary-500 focus:bg-transparent focus:ring-1 focus:ring-secondary-500 focus:border-secondary-500',
         ],
         subtle: [
           'bg-transparent border-none border-0 placeholder:text-[#9ca3af]',
           'hover:bg-slate-50 disabled:hover:bg-transparent',
-          'focus:outline-none required:border-red-500 focus:border-0 focus:ring-0 focus-within:border-0',
+          'focus:outline-none focus:border-0 focus:ring-0 focus-within:border-0',
         ],
       },
       size: {
@@ -52,14 +52,7 @@ export type InputProps = React.HTMLProps<HTMLInputElement> & {
   iconAfter?: ReactElement;
 };
 
-export interface InputGlobalProps
-  extends React.HTMLAttributes<HTMLInputElement>,
-    VariantProps<typeof inputToken> {
-  setParentValue?: any;
-  iconBefore?: ReactElement;
-  isLoding?: boolean;
-  iconAfter?: ReactElement;
-}
+export type InputGlobalProps = VariantProps<typeof inputToken> & InputProps;
 
 export const Input = forwardRef<HTMLInputElement, InputGlobalProps>(
   (

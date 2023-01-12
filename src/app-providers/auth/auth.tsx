@@ -8,8 +8,11 @@ import {
   useState,
 } from 'react';
 
+import {client} from '@utils/api-client';
+
 type User = {
   email: string;
+  token: string;
   password: string;
 };
 
@@ -32,7 +35,7 @@ const AuthProvider: React.FC<{children: ReactNode}> = ({children}) => {
 
   const login = useCallback(({email, password}: User) => {
     if (email === 'calebrussel77@gmail.com') {
-      setUser({email, password});
+      setUser({email, password, token: 'dnfafksfkfg'});
       return;
     }
     setUser(undefined);
@@ -60,4 +63,13 @@ const useAuth = () => {
   return context;
 };
 
-export {AuthProvider, useAuth};
+function useClient() {
+  const {user} = useAuth();
+  const token = user?.token;
+  return useCallback(
+    (endpoint, config) => client(endpoint, {...config, token}),
+    [token]
+  );
+}
+
+export {AuthProvider, useAuth, useClient};

@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import ProgressBar from '@badrap/bar-of-progress';
+import {AppProviders} from '@providers/app-providers';
 import '@styles/globals.css';
 import type {NextPage} from 'next';
 import {DefaultSeo} from 'next-seo';
@@ -120,7 +121,7 @@ export default function MyApp({Component, pageProps}: AppPropsWithLayout) {
           href="/android-chrome-512x512.png"
         />
       </Head>
-      {getLayout(<Component {...pageProps} />)}
+      <AppProviders>{getLayout(<Component {...pageProps} />)}</AppProviders>
     </>
   );
 }

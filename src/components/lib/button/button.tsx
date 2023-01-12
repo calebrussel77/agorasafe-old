@@ -52,7 +52,7 @@ const button = cva('gap-2 transition ease-in-out duration-300', {
   },
   compoundVariants: [{variant: 'primary', size: 'md', shape: 'rounded'}],
   defaultVariants: {
-    variant: 'subtle',
+    variant: 'primary',
     size: 'md',
     shape: 'rounded',
   },
@@ -76,10 +76,10 @@ export const Button: React.FC<ButtonProps> = ({
     {...props}
   >
     {isLoding ? (
-      <>
+      <div className="flex items-center gap-2 flex-nowrap">
         <BtnSpinner className="h-5 w-5" />
-        <span>Loading...</span>
-      </>
+        <span>{children}</span>
+      </div>
     ) : (
       children
     )}
