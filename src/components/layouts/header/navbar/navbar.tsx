@@ -36,7 +36,7 @@ const Navbar: FC<NavbarProps> = ({navigations, viewBgHeader}) => {
               className="focus-ring-inset inline-flex items-center justify-center rounded-md p-1 text-gray-600 focus:outline-none focus:ring-2 focus:ring-white"
             >
               <span className="sr-only">Open main menu</span>
-              <HiOutlineMenuAlt1 className="h-7 w-7" aria-hidden="true" />
+              <HiOutlineMenuAlt1 className="h-7 w-7" ariaHidden="true" />
             </Popover.Button>
           </div>
           <Link href="#">

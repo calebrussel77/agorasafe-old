@@ -6,7 +6,7 @@ import {twMerge} from 'tailwind-merge';
  * Example
  *  <InlineUI
       divider={<span className="text-blue-600">·</span>}
-      divider={<span aria-hidden="true">&middot;</span>}
+      divider={<span ariaHidden="true">&middot;</span>}
       className="gap-1"
     >
       {actions}

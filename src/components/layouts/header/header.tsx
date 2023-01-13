@@ -67,7 +67,7 @@ const Header = () => {
           <>
             <SubscriberLaunchModal dialog={dialog} />
             <SectionMessage
-              title="Developpement en cours"
+              title="En cours de developpement"
               appareance="discovery"
               className="border-b border-secondary-300"
             >

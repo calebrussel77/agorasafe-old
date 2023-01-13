@@ -6,6 +6,9 @@ import {useMutation} from 'react-query';
 
 import {Button} from '@components/lib/button/button';
 import {Modal} from '@components/lib/modal/modal';
+import SectionMessage, {
+  SectionMessageAction,
+} from '@components/lib/section-message/section-message';
 
 import {FormSubscription} from './form-subscription/form-subscription';
 
@@ -42,9 +45,18 @@ const SubscriberLaunchModal = ({dialog}) => {
       <If condition={isSuccess}>
         <Then>
           <Modal.Body>
-            <div className="my-6 p-2 bg-green-50 text-green-500 flex gap-2 items-center">
-              <HiCheckCircle className="h-5 w-5" />
-              <span> Merci d'avoir souscrit à l'enregistrement !</span>
+            <div className="my-6 p-2">
+              <SectionMessage
+                title="Souscription réussie"
+                hasCloseButton={false}
+                appareance="success"
+              >
+                <p className="text-sm md:text-base">
+                  Merci d'avoir souscrit à l'enregistrement ! Un mail vous a été
+                  envoyé via votre adresse email afin de confirmer votre
+                  souscription.
+                </p>
+              </SectionMessage>
             </div>
           </Modal.Body>
         </Then>

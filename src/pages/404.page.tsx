@@ -110,7 +110,7 @@ export default function Example() {
                     <span className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary-50">
                       <link.icon
                         className="h-6 w-6 text-primary-700"
-                        aria-hidden="true"
+                        ariaHidden="true"
                       />
                     </span>
                   </div>
@@ -120,7 +120,7 @@ export default function Example() {
                         <a href="#" className="focus:outline-none">
                           <span
                             className="absolute inset-0"
-                            aria-hidden="true"
+                            ariaHidden="true"
                           />
                           {link.name}
                         </a>
@@ -133,7 +133,7 @@ export default function Example() {
                   <div className="flex-shrink-0 self-center">
                     <FaChevronRight
                       className="h-5 w-5 text-gray-400"
-                      aria-hidden="true"
+                      ariaHidden="true"
                     />
                   </div>
                 </li>
@@ -143,7 +143,7 @@ export default function Example() {
               <Link href="/">
                 <a className="text-base font-medium text-primary-600 hover:text-primary-500">
                   Ou revenir à l'accueil
-                  <span aria-hidden="true"> &rarr;</span>
+                  <span ariaHidden="true"> &rarr;</span>
                 </a>
               </Link>
             </div>
@@ -163,7 +163,7 @@ export default function Example() {
                 className="inline-flex text-gray-400 hover:text-gray-500"
               >
                 <span className="sr-only">{item.name}</span>
-                <item.icon className="h-6 w-6" aria-hidden="true" />
+                <item.icon className="h-6 w-6" ariaHidden="true" />
               </a>
             ))}
           </div>

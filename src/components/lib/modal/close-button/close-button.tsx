@@ -10,7 +10,7 @@ export const CloseButton: React.FC<{className?: string}> = ({
     <button
       title="Close"
       className={clsx(
-        'p-1 rounded-full bg-primary-50 text-primary-600 flex justify-center fixed md:absolute top-3 right-3 z-20 items-center',
+        'p-1 rounded-full bg-gray-50 text-gray-600 hover:text-gray-900 flex justify-center fixed md:absolute top-3 right-3 z-20 items-center',
         className
       )}
       {...props}

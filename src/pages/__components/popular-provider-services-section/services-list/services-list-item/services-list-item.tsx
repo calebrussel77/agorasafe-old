@@ -69,7 +69,7 @@ const ServicesListItem = ({service}) => {
             <div className="flex space-x-1 items-center text-sm text-gray-500">
               <HiOutlineLocationMarker className="h-4 w-4" />
               <span>{service.location}</span>
-              {/* <span aria-hidden="true">&middot;</span> */}
+              {/* <span ariaHidden="true">&middot;</span> */}
             </div>
           </div>
         </div>

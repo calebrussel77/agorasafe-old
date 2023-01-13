@@ -26,7 +26,7 @@ const MobilePopover = forwardRef<HTMLDivElement, MobilePopoverProps>(
           <div className="-mr-2">
             <Button onClick={onClose} variant="subtle" className="shadow-none">
               <span className="sr-only">Close menu</span>
-              <HiOutlineX className="h-6 w-6" aria-hidden="true" />
+              <HiOutlineX className="h-6 w-6" ariaHidden="true" />
             </Button>
           </div>
         </div>

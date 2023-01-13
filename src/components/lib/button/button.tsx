@@ -66,14 +66,16 @@ export const Button: React.FC<ButtonProps> = ({
   className,
   variant,
   size,
+  disabled,
   shape,
   isLoding,
   children,
   ...props
 }) => (
   <button
-    className={twMerge(button({variant, size, shape}), className)}
     {...props}
+    disabled={disabled || isLoding}
+    className={twMerge(button({variant, size, shape}), className)}
   >
     {isLoding ? (
       <div className="flex items-center gap-2 flex-nowrap">

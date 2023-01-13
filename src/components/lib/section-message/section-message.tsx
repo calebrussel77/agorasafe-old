@@ -82,7 +82,17 @@ export type SectionMessageProps = VariantProps<typeof sectionMessage> &
 
 const SectionMessage = forwardRef<HTMLDivElement, SectionMessageProps>(
   (
-    {className, appareance, onClose, size, title, actions, children, ...props},
+    {
+      className,
+      appareance,
+      onClose,
+      hasCloseButton = true,
+      size,
+      title,
+      actions,
+      children,
+      ...props
+    },
     ref
   ) => {
     const [visible, setVisible] = useState(true);
@@ -129,12 +139,14 @@ const SectionMessage = forwardRef<HTMLDivElement, SectionMessageProps>(
               </div>
             </div>
           </div>
-          <button
-            onClick={onClose || toggleVisible}
-            className="p-1 transform hover:scale-105 transition duration-150"
-          >
-            <HiOutlineXMark className="h-5 w-5 flex-shrink-0" />
-          </button>
+          {hasCloseButton && (
+            <button
+              onClick={onClose || toggleVisible}
+              className="p-1 transform hover:scale-105 transition duration-150"
+            >
+              <HiOutlineXMark className="h-5 w-5 flex-shrink-0" />
+            </button>
+          )}
         </div>
       </FadeAnimation>
     );
