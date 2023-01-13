@@ -65,7 +65,7 @@ export function FeatureSection() {
           height={784}
           fill="none"
           viewBox="0 0 404 784"
-          ariaHidden="true"
+          aria-hidden="true"
         >
           <defs>
             <pattern
@@ -117,7 +117,7 @@ export function FeatureSection() {
                 <div key={item.id} className="relative">
                   <dt>
                     <div className="absolute flex h-12 w-12 items-center justify-center rounded-xl bg-primary-600 text-white">
-                      <item.icon className="h-8 w-8" ariaHidden="true" />
+                      <item.icon className="h-8 w-8" aria-hidden="true" />
                     </div>
                     <p className="ml-16 text-lg font-medium leading-6 text-gray-900">
                       {item.name}
@@ -131,7 +131,7 @@ export function FeatureSection() {
             </dl>
           </div>
 
-          <div className="relative -mx-4 mt-10 lg:mt-0" ariaHidden="true">
+          <div className="relative -mx-4 mt-10 lg:mt-0" aria-hidden="true">
             <svg
               className="absolute left-1/2 -translate-x-1/2 translate-y-16 transform lg:hidden"
               width={784}
@@ -181,7 +181,7 @@ export function FeatureSection() {
           height={784}
           fill="none"
           viewBox="0 0 404 784"
-          ariaHidden="true"
+          aria-hidden="true"
         >
           <defs>
             <pattern
@@ -226,7 +226,7 @@ export function FeatureSection() {
                   <div key={item.id} className="relative">
                     <dt>
                       <div className="absolute flex h-12 w-12 items-center justify-center rounded-xl bg-secondary-600 text-white">
-                        <item.icon className="h-8 w-8" ariaHidden="true" />
+                        <item.icon className="h-8 w-8" aria-hidden="true" />
                       </div>
                       <p className="ml-16 text-lg font-medium leading-6 text-gray-900">
                         {item.name}
@@ -247,7 +247,7 @@ export function FeatureSection() {
                 height={404}
                 fill="none"
                 viewBox="0 0 784 404"
-                ariaHidden="true"
+                aria-hidden="true"
               >
                 <defs>
                   <pattern
