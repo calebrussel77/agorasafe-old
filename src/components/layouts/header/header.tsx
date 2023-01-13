@@ -4,15 +4,8 @@ import Axios from 'axios';
 import axios from 'axios';
 import clsx from 'clsx';
 import {Fragment, useEffect, useRef, useState} from 'react';
-import {
-  HiCheckCircle,
-  HiOutlinePhone,
-  HiOutlineSquares2X2,
-} from 'react-icons/hi2';
-import {useMutation} from 'react-query';
+import {HiOutlinePhone, HiOutlineSquares2X2} from 'react-icons/hi2';
 
-import {Button} from '@components/lib/button/button';
-import {Input} from '@components/lib/input/input';
 import {Modal, useModalState} from '@components/lib/modal/modal';
 import SectionMessage, {
   SectionMessageAction,
@@ -20,6 +13,7 @@ import SectionMessage, {
 
 import {MobilePopover} from './mobile-popover/mobile-popover';
 import {Navbar} from './navbar/navbar';
+import {SubscriberLaunchModal} from './subscriber-launch-modal/subscriber-launch-modal';
 
 export const headerNavigations = [
   {
@@ -48,94 +42,6 @@ const options = {
 };
 const classNameList = ['border-b', 'border-gray-300', 'bg-white'];
 
-const FormSubscription = ({onSubmit, formRef}) => {
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
-
-  return (
-    <form
-      onSubmit={event => {
-        event.preventDefault();
-        onSubmit({email_subscription: email, name_subscription: name});
-      }}
-      ref={formRef}
-      className="space-y-2"
-    >
-      <div>
-        <label htmlFor="email_subscription">Adresse email</label>
-        <Input
-          id="email_subscription"
-          type="email"
-          required
-          value={email}
-          onChange={(e: any) => setEmail(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="name_subscription">Votre nom</label>
-        <Input
-          id="name_subscription"
-          required
-          value={name}
-          onChange={(e: any) => setName(e.target.value)}
-        />
-      </div>
-    </form>
-  );
-};
-
-const SubscriberLaunchModal = ({dialog}) => {
-  const {mutate, isLoading, isSuccess} = useMutation((formData: FormData) => {
-    return axios.post(
-      'https://app.convertkit.com/forms/3997673/subscriptions',
-      formData,
-      {
-        headers: {'content-type': 'multipart/form-data'},
-      }
-    );
-  });
-
-  const formRef = useRef<HTMLFormElement>(null);
-
-  const onSubmit = ({email_subscription, name_subscription}) => {
-    let formData = new FormData();
-    formData.append('email_address', email_subscription);
-    formData.append('fields[first_name]', name_subscription);
-    formData.append('user', 'd506b01f-b95b-4c4e-945e-f35dfa9f6a9d');
-    mutate(formData);
-  };
-
-  return (
-    <Modal state={dialog} className="md:w-[630px] 2xl:w-[650px]">
-      <Modal.Header title={`Enregistrement du lancement`} />
-      {isSuccess ? (
-        <Modal.Body>
-          <div className="my-6 p-2 bg-green-50 text-green-500 flex gap-2 items-center">
-            <HiCheckCircle className="h-5 w-5" />
-            <span> Merci d'avoir souscrit à l'enregistrement !</span>
-          </div>
-        </Modal.Body>
-      ) : (
-        <>
-          <Modal.Body>
-            <FormSubscription onSubmit={onSubmit} formRef={formRef} />
-          </Modal.Body>
-          <Modal.Footer>
-            <div className="flex justify-end w-full">
-              <Button
-                onClick={() => formRef?.current?.requestSubmit()}
-                isLoding={isLoading}
-              >
-                Envoyer
-              </Button>
-            </div>
-          </Modal.Footer>
-        </>
-      )}
-    </Modal>
-  );
-};
-
 const Header = () => {
   const headerRef = useRef<HTMLDivElement>(null);
   const dialog = useModalState();
@@ -162,10 +68,10 @@ const Header = () => {
             <SubscriberLaunchModal dialog={dialog} />
             <SectionMessage
               title="Developpement en cours"
-              appareance="info"
-              className="border-b border-primary-300"
+              appareance="discovery"
+              className="border-b border-secondary-300"
             >
-              <p>
+              <p className="text-sm md:text-base">
                 La plateforme AgoraSafe est actuellement en cours de
                 developpement. si vous souhaitez être tenu informé de son
                 lancement,{' '}

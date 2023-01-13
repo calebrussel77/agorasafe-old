@@ -108,10 +108,10 @@ const SectionMessage = forwardRef<HTMLDivElement, SectionMessageProps>(
           className={sectionMessage({appareance, size, class: className})}
           {...props}
         >
-          <div className="flex items-start flex-1 w-full gap-1">
+          <div className="flex items-start flex-1 w-full gap-3">
             {<Icon className={`h-6 w-6 flex-shrink-0 ${ColorIcon}`} />}
             <div>
-              {title && <h3 className="ml-1 font-bold text-base">{title}</h3>}
+              {title && <h3 className="font-bold text-base">{title}</h3>}
               {children && <div className="text-[13px]">{children}</div>}
               <div className="flex items-center flex-wrap gap-1">
                 {isActionsArray
