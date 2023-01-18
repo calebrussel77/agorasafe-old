@@ -1,15 +1,14 @@
 import {Popover} from '@headlessui/react';
 import clsx from 'clsx';
 import Link from 'next/link';
-import {FC, ReactElement} from 'react';
-import {HiOutlineMenuAlt1, HiOutlineSearch} from 'react-icons/hi';
+import {FC, useRef} from 'react';
+import {HiOutlineMenuAlt1, HiOutlinePlus} from 'react-icons/hi';
 
+import {GlobalSearchModal} from '@components/global-search-modal/global-search-modal';
 import {LogoIcon} from '@components/icons/logo-icon/logo-icon';
 import {ActiveLink} from '@components/lib/active-link/active-link';
 import {Button} from '@components/lib/button/button';
-import FadeAnimation from '@components/lib/fade-animation/fade-animation';
-
-import {GlobalSearch} from '@pages/__components/global-search/global-search';
+import {useModalState} from '@components/lib/modal/modal';
 
 type navigationItem = {
   name: string;
@@ -19,16 +18,18 @@ type navigationItem = {
 
 type NavbarProps = {
   navigations: navigationItem[];
-  viewBgHeader?: boolean;
 };
 
-const Navbar: FC<NavbarProps> = ({navigations, viewBgHeader}) => {
+const Navbar: FC<NavbarProps> = ({navigations}) => {
+  const dialog = useModalState();
+  const initialFocusRef = useRef<any>(null);
+
   return (
     <nav
       className="relative z-10 w-full flex items-center lg:items-end justify-between px-4 sm:px-8 pb-2 pt-4"
       aria-label="Global"
     >
-      <div className="flex flex-1 items-center w-full">
+      <div className="flex items-center">
         <div className="flex items-center justify-between md:w-auto">
           <div className="mr-2 flex items-center lg:hidden">
             <Popover.Button
@@ -46,29 +47,34 @@ const Navbar: FC<NavbarProps> = ({navigations, viewBgHeader}) => {
             </a>
           </Link>
         </div>
-        <div className="hidden space-x-6 lg:ml-6 lg:flex items-center">
+        <div className="hidden space-x-6 lg:ml-4 lg:flex items-center">
           {navigations.map(item => (
             <ActiveLink
               key={item.name}
               href={item.href}
-              activeClassName="text-secondary-500 px-1.5 py-1 bg-secondary-100 rounded-md"
+              activeClassName="text-secondary-500 bg-secondary-100 "
             >
-              <a className="whitespace-nowrap hover:text-secondary-600 text-gray-700 font-semibold flex items-center gap-1 ">
+              <a className="whitespace-nowrap py-1 px-2 rounded-md hover:bg-secondary-50 hover:text-secondary-600 text-gray-700 font-semibold flex items-center gap-1 transition duration-300">
                 {<item.icon className="h-5 w-5" />}
                 <span>{item.name}</span>
               </a>
             </ActiveLink>
           ))}
         </div>
-        {viewBgHeader && (
-          <FadeAnimation
-            visible={viewBgHeader}
-            animateEnter
-            className={clsx('ml-3 w-full max-w-xl')}
-          >
-            <GlobalSearch isNavbarSearch={viewBgHeader} />
-          </FadeAnimation>
-        )}
+      </div>
+      <div>
+        <Button
+          onClick={dialog.show}
+          className="flex items-center text-sm sm:text-base"
+        >
+          <HiOutlinePlus className="h-6 w-6 hidden sm:inline-block" />
+          <span>Demandez un service</span>
+        </Button>
+        <GlobalSearchModal
+          dialog={dialog}
+          initialFocusRef={initialFocusRef}
+          onCloseDialog={() => {}}
+        />
       </div>
       <div className="hidden md:flex md:items-center md:space-x-4 ml-3">
         <Button
@@ -76,10 +82,21 @@ const Navbar: FC<NavbarProps> = ({navigations, viewBgHeader}) => {
           variant="subtle-link"
           className="font-semibold bg-transparent"
         >
+          Devenir prestataire
+        </Button>
+        <Button
+          size="sm"
+          variant="subtle-link"
+          className="font-semibold bg-transparent"
+        >
           Connexion
         </Button>
-        <Button size="sm" variant="secondary" className="whitespace-nowrap">
-          Proposer un service
+        <Button
+          size="sm"
+          variant="subtle-link"
+          className="font-semibold bg-transparent"
+        >
+          Inscription
         </Button>
       </div>
     </nav>

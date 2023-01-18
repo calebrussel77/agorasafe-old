@@ -15,7 +15,7 @@ const ServicesList = ({services}) => {
     <div className="w-full">
       <div className="relative">
         <button
-          className="absolute z-10 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed bg-gray-500 rounded-full border border-gray-600 text-white -left-5 top-1/2"
+          className="absolute z-10 shadow-lg disabled:opacity-0 disabled:cursor-not-allowed bg-gray-500 rounded-full border border-gray-600 text-white -left-5 top-1/2"
           ref={prevRef}
         >
           <BsArrowLeftCircleFill className="h-10 w-10" />
@@ -62,7 +62,7 @@ const ServicesList = ({services}) => {
           ))}
         </Swiper>
         <button
-          className="absolute z-10 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed bg-gray-500 rounded-full border border-gray-600 text-white -right-5 top-1/2"
+          className="absolute z-10 shadow-lg disabled:opacity-0 disabled:cursor-not-allowed bg-gray-500 rounded-full border border-gray-600 text-white -right-5 top-1/2"
           ref={nextRef}
         >
           <BsArrowRightCircleFill className="h-10 w-10" />

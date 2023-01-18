@@ -1,51 +1,64 @@
-import {CgSearch} from 'react-icons/cg';
 import {IoMdSearch} from 'react-icons/io';
-import {Else, If, Then} from 'react-if';
+import {TypeAnimation} from 'react-type-animation';
 
 import {Button} from '@components/lib/button/button';
 import {Input} from '@components/lib/input/input';
 
-const GlobalSearch = ({isNavbarSearch = false}) => {
+const GlobalSearch = ({onClick}) => {
   return (
-    <form action="#" className="w-full sm:flex items-center">
-      <div className="w-full flex-1 flex items-center">
-        <label htmlFor="whatSearch" className="sr-only">
-          Rechercher un service
-        </label>
+    <div className="w-full sm:flex items-center">
+      <div
+        onClick={onClick}
+        className="cursor-pointer w-full flex-1 flex items-center relative"
+      >
+        <TypeAnimation
+          sequence={[
+            'Réparer mon frigot',
+            1000,
+            'Réparer ma chaussure',
+            1000,
+            'Coursier',
+            1000,
+            'Faire des tresses à domicile',
+            1000,
+            'Débroussailler un champs',
+            1000,
+            'Babysitting',
+            1000,
+            'Cours informatique',
+            1000,
+            'Ménage à domicile',
+          ]}
+          wrapper="div"
+          cursor={true}
+          repeat={Infinity}
+          style={{
+            position: 'absolute',
+            left: '0',
+            right: '0',
+            display: 'flex',
+            justifyContent: 'start',
+            paddingLeft: '42px',
+            zIndex: '20',
+          }}
+        />
         <Input
           id="whatSearch"
-          style={{height: isNavbarSearch ? '40px' : '46px'}}
-          className="rounded-r-none border-r-0 focus:ring-0 focus:border-slate-300"
-          placeholder="Que cherchez-vous (Coiffeur, cordonnier, tailleur, frigoriste...) ?"
-          iconBefore={
-            !isNavbarSearch && <IoMdSearch className="h-6 w-6 text-gray-500" />
-          }
+          style={{height: '46px'}}
+          className="rounded-r-none border-r-0 focus:ring-0 focus:border-slate-300 pointer-events-none"
+          // placeholder="Que cherchez-vous (Coiffeur, cordonnier, tailleur, frigoriste...) ?"
+          iconBefore={<IoMdSearch className="h-6 w-6 text-gray-500" />}
         />
-
-        <If condition={isNavbarSearch}>
-          <Then>
-            <Button
-              style={{height: '40px'}}
-              variant={'primary'}
-              shape="square"
-              className="w-auto rounded-r "
-            >
-              <CgSearch className="h-5 w-5 md:h-6 md:w-6" />
-            </Button>
-          </Then>
-          <Else>
-            <Button
-              style={{height: '46px'}}
-              variant={'primary'}
-              shape="square"
-              className="w-auto rounded-r "
-            >
-              <span>Rechercher</span>
-            </Button>
-          </Else>
-        </If>
+        <Button
+          style={{height: '46px'}}
+          variant={'primary'}
+          shape="square"
+          className="w-auto rounded-r "
+        >
+          <span>Rechercher</span>
+        </Button>
       </div>
-    </form>
+    </div>
   );
 };
 

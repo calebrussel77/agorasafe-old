@@ -1,8 +1,16 @@
+import {useRef} from 'react';
+
+import {GlobalSearchModal} from '@components/global-search-modal/global-search-modal';
+import {useModalState} from '@components/lib/modal/modal';
+
 import {CompanyLogos} from '../company-logos/company-logos';
 import {GlobalSearch} from '../global-search/global-search';
 import {HeroCarousselImages} from './hero-caroussel-images/hero-caroussel-images';
 
 const HeroSection = () => {
+  const dialog = useModalState();
+  const initialFocusRef = useRef<any>(null);
+
   return (
     <section id="hero-section" className="relative pt-4 lg:overflow-hidden">
       <div className="mx-auto max-w-screen-2xl lg:px-8">
@@ -26,7 +34,12 @@ const HeroSection = () => {
               </p>
               <div className="mt-8">
                 <div className="max-w-xl w-full">
-                  <GlobalSearch />
+                  <GlobalSearch onClick={dialog.show} />
+                  <GlobalSearchModal
+                    dialog={dialog}
+                    initialFocusRef={initialFocusRef}
+                    onCloseDialog={() => {}}
+                  />
                 </div>
                 <div className="mt-10">
                   <h3 className="uppercase text-xs mb-3 font-medium text-gray-500">

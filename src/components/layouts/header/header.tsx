@@ -22,18 +22,12 @@ export const headerNavigations = [
     href: '/market',
     icon: HiOutlineSquares2X2,
   },
-  // {
-  //   name: 'Inpsirations coiffure',
-  //   description: 'Installation guides that cover popular setups',
-  //   icon: FaTrash,
-  //   href: '/inspi',
-  // },
   {
     name: 'Contact',
     description: 'Read our latest news and articles',
     icon: HiOutlinePhone,
 
-    href: '/localisation',
+    href: '/contact',
   },
 ];
 
@@ -72,15 +66,15 @@ const Header = () => {
               className="border-b border-secondary-300"
             >
               <p className="text-sm md:text-base">
-                La plateforme AgoraSafe est actuellement en cours de
+                La plateforme Agorasafe est actuellement en cours de
                 developpement. si vous souhaitez être tenu informé de son
                 lancement,{' '}
                 <SectionMessageAction onClick={dialog.show}>
-                  Cliquer ici
+                  Cliquez ici
                 </SectionMessageAction>
               </p>
             </SectionMessage>
-            <Navbar navigations={headerNavigations} viewBgHeader={isAppear} />
+            <Navbar navigations={headerNavigations} />
             <Transition
               as={Fragment}
               enter="duration-150 ease-out"

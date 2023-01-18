@@ -146,7 +146,7 @@ export function PopularProviderServicesSection() {
             </p>
             <p className="mt-3 max-w-prose text-xl text-gray-500">
               Parcourez actuellement le catalogue de services et produits
-              proposés par les vendeurs.
+              proposés par nos prestataires.
             </p>
           </div>
           <Link href="#">

@@ -4,7 +4,7 @@ import React, {ReactElement, ReactNode, forwardRef} from 'react';
 
 export interface HeaderOptions {
   className?: string;
-  title: string;
+  title?: string;
   subtitle?: string;
   iconBefore?: ReactElement;
   children?: ReactNode;

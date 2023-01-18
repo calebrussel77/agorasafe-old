@@ -38,7 +38,7 @@ const SubscriberLaunchModal = ({dialog}) => {
       <Modal.Header title={`Enregistrement du lancement`}>
         <p className="px-3 text-gray-500 text-sm mt-1">
           Renseignez votre nom et votre addresse email pour être informé du
-          lancement d'AgoraSafe. Vos donnéés ne seront en aucun cas partagés ou
+          lancement d'Agorasafe. Vos donnéés ne seront en aucun cas partagés ou
           divulgués auprès de tierce personnes.{' '}
         </p>
       </Modal.Header>

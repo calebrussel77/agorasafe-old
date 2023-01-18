@@ -79,18 +79,19 @@ export default function Example() {
         <div className="flex-shrink-0 pt-12">
           <Link href="/">
             <a>
-              <LogoIcon className="mx-auto h-8 w-auto" />
+              <LogoIcon className="mx-auto h-6 sm:h-8 w-auto" />
             </a>
           </Link>
         </div>
-        <div className="mx-auto max-w-xl py-16">
+        <div className="mx-auto max-w-3xl py-10 sm:py-16">
           <div className="text-center">
             <p className="text-base font-semibold text-primary-600">404</p>
-            <h1 className="mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-              Cette page n'existe pas.
+            <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+              La page recherchée est inaccessible
             </h1>
             <p className="mt-2 text-lg text-gray-500">
-              La page que vous recherchez n'a pas pu être trouvée.
+              Il se peut que l'adresse saisie soit incorrecte, ou que la page
+              ait été déplacée.
             </p>
           </div>
           <div className="mt-12">
@@ -140,12 +141,22 @@ export default function Example() {
               ))}
             </ul>
             <div className="mt-8">
-              <Link href="/">
-                <a className="text-base font-medium text-primary-600 hover:text-primary-500">
-                  Ou revenir à l'accueil
-                  <span aria-hidden="true"> &rarr;</span>
-                </a>
-              </Link>
+              <p>
+                Si le problème persiste, n'hésitez pas à contacter notre support
+                via{' '}
+                <Link href="/">
+                  <a className="text-base font-medium text-primary-600 hover:text-primary-500">
+                    le formulaire de contact.
+                  </a>
+                </Link>{' '}
+                Ou{' '}
+                <Link href="/">
+                  <a className="text-base font-medium text-primary-600 hover:text-primary-500">
+                    revenir à l'accueil
+                    <span aria-hidden="true"> &rarr;</span>
+                  </a>
+                </Link>
+              </p>
             </div>
           </div>
         </div>
@@ -153,7 +164,7 @@ export default function Example() {
       <footer className="mx-auto max-w-screen-xl px-8">
         <div className="border-t border-gray-200 py-6 text-center md:flex md:justify-between">
           <p className="text-base text-gray-400">
-            &copy; {new Date().getFullYear()} AgoraSafe. Tous droits réservés.
+            &copy; {new Date().getFullYear()} Agorasafe. Tous droits réservés.
           </p>
           <div className="mt-6 flex justify-center space-x-8 md:mt-0">
             {social.map((item, itemIdx) => (

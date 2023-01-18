@@ -70,6 +70,7 @@ export interface ModalOptions {
   closeElement?: React.ElementType;
   onClose?: () => void;
   className?: string;
+  hasCloseButton?: boolean;
   size?: Size;
   state: DialogState;
   children: JSX.Element | JSX.Element[];
@@ -90,6 +91,7 @@ const ModalComponent = forwardRef<HTMLDivElement, ModalProps>(
       children,
       state,
       className,
+      hasCloseButton = true,
       onClose,
       closeElement: CloseElement = CloseButton,
       size = 'md',
@@ -137,7 +139,7 @@ const ModalComponent = forwardRef<HTMLDivElement, ModalProps>(
         )}
         {...rest}
       >
-        <CloseElement onClick={closeModal} />
+        {hasCloseButton && <CloseElement onClick={closeModal} />}
         {Children.map(children, (child: JSX.Element) => {
           if (!child) return null;
           const name = child?.type?.displayName || child?.type?.name;

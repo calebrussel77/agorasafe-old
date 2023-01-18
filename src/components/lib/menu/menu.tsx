@@ -100,14 +100,15 @@ const MenuItem = forwardRef<
         ref={ref}
         className={twMerge(
           clsx(
-            'w-full text-left flex items-center justify-between px-2 transition-all duration-200',
-            hovered ? 'hover:bg-slate-100' : 'cursor-default'
+            'w-full text-left flex justify-between rounded-md px-2 transition-all duration-200',
+            hovered ? 'hover:bg-gray-100' : 'cursor-default',
+            _position
           ),
           className
         )}
         {...props}
       >
-        <div className={`flex w-full space-x-2 py-1 rounded-sm ${_position}`}>
+        <div className={`flex w-full space-x-3 py-1 rounded-sm ${_position}`}>
           {iconBefore && <span className="flex-shrink-0">{iconBefore}</span>}
           <div className="space-y-1">
             {children && typeof children === 'string' ? (

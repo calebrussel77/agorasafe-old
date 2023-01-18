@@ -1,5 +1,8 @@
 import {FC} from 'react';
+import {ErrorBoundary} from 'react-error-boundary';
 import {QueryClient, QueryClientProvider} from 'react-query';
+
+import FullPageError from '@components/lib/full-page-error/full-page-error';
 
 import {AuthProvider} from './auth/auth';
 
@@ -21,9 +24,11 @@ const AppProviders: FC<{children: React.ReactNode}> = ({children}) => {
   });
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <AuthProvider>{children}</AuthProvider>
-    </QueryClientProvider>
+    <ErrorBoundary FallbackComponent={FullPageError}>
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>{children}</AuthProvider>
+      </QueryClientProvider>
+    </ErrorBoundary>
   );
 };
 
