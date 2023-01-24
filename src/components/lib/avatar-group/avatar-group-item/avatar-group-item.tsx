@@ -27,11 +27,14 @@ const AvatarGroupItem: FC<AvatarGroupItemProps> = ({
 
   if (href) {
     return (
-      <Link href={href} onClick={callback}>
-        <a
-          rel={avatar.target === '_blank' ? 'noopener noreferrer' : undefined}
-          {...props}
-        >
+      <Link
+        href={href}
+        onClick={callback as any}
+        rel={avatar.target === '_blank' ? 'noopener noreferrer' : undefined}
+        passHref
+        {...props}
+      >
+        <a>
           <MenuItem iconBefore={AvatarIcon}>{avatar.name}</MenuItem>
         </a>
       </Link>

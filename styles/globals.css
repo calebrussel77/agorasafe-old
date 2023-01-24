@@ -1,11 +1,10 @@
 /**
  * CSS Import statements 
  */
+@import '../src/components/lib/editor/editor.theme.css';
 @import '../src/components/lib/spinner/spinner.style.css';
 @import '../src/components/lib/modal/modal.style.css';
-@import 'swiper/css';
-@import 'swiper/css/effect-cube';
-@import 'swiper/css/pagination';
+@import '../styles/custom_scrollbar.css';
 
 :root {
   /* #354cd0 => blue */

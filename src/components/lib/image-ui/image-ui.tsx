@@ -118,7 +118,7 @@ export const ImageUI = forwardRef<HTMLDivElement, ImageUIProps>(
             alt={name}
             src={imageSrc}
             blurDataURL={blurDataURL()}
-            layout="fill"
+            fill
             style={{
               borderRadius:
                 shape === 'circle'

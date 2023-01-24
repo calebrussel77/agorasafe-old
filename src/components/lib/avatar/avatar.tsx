@@ -162,9 +162,9 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
           {src && !error && (
             <Image
               alt={name}
+              fill
               src={avatarSrc as string}
               blurDataURL={blurDataURL()}
-              layout="fill"
               placeholder="blur"
               onError={() => setError(true)}
               className={classes}

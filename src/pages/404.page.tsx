@@ -78,9 +78,7 @@ export default function Example() {
       <main className="mx-auto max-w-screen-xl px-8">
         <div className="flex-shrink-0 pt-12">
           <Link href="/">
-            <a>
-              <LogoIcon className="mx-auto h-6 sm:h-8 w-auto" />
-            </a>
+            <LogoIcon className="mx-auto h-6 sm:h-8 w-auto" />
           </Link>
         </div>
         <div className="mx-auto max-w-3xl py-10 sm:py-16">
@@ -144,17 +142,19 @@ export default function Example() {
               <p>
                 Si le problème persiste, n'hésitez pas à contacter notre support
                 via{' '}
-                <Link href="/">
-                  <a className="text-base font-medium text-primary-600 hover:text-primary-500">
-                    le formulaire de contact.
-                  </a>
+                <Link
+                  href="/"
+                  className="text-base font-medium text-primary-600 hover:text-primary-500"
+                >
+                  le formulaire de contact.
                 </Link>{' '}
                 Ou{' '}
-                <Link href="/">
-                  <a className="text-base font-medium text-primary-600 hover:text-primary-500">
-                    revenir à l'accueil
-                    <span aria-hidden="true"> &rarr;</span>
-                  </a>
+                <Link
+                  href="/"
+                  className="text-base font-medium text-primary-600 hover:text-primary-500"
+                >
+                  revenir à l'accueil
+                  <span aria-hidden="true"> &rarr;</span>
                 </Link>
               </p>
             </div>

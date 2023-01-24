@@ -1,0 +1,74 @@
+/**
+ * toolbar styles of the quill editor
+ */
+.ql-snow
+  .ql-picker.ql-header
+  .ql-picker-label[data-label]:not([data-label='']):hover,
+.ql-snow.ql-toolbar button:hover,
+.ql-snow .ql-toolbar button:hover,
+.ql-snow.ql-toolbar button:focus,
+.ql-snow .ql-toolbar button:focus,
+.ql-snow.ql-toolbar button.ql-active,
+.ql-snow .ql-toolbar button.ql-active,
+.ql-snow.ql-toolbar .ql-picker-label:hover,
+.ql-snow .ql-toolbar .ql-picker-label:hover,
+.ql-snow.ql-toolbar .ql-picker-label.ql-active,
+.ql-snow .ql-toolbar .ql-picker-label.ql-active,
+.ql-snow.ql-toolbar .ql-picker-item:hover,
+.ql-snow .ql-toolbar .ql-picker-item:hover,
+.ql-snow.ql-toolbar .ql-picker-item.ql-selected,
+.ql-snow .ql-toolbar .ql-picker-item.ql-selected {
+  @apply rounded-md bg-primary-100 text-primary-500 !important;
+}
+.ql-toolbar {
+  @apply flex flex-wrap items-center gap-2 border-none py-2 px-0 font-sans text-lg font-semibold text-gray-900 !important;
+}
+
+.ql-toolbar.ql-snow .ql-picker-label {
+  @apply border-none !important;
+}
+.ql-snow.ql-toolbar button,
+.ql-snow .ql-toolbar button {
+  @apply float-none mx-0.5 inline-flex h-8 w-8 rounded-md border-none bg-transparent p-1 transition duration-200 hover:bg-primary-100 hover:text-primary-500 !important;
+}
+
+.ql-snow .ql-fill,
+.ql-snow .ql-stroke.ql-fill {
+  @apply text-primary-500 hover:text-primary-500 !important;
+}
+
+.ql-picker-label {
+  @apply flex items-center font-sans text-lg !important;
+}
+
+.ql-snow .ql-picker:not(.ql-color-picker):not(.ql-icon-picker) svg {
+  @apply h-5 w-5 !important;
+}
+.ql-color-picker .ql-icon-picker {
+  @apply text-primary-500 !important;
+}
+/**
+ * container styles of the quill editor
+ */
+.ql-editor [alt='emoji-icon'] {
+  @apply mx-0.5 inline h-5 w-5 !important;
+}
+.ql-container {
+  @apply border-none p-0 font-sans !important;
+}
+.ql-editor {
+  @apply max-h-96 min-h-0 py-0 pl-3 pr-0 text-base leading-snug !important;
+}
+.ql-editor.ql-blank::before {
+  @apply text-gray-500 !important;
+}
+/* Scroll apect of the container */
+.ql-editor::-webkit-scrollbar {
+  @apply w-1 !important;
+}
+.ql-editor::-webkit-scrollbar-track {
+  @apply rounded-lg bg-gray-100 !important;
+}
+.ql-editor::-webkit-scrollbar-thumb {
+  @apply rounded-lg bg-gray-900 bg-opacity-30 !important;
+}

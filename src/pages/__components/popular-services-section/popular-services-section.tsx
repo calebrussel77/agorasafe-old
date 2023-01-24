@@ -136,10 +136,11 @@ export function PopularServicesSection() {
               récherchés.
             </p>
           </div>
-          <Link href="#">
-            <a className="mt-2 flex justify-end hover:underline text-primary-500 font-semibold">
-              Voir plus
-            </a>
+          <Link
+            href="#"
+            className="mt-2 flex justify-end hover:underline text-primary-500 font-semibold"
+          >
+            Voir plus
           </Link>
         </div>
 

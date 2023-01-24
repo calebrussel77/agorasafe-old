@@ -41,24 +41,21 @@ const Navbar: FC<NavbarProps> = ({navigations}) => {
             </Popover.Button>
           </div>
           <Link href="#">
-            <a>
-              <span className="sr-only">Agorasafe</span>
-              <LogoIcon className="h-4 md:h-5 w-auto" />
-            </a>
+            <span className="sr-only">Agorasafe</span>
+            <LogoIcon className="h-4 md:h-5 w-auto" />
           </Link>
         </div>
         <div className="hidden space-x-6 lg:ml-4 lg:flex items-center">
           {navigations.map(item => (
-            <ActiveLink
+            <Link
               key={item.name}
               href={item.href}
-              activeClassName="text-secondary-500 bg-secondary-100 "
+              // activeClassName="text-secondary-500 bg-secondary-100 "
+              className="whitespace-nowrap py-1 px-2 rounded-md hover:bg-secondary-50 hover:text-secondary-600 text-gray-700 font-semibold flex items-center gap-1 transition duration-300"
             >
-              <a className="whitespace-nowrap py-1 px-2 rounded-md hover:bg-secondary-50 hover:text-secondary-600 text-gray-700 font-semibold flex items-center gap-1 transition duration-300">
-                {<item.icon className="h-5 w-5" />}
-                <span>{item.name}</span>
-              </a>
-            </ActiveLink>
+              {<item.icon className="h-5 w-5" />}
+              <span>{item.name}</span>
+            </Link>
           ))}
         </div>
       </div>

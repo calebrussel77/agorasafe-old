@@ -2,7 +2,6 @@ import axios from 'axios';
 import {useRef} from 'react';
 import {HiCheckCircle} from 'react-icons/hi2';
 import {Else, If, Then} from 'react-if';
-import {useMutation} from 'react-query';
 
 import {Button} from '@components/lib/button/button';
 import {Modal} from '@components/lib/modal/modal';
@@ -13,15 +12,15 @@ import SectionMessage, {
 import {FormSubscription} from './form-subscription/form-subscription';
 
 const SubscriberLaunchModal = ({dialog}) => {
-  const {mutate, isLoading, isSuccess} = useMutation((formData: FormData) => {
-    return axios.post(
-      'https://app.convertkit.com/forms/3997673/subscriptions',
-      formData,
-      {
-        headers: {'content-type': 'multipart/form-data'},
-      }
-    );
-  });
+  // const {mutate, isLoading, isSuccess} = useMutation((formData: FormData) => {
+  //   return axios.post(
+  //     'https://app.convertkit.com/forms/3997673/subscriptions',
+  //     formData,
+  //     {
+  //       headers: {'content-type': 'multipart/form-data'},
+  //     }
+  //   );
+  // });
 
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -30,7 +29,7 @@ const SubscriberLaunchModal = ({dialog}) => {
     formData.append('email_address', email_subscription);
     formData.append('fields[first_name]', name_subscription);
     formData.append('user', 'd506b01f-b95b-4c4e-945e-f35dfa9f6a9d');
-    mutate(formData);
+    // mutate(formData);
   };
 
   return (
@@ -42,7 +41,7 @@ const SubscriberLaunchModal = ({dialog}) => {
           divulgués auprès de tierce personnes.{' '}
         </p>
       </Modal.Header>
-      <If condition={isSuccess}>
+      <If condition={false}>
         <Then>
           <Modal.Body>
             <div className="my-6 p-2">
@@ -68,7 +67,7 @@ const SubscriberLaunchModal = ({dialog}) => {
             <div className="flex justify-end w-full">
               <Button
                 onClick={() => formRef?.current?.requestSubmit()}
-                isLoding={isLoading}
+                isLoding={false}
               >
                 Envoyer
               </Button>

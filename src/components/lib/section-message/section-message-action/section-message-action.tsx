@@ -21,14 +21,12 @@ const MessageAction = memo(function MessageAction({
     </button>
   ) : href ? (
     <Link href={href}>
-      <a>
-        <button
-          className="text-primary-600 font-semibold hover:underline"
-          onClick={onClick}
-        >
-          {children}
-        </button>
-      </a>
+      <button
+        className="text-primary-600 font-semibold hover:underline"
+        onClick={onClick}
+      >
+        {children}
+      </button>
     </Link>
   ) : (
     <>{children}</>
