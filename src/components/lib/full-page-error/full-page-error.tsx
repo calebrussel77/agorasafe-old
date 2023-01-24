@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import Link from 'next/link';
 import {useState} from 'react';
 import {HiChevronDown} from 'react-icons/hi';
 
@@ -17,10 +18,10 @@ export default function FullPageError({error}) {
           <main className="flex flex-grow flex-col bg-white">
             <div className="mx-auto flex w-full max-w-7xl flex-grow flex-col px-6 lg:px-8">
               <div className="flex-shrink-0 pt-10 sm:pt-16">
-                <a href="/" className="inline-flex">
+                <Link href="/" className="inline-flex" passHref>
                   <span className="sr-only">Agorasafe</span>
                   <LogoIcon className="h-6 w-auto" />
-                </a>
+                </Link>
               </div>
               <div className="my-auto flex-shrink-0 py-16 sm:py-32">
                 <p className="text-base font-semibold text-primary-600">501</p>
@@ -50,13 +51,14 @@ export default function FullPageError({error}) {
                   </div>
                 </FadeAnimation>
                 <div className="mt-6">
-                  <a
+                  <Link
+                    passHref
                     href="#"
                     className="text-base font-medium text-primary-600 hover:text-primary-500"
                   >
                     Retour en arrière
                     <span aria-hidden="true"> &rarr;</span>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -64,32 +66,32 @@ export default function FullPageError({error}) {
           <footer className="flex-shrink-0 bg-gray-50">
             <div className="mx-auto w-full max-w-7xl py-16 px-6 lg:px-8">
               <nav className="flex space-x-4">
-                <a
+                <Link
                   href="#"
                   className="text-sm font-medium text-gray-500 hover:text-gray-600"
                 >
                   Contact Support
-                </a>
+                </Link>
                 <span
                   className="inline-block border-l border-gray-300"
                   aria-hidden="true"
                 />
-                <a
+                <Link
                   href="#"
                   className="text-sm font-medium text-gray-500 hover:text-gray-600"
                 >
                   Status
-                </a>
+                </Link>
                 <span
                   className="inline-block border-l border-gray-300"
                   aria-hidden="true"
                 />
-                <a
+                <Link
                   href="#"
                   className="text-sm font-medium text-gray-500 hover:text-gray-600"
                 >
                   Twitter
-                </a>
+                </Link>
               </nav>
             </div>
           </footer>

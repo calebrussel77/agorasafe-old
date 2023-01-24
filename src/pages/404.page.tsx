@@ -116,13 +116,13 @@ export default function Example() {
                   <div className="min-w-0 flex-1">
                     <h3 className="text-base font-medium text-gray-900">
                       <span className="rounded-sm focus-within:ring-2 focus-within:ring-primary-500 focus-within:ring-offset-2">
-                        <a href="#" className="focus:outline-none">
+                        <Link passHref href="#" className="focus:outline-none">
                           <span
                             className="absolute inset-0"
                             aria-hidden="true"
                           />
                           {link.name}
-                        </a>
+                        </Link>
                       </span>
                     </h3>
                     <p className="text-base text-gray-500">

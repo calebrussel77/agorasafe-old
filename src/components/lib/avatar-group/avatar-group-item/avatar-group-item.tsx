@@ -34,9 +34,7 @@ const AvatarGroupItem: FC<AvatarGroupItemProps> = ({
         passHref
         {...props}
       >
-        <a>
-          <MenuItem iconBefore={AvatarIcon}>{avatar.name}</MenuItem>
-        </a>
+        <MenuItem iconBefore={AvatarIcon}>{avatar.name}</MenuItem>
       </Link>
     );
   }

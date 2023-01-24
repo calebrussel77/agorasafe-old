@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import {
   HiCheckCircle,
   HiOutlineLocationMarker,
@@ -20,22 +21,22 @@ const ServicesListItem = ({service}) => {
       <div className="flex flex-1 flex-col justify-between bg-white p-6">
         <div className="flex-1">
           <p className="text-sm font-medium text-secondary-600">
-            <a href={service.category.href} className="hover:underline">
+            <Link href={service.category.href} className="hover:underline">
               {service.category.name}
-            </a>
+            </Link>
           </p>
-          <a href={service.href} className="mt-2 block">
+          <Link passHref href={service.href} className="mt-2 block">
             <p className="text-xl font-semibold text-gray-900 truncate whitespace-nowrap">
               {service.title}
             </p>
             <p className="mt-3 text-base text-gray-500 line-clamp-3">
               {service.preview}
             </p>
-          </a>
+          </Link>
         </div>
         <div className="mt-6 flex items-center">
           <div className="flex-shrink-0">
-            <a href={service.author.href}>
+            <Link passHref href={service.author.href}>
               <span className="sr-only">{service.author.name}</span>
               <ImageUI
                 name={service?.title}
@@ -45,11 +46,12 @@ const ServicesListItem = ({service}) => {
                 src={service.author.imageUrl}
                 alt=""
               />
-            </a>
+            </Link>
           </div>
           <div className="ml-3">
             <p className="text-sm font-medium text-gray-900">
-              <a
+              <Link
+                passHref
                 href={service.author.href}
                 className="hover:underline flex space-x-1 items-center"
               >
@@ -57,7 +59,7 @@ const ServicesListItem = ({service}) => {
                 {service?.isVerified && (
                   <HiCheckCircle className="h-4 w-4 text-green-500" />
                 )}
-              </a>
+              </Link>
             </p>
             <div className="text-gray-500 flex items-center gap-1">
               <HiStar className="h-3 w-3 text-yellow-500" />
