@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import {LogoIcon} from '@components/icons/logo-icon/logo-icon';
 
 const navigation = {
@@ -106,14 +108,15 @@ export function Footer() {
             </p>
             <div className="flex space-x-6">
               {navigation.social.map(item => (
-                <a
+                <Link
                   key={item.name}
                   href={item.href}
                   className="text-gray-400 hover:text-gray-500"
+                  passHref
                 >
                   <span className="sr-only">{item.name}</span>
                   <item.icon className="h-6 w-6" aria-hidden="true" />
-                </a>
+                </Link>
               ))}
             </div>
           </div>
@@ -126,12 +129,12 @@ export function Footer() {
                 <ul role="list" className="mt-4 space-y-4">
                   {navigation.solutions.map(item => (
                     <li key={item.name}>
-                      <a
+                      <Link
                         href={item.href}
                         className="text-base text-gray-500 hover:text-gray-900"
                       >
                         {item.name}
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -141,12 +144,12 @@ export function Footer() {
                 <ul role="list" className="mt-4 space-y-4">
                   {navigation.support.map(item => (
                     <li key={item.name}>
-                      <a
+                      <Link
                         href={item.href}
                         className="text-base text-gray-500 hover:text-gray-900"
                       >
                         {item.name}
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -158,12 +161,12 @@ export function Footer() {
                 <ul role="list" className="mt-4 space-y-4">
                   {navigation.company.map(item => (
                     <li key={item.name}>
-                      <a
+                      <Link
                         href={item.href}
                         className="text-base text-gray-500 hover:text-gray-900"
                       >
                         {item.name}
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -173,12 +176,12 @@ export function Footer() {
                 <ul role="list" className="mt-4 space-y-4">
                   {navigation.legal.map(item => (
                     <li key={item.name}>
-                      <a
+                      <Link
                         href={item.href}
                         className="text-base text-gray-500 hover:text-gray-900"
                       >
                         {item.name}
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>

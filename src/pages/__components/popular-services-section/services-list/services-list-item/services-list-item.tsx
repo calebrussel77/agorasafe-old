@@ -2,7 +2,7 @@ import {ImageUI} from '@components/lib/image-ui/image-ui';
 
 const ServicesListItem = ({service}) => {
   return (
-    <div className="group relative h-80 flex flex-col overflow-hidden rounded-lg shadow-md">
+    <div className="group relative h-80 flex flex-col overflow-hidden cursor-pointer rounded-lg shadow-md">
       <ImageUI
         className="absolute h-full inset-0 object-cover"
         noNeedApiPrefix

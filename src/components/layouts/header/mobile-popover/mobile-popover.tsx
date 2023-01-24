@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import {FC, forwardRef} from 'react';
 import {HiOutlineUserGroup, HiOutlineX} from 'react-icons/hi';
 
@@ -33,22 +34,24 @@ const MobilePopover = forwardRef<HTMLDivElement, MobilePopoverProps>(
         <div className="pt-5 pb-6">
           <div className="space-y-1 px-2">
             {navigations.map(item => (
-              <a
+              <Link
+                passHref
                 key={item.name}
                 href={item.href}
                 className="rounded-md flex items-center gap-2 px-3 py-2 text-base text-gray-700 font-semibold hover:bg-gray-50"
               >
                 {<item.icon className="h-5 w-5" />}
                 <span>{item.name}</span>
-              </a>
+              </Link>
             ))}
-            <a
+            <Link
+              passHref
               href="/become-provider"
               className="rounded-md flex items-center gap-2 px-3 py-2 text-base text-gray-700 font-semibold hover:bg-gray-50"
             >
               {<HiOutlineUserGroup className="h-5 w-5" />}
               <span>Devenir prestataire</span>
-            </a>
+            </Link>
           </div>
           <div className="mt-6 px-5 w-full">
             <Button variant="secondary" className="whitespace-nowrap w-full">
@@ -58,9 +61,9 @@ const MobilePopover = forwardRef<HTMLDivElement, MobilePopoverProps>(
           <div className="mt-6 px-5">
             <p className="text-center text-base font-medium text-gray-500">
               Utilisateur existant ?{' '}
-              <a href="#" className="text-gray-900 hover:underline">
-                Connexion
-              </a>
+              <Link href="#" className="text-gray-900 hover:underline">
+                passHref Connexion
+              </Link>
             </p>
           </div>
         </div>
