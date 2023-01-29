@@ -1,6 +1,5 @@
 import ProgressBar from '@badrap/bar-of-progress';
 import {AppProviders} from '@providers/app-providers';
-import '@styles/globals.css';
 import type {NextPage} from 'next';
 import {type Session} from 'next-auth';
 import {SessionProvider} from 'next-auth/react';
@@ -15,6 +14,7 @@ import 'swiper/css/pagination';
 import {CookieConsentBanner} from '@components/cookie-consent-banner/cookie-consent-banner';
 import {DefaultSeo} from '@components/default-seo/default-seo';
 
+import '../styles/globals.css';
 import {api} from '../utils/api';
 
 const progress = new ProgressBar({

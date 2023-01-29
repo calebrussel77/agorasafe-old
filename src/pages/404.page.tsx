@@ -5,7 +5,7 @@ import {FaChartArea, FaInbox, FaPenSquare, FaTrash} from 'react-icons/fa';
 import {LogoIcon} from '@components/icons/logo-icon/logo-icon';
 import {headerNavigations} from '@components/layouts/header/header';
 
-import {HomeBackground} from './__components/home-background/home-background';
+import {HomeBackground} from '../components/home-background/home-background';
 
 const social = [
   {
@@ -152,6 +152,7 @@ export default function Example() {
                 <Link
                   href="/"
                   className="text-base font-medium text-primary-600 hover:text-primary-500"
+                  passHref
                 >
                   revenir à l'accueil
                   <span aria-hidden="true"> &rarr;</span>

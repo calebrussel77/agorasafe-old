@@ -4,11 +4,11 @@ import Image from 'next/image';
 import React, {CSSProperties, ReactElement, forwardRef, useState} from 'react';
 import {twMerge} from 'tailwind-merge';
 
-import {blurDataURL} from '@utils/image';
+import {blurDataURL} from '@helpers/image';
 import {
   getNameInitials as defaultGetInitials,
   stringToHslColor,
-} from '@utils/misc';
+} from '@helpers/misc';
 
 import {Presence, presenceDiv} from './presence';
 

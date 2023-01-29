@@ -14,19 +14,21 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "noUncheckedIndexedAccess": true,
     "baseUrl": ".",
     "paths": {
       "@components/*": ["./src/components/*"],
       "@icons/*": ["./src/components/icons/*"],
       "@utils/*": ["./src/utils/*"],
-      "@styles/*": ["./styles/*"],
+      "@helpers/*": ["./src/helpers/*"],
+      "@styles/*": ["./src/styles/*"],
       "@hooks/*": ["./src/hooks/*"],
-      "@api/*": ["./src/api/*"],
+      "@services/*": ["./src/services/*"],
       "@providers/*": ["./src/app-providers/*"],
       "@pages/*": ["./src/pages/*"],
       "@lib/*": ["./src/lib/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.cjs", "**/*.mjs", "src/components/lib/label/label.style.csstsx"],
   "exclude": ["node_modules"]
 }

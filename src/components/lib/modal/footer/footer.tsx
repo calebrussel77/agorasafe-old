@@ -23,7 +23,7 @@ export const Footer = forwardRef<HTMLDivElement, FooterProps>(
         {...rest}
       >
         {children && (
-          <div className="w-full py-3 px-3 border-t border-slate-100 ">
+          <div className="w-full py-3 px-3 border-t border-gray-200 ">
             {children}
           </div>
         )}

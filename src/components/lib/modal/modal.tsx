@@ -166,7 +166,7 @@ const Content = forwardRef<HTMLDivElement, ContentProps>(
       <div
         ref={ref}
         className={clsx(
-          'h-full w-full px-4 scrollbar__custom flex-1 py-3 overflow-y-auto',
+          'h-full w-full px-4 scrollbar__custom flex-1 py-6 overflow-y-auto',
           className
         )}
         {...props}

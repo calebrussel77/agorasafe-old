@@ -3,6 +3,15 @@ import {twMerge} from 'tailwind-merge';
 
 import {Tooltip} from '@components/lib/tooltip/tooltip';
 
+const atValues = [
+  {id: 1, value: 'Fredrik Sundqvist'},
+  {id: 2, value: 'Patrik Sjölin'},
+];
+const hashValues = [
+  {id: 3, value: 'Fredrik Sundqvist 2'},
+  {id: 4, value: 'Patrik Sjölin 2'},
+];
+
 // Custom Undo button icon component for Quill editor. You can import it directly
 // from 'quill/assets/icons/undo.svg' but I found that a number of loaders do not
 // handle them correctly
@@ -58,6 +67,29 @@ export const modules = {
   // clipboard: {
   //   matchVisual: false,
   // },
+  mention: {
+    allowedChars: /^[A-Za-z\sÅÄÖåäö]*$/,
+    mentionDenotationChars: ['@', '#'],
+    source: function (searchTerm: any, renderList: any, mentionChar: any) {
+      let values;
+
+      if (mentionChar === '@') {
+        values = atValues;
+      } else {
+        values = hashValues;
+      }
+
+      if (searchTerm.length === 0) {
+        renderList(values, searchTerm);
+      } else {
+        const matches = [];
+        for (let i = 0; i < values.length; i++)
+          if (~values[i].value.toLowerCase().indexOf(searchTerm.toLowerCase()))
+            matches.push(values[i]);
+        renderList(matches, searchTerm);
+      }
+    },
+  },
   toolbar: {
     container: '#toolbar',
     handlers: {
@@ -92,6 +124,7 @@ export const formats = [
   'image',
   'color',
   'code-block',
+  'mention',
 ];
 
 // Quill Toolbar component

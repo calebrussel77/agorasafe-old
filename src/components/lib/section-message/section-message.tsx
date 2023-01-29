@@ -112,7 +112,7 @@ const SectionMessage = forwardRef<HTMLDivElement, SectionMessageProps>(
         ref={ref}
         visible={visible}
         animateEnter
-        from={{x: 10, opacity: 0}}
+        from={{opacity: 0}}
       >
         <div
           className={sectionMessage({appareance, size, class: className})}

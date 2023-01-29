@@ -1,8 +1,8 @@
 import {Popover, Transition} from '@headlessui/react';
-import {useAppearOnTarget} from '@hooks/use-appear-on-target/use-appear-on-target';
 import Axios from 'axios';
 import axios from 'axios';
 import clsx from 'clsx';
+import {useRouter} from 'next/router';
 import {Fragment, useEffect, useRef, useState} from 'react';
 import {HiOutlinePhone, HiOutlineSquares2X2} from 'react-icons/hi2';
 
@@ -10,6 +10,8 @@ import {Modal, useModalState} from '@components/lib/modal/modal';
 import SectionMessage, {
   SectionMessageAction,
 } from '@components/lib/section-message/section-message';
+
+import {useAppearOnTarget} from '@hooks/use-appear-on-target/use-appear-on-target';
 
 import {MobilePopover} from './mobile-popover/mobile-popover';
 import {Navbar} from './navbar/navbar';
@@ -38,10 +40,13 @@ const classNameList = ['border-b', 'border-gray-300', 'bg-white'];
 
 const Header = () => {
   const headerRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
   const dialog = useModalState();
-  const targetedSelector = '#home__primary__title'; //Correspond of the first title of the home page
+  // Correspond of the first title of the home page
+  const targetedSelector = '#home__primary__title';
+  const isHomePage = router?.pathname === '/';
 
-  const {isAppear} = useAppearOnTarget({
+  useAppearOnTarget({
     elementRef: headerRef,
     targetedSelector,
     classNameList,
@@ -53,7 +58,8 @@ const Header = () => {
       as="header"
       ref={headerRef}
       className={clsx(
-        'sticky top-0 inset-x-0 z-20 pb-1 transition-all duration-300 ease-in-out'
+        'sticky top-0 inset-x-0 z-20 pb-1 transition-all duration-300 ease-in-out',
+        !isHomePage && classNameList
       )}
     >
       {({close}) => {

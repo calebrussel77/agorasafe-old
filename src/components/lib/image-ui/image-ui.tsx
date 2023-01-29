@@ -3,8 +3,8 @@ import Image from 'next/image';
 import React, {CSSProperties, forwardRef, useState} from 'react';
 import {twMerge} from 'tailwind-merge';
 
-import {blurDataURL} from '@utils/image';
-import {stringToHslColor} from '@utils/misc';
+import {blurDataURL} from '@helpers/image';
+import {stringToHslColor} from '@helpers/misc';
 
 type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 const DEFAULT_FONT_SIZE = 16;

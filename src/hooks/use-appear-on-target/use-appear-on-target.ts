@@ -19,6 +19,9 @@ const useAppearOnTarget = ({
 
   useEffect(() => {
     const targetedElement = document.querySelector(targetedSelector);
+    const hasTargetElement = targetedElement || targetedRef?.current;
+    if (!hasTargetElement) return;
+
     const sectionObserver = new IntersectionObserver(function (entries) {
       entries.forEach(entry => {
         if (!entry.isIntersecting) {
