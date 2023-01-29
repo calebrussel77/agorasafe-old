@@ -20,7 +20,7 @@ const RegisterPage = ({providers}: TRegisterPageProps) => {
   return (
     <div className="isolate overflow-x-hidden">
       <HomeBackground />
-      <div className="mx-auto w-full max-w-lg py-12">
+      <div className="mx-auto w-full max-w-lg py-12 px-4">
         <div>
           <LogoIcon className="h-6 w-auto" />
           <h1 className="mt-6 text-3xl font-bold tracking-tight">
