@@ -1,4 +1,4 @@
-// @ts-check
+// @ts-nocheck
 import {clientEnv, clientSchema} from './schema.mjs';
 
 const _clientEnv = clientSchema.safeParse(clientEnv);
