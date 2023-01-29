@@ -1,7 +1,9 @@
 import clsx from 'clsx';
 import {EmojiStyle} from 'emoji-picker-react';
-import {forwardRef, useImperativeHandle, useRef, useState} from 'react';
+import 'quill-mention';
+import {forwardRef, useEffect, useRef, useState} from 'react';
 import {BsEmojiLaughing} from 'react-icons/bs';
+import {mergeRefs} from 'react-merge-refs';
 import ReactQuill from 'react-quill';
 import {twMerge} from 'tailwind-merge';
 
@@ -14,24 +16,16 @@ import {
   modules as defaultModules,
 } from './editor-toolbar';
 
-const data = [
-  {id: 1, display: 'John Doe'},
-  {id: 2, display: 'Jane Smith'},
-  {id: 3, display: 'Bob Johnson'},
-];
-
 const renderImage = (url, name) =>
   `<img src="${url}" alt="emoji-icon" id="emoji-icone" />`;
 
 const EditorInstance = forwardRef<any, any>(
-  ({modules, formats, children, autoFocus, className, ...rest}, forwardRef) => {
+  ({modules, formats, children, autoFocus, className, ...rest}, ref) => {
     const isToolbarHidden = modules?.toolbar === false;
-    const {popover, hide} = usePopoverState();
+    const {popover} = usePopoverState();
     const [selectedIndex, setSelectedIndex] = useState(0);
     const quillRef = useRef(null);
     const editor = quillRef.current?.getEditor();
-
-    useImperativeHandle(forwardRef, () => quillRef.current);
 
     const handleEmojiClick = emoji => {
       const emojiUrl = emoji?.getImageUrl(EmojiStyle.APPLE);
@@ -46,6 +40,12 @@ const EditorInstance = forwardRef<any, any>(
       editor?.setSelection(selectedIndex + 1);
     };
 
+    useEffect(() => {
+      if (autoFocus) {
+        editor.focus();
+      }
+    }, [autoFocus, editor]);
+
     return (
       <div
         id="editor__wrapper"
@@ -58,7 +58,7 @@ const EditorInstance = forwardRef<any, any>(
           {!isToolbarHidden && <EditorToolbar />}
           <ReactQuill
             id="editor"
-            ref={quillRef}
+            ref={mergeRefs([quillRef, ref])}
             modules={{
               ...defaultModules,
               ...modules,

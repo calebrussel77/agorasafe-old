@@ -7,7 +7,7 @@ const DefaultSeo = () => {
     <>
       <DefaultNextSeo
         defaultTitle="Agorasafe - Trouvez les meilleurs services adaptés pour n'importe quel travail."
-        titleTemplate="%s | Agorasafe - Trouvez les meilleurs services adaptés pour n'importe quel travail."
+        titleTemplate="%s | Agorasafe"
         languageAlternates={[
           {href: 'https://www.agorasafe.com/', hrefLang: 'en'},
           {href: 'https://www.agorasafe.com/fr', hrefLang: 'fr'},
@@ -41,7 +41,7 @@ const DefaultSeo = () => {
         <meta name="author" content="Caleb russel" />
         <meta
           name="keywords"
-          content="agorasafe, photos, images, tableau en bois, bâches, perciglace, vente, shop "
+          content="agorasafe, agora, services, à domicile, cameroun, vente en ligne, vente, shop"
         />
         <meta
           name="apple-mobile-web-app-status-bar-style"

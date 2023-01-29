@@ -20,6 +20,21 @@ type NavbarProps = {
   navigations: navigationItem[];
 };
 
+const rightSideLinks = [
+  {
+    title: 'Devenir prestataire',
+    href: '/become-provider',
+  },
+  {
+    title: 'Connexion',
+    href: '/login',
+  },
+  {
+    title: 'Inscription',
+    href: '/register',
+  },
+];
+
 const Navbar: FC<NavbarProps> = ({navigations}) => {
   const dialog = useModalState();
   const initialFocusRef = useRef<any>(null);
@@ -40,7 +55,7 @@ const Navbar: FC<NavbarProps> = ({navigations}) => {
               <HiOutlineMenuAlt1 className="h-7 w-7" aria-hidden="true" />
             </Popover.Button>
           </div>
-          <Link href="#">
+          <Link href="/" passHref>
             <span className="sr-only">Agorasafe</span>
             <LogoIcon className="h-4 md:h-5 w-auto" />
           </Link>
@@ -50,8 +65,9 @@ const Navbar: FC<NavbarProps> = ({navigations}) => {
             <Link
               key={item.name}
               href={item.href}
+              passHref
               // activeClassName="text-secondary-500 bg-secondary-100 "
-              className="whitespace-nowrap py-1 px-2 rounded-md hover:bg-secondary-50 hover:text-secondary-600 text-gray-700 font-semibold flex items-center gap-1 transition duration-300"
+              className="whitespace-nowrap py-1 px-2 rounded-md hover:bg-primary-50 hover:text-primary-600 text-gray-700 font-semibold flex items-center gap-1 transition duration-300"
             >
               {<item.icon className="h-5 w-5" />}
               <span>{item.name}</span>
@@ -67,6 +83,7 @@ const Navbar: FC<NavbarProps> = ({navigations}) => {
           <HiOutlinePlus className="h-6 w-6 hidden sm:inline-block" />
           <span>Demandez un service</span>
         </Button>
+
         <GlobalSearchModal
           dialog={dialog}
           initialFocusRef={initialFocusRef}
@@ -74,27 +91,21 @@ const Navbar: FC<NavbarProps> = ({navigations}) => {
         />
       </div>
       <div className="hidden md:flex md:items-center md:space-x-4 ml-3">
-        <Button
-          size="sm"
-          variant="subtle-link"
-          className="font-semibold bg-transparent"
-        >
-          Devenir prestataire
-        </Button>
-        <Button
-          size="sm"
-          variant="subtle-link"
-          className="font-semibold bg-transparent"
-        >
-          Connexion
-        </Button>
-        <Button
-          size="sm"
-          variant="subtle-link"
-          className="font-semibold bg-transparent"
-        >
-          Inscription
-        </Button>
+        {rightSideLinks?.map(element => (
+          <ActiveLink
+            activeClassName="text-primary-500 bg-primary-100 "
+            href={element?.href}
+            key={element.title}
+          >
+            <Button
+              size="sm"
+              variant="subtle-link"
+              className="font-semibold bg-transparent hover:bg-primary-50 hover:text-primary-600"
+            >
+              {element.title}
+            </Button>
+          </ActiveLink>
+        ))}
       </div>
     </nav>
   );

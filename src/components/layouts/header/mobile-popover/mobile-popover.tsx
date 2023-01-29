@@ -54,9 +54,11 @@ const MobilePopover = forwardRef<HTMLDivElement, MobilePopoverProps>(
             </Link>
           </div>
           <div className="mt-6 px-5 w-full">
-            <Button variant="secondary" className="whitespace-nowrap w-full">
-              Inscription
-            </Button>
+            <Link passHref href="/register">
+              <Button variant="secondary" className="whitespace-nowrap w-full">
+                Inscription
+              </Button>
+            </Link>
           </div>
           <div className="mt-6 px-5">
             <p className="text-center text-base font-medium text-gray-500">

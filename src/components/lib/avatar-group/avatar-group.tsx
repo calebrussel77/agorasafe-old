@@ -1,8 +1,7 @@
 /* eslint-disable no-unused-vars */
 import clsx from 'clsx';
 import {ElementType, MouseEventHandler, ReactNode} from 'react';
-
-import {composeUniqueKey} from '@utils/avatar';
+import {composeUniqueKey} from 'src/helpers/avatar';
 
 import {Avatar, AvatarProps, AvatarSize} from '../avatar/avatar';
 import {Popover} from '../popover/popover';

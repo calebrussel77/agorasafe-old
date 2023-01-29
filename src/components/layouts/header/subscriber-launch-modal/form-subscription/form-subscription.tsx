@@ -1,5 +1,6 @@
 import {useState} from 'react';
 
+import {Field} from '@components/lib/Field/Field';
 import {Input} from '@components/lib/input/input';
 
 const FormSubscription = ({onSubmit, formRef}) => {
@@ -13,27 +14,23 @@ const FormSubscription = ({onSubmit, formRef}) => {
         onSubmit({email_subscription: email, name_subscription: name});
       }}
       ref={formRef}
-      className="space-y-3"
+      className="space-y-6"
     >
-      <div>
-        <label htmlFor="name_subscription">Nom</label>
+      <Field autoFocus id="name_subscription" required label="Nom">
         <Input
-          id="name_subscription"
-          required
           value={name}
+          placeholder="Entrez votre nom"
           onChange={(e: any) => setName(e.target.value)}
         />
-      </div>
-      <div>
-        <label htmlFor="email_subscription">Adresse email</label>
+      </Field>
+      <Field id="email_subscription" required label="Adresse email">
         <Input
-          id="email_subscription"
           type="email"
-          required
           value={email}
+          placeholder="Entrez votre adresse email"
           onChange={(e: any) => setEmail(e.target.value)}
         />
-      </div>
+      </Field>
     </form>
   );
 };

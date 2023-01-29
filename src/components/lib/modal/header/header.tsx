@@ -4,7 +4,7 @@ import React, {ReactElement, ReactNode, forwardRef} from 'react';
 
 export interface HeaderOptions {
   className?: string;
-  title?: string;
+  title?: string | ReactNode;
   subtitle?: string;
   iconBefore?: ReactElement;
   children?: ReactNode;
@@ -21,7 +21,7 @@ export const Header = forwardRef<HTMLDivElement, HeaderProps>(
       <div
         ref={ref}
         className={clsx(
-          'sticky top-0 w-full py-3 z-10 border-slate-100 bg-white border-b inset-x-0 md:relative',
+          'sticky top-0 w-full py-3 z-10 border-gray-200 bg-white border-b inset-x-0 md:relative',
           className
         )}
         {...rest}
@@ -29,15 +29,19 @@ export const Header = forwardRef<HTMLDivElement, HeaderProps>(
         <div className="flex w-full bg-white items-start gap-2 px-3">
           {iconBefore && iconBefore}
           <div>
-            {title && (
-              <DialogHeading className={clsx('text-xl', className)}>
+            {title && typeof title === 'string' ? (
+              <DialogHeading
+                className={clsx('text-xl font-semibold', className)}
+              >
                 {title}
               </DialogHeading>
+            ) : (
+              title
             )}
-            {subtitle && <p className="mt-2">{subtitle}</p>}
+            {subtitle && <p className="mt-3">{subtitle}</p>}
           </div>
         </div>
-        {children && <div className="w-full">{children}</div>}
+        {children && <div className="w-full mt-3">{children}</div>}
       </div>
     );
   }

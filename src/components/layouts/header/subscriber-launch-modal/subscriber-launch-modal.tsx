@@ -1,7 +1,4 @@
-import axios from 'axios';
 import {useRef} from 'react';
-import {HiCheckCircle} from 'react-icons/hi2';
-import {Else, If, Then} from 'react-if';
 
 import {Button} from '@components/lib/button/button';
 import {Modal} from '@components/lib/modal/modal';
@@ -35,46 +32,37 @@ const SubscriberLaunchModal = ({dialog}) => {
   return (
     <Modal state={dialog} className="md:w-[630px] 2xl:w-[650px]">
       <Modal.Header title={`Enregistrement du lancement`}>
-        <p className="px-3 text-gray-500 text-sm mt-1">
-          Renseignez votre nom et votre addresse email pour être informé du
-          lancement d'Agorasafe. Vos donnéés ne seront en aucun cas partagés ou
-          divulgués auprès de tierce personnes.{' '}
+        <p className="px-3 text-gray-500">
+          Remplissez le formulaire ci-dessous afin d'être informé du lancement
+          d'Agorasafe. Les données renseignées ne seront en aucun cas partagées
+          ou divulguées auprès de tierces personnes.{' '}
         </p>
       </Modal.Header>
-      <If condition={false}>
-        <Then>
-          <Modal.Body>
-            <div className="my-6 p-2">
-              <SectionMessage
-                title="Souscription réussie"
-                hasCloseButton={false}
-                appareance="success"
-              >
-                <p className="text-sm md:text-base">
-                  Merci d'avoir souscrit à l'enregistrement ! Un mail vous a été
-                  envoyé via votre adresse email afin de confirmer votre
-                  souscription.
-                </p>
-              </SectionMessage>
-            </div>
-          </Modal.Body>
-        </Then>
-        <Else>
-          <Modal.Body>
-            <FormSubscription onSubmit={onSubmit} formRef={formRef} />
-          </Modal.Body>
-          <Modal.Footer>
-            <div className="flex justify-end w-full">
-              <Button
-                onClick={() => formRef?.current?.requestSubmit()}
-                isLoding={false}
-              >
-                Envoyer
-              </Button>
-            </div>
-          </Modal.Footer>
-        </Else>
-      </If>
+      <Modal.Body>
+        {false && (
+          <div className="my-6">
+            <SectionMessage
+              title="Souscription réussie"
+              hasCloseButton={false}
+              appareance="success"
+            >
+              <p className="text-sm md:text-base">
+                Merci d'avoir souscrit à l'enregistrement ! Un mail vous a été
+                envoyé via votre adresse email afin de confirmer votre
+                souscription.
+              </p>
+            </SectionMessage>
+          </div>
+        )}
+        <FormSubscription onSubmit={onSubmit} formRef={formRef} />
+      </Modal.Body>
+      <Modal.Footer>
+        <div className="flex justify-end w-full">
+          <Button onClick={() => formRef?.current?.requestSubmit()}>
+            Envoyer
+          </Button>
+        </div>
+      </Modal.Footer>
     </Modal>
   );
 };
