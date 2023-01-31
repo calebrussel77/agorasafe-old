@@ -1,6 +1,10 @@
 import {type VariantProps, cva} from 'class-variance-authority';
 import React, {ReactElement, forwardRef, useEffect} from 'react';
+import {useCallback} from 'react';
+import {useState} from 'react';
+import {HiOutlineEye, HiOutlineEyeSlash} from 'react-icons/hi2';
 import {mergeRefs} from 'react-merge-refs';
+import {useToggle} from 'react-use';
 import {twMerge} from 'tailwind-merge';
 
 import {VariantIcon} from '@helpers/variant-icons';
@@ -56,6 +60,7 @@ export type InputProps = React.HTMLProps<HTMLInputElement> & {
   iconAfter?: ReactElement;
   variant?: Variant;
   autoFocus?: boolean;
+  viewPasswordIcon?: boolean;
 };
 
 export type InputGlobalProps = VariantProps<typeof inputToken> & InputProps;
@@ -69,6 +74,48 @@ const VARIANTS_BORDER_COLORS: Record<Variant, string> = {
   system: 'border-secondary-500',
 };
 
+const RenderAfterElement = ({loading, iconAfter}) => {
+  return loading ? (
+    <BtnSpinner className="h-5 w-5" aria-hidden="true" />
+  ) : (
+    <VariantIcon icon={iconAfter} />
+  );
+};
+
+const useTogglePasswordView = type => {
+  const [newType, setNewType] = useState<string>(type);
+  const isPasswordViewed = newType === 'text';
+
+  const onToggleView = useCallback(() => {
+    if (!isPasswordViewed) {
+      setNewType('text');
+      return;
+    }
+    setNewType('password');
+  }, [isPasswordViewed]);
+
+  const renderEyeButton = useCallback(
+    () => (
+      <div className="absolute inset-y-0 right-0 flex items-center pr-3">
+        <button type="button" onClick={onToggleView}>
+          {isPasswordViewed ? (
+            <HiOutlineEye className="h-5 w-5" />
+          ) : (
+            <HiOutlineEyeSlash className="h-5 w-5" />
+          )}
+        </button>
+      </div>
+    ),
+    [isPasswordViewed, onToggleView]
+  );
+
+  return {
+    render: renderEyeButton,
+    isPasswordViewed,
+    newType,
+  };
+};
+
 export const Input = forwardRef<HTMLInputElement, InputGlobalProps>(
   (
     {
@@ -78,8 +125,10 @@ export const Input = forwardRef<HTMLInputElement, InputGlobalProps>(
       iconAfter,
       loading,
       disabled,
+      viewPasswordIcon,
       variant,
       appareance,
+      type,
       size,
       autoFocus,
       ...props
@@ -88,6 +137,8 @@ export const Input = forwardRef<HTMLInputElement, InputGlobalProps>(
   ) => {
     const hasElementAfter = iconAfter || loading;
     const localRef = React.useRef<HTMLInputElement>(null);
+    const {render, newType} = useTogglePasswordView(type);
+
     const handleOnchange = (e: React.ChangeEvent<HTMLInputElement>) => {
       setParentValue && setParentValue(e.target.value);
     };
@@ -108,6 +159,7 @@ export const Input = forwardRef<HTMLInputElement, InputGlobalProps>(
         <input
           ref={mergeRefs([localRef, ref])}
           autoFocus={autoFocus}
+          type={newType}
           disabled={disabled || loading}
           onChange={handleOnchange}
           aria-invalid={variant === 'danger' ? 'true' : 'false'}
@@ -119,21 +171,18 @@ export const Input = forwardRef<HTMLInputElement, InputGlobalProps>(
             className,
             iconBefore && 'pl-10',
             hasElementAfter && 'pr-10',
-            //!TODO Need to find why getting the exported constant doesn't reflects on the screen
+            //!TODO Need to find out why getting the exported constant doesn't reflects on the screen
             variant && VARIANTS_BORDER_COLORS[variant]
           )}
           {...props}
         />
 
-        {hasElementAfter && (
+        {hasElementAfter && !viewPasswordIcon && (
           <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-            {loading ? (
-              <BtnSpinner className="h-5 w-5" aria-hidden="true" />
-            ) : (
-              <VariantIcon icon={iconAfter} />
-            )}
+            <RenderAfterElement loading={loading} iconAfter={iconAfter} />
           </div>
         )}
+        {viewPasswordIcon && render()}
       </div>
     );
   }

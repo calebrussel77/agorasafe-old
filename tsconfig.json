@@ -24,6 +24,7 @@
       "@styles/*": ["./src/styles/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@services/*": ["./src/services/*"],
+      "@validations/*": ["./src/validations/*"],
       "@providers/*": ["./src/app-providers/*"],
       "@pages/*": ["./src/pages/*"],
       "@lib/*": ["./src/lib/*"]

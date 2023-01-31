@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import clsx from 'clsx';
-import {Fragment, forwardRef} from 'react';
+import {Fragment, forwardRef, useId} from 'react';
 import React from 'react';
 import {twMerge} from 'tailwind-merge';
 
@@ -18,8 +18,10 @@ export interface FieldOptions {
   disabledIcon?: JSX.Element;
   label?: string | JSX.Element;
   required?: boolean;
+  requiredLabel?: boolean;
   autoFocus?: boolean;
   loading?: boolean;
+  viewPasswordIcon?: boolean;
   error?: string | JSX.Element;
   warning?: string | JSX.Element;
   success?: string | JSX.Element;
@@ -44,12 +46,16 @@ export const Field = forwardRef<HTMLDivElement, FieldProps>(
       loading,
       autoFocus,
       required,
+      requiredLabel,
+      viewPasswordIcon,
       hint,
       className,
       ...rest
     },
     ref
   ) => {
+    const id = useId();
+
     const baseType = getBaseType(
       children.props.type || children.type.displayName
     );
@@ -62,8 +68,7 @@ export const Field = forwardRef<HTMLDivElement, FieldProps>(
 
     const Container = layout === 'flex-row' ? RowContainer : (Fragment as any);
 
-    const htmlFor =
-      children.props.id || children.props.name || generateRandomId();
+    const htmlFor = children.props.id || children.props.name || id;
     const hasHintText = !!hint;
 
     const infoText = info && wrapChildren(info);
@@ -83,14 +88,12 @@ export const Field = forwardRef<HTMLDivElement, FieldProps>(
       variant,
       loading,
       autoFocus,
+      viewPasswordIcon: !isCheckable && viewPasswordIcon,
+      ...rest,
     });
 
     return (
-      <div
-        ref={ref}
-        className={twMerge('flex flex-col gap-0.5', className)}
-        {...rest}
-      >
+      <div ref={ref} className={twMerge('flex flex-col gap-0.5', className)}>
         <>
           <Container>
             {label && (
@@ -99,9 +102,9 @@ export const Field = forwardRef<HTMLDivElement, FieldProps>(
                 disabledIcon={disabledIcon}
                 variant={variant}
                 htmlFor={htmlFor}
-                required={required}
+                required={requiredLabel}
                 withDisabledIcon={!isCheckable}
-                className={clsx('font-semibold')}
+                className={clsx('font-semibold', errorText && 'text-red-500')}
               >
                 {isCheckable && child}
                 {label}
