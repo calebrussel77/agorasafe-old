@@ -1,9 +1,11 @@
 import {type VariantProps, cva} from 'class-variance-authority';
 import React, {forwardRef, useEffect} from 'react';
-import {mergeRefs} from 'react-merge-refs';
 import {twMerge} from 'tailwind-merge';
 
 import {Variant, getVariantColor} from '@helpers/variants';
+
+import {useMergeRefs} from '@hooks/use-merge-refs/use-merge-refs';
+import {useFocus} from '@hooks/useFocus/useFocus';
 
 const checkboxToken = cva(
   'rounded border-gray-300 disabled:bg-gray-300 disabled:cursor-not-allowed',
@@ -53,17 +55,12 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxGlobalProps>(
     },
     ref
   ) => {
-    const localRef = React.useRef<HTMLInputElement>(null);
-
-    useEffect(() => {
-      if (autoFocus) {
-        localRef.current.focus();
-      }
-    }, [autoFocus]);
+    const {elementRef} = useFocus(autoFocus);
+    const refs = useMergeRefs(elementRef, ref);
 
     return (
       <input
-        ref={mergeRefs([localRef, ref])}
+        ref={refs}
         disabled={disabled || loading}
         autoFocus={autoFocus}
         type="checkbox"

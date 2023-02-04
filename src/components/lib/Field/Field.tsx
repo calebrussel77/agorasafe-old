@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import clsx from 'clsx';
-import {Fragment, forwardRef} from 'react';
+import {Fragment, forwardRef, useId} from 'react';
 import React from 'react';
 import {twMerge} from 'tailwind-merge';
 
@@ -10,7 +10,7 @@ import {HelperMessage} from '../helper-message/helper-message';
 import {Label} from '../label/label';
 import {RowContainer} from '../layout/row-container/row-container';
 import {VariantMessage} from '../variant-message/variant-message';
-import {generateRandomId, getBaseType, getVariant} from './utils';
+import {getBaseType, getVariant} from './utils';
 
 export interface FieldOptions {
   children: JSX.Element;
@@ -18,17 +18,16 @@ export interface FieldOptions {
   disabledIcon?: JSX.Element;
   label?: string | JSX.Element;
   required?: boolean;
-  autoFocus?: boolean;
   loading?: boolean;
   error?: string | JSX.Element;
   warning?: string | JSX.Element;
   success?: string | JSX.Element;
   info?: string | JSX.Element;
   hint?: string;
+  className?: string;
 }
 
-export type FieldProps = React.HtmlHTMLAttributes<HTMLDivElement> &
-  FieldOptions;
+export type FieldProps = FieldOptions;
 
 export const Field = forwardRef<HTMLDivElement, FieldProps>(
   (
@@ -42,14 +41,14 @@ export const Field = forwardRef<HTMLDivElement, FieldProps>(
       info,
       success,
       loading,
-      autoFocus,
       required,
       hint,
       className,
-      ...rest
     },
     ref
   ) => {
+    const generatedId = useId();
+
     const baseType = getBaseType(
       children.props.type || children.type.displayName
     );
@@ -63,7 +62,7 @@ export const Field = forwardRef<HTMLDivElement, FieldProps>(
     const Container = layout === 'flex-row' ? RowContainer : (Fragment as any);
 
     const htmlFor =
-      children.props.id || children.props.name || generateRandomId();
+      children.props.id || children.props.name || `${baseType}--${generatedId}`;
     const hasHintText = !!hint;
 
     const infoText = info && wrapChildren(info);
@@ -79,18 +78,13 @@ export const Field = forwardRef<HTMLDivElement, FieldProps>(
     const child = React.cloneElement(React.Children.only(children), {
       disabled,
       id: htmlFor,
-      required,
+      // required,
       variant,
       loading,
-      autoFocus,
     });
 
     return (
-      <div
-        ref={ref}
-        className={twMerge('flex flex-col gap-0.5', className)}
-        {...rest}
-      >
+      <div ref={ref} className={twMerge('flex flex-col gap-0.5', className)}>
         <>
           <Container>
             {label && (

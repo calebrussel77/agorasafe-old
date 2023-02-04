@@ -1,21 +1,20 @@
 import {Popover, Transition} from '@headlessui/react';
 import Axios from 'axios';
-import axios from 'axios';
 import clsx from 'clsx';
 import {useRouter} from 'next/router';
-import {Fragment, useEffect, useRef, useState} from 'react';
+import {Fragment, useRef} from 'react';
 import {HiOutlinePhone, HiOutlineSquares2X2} from 'react-icons/hi2';
 
-import {Modal, useModalState} from '@components/lib/modal/modal';
+import {useModalState} from '@components/lib/modal/modal';
 import SectionMessage, {
   SectionMessageAction,
 } from '@components/lib/section-message/section-message';
 
 import {useAppearOnTarget} from '@hooks/use-appear-on-target/use-appear-on-target';
 
+import {SubscriptionModal} from '../../subscription-modal/subscription-modal';
 import {MobilePopover} from './mobile-popover/mobile-popover';
 import {Navbar} from './navbar/navbar';
-import {SubscriberLaunchModal} from './subscriber-launch-modal/subscriber-launch-modal';
 
 export const headerNavigations = [
   {
@@ -65,7 +64,7 @@ const Header = () => {
       {({close}) => {
         return (
           <>
-            <SubscriberLaunchModal dialog={dialog} />
+            <SubscriptionModal dialog={dialog} />
             <SectionMessage
               title="En cours de developpement"
               appareance="discovery"

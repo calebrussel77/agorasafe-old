@@ -1,10 +1,9 @@
-import {randomBetween} from '../utils/misc';
+import {randomBetween} from '@helpers/misc';
 
 /**
  * `Spy` means records every time the method is called
  *  with what parameters are passed. => jest.spyOn(Math, "random")
  */
-
 const randomSpy = jest.spyOn(Math, 'random');
 
 describe('RandomBetween', () => {

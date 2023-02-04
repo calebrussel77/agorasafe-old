@@ -20,7 +20,7 @@ const RegisterPage = ({providers}: TRegisterPageProps) => {
   return (
     <div className="isolate overflow-x-hidden">
       <HomeBackground />
-      <div className="mx-auto w-full max-w-lg py-12">
+      <div className="mx-auto w-full max-w-lg py-12 px-4">
         <div>
           <LogoIcon className="h-6 w-auto" />
           <h1 className="mt-6 text-3xl font-bold tracking-tight">
@@ -34,19 +34,16 @@ const RegisterPage = ({providers}: TRegisterPageProps) => {
         <div className="mt-8">
           <div>
             <div>
-              <p className="text-sm font-medium text-gray-700">
-                S'inscrire avec
-              </p>
               <div className="mt-1">
                 {Object.values(providers).map(provider => (
                   <Button
                     key={provider.id}
                     onClick={() => signIn(provider.id)}
                     className="w-full flex items-center justify-center"
-                    variant="secondary"
+                    variant="subtle"
                   >
                     <GoogleIconSolid className="h-5 w-5" />
-                    <span className="font-bold">Google</span>
+                    <span>S'inscrire avec Google</span>
                   </Button>
                 ))}
               </div>
