@@ -3,12 +3,13 @@ import React, {ReactElement, forwardRef, useEffect} from 'react';
 import {useCallback} from 'react';
 import {useState} from 'react';
 import {HiOutlineEye, HiOutlineEyeSlash} from 'react-icons/hi2';
-import {mergeRefs} from 'react-merge-refs';
-import {useToggle} from 'react-use';
 import {twMerge} from 'tailwind-merge';
 
 import {VariantIcon} from '@helpers/variant-icons';
 import {Variant} from '@helpers/variants';
+
+import {useMergeRefs} from '@hooks/use-merge-refs/use-merge-refs';
+import {useFocus} from '@hooks/useFocus/useFocus';
 
 import {BtnSpinner} from '../spinner/spinner';
 
@@ -60,7 +61,7 @@ export type InputProps = React.HTMLProps<HTMLInputElement> & {
   iconAfter?: ReactElement;
   variant?: Variant;
   autoFocus?: boolean;
-  viewPasswordIcon?: boolean;
+  shouldViewPasswordIcon?: boolean;
 };
 
 export type InputGlobalProps = VariantProps<typeof inputToken> & InputProps;
@@ -125,7 +126,7 @@ export const Input = forwardRef<HTMLInputElement, InputGlobalProps>(
       iconAfter,
       loading,
       disabled,
-      viewPasswordIcon,
+      shouldViewPasswordIcon,
       variant,
       appareance,
       type,
@@ -136,18 +137,13 @@ export const Input = forwardRef<HTMLInputElement, InputGlobalProps>(
     ref
   ) => {
     const hasElementAfter = iconAfter || loading;
-    const localRef = React.useRef<HTMLInputElement>(null);
     const {render, newType} = useTogglePasswordView(type);
+    const {elementRef} = useFocus(autoFocus);
+    const refs = useMergeRefs(elementRef, ref);
 
     const handleOnchange = (e: React.ChangeEvent<HTMLInputElement>) => {
       setParentValue && setParentValue(e.target.value);
     };
-
-    useEffect(() => {
-      if (autoFocus) {
-        localRef.current.focus();
-      }
-    }, [autoFocus]);
 
     return (
       <div className="relative w-full">
@@ -157,7 +153,7 @@ export const Input = forwardRef<HTMLInputElement, InputGlobalProps>(
           </div>
         )}
         <input
-          ref={mergeRefs([localRef, ref])}
+          ref={refs}
           autoFocus={autoFocus}
           type={newType}
           disabled={disabled || loading}
@@ -177,12 +173,12 @@ export const Input = forwardRef<HTMLInputElement, InputGlobalProps>(
           {...props}
         />
 
-        {hasElementAfter && !viewPasswordIcon && (
+        {hasElementAfter && !shouldViewPasswordIcon && (
           <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
             <RenderAfterElement loading={loading} iconAfter={iconAfter} />
           </div>
         )}
-        {viewPasswordIcon && render()}
+        {shouldViewPasswordIcon && render()}
       </div>
     );
   }

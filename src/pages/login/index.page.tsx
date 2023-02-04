@@ -32,29 +32,24 @@ const LoginPage = ({providers}: TLoginPageProps) => {
         <div className="mt-8">
           <div>
             <div>
-              <p className="text-sm font-medium text-gray-700">
-                Se connecter avec
-              </p>
               <div className="mt-1">
                 {Object.values(providers).map(provider => (
                   <Button
                     key={provider.id}
                     onClick={() => signIn(provider.id)}
                     className="w-full flex items-center justify-center"
-                    variant="secondary"
+                    variant="subtle"
                   >
                     <GoogleIconSolid className="h-5 w-5" />
-                    <span className="font-bold">Google</span>
+                    <span>Se connecter avec Google</span>
                   </Button>
                 ))}
               </div>
             </div>
-
             <div className="mt-6 text-gray-500">
               <MiddleSeparator>Ou continuer avec</MiddleSeparator>
             </div>
           </div>
-
           <div className="mt-6">
             <AuthForm mode="login" />
           </div>

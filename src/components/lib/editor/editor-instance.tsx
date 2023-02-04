@@ -3,9 +3,10 @@ import {EmojiStyle} from 'emoji-picker-react';
 import 'quill-mention';
 import {forwardRef, useEffect, useRef, useState} from 'react';
 import {BsEmojiLaughing} from 'react-icons/bs';
-import {mergeRefs} from 'react-merge-refs';
 import ReactQuill from 'react-quill';
 import {twMerge} from 'tailwind-merge';
+
+import {useMergeRefs} from '@hooks/use-merge-refs/use-merge-refs';
 
 import {Popover} from '../popover/popover';
 import {usePopoverState} from '../popover/usePopoverState';
@@ -26,6 +27,7 @@ const EditorInstance = forwardRef<any, any>(
     const [selectedIndex, setSelectedIndex] = useState(0);
     const quillRef = useRef(null);
     const editor = quillRef.current?.getEditor();
+    const refs = useMergeRefs(quillRef, ref);
 
     const handleEmojiClick = emoji => {
       const emojiUrl = emoji?.getImageUrl(EmojiStyle.APPLE);
@@ -58,7 +60,7 @@ const EditorInstance = forwardRef<any, any>(
           {!isToolbarHidden && <EditorToolbar />}
           <ReactQuill
             id="editor"
-            ref={mergeRefs([quillRef, ref])}
+            ref={refs}
             modules={{
               ...defaultModules,
               ...modules,

@@ -34,19 +34,16 @@ const RegisterPage = ({providers}: TRegisterPageProps) => {
         <div className="mt-8">
           <div>
             <div>
-              <p className="text-sm font-medium text-gray-700">
-                S'inscrire avec
-              </p>
               <div className="mt-1">
                 {Object.values(providers).map(provider => (
                   <Button
                     key={provider.id}
                     onClick={() => signIn(provider.id)}
                     className="w-full flex items-center justify-center"
-                    variant="secondary"
+                    variant="subtle"
                   >
                     <GoogleIconSolid className="h-5 w-5" />
-                    <span className="font-bold">Google</span>
+                    <span>S'inscrire avec Google</span>
                   </Button>
                 ))}
               </div>

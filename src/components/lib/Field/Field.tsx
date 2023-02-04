@@ -10,7 +10,7 @@ import {HelperMessage} from '../helper-message/helper-message';
 import {Label} from '../label/label';
 import {RowContainer} from '../layout/row-container/row-container';
 import {VariantMessage} from '../variant-message/variant-message';
-import {generateRandomId, getBaseType, getVariant} from './utils';
+import {getBaseType, getVariant} from './utils';
 
 export interface FieldOptions {
   children: JSX.Element;
@@ -18,19 +18,16 @@ export interface FieldOptions {
   disabledIcon?: JSX.Element;
   label?: string | JSX.Element;
   required?: boolean;
-  requiredLabel?: boolean;
-  autoFocus?: boolean;
   loading?: boolean;
-  viewPasswordIcon?: boolean;
   error?: string | JSX.Element;
   warning?: string | JSX.Element;
   success?: string | JSX.Element;
   info?: string | JSX.Element;
   hint?: string;
+  className?: string;
 }
 
-export type FieldProps = React.HtmlHTMLAttributes<HTMLDivElement> &
-  FieldOptions;
+export type FieldProps = FieldOptions;
 
 export const Field = forwardRef<HTMLDivElement, FieldProps>(
   (
@@ -44,17 +41,13 @@ export const Field = forwardRef<HTMLDivElement, FieldProps>(
       info,
       success,
       loading,
-      autoFocus,
       required,
-      requiredLabel,
-      viewPasswordIcon,
       hint,
       className,
-      ...rest
     },
     ref
   ) => {
-    const id = useId();
+    const generatedId = useId();
 
     const baseType = getBaseType(
       children.props.type || children.type.displayName
@@ -68,7 +61,8 @@ export const Field = forwardRef<HTMLDivElement, FieldProps>(
 
     const Container = layout === 'flex-row' ? RowContainer : (Fragment as any);
 
-    const htmlFor = children.props.id || children.props.name || id;
+    const htmlFor =
+      children.props.id || children.props.name || `${baseType}--${generatedId}`;
     const hasHintText = !!hint;
 
     const infoText = info && wrapChildren(info);
@@ -84,12 +78,9 @@ export const Field = forwardRef<HTMLDivElement, FieldProps>(
     const child = React.cloneElement(React.Children.only(children), {
       disabled,
       id: htmlFor,
-      required,
+      // required,
       variant,
       loading,
-      autoFocus,
-      viewPasswordIcon: !isCheckable && viewPasswordIcon,
-      ...rest,
     });
 
     return (
@@ -102,9 +93,9 @@ export const Field = forwardRef<HTMLDivElement, FieldProps>(
                 disabledIcon={disabledIcon}
                 variant={variant}
                 htmlFor={htmlFor}
-                required={requiredLabel}
+                required={required}
                 withDisabledIcon={!isCheckable}
-                className={clsx('font-semibold', errorText && 'text-red-500')}
+                className={clsx('font-semibold')}
               >
                 {isCheckable && child}
                 {label}
