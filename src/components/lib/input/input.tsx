@@ -6,7 +6,7 @@ import {HiOutlineEye, HiOutlineEyeSlash} from 'react-icons/hi2';
 import {twMerge} from 'tailwind-merge';
 
 import {VariantIcon} from '@helpers/variant-icons';
-import {Variant} from '@helpers/variants';
+import {Variant, getVariantBorderColor} from '@helpers/variants';
 
 import {useMergeRefs} from '@hooks/use-merge-refs/use-merge-refs';
 import {useFocus} from '@hooks/useFocus/useFocus';
@@ -65,15 +65,6 @@ export type InputProps = React.HTMLProps<HTMLInputElement> & {
 };
 
 export type InputGlobalProps = VariantProps<typeof inputToken> & InputProps;
-
-const VARIANTS_BORDER_COLORS: Record<Variant, string> = {
-  danger: 'border-red-500',
-  focused: 'border-primary-500',
-  info: 'border-blue-500',
-  success: 'border-green-500',
-  warning: 'border-yellow-500',
-  system: 'border-secondary-500',
-};
 
 const RenderAfterElement = ({loading, iconAfter}) => {
   return loading ? (
@@ -167,8 +158,7 @@ export const Input = forwardRef<HTMLInputElement, InputGlobalProps>(
             className,
             iconBefore && 'pl-10',
             hasElementAfter && 'pr-10',
-            //!TODO Need to find out why getting the exported constant doesn't reflects on the screen
-            variant && VARIANTS_BORDER_COLORS[variant]
+            variant && getVariantBorderColor(variant)
           )}
           {...props}
         />

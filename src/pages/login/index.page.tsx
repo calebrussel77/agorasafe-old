@@ -9,6 +9,7 @@ import {HomeBackground} from '@components/home-background/home-background';
 import {GoogleIconSolid} from '@components/icons/GoogleIconSolid';
 import {LogoIcon} from '@components/icons/logo-icon/logo-icon';
 import {Layout} from '@components/layouts/layouts';
+import {Accordion} from '@components/lib/accordion/accordion';
 import {Button} from '@components/lib/button/button';
 import {MiddleSeparator} from '@components/lib/middle-separator/middle-separator';
 

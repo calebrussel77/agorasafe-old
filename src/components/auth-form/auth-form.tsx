@@ -14,6 +14,7 @@ import {Checkbox} from '@components/lib/checkbox/checkbox';
 import {HelperMessage} from '@components/lib/helper-message/helper-message';
 import {Input} from '@components/lib/input/input';
 import {Label} from '@components/lib/label/label';
+import {RadioGroup} from '@components/lib/radio-group/radio-group';
 import {VariantMessage} from '@components/lib/variant-message/variant-message';
 
 type TAuthFormProps = {
@@ -27,12 +28,16 @@ type TAuthForm = z.infer<typeof registerSchema> & {
 
 const AuthForm: FC<TAuthFormProps> = ({mode}) => {
   const isLoginPage = mode === 'login';
+  const authFormValidationSchema = isLoginPage
+    ? loginSchema
+    : registerSchemaValidation;
+
   const {
     register,
     handleSubmit,
-    formState: {errors},
+    formState: {errors, isSubmitting},
   } = useForm<TAuthForm>({
-    resolver: zodResolver(isLoginPage ? loginSchema : registerSchemaValidation),
+    resolver: zodResolver(authFormValidationSchema),
   });
 
   const onSubmit = data => {
@@ -76,7 +81,6 @@ const AuthForm: FC<TAuthFormProps> = ({mode}) => {
         <Input
           {...register('email')}
           autoFocus={isLoginPage}
-          id="email"
           type="email"
           placeholder="Entrez votre adresse email"
         />
@@ -135,12 +139,12 @@ const AuthForm: FC<TAuthFormProps> = ({mode}) => {
           </div>
         </>
       )}
-      <Button variant="primary" className="w-full">
+      <Button variant="primary" className="w-full" loading={isSubmitting}>
         Connexion
       </Button>
 
       {!isLoginPage && (
-        <HelperMessage className="text-sm text-gray-500">
+        <HelperMessage className="text-gray-500">
           En vous inscrivant vous acceptez les conditions générales et la
           politique de confidentialité
         </HelperMessage>
