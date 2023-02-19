@@ -26,6 +26,7 @@
 </div> 
  **/
 import clsx from 'clsx';
+import Link from 'next/link';
 import {ReactElement, ReactNode, forwardRef} from 'react';
 import {twMerge} from 'tailwind-merge';
 
@@ -35,6 +36,8 @@ type MenuItemProps = {
   description?: string | ReactElement;
   hovered?: boolean;
   className?: string;
+  href?: string;
+  onClick?: () => void;
   position?: 'center' | 'top' | 'bottom';
   children?: ReactNode | JSX.Element;
 };
@@ -69,12 +72,7 @@ const HeadingItem = ({
   );
 };
 
-const MenuItem = forwardRef<
-  HTMLButtonElement,
-  MenuItemProps &
-    React.HTMLProps<HTMLButtonElement> &
-    React.ComponentPropsWithRef<'button'>
->(
+const MenuItem = forwardRef<HTMLButtonElement, MenuItemProps>(
   (
     {
       iconBefore = null,
@@ -82,7 +80,9 @@ const MenuItem = forwardRef<
       description = '',
       position = 'center',
       hovered = true,
+      onClick,
       className = '',
+      href,
       children,
       ...props
     },
@@ -95,13 +95,14 @@ const MenuItem = forwardRef<
         ? 'items-start'
         : 'items-center';
 
-    return (
+    const Item = (
       <button
         ref={ref}
+        onClick={onClick}
         className={twMerge(
           clsx(
-            'w-full text-left flex justify-between rounded-md px-2 transition-all duration-200',
-            hovered ? 'hover:bg-gray-100' : 'cursor-default',
+            'w-full text-left flex justify-between rounded-md transition-all duration-200',
+            hovered ? 'hover:bg-gray-100 px-2' : 'cursor-default px-0',
             _position
           ),
           className
@@ -110,7 +111,7 @@ const MenuItem = forwardRef<
       >
         <div className={`flex w-full space-x-3 py-1 rounded-sm ${_position}`}>
           {iconBefore && <span className="flex-shrink-0">{iconBefore}</span>}
-          <div className="space-y-1">
+          <div className="">
             {children && typeof children === 'string' ? (
               <h3 className="whitespace-nowrap">{children}</h3>
             ) : children ? (
@@ -128,6 +129,15 @@ const MenuItem = forwardRef<
         {iconAfter && iconAfter}
       </button>
     );
+
+    if (href) {
+      return (
+        <Link href={href} onClick={onClick} passHref>
+          {Item}
+        </Link>
+      );
+    }
+    return Item;
   }
 );
 

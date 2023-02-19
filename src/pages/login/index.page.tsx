@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import {GetServerSideProps} from 'next';
-import {getProviders, signIn} from 'next-auth/react';
+import {getProviders, getSession, signIn} from 'next-auth/react';
 import {AppProps} from 'next/app';
 import React, {ReactElement} from 'react';
 
@@ -12,6 +12,8 @@ import {Layout} from '@components/layouts/layouts';
 import {Accordion} from '@components/lib/accordion/accordion';
 import {Button} from '@components/lib/button/button';
 import {MiddleSeparator} from '@components/lib/middle-separator/middle-separator';
+
+import {redirectIfAuth} from '@utils/redirectIfAuth';
 
 type TLoginPageProps = {
   providers: AppProps;
@@ -37,7 +39,11 @@ const LoginPage = ({providers}: TLoginPageProps) => {
                 {Object.values(providers).map(provider => (
                   <Button
                     key={provider.id}
-                    onClick={() => signIn(provider.id)}
+                    onClick={() =>
+                      signIn(provider.id, {
+                        callbackUrl: `${window.location.origin}/dashboard`,
+                      })
+                    }
                     className="w-full flex items-center justify-center"
                     variant="subtle"
                   >
@@ -72,11 +78,16 @@ LoginPage.getLayout = function getLayout(page: ReactElement) {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async ctx => {
   const providers = await getProviders();
-  return {
-    props: {providers},
-  };
+  return redirectIfAuth({
+    ctx,
+    cb() {
+      return {
+        props: {providers},
+      };
+    },
+  });
 };
 
 export default LoginPage;

@@ -25,9 +25,10 @@
       "@hooks/*": ["./src/hooks/*"],
       "@services/*": ["./src/services/*"],
       "@validations/*": ["./src/validations/*"],
-      "@providers/*": ["./src/app-providers/*"],
+      "@app-providers/*": ["./src/app-providers/*"],
       "@pages/*": ["./src/pages/*"],
-      "@lib/*": ["./src/lib/*"]
+      "@server/*": ["./src/server/*"],
+      "@api-providers/*": ["./src/api-providers/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.cjs", "**/*.mjs"],

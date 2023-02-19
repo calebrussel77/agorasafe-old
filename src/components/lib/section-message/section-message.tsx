@@ -33,7 +33,7 @@ const sectionMessage = cva('w-full flex justify-center items-start gap-2', {
     },
     size: {
       small: ['text-sm', 'py-1.5', 'px-4'],
-      medium: ['text-base', 'py-2', 'px-4'],
+      medium: ['text-base', 'py-2', 'px-4 sm:px-8'],
       large: ['text-lg', 'py-3', 'px-6'],
     },
   },

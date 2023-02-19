@@ -1,5 +1,7 @@
+import {Session} from 'next-auth';
+import {useSession} from 'next-auth/react';
 import Link from 'next/link';
-import {FC, forwardRef} from 'react';
+import {forwardRef} from 'react';
 import {HiOutlineUserGroup, HiOutlineX} from 'react-icons/hi';
 
 import {LogoIcon} from '@components/icons/logo-icon/logo-icon';
@@ -18,6 +20,8 @@ type MobilePopoverProps = {
 
 const MobilePopover = forwardRef<HTMLDivElement, MobilePopoverProps>(
   ({navigations, onClose}, ref) => {
+    const {data: session, status} = useSession();
+
     return (
       <div className="rounded-lg bg-white shadow-md ring-1 ring-black ring-opacity-5">
         <div className="flex items-center justify-between px-5 pt-4">

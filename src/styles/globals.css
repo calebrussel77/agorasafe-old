@@ -1,11 +1,12 @@
 /**
  * CSS Import statements 
  */
-@import '../components/lib/editor/editor.theme.css';
+@import '../components/lib/editor/editor.style.css';
 @import '../components/lib/spinner/spinner.style.css';
 @import '../components/lib/modal/modal.style.css';
 @import '../components/lib/label/label.style.css';
 @import './custom_scrollbar.css';
+@import './input_reset.css';
 
 :root {
   /* #354cd0 => blue */

@@ -1,9 +1,4 @@
 import {zodResolver} from '@hookform/resolvers/zod';
-import {loginSchema} from '@validations/schema/login-schema';
-import {
-  registerSchema,
-  registerSchemaValidation,
-} from '@validations/schema/register-schema';
 import {FC} from 'react';
 import {useForm} from 'react-hook-form';
 import {z} from 'zod';
@@ -14,8 +9,13 @@ import {Checkbox} from '@components/lib/checkbox/checkbox';
 import {HelperMessage} from '@components/lib/helper-message/helper-message';
 import {Input} from '@components/lib/input/input';
 import {Label} from '@components/lib/label/label';
-import {RadioGroup} from '@components/lib/radio-group/radio-group';
 import {VariantMessage} from '@components/lib/variant-message/variant-message';
+
+import {
+  loginSchema,
+  registerSchema,
+  registerSchemaValidation,
+} from './auth-form.validation';
 
 type TAuthFormProps = {
   mode: 'register' | 'login';

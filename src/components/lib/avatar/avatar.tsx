@@ -10,6 +10,12 @@ import {
   stringToHslColor,
 } from '@helpers/misc';
 
+import {blurDataURL} from '@helpers/image';
+import {
+  getNameInitials as defaultGetInitials,
+  stringToHslColor,
+} from '@helpers/misc';
+
 import {Presence, presenceDiv} from './presence';
 
 export type AvatarSize = 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
@@ -111,9 +117,8 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
     const avatarSizeText = sizesText[size];
     const avatarFontSize = fontSize || `calc(${avatarSize} / 2.5)`;
     const [error, setError] = useState(false);
-    const avatarSrc = noNeedApiPrefix
-      ? src
-      : `${process.env.NEXT_PUBLIC_BASE_UPLOAD_URL as string}/${src}`;
+    const avatarSrc = src;
+    // : `${process.env.NEXT_PUBLIC_BASE_UPLOAD_URL as string}/${src}`;
 
     const displayPresence = presenceIcon ? (
       presenceIcon

@@ -19,6 +19,8 @@ export const registerSchema = z.object({
   isCustomer: z.boolean(),
 });
 
+export const loginSchema = registerSchema.pick({email: true, password: true});
+
 export const registerSchemaValidation = registerSchema
   .refine(data => data.password === data.confirm_password, {
     message: 'Les mots de passe ne correspondent pas',

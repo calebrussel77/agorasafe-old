@@ -1,9 +1,12 @@
 import {type VariantProps, cva} from 'class-variance-authority';
-import React, {ReactElement, forwardRef, useEffect} from 'react';
+import React, {ReactElement, forwardRef} from 'react';
 import {useCallback} from 'react';
 import {useState} from 'react';
 import {HiOutlineEye, HiOutlineEyeSlash} from 'react-icons/hi2';
 import {twMerge} from 'tailwind-merge';
+
+import {VariantIcon} from '@helpers/variant-icons';
+import {Variant, getVariantBorderColor} from '@helpers/variants';
 
 import {VariantIcon} from '@helpers/variant-icons';
 import {Variant, getVariantBorderColor} from '@helpers/variants';
@@ -15,7 +18,7 @@ import {BtnSpinner} from '../spinner/spinner';
 
 const inputToken = cva(
   [
-    'w-full rounded ',
+    'w-full rounded',
     'disabled:opacity-70 disabled:cursor-not-allowed',
     'transition duration-300 ease-in-out',
   ],
@@ -155,9 +158,9 @@ export const Input = forwardRef<HTMLInputElement, InputGlobalProps>(
               appareance,
               size,
             }),
-            className,
             iconBefore && 'pl-10',
             hasElementAfter && 'pr-10',
+            className,
             variant && getVariantBorderColor(variant)
           )}
           {...props}

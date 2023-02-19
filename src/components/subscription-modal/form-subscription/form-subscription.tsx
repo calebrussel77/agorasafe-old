@@ -1,12 +1,13 @@
 import {zodResolver} from '@hookform/resolvers/zod';
-import {
-  SubscriptionSchema,
-  TSubscriptionForm,
-} from '@validations/schema/subscription-schema';
 import {useForm} from 'react-hook-form';
 
 import {Field} from '@components/lib/Field/Field';
 import {Input} from '@components/lib/input/input';
+
+import {
+  SubscriptionSchema,
+  TSubscriptionForm,
+} from './form-subscription.validation';
 
 const FormSubscription = ({onSubmit, formRef}) => {
   const {
