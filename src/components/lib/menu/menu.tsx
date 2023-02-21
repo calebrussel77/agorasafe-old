@@ -28,6 +28,7 @@
 import clsx from 'clsx';
 import Link from 'next/link';
 import {ReactElement, ReactNode, forwardRef} from 'react';
+import Skeleton from 'react-loading-skeleton';
 import {twMerge} from 'tailwind-merge';
 
 type MenuItemProps = {
@@ -40,6 +41,8 @@ type MenuItemProps = {
   onClick?: () => void;
   position?: 'center' | 'top' | 'bottom';
   children?: ReactNode | JSX.Element;
+  loading?: boolean;
+  isActive?: boolean;
 };
 
 type SectionProps = {
@@ -81,6 +84,8 @@ const MenuItem = forwardRef<HTMLButtonElement, MenuItemProps>(
       position = 'center',
       hovered = true,
       onClick,
+      loading,
+      isActive,
       className = '',
       href,
       children,
@@ -101,32 +106,57 @@ const MenuItem = forwardRef<HTMLButtonElement, MenuItemProps>(
         onClick={onClick}
         className={twMerge(
           clsx(
-            'w-full text-left flex justify-between rounded-md transition-all duration-200',
-            hovered ? 'hover:bg-gray-100 px-2' : 'cursor-default px-0',
+            'w-full text-left flex justify-between rounded-md transition-all duration-200 overflow-hidden',
+            hovered && !loading
+              ? 'hover:bg-gray-100 px-2'
+              : 'cursor-default px-0',
             _position
           ),
+          isActive && !loading && 'bg-gray-100',
           className
         )}
         {...props}
       >
-        <div className={`flex w-full space-x-3 py-1 rounded-sm ${_position}`}>
-          {iconBefore && <span className="flex-shrink-0">{iconBefore}</span>}
+        <div className={`flex w-full space-x-3 py-2 rounded-sm ${_position}`}>
+          {iconBefore && (
+            <span className="flex-shrink-0">
+              {loading ? <Skeleton className="h-8 w-8" circle /> : iconBefore}
+            </span>
+          )}
           <div className="">
             {children && typeof children === 'string' ? (
-              <h3 className="whitespace-nowrap">{children}</h3>
+              <h3 className="whitespace-nowrap">
+                {loading ? <Skeleton className="h-3 w-32" /> : children}
+              </h3>
             ) : children ? (
-              children
+              loading ? (
+                <Skeleton className="h-3 w-32" />
+              ) : (
+                children
+              )
             ) : null}
             {description && typeof description === 'string' ? (
               <p className="text-sm line-clamp-2 text-gray-500 text-left">
-                {description}
+                {loading ? (
+                  <Skeleton className="h-3 w-80" count={2} />
+                ) : (
+                  description
+                )}
               </p>
             ) : description ? (
-              description
+              loading ? (
+                <Skeleton className="h-3 w-80" count={2} />
+              ) : (
+                description
+              )
             ) : null}
           </div>
         </div>
-        {iconAfter && iconAfter}
+        {iconAfter && loading ? (
+          <Skeleton className="h-8 w-8" circle />
+        ) : (
+          iconAfter
+        )}
       </button>
     );
 

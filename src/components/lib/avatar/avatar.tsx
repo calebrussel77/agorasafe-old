@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import {VariantProps} from 'class-variance-authority';
 import clsx from 'clsx';
 import Image from 'next/image';
@@ -16,21 +17,39 @@ import {
   stringToHslColor,
 } from '@helpers/misc';
 
-import {Presence, presenceDiv} from './presence';
+import {AvatarBadge, avatarBadge} from './avatar-badge';
 
 export type AvatarSize = 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 const DEFAULT_FONT_SIZE = 16;
-const toRem = (px: number) => `${px / DEFAULT_FONT_SIZE}rem`;
+const toRem = px => `${px / DEFAULT_FONT_SIZE}rem`;
+
+const sizes = {
+  sm: toRem(20),
+  md: toRem(30),
+  lg: toRem(40),
+  xl: toRem(50),
+  xxl: toRem(60),
+};
+
+const sizesText = {
+  sm: 'h-5 w-5',
+  md: 'h-7 w-7',
+  lg: 'h-8 w-8',
+  xl: 'h-10 w-10',
+  xxl: 'h-12 w-12',
+};
+
+const statusText = {
+  online: 'ring-2 ring-green-500',
+  busy: 'ring-2 ring-gray-300',
+  gold: 'ring-2 ring-yellow-500',
+};
 
 export interface AvatarOptions {
-  //display the presence of the avatar by default
-  presenceIcon?: ReactElement;
+  children?: JSX.Element;
 
   //display background color of the avatar by default
   color?: string | CSSProperties['backgroundColor'];
-
-  //display presencePositionClassName of the avatar by default
-  presencePositionClassName?: string;
 
   //Used to display specified component of the avatar
   as?: any;
@@ -58,14 +77,21 @@ export interface AvatarOptions {
 
   //Used it to display a custom initials of the avatar
   getInitials?: (name: string) => string;
+
+  badgePlacement?: VariantProps<typeof avatarBadge>['placement'];
+  badgeSize?: VariantProps<typeof avatarBadge>['size'];
+  badgeShape?: VariantProps<typeof avatarBadge>['shape'];
+  badgeIcon?: JSX.Element | ReactElement;
+  status?: 'online' | 'busy' | 'gold';
+  isFavorite?: boolean;
+  isPremium?: boolean;
 }
 
 export type AvatarProps = Omit<
   React.HTMLProps<HTMLDivElement>,
   'size' | 'sizes'
 > &
-  AvatarOptions &
-  VariantProps<typeof presenceDiv>;
+  AvatarOptions;
 
 export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
   (
@@ -74,57 +100,34 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
       fontSize,
       getInitials = defaultGetInitials,
       name,
-      presence,
-      presenceIcon,
-      presenceSize = 'sm',
-      presencePositionClassName,
       as: Component = 'div',
       shape = 'circle',
       size = 'md',
       position = 'top',
       src,
       className,
+      status = 'busy',
+      isFavorite,
+      isPremium,
+      badgePlacement,
+      badgeSize,
+      badgeShape,
+      badgeIcon,
       style: externalStyle,
-      noNeedApiPrefix = false,
+      noNeedApiPrefix = true,
       children,
       ...rest
     },
     ref
   ) => {
     const backgroundColor = color || stringToHslColor(name);
-    const sizes = {
-      sm: toRem(20),
-      md: toRem(30),
-      lg: toRem(40),
-      xl: toRem(50),
-      xxl: toRem(60),
-    };
-    const sizesText = {
-      sm: 'h-5 w-5',
-      md: 'h-7 w-7',
-      lg: 'h-8 w-8',
-      xl: 'h-10 w-10',
-      xxl: 'h-12 w-12',
-    };
-    const presencePosition = {
-      xs: '-bottom-0.5 -right-0.5',
-      sm: 'bottom-0 right-0.5',
-      md: '-bottom-0.5 -right-0.5',
-      lg: '-bottom-0.5 -right-0.5',
-      xl: '-bottom-0.5 -right-0.5',
-    };
+
     const avatarSize = sizes[size];
     const avatarSizeText = sizesText[size];
+    const avatarStatusText = statusText[status];
     const avatarFontSize = fontSize || `calc(${avatarSize} / 2.5)`;
     const [error, setError] = useState(false);
-    const avatarSrc = src;
-    // : `${process.env.NEXT_PUBLIC_BASE_UPLOAD_URL as string}/${src}`;
-
-    const displayPresence = presenceIcon ? (
-      presenceIcon
-    ) : presence ? (
-      <Presence presence={presence} presenceSize={presenceSize} />
-    ) : null;
+    const avatarSrc = noNeedApiPrefix ? src : src;
 
     const classes = twMerge(
       clsx(
@@ -139,7 +142,7 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
     );
 
     return (
-      <div className="relative">
+      <div className={twMerge('relative w-fit')}>
         <Component
           aria-label={name}
           style={{
@@ -148,6 +151,7 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
             justifyContent: 'center',
             position: 'relative',
             overflow: 'hidden',
+            flexDirection: 'columns',
             flexShrink: '0',
             fontSize: avatarFontSize,
             fontWeight: 'bold',
@@ -161,7 +165,12 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
           }}
           ref={ref}
           role="img"
-          className={twMerge(clsx(`flex ${avatarSizeText}`), className)}
+          className={twMerge(
+            'flex flex-col items-center justify-center',
+            avatarSizeText,
+            avatarStatusText,
+            className
+          )}
           {...rest}
         >
           {src && !error && (
@@ -175,22 +184,22 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
               className={classes}
             />
           )}
-          {children
-            ? children
-            : (!src || error) && (
-                <h3 className="uppercase">{getInitials(name)}</h3>
-              )}
+          {(!src || error) && (
+            <h3 className="uppercase text-center">{getInitials(name)}</h3>
+          )}
         </Component>
-        {displayPresence && (
-          <span
-            className={`absolute z-10 ${
-              presencePositionClassName
-                ? presencePositionClassName
-                : (presencePosition[presenceSize!] as string)
-            }`}
-          >
-            {displayPresence}
-          </span>
+        {children && children}
+        {status && (
+          <AvatarBadge
+            {...{
+              isFavorite,
+              isPremium,
+              placement: badgePlacement,
+              shape: badgeShape,
+              size: badgeSize,
+              icon: badgeIcon,
+            }}
+          />
         )}
       </div>
     );

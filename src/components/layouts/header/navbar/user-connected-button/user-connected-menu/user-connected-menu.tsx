@@ -1,54 +1,25 @@
 import {signOut, useSession} from 'next-auth/react';
+import {useRouter} from 'next/router';
 import {FC} from 'react';
-import {AiOutlineLogout, AiOutlineUser} from 'react-icons/ai';
-import {HiOutlineCog} from 'react-icons/hi';
-import {RxDashboard} from 'react-icons/rx';
-import {TbBookmarks} from 'react-icons/tb';
+import {AiOutlineLogout} from 'react-icons/ai';
 
 import {Avatar} from '@components/lib/avatar/avatar';
 import {MenuItem} from '@components/lib/menu/menu';
 import {Popover} from '@components/lib/popover/popover';
+
+import {renderFilteredLinks} from '@utils/user-connected-links';
 
 type UserConnectedMenuProps = {
   popover: any;
   hide: () => void;
 };
 
-export const userConnectedLinks = [
-  {
-    Icon: RxDashboard,
-    title: 'Tableau de bord',
-    description: 'Accéder à mon tableau de bord personnel',
-    href: '/dashboard',
-  },
-  {
-    Icon: TbBookmarks,
-    title: 'Mes demandes',
-    description: 'Consulter mes demandes de service',
-    href: '/#',
-  },
-  {
-    Icon: TbBookmarks,
-    title: 'Services postulés',
-    description: "Accéder aux services auxquels j'ai postulé",
-    href: '/#',
-  },
-  {
-    Icon: AiOutlineUser,
-    title: 'Mon profil',
-    description: 'Accéder à mon profil publique',
-    href: '/#',
-  },
-  {
-    Icon: HiOutlineCog,
-    title: 'Paramètres',
-    description: 'Gérer mes paramètres utilisateur',
-    href: '/#',
-  },
-];
-
 const UserConnectedMenu: FC<UserConnectedMenuProps> = ({popover, hide}) => {
-  const {data: session} = useSession();
+  const {data: session, status} = useSession();
+  const isPurchaser = session?.user?.is_purchaser;
+  const isProvider = session?.user?.is_provider;
+  const isSessionLoading = status === 'loading';
+  const router = useRouter();
 
   return (
     <Popover
@@ -59,13 +30,11 @@ const UserConnectedMenu: FC<UserConnectedMenuProps> = ({popover, hide}) => {
         <div>
           <MenuItem
             iconBefore={
-              <div className="rounded-full w-fit h-fit bg-gradient-to-b from-primary-500 to-secondary-700 p-0.5">
-                <Avatar
-                  src={session?.user?.avatar}
-                  name={session?.user?.name}
-                  size="xxl"
-                />
-              </div>
+              <Avatar
+                src={session?.user?.avatar}
+                name={session?.user?.name}
+                size="xxl"
+              />
             }
             hovered={false}
             description={session?.user?.email}
@@ -73,20 +42,30 @@ const UserConnectedMenu: FC<UserConnectedMenuProps> = ({popover, hide}) => {
             <h3 className="font-semibold"> {session?.user?.name}</h3>
           </MenuItem>
           <hr className="my-3 border-gray-200" />
-          <section className="space-y-1">
-            {userConnectedLinks.map(item => {
-              return (
-                <MenuItem
-                  key={item.title}
-                  href={item?.href}
-                  onClick={hide}
-                  iconBefore={<item.Icon className="h-6 w-6" />}
-                  description={item.description}
-                >
-                  {item.title}
-                </MenuItem>
-              );
-            })}
+          <section className="flex flex-col space-y-0.5">
+            {renderFilteredLinks({isPurchaser, isProvider})
+              .filter(el => el.id !== 3)
+              ?.map(item => {
+                const href =
+                  item?.id === 5
+                    ? `/dashboard/u/${session?.user?.id}`
+                    : item?.href;
+                const isActiveLink = router?.pathname === href;
+
+                return (
+                  <MenuItem
+                    key={item.title}
+                    isActive={isActiveLink}
+                    loading={isSessionLoading}
+                    href={href}
+                    onClick={hide}
+                    iconBefore={<item.Icon className="h-6 w-6" />}
+                    description={item.description}
+                  >
+                    {item.title}
+                  </MenuItem>
+                );
+              })}
             <MenuItem
               onClick={() => {
                 signOut({

@@ -9,20 +9,20 @@ import {NextPageWithLayout} from '@pages/_app.page';
 
 import {requireAuth} from '@utils/requireAuth';
 
-import {ContentTitle} from './__components/content-title/content-title';
-import {ContentWrapper} from './__components/content-wrapper/content-wrapper';
-import {Sidebar} from './__components/sidebar/sidebar';
+import {ContentTitle} from '../__components/content-title/content-title';
+import {ContentWrapper} from '../__components/content-wrapper/content-wrapper';
+import {Sidebar} from '../__components/sidebar/sidebar';
 
-type TDashboardPageProps = NextPageWithLayout &
+type TNotificationsPageProps = NextPageWithLayout &
   FC<InferGetServerSidePropsType<typeof getServerSideProps>>;
 
-const DashboardPage: TDashboardPageProps = ({data}) => {
+const NotificationsPage: TNotificationsPageProps = ({data}) => {
   return (
     <ContentWrapper>
-      <ContentTitle>Tableau de bord</ContentTitle>
+      <ContentTitle>Notifications</ContentTitle>
       <div className="mt-3">
         <p>
-          Je suis les settings. Lorem ipsum dolor sit amet consectetur
+          Je suis les notifications. Lorem ipsum dolor sit amet consectetur
           adipisicing elit. Sit sapiente.
         </p>
       </div>
@@ -30,9 +30,9 @@ const DashboardPage: TDashboardPageProps = ({data}) => {
   );
 };
 
-DashboardPage.getLayout = function getLayout(page: ReactElement) {
+NotificationsPage.getLayout = function getLayout(page: ReactElement) {
   const session: Session = page?.props?.data;
-  const pageTitle = `Tableau de bord - ${session?.user?.name}`;
+  const pageTitle = `Notifications - ${session?.user?.name}`;
   return (
     <AuthLayout title={pageTitle}>
       <Sidebar />
@@ -54,4 +54,4 @@ export const getServerSideProps: GetServerSideProps<{
   });
 };
 
-export default DashboardPage;
+export default NotificationsPage;

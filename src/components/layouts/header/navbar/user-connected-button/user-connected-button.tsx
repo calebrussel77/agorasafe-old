@@ -14,7 +14,6 @@ const UserConnectedButton = ({session}) => {
     <>
       <Popover.Trigger
         {...{...popover, state: popover.state}}
-        className="rounded-full w-fit h-fit bg-gradient-to-b from-primary-500 to-secondary-700 p-0.5"
         disclosure={
           <button title={`Click to open menu options`}>
             <Avatar
