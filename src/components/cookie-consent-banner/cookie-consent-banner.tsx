@@ -1,7 +1,7 @@
 import CookieConsent from 'react-cookie-consent';
-import {twMerge} from 'tailwind-merge';
+import { twMerge } from 'tailwind-merge';
 
-import {ImageUI} from '@components/lib/image-ui/image-ui';
+import { ImageUI } from '@components/lib/image-ui/image-ui';
 
 const CookieConsentBanner = () => {
   return (
@@ -32,4 +32,4 @@ const CookieConsentBanner = () => {
   );
 };
 
-export {CookieConsentBanner};
+export { CookieConsentBanner };

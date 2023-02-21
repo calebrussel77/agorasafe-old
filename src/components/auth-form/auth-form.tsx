@@ -1,15 +1,15 @@
-import {zodResolver} from '@hookform/resolvers/zod';
-import {FC} from 'react';
-import {useForm} from 'react-hook-form';
-import {z} from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { FC } from 'react';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
-import {Field} from '@components/lib/Field/Field';
-import {Button} from '@components/lib/button/button';
-import {Checkbox} from '@components/lib/checkbox/checkbox';
-import {HelperMessage} from '@components/lib/helper-message/helper-message';
-import {Input} from '@components/lib/input/input';
-import {Label} from '@components/lib/label/label';
-import {VariantMessage} from '@components/lib/variant-message/variant-message';
+import { Field } from '@components/lib/Field/Field';
+import { Button } from '@components/lib/button/button';
+import { Checkbox } from '@components/lib/checkbox/checkbox';
+import { HelperMessage } from '@components/lib/helper-message/helper-message';
+import { Input } from '@components/lib/input/input';
+import { Label } from '@components/lib/label/label';
+import { VariantMessage } from '@components/lib/variant-message/variant-message';
 
 import {
   loginSchema,
@@ -26,7 +26,7 @@ type TAuthForm = z.infer<typeof registerSchema> & {
   desire?: any;
 };
 
-const AuthForm: FC<TAuthFormProps> = ({mode}) => {
+const AuthForm: FC<TAuthFormProps> = ({ mode }) => {
   const isLoginPage = mode === 'login';
   const authFormValidationSchema = isLoginPage
     ? loginSchema
@@ -35,7 +35,7 @@ const AuthForm: FC<TAuthFormProps> = ({mode}) => {
   const {
     register,
     handleSubmit,
-    formState: {errors, isSubmitting},
+    formState: { errors, isSubmitting },
   } = useForm<TAuthForm>({
     resolver: zodResolver(authFormValidationSchema),
   });
@@ -125,10 +125,10 @@ const AuthForm: FC<TAuthFormProps> = ({mode}) => {
             </Label>
             <div className="flex items-center flex-wrap gap-2 justify-between">
               <Field label="Proposer mes services">
-                <Checkbox {...register('isProvider', {value: true})} />
+                <Checkbox {...register('isProvider', { value: true })} />
               </Field>
               <Field label="Demander des services">
-                <Checkbox {...register('isCustomer', {value: true})} />
+                <Checkbox {...register('isCustomer', { value: true })} />
               </Field>
             </div>
             {errors.desire?.message && (
@@ -158,4 +158,4 @@ const AuthForm: FC<TAuthFormProps> = ({mode}) => {
   );
 };
 
-export {AuthForm};
+export { AuthForm };

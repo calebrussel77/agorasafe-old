@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import {Children, Fragment, ReactElement, ReactNode, forwardRef} from 'react';
-import {twMerge} from 'tailwind-merge';
+import { Children, Fragment, ReactElement, ReactNode, forwardRef } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 /**
  * Example
@@ -19,7 +19,7 @@ type InlineUIProps = {
   children?: ReactNode;
 };
 const InlineUI = forwardRef<HTMLDivElement, InlineUIProps>(
-  ({divider, className, children}, ref) => {
+  ({ divider, className, children }, ref) => {
     const dividerComponent =
       typeof divider === 'string' ? <span>{divider}</span> : divider;
 
@@ -42,4 +42,4 @@ const InlineUI = forwardRef<HTMLDivElement, InlineUIProps>(
 
 InlineUI.displayName = 'InlineUI';
 
-export {InlineUI};
+export { InlineUI };

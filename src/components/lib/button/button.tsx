@@ -1,10 +1,10 @@
 // button.tsx
-import {type VariantProps, cva} from 'class-variance-authority';
+import { type VariantProps, cva } from 'class-variance-authority';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
-import {twMerge} from 'tailwind-merge';
+import { twMerge } from 'tailwind-merge';
 
-import {BtnSpinner, Spinner} from '../spinner/spinner';
+import { BtnSpinner, Spinner } from '../spinner/spinner';
 
 const button = cva(
   'gap-2 disabled:cursor-not-allowed transition ease-in-out duration-300',
@@ -58,7 +58,7 @@ const button = cva(
         square: ['rounded-none'],
       },
     },
-    compoundVariants: [{variant: 'primary', size: 'md', shape: 'rounded'}],
+    compoundVariants: [{ variant: 'primary', size: 'md', shape: 'rounded' }],
     defaultVariants: {
       variant: 'primary',
       size: 'md',
@@ -91,7 +91,7 @@ export const Button: React.FC<ButtonProps> = ({
     <button
       {...props}
       disabled={disabled || loading}
-      className={twMerge(button({variant, size, shape}), className)}
+      className={twMerge(button({ variant, size, shape }), className)}
     >
       {loading ? (
         <div className="flex items-center gap-2 flex-nowrap">

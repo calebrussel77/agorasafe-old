@@ -1,14 +1,14 @@
-import {z} from 'zod';
+import { z } from 'zod';
 
 import {
   createTRPCRouter,
   protectedProcedure,
   publicProcedure,
 } from '../../trpc';
-import {ZHelloInput} from './types';
+import { ZHelloInput } from './types';
 
 export const registerRouter = createTRPCRouter({
-  hello: publicProcedure.input(ZHelloInput).query(({input}) => {
+  hello: publicProcedure.input(ZHelloInput).query(({ input }) => {
     return {
       greeting: `Hello ${input.text}`,
     };

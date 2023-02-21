@@ -27,9 +27,9 @@
  **/
 import clsx from 'clsx';
 import Link from 'next/link';
-import {ReactElement, ReactNode, forwardRef} from 'react';
+import { ReactElement, ReactNode, forwardRef } from 'react';
 import Skeleton from 'react-loading-skeleton';
-import {twMerge} from 'tailwind-merge';
+import { twMerge } from 'tailwind-merge';
 
 type MenuItemProps = {
   iconBefore?: ReactElement;
@@ -193,7 +193,7 @@ const Section = ({
       <section
         style={
           isScrollable
-            ? {overflowY: 'auto', flex: '1 1 0%', height: '100%'}
+            ? { overflowY: 'auto', flex: '1 1 0%', height: '100%' }
             : {}
         }
         className={clsx('py-2 w-full scrollbar__custom', className)}
@@ -213,7 +213,7 @@ const MenuGroup = ({
 }: MenuGroupProps & React.HTMLProps<HTMLDivElement>) => {
   return (
     <div
-      style={{maxHeight: maxHeight && `${maxHeight}px`}}
+      style={{ maxHeight: maxHeight && `${maxHeight}px` }}
       className={clsx('flex flex-col', className)}
       {...rest}
     >
@@ -222,4 +222,4 @@ const MenuGroup = ({
   );
 };
 
-export {MenuItem, MenuGroup, HeadingItem, Section};
+export { MenuItem, MenuGroup, HeadingItem, Section };

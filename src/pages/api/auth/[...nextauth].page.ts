@@ -1,16 +1,16 @@
 // Prisma adapter for NextAuth, optional and can be removed
-import {PrismaAdapter} from '@next-auth/prisma-adapter';
-import NextAuth, {type NextAuthOptions} from 'next-auth';
+import { PrismaAdapter } from '@next-auth/prisma-adapter';
+import NextAuth, { type NextAuthOptions } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
-import {v4 as uuidv4} from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 
-import {env} from '../../../env/server.mjs';
-import {prisma} from '../../../server/db';
+import { env } from '../../../env/server.mjs';
+import { prisma } from '../../../server/db';
 
 export const authOptions: NextAuthOptions = {
   // Include user infos on session
   callbacks: {
-    session({session, user}: any) {
+    session({ session, user }: any) {
       const currentUser = {
         id: user.id,
         name: `${user.first_name} ${user.last_name}`,

@@ -4,7 +4,7 @@ import {
   PopoverStateProps,
   usePopoverState as useAriakitPopoverState,
 } from 'ariakit';
-import {useCallback, useRef} from 'react';
+import { useCallback, useRef } from 'react';
 
 export interface UsePopoverStateOptions {
   hideTimeout?: number;
@@ -26,7 +26,7 @@ export const usePopoverState = ({
   withCloseButton = false,
   ...options
 }: PopoverStateProps & Omit<UsePopoverStateOptions, 'state'> = {}) => {
-  const popover = useAriakitPopoverState({animated, gutter: 8, ...options});
+  const popover = useAriakitPopoverState({ animated, gutter: 8, ...options });
   const closeCountdownRef = useRef<NodeJS.Timeout>();
   const openCountdownRef = useRef<NodeJS.Timeout>();
   const isHoverable = triggerMethod === 'hover';

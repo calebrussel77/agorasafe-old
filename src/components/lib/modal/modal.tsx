@@ -52,9 +52,9 @@ import React, {
   useRef,
 } from 'react';
 
-import {CloseButton} from './close-button/close-button';
-import {Footer} from './footer/footer';
-import {Header} from './header/header';
+import { CloseButton } from './close-button/close-button';
+import { Footer } from './footer/footer';
+import { Header } from './header/header';
 
 export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'auto';
 
@@ -81,7 +81,7 @@ export type ModalInitialState = DialogStateProps;
 export type ModalStateReturn = DialogState;
 
 export function useModalState(options?: ModalInitialState): ModalStateReturn {
-  return useDialogState({animated: true, ...options});
+  return useDialogState({ animated: true, ...options });
 }
 
 const ModalComponent = forwardRef<HTMLDivElement, ModalProps>(
@@ -161,7 +161,7 @@ type ContentProps = {
 };
 
 const Content = forwardRef<HTMLDivElement, ContentProps>(
-  ({className, ...props}, ref) => {
+  ({ className, ...props }, ref) => {
     return (
       <div
         ref={ref}

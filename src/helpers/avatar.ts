@@ -1,4 +1,4 @@
-import {AvatarProps} from '@components/lib/avatar/avatar';
+import { AvatarProps } from '@components/lib/avatar/avatar';
 
 export const composeUniqueKey = (props: AvatarProps, index: number) => {
   if (props.key) {

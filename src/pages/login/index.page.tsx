@@ -1,25 +1,25 @@
 /* eslint-disable @next/next/no-img-element */
-import {GetServerSideProps} from 'next';
-import {getProviders, getSession, signIn} from 'next-auth/react';
-import {AppProps} from 'next/app';
-import React, {ReactElement} from 'react';
+import { GetServerSideProps } from 'next';
+import { getProviders, getSession, signIn } from 'next-auth/react';
+import { AppProps } from 'next/app';
+import React, { ReactElement } from 'react';
 
-import {AuthForm} from '@components/auth-form/auth-form';
-import {HomeBackground} from '@components/home-background/home-background';
-import {GoogleIconSolid} from '@components/icons/GoogleIconSolid';
-import {LogoIcon} from '@components/icons/logo-icon/logo-icon';
-import {Layout} from '@components/layouts/layouts';
-import {Accordion} from '@components/lib/accordion/accordion';
-import {Button} from '@components/lib/button/button';
-import {MiddleSeparator} from '@components/lib/middle-separator/middle-separator';
+import { AuthForm } from '@components/auth-form/auth-form';
+import { HomeBackground } from '@components/home-background/home-background';
+import { GoogleIconSolid } from '@components/icons/GoogleIconSolid';
+import { LogoIcon } from '@components/icons/logo-icon/logo-icon';
+import { Layout } from '@components/layouts/layouts';
+import { Accordion } from '@components/lib/accordion/accordion';
+import { Button } from '@components/lib/button/button';
+import { MiddleSeparator } from '@components/lib/middle-separator/middle-separator';
 
-import {redirectIfAuth} from '@utils/redirectIfAuth';
+import { redirectIfAuth } from '@utils/redirectIfAuth';
 
 type TLoginPageProps = {
   providers: AppProps;
 };
 
-const LoginPage = ({providers}: TLoginPageProps) => {
+const LoginPage = ({ providers }: TLoginPageProps) => {
   return (
     <div className="isolate overflow-x-hidden">
       <HomeBackground />
@@ -84,7 +84,7 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
     ctx,
     cb() {
       return {
-        props: {providers},
+        props: { providers },
       };
     },
   });

@@ -1,4 +1,4 @@
-import {ImageUI} from '@components/lib/image-ui/image-ui';
+import { ImageUI } from '@components/lib/image-ui/image-ui';
 
 const CompanyLogos = () => {
   return (
@@ -43,4 +43,4 @@ const CompanyLogos = () => {
   );
 };
 
-export {CompanyLogos};
+export { CompanyLogos };

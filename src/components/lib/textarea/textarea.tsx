@@ -1,8 +1,8 @@
-import {type VariantProps, cva} from 'class-variance-authority';
+import { type VariantProps, cva } from 'class-variance-authority';
 import clsx from 'clsx';
-import React, {ReactElement, forwardRef} from 'react';
+import React, { ReactElement, forwardRef } from 'react';
 
-import {BtnSpinner} from '../spinner/spinner';
+import { BtnSpinner } from '../spinner/spinner';
 
 const textarea = cva(
   [
@@ -32,7 +32,7 @@ const textarea = cva(
         xl: ['text-xl', 'py-3', 'px-4'],
       },
     },
-    compoundVariants: [{variant: 'default', size: 'md'}],
+    compoundVariants: [{ variant: 'default', size: 'md' }],
     defaultVariants: {
       variant: 'default',
       size: 'md',

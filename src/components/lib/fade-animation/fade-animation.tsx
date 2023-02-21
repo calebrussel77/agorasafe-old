@@ -1,4 +1,4 @@
-import React, {forwardRef, useEffect, useRef, useState} from 'react';
+import React, { forwardRef, useEffect, useRef, useState } from 'react';
 
 const VISIBLE = 1;
 const HIDDEN = 2;
@@ -28,7 +28,7 @@ type fadeProps = {
   onLeave?: Function;
   className?: string;
   style?: any;
-  from?: {opacity?: number; x?: number; y?: number; z?: number};
+  from?: { opacity?: number; x?: number; y?: number; z?: number };
 } & React.HTMLProps<HTMLDivElement>;
 
 // const FadeAnimation = ({
@@ -51,7 +51,7 @@ const FadeAnimation = forwardRef<HTMLDivElement, fadeProps>(
       onLeave,
       style,
       className,
-      from = {opacity: 0},
+      from = { opacity: 0 },
       ...restProps
     },
     ref
@@ -112,7 +112,7 @@ const FadeAnimation = forwardRef<HTMLDivElement, fadeProps>(
     return (
       <div
         ref={ref}
-        style={{...defaultStyle, ...style}}
+        style={{ ...defaultStyle, ...style }}
         className={className}
         {...restProps}
       >

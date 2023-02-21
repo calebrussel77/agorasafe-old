@@ -1,5 +1,5 @@
-import {Button} from '@components/lib/button/button';
-import {ImageUI} from '@components/lib/image-ui/image-ui';
+import { Button } from '@components/lib/button/button';
+import { ImageUI } from '@components/lib/image-ui/image-ui';
 
 export function CtaSection() {
   return (

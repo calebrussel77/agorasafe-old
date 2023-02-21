@@ -1,11 +1,11 @@
-import {useRef} from 'react';
-import {BsArrowLeftCircleFill, BsArrowRightCircleFill} from 'react-icons/bs';
-import {Navigation} from 'swiper';
-import {Swiper, SwiperSlide} from 'swiper/react';
+import { useRef } from 'react';
+import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from 'react-icons/bs';
+import { Navigation } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-import {ServicesListItem} from './services-list-item/services-list-item';
+import { ServicesListItem } from './services-list-item/services-list-item';
 
-const ServicesList = ({services}) => {
+const ServicesList = ({ services }) => {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
 
@@ -50,7 +50,7 @@ const ServicesList = ({services}) => {
             },
           }}
           modules={[Navigation]}
-          style={{padding: '6px 0'}}
+          style={{ padding: '6px 0' }}
           className="mySwiper"
         >
           {services.map(service => (
@@ -70,4 +70,4 @@ const ServicesList = ({services}) => {
   );
 };
 
-export {ServicesList};
+export { ServicesList };

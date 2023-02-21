@@ -1,10 +1,10 @@
 /* eslint-disable no-undef */
 import clsx from 'clsx';
-import React, {forwardRef, useMemo} from 'react';
-import {HiCheckCircle, HiInformationCircle, HiXCircle} from 'react-icons/hi';
-import {HiExclamationTriangle} from 'react-icons/hi2';
+import React, { forwardRef, useMemo } from 'react';
+import { HiCheckCircle, HiInformationCircle, HiXCircle } from 'react-icons/hi';
+import { HiExclamationTriangle } from 'react-icons/hi2';
 
-import {VARIANTS_COLORS, Variant as VariantFromUtils} from './variants';
+import { VARIANTS_COLORS, Variant as VariantFromUtils } from './variants';
 
 type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 
@@ -28,7 +28,7 @@ export type VariantIconProps = React.HTMLAttributes<HTMLElement> &
   VariantIconOptions;
 
 export const VariantIcon = forwardRef<HTMLElement, VariantIconProps>(
-  ({icon, size = 'md', variant, className, ...rest}, ref) => {
+  ({ icon, size = 'md', variant, className, ...rest }, ref) => {
     const Icon = useMemo(() => {
       if (icon === null) return null;
       if (icon) return icon;

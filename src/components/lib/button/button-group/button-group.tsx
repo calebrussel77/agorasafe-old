@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 import React from 'react';
-import {useCss} from 'react-use';
+import { useCss } from 'react-use';
 
-import {ButtonProps} from '../button';
+import { ButtonProps } from '../button';
 
 export type ButtonGroupProps = React.HTMLAttributes<HTMLDivElement> &
   ButtonProps;

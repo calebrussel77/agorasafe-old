@@ -1,15 +1,15 @@
 import clsx from 'clsx';
-import {Session} from 'next-auth';
-import {FC} from 'react';
-import {BsBell} from 'react-icons/bs';
+import { Session } from 'next-auth';
+import { FC } from 'react';
+import { BsBell } from 'react-icons/bs';
 
-import {Popover} from '@components/lib/popover/popover';
-import {usePopoverState} from '@components/lib/popover/usePopoverState';
+import { Popover } from '@components/lib/popover/popover';
+import { usePopoverState } from '@components/lib/popover/usePopoverState';
 
-import {UserNotificationsMenu} from './user-notifications-menu/user-notifications-menu';
+import { UserNotificationsMenu } from './user-notifications-menu/user-notifications-menu';
 
 const UserNotificationsButton = () => {
-  const {popover, hide} = usePopoverState({
+  const { popover, hide } = usePopoverState({
     fitViewport: true,
     placement: 'bottom-end',
   });
@@ -17,7 +17,7 @@ const UserNotificationsButton = () => {
   return (
     <>
       <Popover.Trigger
-        {...{...popover, state: popover.state}}
+        {...{ ...popover, state: popover.state }}
         className={clsx('focus:ring-2 focus:ring-primary-500 rounded-full')}
         disclosure={
           <button title={`Click to open notifications menu`}>
@@ -30,4 +30,4 @@ const UserNotificationsButton = () => {
   );
 };
 
-export {UserNotificationsButton};
+export { UserNotificationsButton };

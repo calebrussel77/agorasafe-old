@@ -1,15 +1,15 @@
 import clsx from 'clsx';
-import React, {forwardRef} from 'react';
+import React, { forwardRef } from 'react';
 
-const Spinner = forwardRef<HTMLDivElement, {className?: string}>(
-  ({className = 'w-9 h-9', ...rest}, ref) => {
+const Spinner = forwardRef<HTMLDivElement, { className?: string }>(
+  ({ className = 'w-9 h-9', ...rest }, ref) => {
     return <div ref={ref} {...rest} className={clsx('loader', className)} />;
   }
 );
 
 Spinner.displayName = 'Spinner';
 
-function FullSpinner({className = 'w-9 h-9'}) {
+function FullSpinner({ className = 'w-9 h-9' }) {
   return (
     <div className="fixed inset-0 flex z-10 justify-center items-center">
       <div className={clsx('loader relative z-30', className)} />
@@ -17,7 +17,7 @@ function FullSpinner({className = 'w-9 h-9'}) {
   );
 }
 
-const BtnSpinner = ({className = ''}) => (
+const BtnSpinner = ({ className = '' }) => (
   <svg
     className={clsx('animate-spin', className)}
     xmlns="http://www.w3.org/2000/svg"
@@ -40,4 +40,4 @@ const BtnSpinner = ({className = ''}) => (
   </svg>
 );
 
-export {Spinner, FullSpinner, BtnSpinner};
+export { Spinner, FullSpinner, BtnSpinner };

@@ -1,10 +1,10 @@
-import {Session} from 'next-auth';
-import {getSession} from 'next-auth/react';
+import { Session } from 'next-auth';
+import { getSession } from 'next-auth/react';
 
 type TRequireAuthProps = {
   ctx: any;
   redirectUrl?: string;
-  cb: ({session}: {session: Session}) => any;
+  cb: ({ session }: { session: Session }) => any;
 };
 
 export const requireAuth = async ({
@@ -23,5 +23,5 @@ export const requireAuth = async ({
     };
   }
 
-  return cb({session} as any);
+  return cb({ session } as any);
 };

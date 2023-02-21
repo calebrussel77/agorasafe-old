@@ -1,11 +1,11 @@
 import Link from 'next/link';
-import {FaChevronRight} from 'react-icons/fa';
-import {FaChartArea, FaInbox, FaPenSquare, FaTrash} from 'react-icons/fa';
+import { FaChevronRight } from 'react-icons/fa';
+import { FaChartArea, FaInbox, FaPenSquare, FaTrash } from 'react-icons/fa';
 
-import {LogoIcon} from '@components/icons/logo-icon/logo-icon';
-import {headerNavigations} from '@components/layouts/header/header';
+import { LogoIcon } from '@components/icons/logo-icon/logo-icon';
+import { headerNavigations } from '@components/layouts/header/header';
 
-import {HomeBackground} from '../components/home-background/home-background';
+import { HomeBackground } from '../components/home-background/home-background';
 
 const social = [
   {

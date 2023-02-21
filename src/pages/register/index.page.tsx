@@ -1,24 +1,24 @@
 /* eslint-disable @next/next/no-img-element */
-import {GetServerSideProps} from 'next';
-import {getProviders, signIn} from 'next-auth/react';
-import {AppProps} from 'next/app';
-import React, {ReactElement} from 'react';
+import { GetServerSideProps } from 'next';
+import { getProviders, signIn } from 'next-auth/react';
+import { AppProps } from 'next/app';
+import React, { ReactElement } from 'react';
 
-import {AuthForm} from '@components/auth-form/auth-form';
-import {HomeBackground} from '@components/home-background/home-background';
-import {GoogleIconSolid} from '@components/icons/GoogleIconSolid';
-import {LogoIcon} from '@components/icons/logo-icon/logo-icon';
-import {Layout} from '@components/layouts/layouts';
-import {Button} from '@components/lib/button/button';
-import {MiddleSeparator} from '@components/lib/middle-separator/middle-separator';
+import { AuthForm } from '@components/auth-form/auth-form';
+import { HomeBackground } from '@components/home-background/home-background';
+import { GoogleIconSolid } from '@components/icons/GoogleIconSolid';
+import { LogoIcon } from '@components/icons/logo-icon/logo-icon';
+import { Layout } from '@components/layouts/layouts';
+import { Button } from '@components/lib/button/button';
+import { MiddleSeparator } from '@components/lib/middle-separator/middle-separator';
 
-import {redirectIfAuth} from '@utils/redirectIfAuth';
+import { redirectIfAuth } from '@utils/redirectIfAuth';
 
 type TRegisterPageProps = {
   providers: AppProps;
 };
 
-const RegisterPage = ({providers}: TRegisterPageProps) => {
+const RegisterPage = ({ providers }: TRegisterPageProps) => {
   return (
     <div className="isolate overflow-x-hidden">
       <HomeBackground />
@@ -85,7 +85,7 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
     ctx,
     cb() {
       return {
-        props: {providers},
+        props: { providers },
       };
     },
   });

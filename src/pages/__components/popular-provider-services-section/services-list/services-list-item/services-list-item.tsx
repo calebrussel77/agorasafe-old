@@ -6,9 +6,9 @@ import {
   HiStar,
 } from 'react-icons/hi';
 
-import {ImageUI} from '@components/lib/image-ui/image-ui';
+import { ImageUI } from '@components/lib/image-ui/image-ui';
 
-const ServicesListItem = ({service}) => {
+const ServicesListItem = ({ service }) => {
   return (
     <div className="flex flex-col overflow-hidden rounded-lg shadow-lg">
       <ImageUI
@@ -80,4 +80,4 @@ const ServicesListItem = ({service}) => {
   );
 };
 
-export {ServicesListItem};
+export { ServicesListItem };

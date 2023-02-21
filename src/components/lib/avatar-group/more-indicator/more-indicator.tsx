@@ -1,6 +1,6 @@
-import React, {forwardRef, useCallback} from 'react';
+import React, { forwardRef, useCallback } from 'react';
 
-import {Avatar, AvatarProps} from '../../avatar/avatar';
+import { Avatar, AvatarProps } from '../../avatar/avatar';
 
 export type MoreIndicatorProps = AvatarProps & {
   count: number;
@@ -9,7 +9,7 @@ export type MoreIndicatorProps = AvatarProps & {
 const MAX_DISPLAY_COUNT = 99;
 
 export const MoreIndicator = forwardRef<HTMLDivElement, MoreIndicatorProps>(
-  ({count, onClick, buttonProps = {}, ...rest}, ref) => {
+  ({ count, onClick, buttonProps = {}, ...rest }, ref) => {
     const onClickHander = useCallback(
       (event: React.MouseEvent<any>) => {
         if (buttonProps.onClick) {

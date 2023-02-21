@@ -1,6 +1,6 @@
-import {wrapChildren} from '@helpers/wrap-children';
+import { wrapChildren } from '@helpers/wrap-children';
 
-const MiddleSeparator = ({children}) => {
+const MiddleSeparator = ({ children }) => {
   const content =
     typeof children === 'string'
       ? wrapChildren(children, 'bg-white px-2')
@@ -16,4 +16,4 @@ const MiddleSeparator = ({children}) => {
   );
 };
 
-export {MiddleSeparator};
+export { MiddleSeparator };

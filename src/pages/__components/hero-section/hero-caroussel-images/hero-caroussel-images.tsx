@@ -1,7 +1,7 @@
-import {Autoplay, EffectCube, Pagination} from 'swiper';
-import {Swiper, SwiperSlide} from 'swiper/react';
+import { Autoplay, EffectCube, Pagination } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-import {ImageUI} from '@components/lib/image-ui/image-ui';
+import { ImageUI } from '@components/lib/image-ui/image-ui';
 
 const HERO_IMAGES = [
   {
@@ -66,4 +66,4 @@ const HeroCarousselImages = () => {
   );
 };
 
-export {HeroCarousselImages};
+export { HeroCarousselImages };

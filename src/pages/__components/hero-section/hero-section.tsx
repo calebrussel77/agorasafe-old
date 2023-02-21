@@ -1,11 +1,11 @@
-import {useRef} from 'react';
+import { useRef } from 'react';
 
-import {GlobalSearchModal} from '@components/global-search-modal/global-search-modal';
-import {useModalState} from '@components/lib/modal/modal';
+import { GlobalSearchModal } from '@components/global-search-modal/global-search-modal';
+import { useModalState } from '@components/lib/modal/modal';
 
-import {CompanyLogos} from '../company-logos/company-logos';
-import {GlobalSearch} from '../global-search/global-search';
-import {HeroCarousselImages} from './hero-caroussel-images/hero-caroussel-images';
+import { CompanyLogos } from '../company-logos/company-logos';
+import { GlobalSearch } from '../global-search/global-search';
+import { HeroCarousselImages } from './hero-caroussel-images/hero-caroussel-images';
 
 const HeroSection = () => {
   const dialog = useModalState();
@@ -59,4 +59,4 @@ const HeroSection = () => {
   );
 };
 
-export {HeroSection};
+export { HeroSection };

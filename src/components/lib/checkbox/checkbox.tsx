@@ -1,11 +1,11 @@
-import {type VariantProps, cva} from 'class-variance-authority';
-import React, {forwardRef} from 'react';
-import {twMerge} from 'tailwind-merge';
+import { type VariantProps, cva } from 'class-variance-authority';
+import React, { forwardRef } from 'react';
+import { twMerge } from 'tailwind-merge';
 
-import {Variant, getVariantColor} from '@helpers/variants';
+import { Variant, getVariantColor } from '@helpers/variants';
 
-import {useMergeRefs} from '@hooks/use-merge-refs/use-merge-refs';
-import {useFocus} from '@hooks/useFocus/useFocus';
+import { useMergeRefs } from '@hooks/use-merge-refs/use-merge-refs';
+import { useFocus } from '@hooks/useFocus/useFocus';
 
 const checkboxToken = cva(
   'rounded border-gray-300 disabled:bg-gray-300 disabled:cursor-not-allowed',
@@ -24,7 +24,7 @@ const checkboxToken = cva(
         xl: ['h-6 w-6'],
       },
     },
-    compoundVariants: [{appareance: 'primary', size: 'md'}],
+    compoundVariants: [{ appareance: 'primary', size: 'md' }],
     defaultVariants: {
       appareance: 'primary',
       size: 'md',
@@ -56,7 +56,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxGlobalProps>(
     },
     ref
   ) => {
-    const {elementRef} = useFocus(autoFocus);
+    const { elementRef } = useFocus(autoFocus);
     const refs = useMergeRefs(elementRef, ref);
 
     return (

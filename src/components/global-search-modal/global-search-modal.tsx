@@ -1,9 +1,9 @@
-import {HiOutlineSearch} from 'react-icons/hi';
-import {HiArchiveBox, HiOutlinePencil} from 'react-icons/hi2';
+import { HiOutlineSearch } from 'react-icons/hi';
+import { HiArchiveBox, HiOutlinePencil } from 'react-icons/hi2';
 
-import {Input} from '@components/lib/input/input';
-import {MenuItem} from '@components/lib/menu/menu';
-import {Modal} from '@components/lib/modal/modal';
+import { Input } from '@components/lib/input/input';
+import { MenuItem } from '@components/lib/menu/menu';
+import { Modal } from '@components/lib/modal/modal';
 
 const items = [
   {
@@ -61,7 +61,7 @@ const items = [
   // More items...
 ];
 
-const GlobalSearchModal = ({dialog, onCloseDialog, initialFocusRef}) => {
+const GlobalSearchModal = ({ dialog, onCloseDialog, initialFocusRef }) => {
   return (
     <Modal
       state={dialog}
@@ -133,4 +133,4 @@ const GlobalSearchModal = ({dialog, onCloseDialog, initialFocusRef}) => {
   );
 };
 
-export {GlobalSearchModal};
+export { GlobalSearchModal };

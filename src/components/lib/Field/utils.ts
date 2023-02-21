@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-const TYPES: {[key: string]: string} = {
+const TYPES: { [key: string]: string } = {
   Checkbox: 'checkbox',
   Radio: 'radio',
   Input: 'input',

@@ -1,4 +1,4 @@
-import {DefaultSeo as DefaultNextSeo} from 'next-seo';
+import { DefaultSeo as DefaultNextSeo } from 'next-seo';
 import Head from 'next/head';
 import Script from 'next/script';
 
@@ -9,8 +9,8 @@ const DefaultSeo = () => {
         defaultTitle="Agorasafe - Trouvez les meilleurs services adaptés pour n'importe quel travail."
         titleTemplate="%s | Agorasafe"
         languageAlternates={[
-          {href: 'https://www.agorasafe.com/', hrefLang: 'en'},
-          {href: 'https://www.agorasafe.com/fr', hrefLang: 'fr'},
+          { href: 'https://www.agorasafe.com/', hrefLang: 'en' },
+          { href: 'https://www.agorasafe.com/fr', hrefLang: 'fr' },
         ]}
         description="Recherchez facilement des prestataires près de chez vous, qui
     seront ravis d'éffectuer vos travaux à des coûts très
@@ -99,4 +99,4 @@ const DefaultSeo = () => {
   );
 };
 
-export {DefaultSeo};
+export { DefaultSeo };

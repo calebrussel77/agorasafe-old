@@ -6,7 +6,7 @@ import {
   HiScale,
 } from 'react-icons/hi2';
 
-import {ImageUI} from '@components/lib/image-ui/image-ui';
+import { ImageUI } from '@components/lib/image-ui/image-ui';
 
 const transferFeatures = [
   {

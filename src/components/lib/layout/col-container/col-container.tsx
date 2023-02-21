@@ -1,6 +1,6 @@
-import {twMerge} from 'tailwind-merge';
+import { twMerge } from 'tailwind-merge';
 
-const ColContainer = ({className, ...props}) => {
+const ColContainer = ({ className, ...props }) => {
   return (
     <div
       className={twMerge(
@@ -12,4 +12,4 @@ const ColContainer = ({className, ...props}) => {
   );
 };
 
-export {ColContainer};
+export { ColContainer };

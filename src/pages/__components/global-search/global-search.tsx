@@ -1,10 +1,10 @@
-import {IoMdSearch} from 'react-icons/io';
-import {TypeAnimation} from 'react-type-animation';
+import { IoMdSearch } from 'react-icons/io';
+import { TypeAnimation } from 'react-type-animation';
 
-import {Button} from '@components/lib/button/button';
-import {Input} from '@components/lib/input/input';
+import { Button } from '@components/lib/button/button';
+import { Input } from '@components/lib/input/input';
 
-const GlobalSearch = ({onClick}) => {
+const GlobalSearch = ({ onClick }) => {
   return (
     <div className="w-full sm:flex items-center">
       <div
@@ -44,13 +44,13 @@ const GlobalSearch = ({onClick}) => {
         />
         <Input
           id="whatSearch"
-          style={{height: '46px'}}
+          style={{ height: '46px' }}
           className="rounded-r-none border-r-0 focus:ring-0 focus:border-slate-300 pointer-events-none"
           // placeholder="Que cherchez-vous (Coiffeur, cordonnier, tailleur, frigoriste...) ?"
           iconBefore={<IoMdSearch className="h-6 w-6 text-gray-500" />}
         />
         <Button
-          style={{height: '46px'}}
+          style={{ height: '46px' }}
           variant={'primary'}
           shape="square"
           className="w-auto rounded-r "
@@ -62,4 +62,4 @@ const GlobalSearch = ({onClick}) => {
   );
 };
 
-export {GlobalSearch};
+export { GlobalSearch };

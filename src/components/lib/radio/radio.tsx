@@ -1,11 +1,11 @@
-import {VariantProps, cva} from 'class-variance-authority';
-import React, {forwardRef} from 'react';
-import {twMerge} from 'tailwind-merge';
+import { VariantProps, cva } from 'class-variance-authority';
+import React, { forwardRef } from 'react';
+import { twMerge } from 'tailwind-merge';
 
-import {getVariantBorderColor, getVariantColor} from '@helpers/variants';
+import { getVariantBorderColor, getVariantColor } from '@helpers/variants';
 
-import {HelperMessage} from '../helper-message/helper-message';
-import {Label, LabelOptions} from '../label/label';
+import { HelperMessage } from '../helper-message/helper-message';
+import { Label, LabelOptions } from '../label/label';
 
 const inputRadioToken = cva([''], {
   variants: {
@@ -35,7 +35,7 @@ const inputRadioToken = cva([''], {
       xl: ['max-w-xl'],
     },
   },
-  compoundVariants: [{appareance: 'primary', maxWidth: 'md', size: 'md'}],
+  compoundVariants: [{ appareance: 'primary', maxWidth: 'md', size: 'md' }],
   defaultVariants: {
     appareance: 'primary',
     maxWidth: 'md',

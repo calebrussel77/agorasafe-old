@@ -1,19 +1,19 @@
-import {Popover} from '@headlessui/react';
-import {useSession} from 'next-auth/react';
+import { Popover } from '@headlessui/react';
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
-import {FC, useRef} from 'react';
-import {HiOutlineMenuAlt1, HiOutlinePlus} from 'react-icons/hi';
-import {Else, If, Then} from 'react-if';
+import { FC, useRef } from 'react';
+import { HiOutlineMenuAlt1, HiOutlinePlus } from 'react-icons/hi';
+import { Else, If, Then } from 'react-if';
 import Skeleton from 'react-loading-skeleton';
 
-import {GlobalSearchModal} from '@components/global-search-modal/global-search-modal';
-import {LogoIcon} from '@components/icons/logo-icon/logo-icon';
-import {ActiveLink} from '@components/lib/active-link/active-link';
-import {Button} from '@components/lib/button/button';
-import {useModalState} from '@components/lib/modal/modal';
+import { GlobalSearchModal } from '@components/global-search-modal/global-search-modal';
+import { LogoIcon } from '@components/icons/logo-icon/logo-icon';
+import { ActiveLink } from '@components/lib/active-link/active-link';
+import { Button } from '@components/lib/button/button';
+import { useModalState } from '@components/lib/modal/modal';
 
-import {UserConnectedButton} from './user-connected-button/user-connected-button';
-import {UserNotificationsButton} from './user-notifications-button/user-notifications-button';
+import { UserConnectedButton } from './user-connected-button/user-connected-button';
+import { UserNotificationsButton } from './user-notifications-button/user-notifications-button';
 
 type navigationItem = {
   name: string;
@@ -40,10 +40,10 @@ const rightSideLinks = [
   },
 ];
 
-const Navbar: FC<NavbarProps> = ({navigations}) => {
+const Navbar: FC<NavbarProps> = ({ navigations }) => {
   const dialog = useModalState();
   const initialFocusRef = useRef<any>(null);
-  const {data: session, status} = useSession();
+  const { data: session, status } = useSession();
   const isLoadingSession = status === 'loading';
 
   return (
@@ -144,4 +144,4 @@ const Navbar: FC<NavbarProps> = ({navigations}) => {
   );
 };
 
-export {Navbar};
+export { Navbar };

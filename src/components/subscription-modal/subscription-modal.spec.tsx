@@ -1,9 +1,9 @@
-import {render, renderHook, screen} from '@testing-library/react';
-import React, {useRef} from 'react';
+import { render, renderHook, screen } from '@testing-library/react';
+import React, { useRef } from 'react';
 
-import {useModalState} from '@components/lib/modal/modal';
+import { useModalState } from '@components/lib/modal/modal';
 
-import {SubscriptionModal} from './subscription-modal';
+import { SubscriptionModal } from './subscription-modal';
 
 const onSubmit = jest.fn();
 let nameInput: HTMLElement;
@@ -11,7 +11,7 @@ let emailAddress: HTMLElement;
 let submitButton: HTMLElement;
 
 describe('Email Form subscription', () => {
-  const {result: dialog} = renderHook(useModalState, {});
+  const { result: dialog } = renderHook(useModalState, {});
 
   beforeEach(() => {
     render(<SubscriptionModal dialog={dialog.current} />);

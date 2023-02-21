@@ -1,8 +1,8 @@
-import {AiOutlineUser} from 'react-icons/ai';
-import {HiOutlineChatAlt, HiOutlineCog} from 'react-icons/hi';
-import {MdOutlineWorkOutline} from 'react-icons/md';
-import {RxDashboard} from 'react-icons/rx';
-import {TbBookmarks} from 'react-icons/tb';
+import { AiOutlineUser } from 'react-icons/ai';
+import { HiOutlineChatAlt, HiOutlineCog } from 'react-icons/hi';
+import { MdOutlineWorkOutline } from 'react-icons/md';
+import { RxDashboard } from 'react-icons/rx';
+import { TbBookmarks } from 'react-icons/tb';
 
 export const userConnectedLinks = [
   {
@@ -50,7 +50,7 @@ export const userConnectedLinks = [
 ];
 
 // Filter the items based on the user's properties
-export const renderFilteredLinks = ({isPurchaser, isProvider}) => {
+export const renderFilteredLinks = ({ isPurchaser, isProvider }) => {
   switch (true) {
     case isPurchaser && !isProvider:
       return userConnectedLinks.filter(link => link?.id !== 3);

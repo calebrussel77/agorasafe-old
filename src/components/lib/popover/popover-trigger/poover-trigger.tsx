@@ -1,8 +1,8 @@
 /* eslint-disable no-undef */
-import {PopoverDisclosure, PopoverDisclosureProps} from 'ariakit';
-import React, {forwardRef, useLayoutEffect, useRef} from 'react';
+import { PopoverDisclosure, PopoverDisclosureProps } from 'ariakit';
+import React, { forwardRef, useLayoutEffect, useRef } from 'react';
 
-import {UsePopoverStateOptions} from '../usePopoverState';
+import { UsePopoverStateOptions } from '../usePopoverState';
 
 export type As<Props = any> = React.ElementType<Props>;
 
@@ -10,7 +10,7 @@ type TriggerProps = PopoverDisclosureProps &
   Pick<
     UsePopoverStateOptions,
     'triggerMethod' | 'withCloseButton' | 'state'
-  > & {disclosure?: React.ReactElement<any>};
+  > & { disclosure?: React.ReactElement<any> };
 
 export const Trigger = forwardRef<HTMLButtonElement, TriggerProps>(
   (

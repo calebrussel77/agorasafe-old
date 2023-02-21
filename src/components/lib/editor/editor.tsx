@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import ReactQuill from 'react-quill';
 
-import {BtnSpinner} from '../spinner/spinner';
+import { BtnSpinner } from '../spinner/spinner';
 
 export type TEditorProps = React.ComponentPropsWithRef<typeof ReactQuill> & {
   className?: string;
@@ -18,4 +18,4 @@ const Editor = dynamic<TEditorProps>(() => import('./editor-instance') as any, {
   ),
 });
 
-export {Editor};
+export { Editor };
