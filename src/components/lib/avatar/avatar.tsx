@@ -1,23 +1,22 @@
 /* eslint-disable no-undef */
-import {VariantProps} from 'class-variance-authority';
+import { VariantProps } from 'class-variance-authority';
 import clsx from 'clsx';
 import Image from 'next/image';
-import React, {CSSProperties, ReactElement, forwardRef, useState} from 'react';
-import {twMerge} from 'tailwind-merge';
+import React, {
+  CSSProperties,
+  ReactElement,
+  forwardRef,
+  useState,
+} from 'react';
+import { twMerge } from 'tailwind-merge';
 
-import {blurDataURL} from '@helpers/image';
+import { blurDataURL } from '@helpers/image';
 import {
   getNameInitials as defaultGetInitials,
   stringToHslColor,
 } from '@helpers/misc';
 
-import {blurDataURL} from '@helpers/image';
-import {
-  getNameInitials as defaultGetInitials,
-  stringToHslColor,
-} from '@helpers/misc';
-
-import {AvatarBadge, avatarBadge} from './avatar-badge';
+import { AvatarBadge, avatarBadge } from './avatar-badge';
 
 export type AvatarSize = 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 const DEFAULT_FONT_SIZE = 16;
