@@ -1,3 +1,4 @@
+// jest.config.js
 const nextJest = require('next/jest');
 
 const createJestConfig = nextJest({
@@ -6,29 +7,20 @@ const createJestConfig = nextJest({
 });
 
 // Add any custom config to be passed to Jest
+/** @type {import('jest').Config} */
 const customJestConfig = {
-  preset: 'ts-jest',
-  globals: {
-    'ts-jest': {
-      tsconfig: './tsconfig.jest.json',
-    },
-  },
-  testEnvironment: 'jsdom',
-  setupFilesAfterEnv: ['./src/jest.setup.ts'],
-  transformIgnorePatterns: ['./node_modules/react-merge-refs/'],
+  // Add more setup options before each test is run
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+  // if using TypeScript with a baseUrl set to the root directory then you need the below for alias' to work
+  moduleDirectories: ['node_modules', '<rootDir>/'],
+
+  // If you're using [Module Path Aliases](https://nextjs.org/docs/advanced-features/module-path-aliases),
+  // you will have to add the moduleNameMapper in order for jest to resolve your absolute paths.
+  // The paths have to be matching with the paths option within the compilerOptions in the tsconfig.json
+  // For example:
+
   moduleNameMapper: {
-    // Handle module aliases (this will be automatically configured for you soon)
-    '^@components/(.*)$': '<rootDir>/src/components/$1',
-    '^@icons/(.*)$': '<rootDir>/src/icons/$1',
-    '^@utils/(.*)$': '<rootDir>/src/utils/$1',
-    '^@helpers/(.*)$': '<rootDir>/src/helpers/$1',
-    '^@styles/(.*)$': '<rootDir>/src/styles/$1',
-    '^@hooks/(.*)$': '<rootDir>/src/hooks/$1',
-    '^@services/(.*)$': '<rootDir>/src/services/$1',
-    '^@validations/(.*)$': '<rootDir>/src/validations/$1',
-    '^@providers/(.*)$': '<rootDir>/src/providers/$1',
-    '^@pages/(.*)$': '<rootDir>/src/pages/$1',
-    '^@lib/(.*)$': '<rootDir>/src/lib/$1',
+    '@/(.*)$': '<rootDir>/src/$1',
   },
   testMatch: [
     '**/src/__tests__/**/*.[jt]s?(x)',
@@ -51,6 +43,7 @@ const customJestConfig = {
       statements: 30,
     },
   },
+  testEnvironment: 'jest-environment-jsdom',
 };
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async

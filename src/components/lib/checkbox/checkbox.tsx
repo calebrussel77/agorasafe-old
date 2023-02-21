@@ -1,5 +1,5 @@
 import {type VariantProps, cva} from 'class-variance-authority';
-import React, {forwardRef, useEffect} from 'react';
+import React, {forwardRef} from 'react';
 import {twMerge} from 'tailwind-merge';
 
 import {Variant, getVariantColor} from '@helpers/variants';
@@ -35,6 +35,7 @@ const checkboxToken = cva(
 export type CheckboxProps = React.HTMLProps<HTMLInputElement> & {
   loading?: boolean;
   autoFocus?: boolean;
+  indeterminate?: boolean;
   variant?: Variant;
 };
 

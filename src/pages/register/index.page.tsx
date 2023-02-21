@@ -12,6 +12,8 @@ import {Layout} from '@components/layouts/layouts';
 import {Button} from '@components/lib/button/button';
 import {MiddleSeparator} from '@components/lib/middle-separator/middle-separator';
 
+import {redirectIfAuth} from '@utils/redirectIfAuth';
+
 type TRegisterPageProps = {
   providers: AppProps;
 };
@@ -38,7 +40,11 @@ const RegisterPage = ({providers}: TRegisterPageProps) => {
                 {Object.values(providers).map(provider => (
                   <Button
                     key={provider.id}
-                    onClick={() => signIn(provider.id)}
+                    onClick={() =>
+                      signIn(provider.id, {
+                        callbackUrl: `${window.location.origin}/dashboard`,
+                      })
+                    }
                     className="w-full flex items-center justify-center"
                     variant="subtle"
                   >
@@ -73,11 +79,16 @@ RegisterPage.getLayout = function getLayout(page: ReactElement) {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async ctx => {
   const providers = await getProviders();
-  return {
-    props: {providers},
-  };
+  return redirectIfAuth({
+    ctx,
+    cb() {
+      return {
+        props: {providers},
+      };
+    },
+  });
 };
 
 export default RegisterPage;

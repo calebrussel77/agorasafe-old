@@ -40,8 +40,6 @@ export const Label = forwardRef<HTMLLabelElement, LabelProps>(
     // Wrap strings in span to allow for required asterisk
     const content = wrapChildren(children as JSX.Element);
 
-    console.log(variant);
-
     return (
       <label
         className={twMerge(

@@ -1,9 +1,4 @@
 import {zodResolver} from '@hookform/resolvers/zod';
-import {loginSchema} from '@validations/schema/login-schema';
-import {
-  registerSchema,
-  registerSchemaValidation,
-} from '@validations/schema/register-schema';
 import {FC} from 'react';
 import {useForm} from 'react-hook-form';
 import {z} from 'zod';
@@ -16,6 +11,12 @@ import {Input} from '@components/lib/input/input';
 import {Label} from '@components/lib/label/label';
 import {VariantMessage} from '@components/lib/variant-message/variant-message';
 
+import {
+  loginSchema,
+  registerSchema,
+  registerSchemaValidation,
+} from './auth-form.validation';
+
 type TAuthFormProps = {
   mode: 'register' | 'login';
 };
@@ -27,12 +28,16 @@ type TAuthForm = z.infer<typeof registerSchema> & {
 
 const AuthForm: FC<TAuthFormProps> = ({mode}) => {
   const isLoginPage = mode === 'login';
+  const authFormValidationSchema = isLoginPage
+    ? loginSchema
+    : registerSchemaValidation;
+
   const {
     register,
     handleSubmit,
-    formState: {errors},
+    formState: {errors, isSubmitting},
   } = useForm<TAuthForm>({
-    resolver: zodResolver(isLoginPage ? loginSchema : registerSchemaValidation),
+    resolver: zodResolver(authFormValidationSchema),
   });
 
   const onSubmit = data => {
@@ -76,7 +81,6 @@ const AuthForm: FC<TAuthFormProps> = ({mode}) => {
         <Input
           {...register('email')}
           autoFocus={isLoginPage}
-          id="email"
           type="email"
           placeholder="Entrez votre adresse email"
         />
@@ -135,12 +139,12 @@ const AuthForm: FC<TAuthFormProps> = ({mode}) => {
           </div>
         </>
       )}
-      <Button variant="primary" className="w-full">
+      <Button variant="primary" className="w-full" loading={isSubmitting}>
         Connexion
       </Button>
 
       {!isLoginPage && (
-        <HelperMessage className="text-sm text-gray-500">
+        <HelperMessage className="text-gray-500">
           En vous inscrivant vous acceptez les conditions générales et la
           politique de confidentialité
         </HelperMessage>

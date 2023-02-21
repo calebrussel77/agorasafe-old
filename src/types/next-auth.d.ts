@@ -7,6 +7,13 @@ declare module 'next-auth' {
   interface Session {
     user?: {
       id: string;
-    } & DefaultSession['user'];
+      name: string;
+      email: string;
+      avatar: string;
+      provider: string;
+      is_provider: boolean;
+      is_purchaser: boolean;
+      is_home_service_provider: boolean;
+    };
   }
 }

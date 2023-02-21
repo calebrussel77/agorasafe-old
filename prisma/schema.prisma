@@ -14,19 +14,103 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
-model Example {
-    id        String   @id @default(cuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+model Skill {
+    id      String @id @default(cuid())
+    name    String @unique
+    slug    String
+    User    User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+    user_id String @unique
+
+    created_at DateTime @default(now())
+    updated_at DateTime @updatedAt
+}
+
+model Profile {
+    id          String   @id @default(cuid())
+    name        String   @unique
+    description String?
+    is_verified Boolean?
+
+    User    User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+    user_id String @unique
+
+    created_at DateTime @default(now())
+    updated_at DateTime @updatedAt
+}
+
+model Service {
+    id                  String           @id @default(cuid())
+    slug                String?          @unique
+    name                String           @unique
+    description         String?
+    service_requests    ServiceRequest[]
+    users               User[]
+    CategoryService     CategoryService  @relation(fields: [category_service_id], references: [id], onDelete: Cascade)
+    category_service_id String
+    created_at          DateTime         @default(now())
+    updated_at          DateTime         @updatedAt
+}
+
+model CategoryService {
+    id          String    @id @default(cuid())
+    name        String    @unique
+    slug        String?   @unique
+    description String?
+    created_at  DateTime  @default(now())
+    updated_at  DateTime  @updatedAt
+    services    Service[]
+}
+
+model Photo {
+    id                 String         @id @default(cuid())
+    name               String         @unique
+    slug               String?        @unique
+    description        String?
+    created_at         DateTime       @default(now())
+    updated_at         DateTime       @updatedAt
+    ServiceRequest     ServiceRequest @relation(fields: [service_request_id], references: [id], onDelete: Cascade)
+    service_request_id String
+}
+
+model ServiceRequest {
+    id                             String                           @id @default(cuid())
+    title                          String
+    content                        String
+    phone_to_contact               String?
+    Photos                         Photo[]
+    number_of_provider_needed      Int
+    duration                       String?
+    start_date                     DateTime?
+    end_date                       DateTime?
+    estimated_price                String
+    adresse                        String?
+    status                         ServiceRequestStatus
+    created_at                     DateTime                         @default(now())
+    updated_at                     DateTime                         @updatedAt
+    User                           User?                            @relation(fields: [author_id], references: [id])
+    author_id                      String
+    Service                        Service?                         @relation(fields: [service_id], references: [id])
+    service_id                     String
+    ProviderServiceRequestResponse ProviderServiceRequestResponse[]
+}
+
+model ProviderServiceRequestResponse {
+    id                 String          @id @default(cuid())
+    is_selected        Boolean         @default(false)
+    text               String
+    proposed_price     String?
+    User               User?           @relation(fields: [user_id], references: [id])
+    user_id            String
+    ServiceRequest     ServiceRequest? @relation(fields: [service_request_id], references: [id])
+    service_request_id String
 }
 
 // Necessary for Next auth
 model Account {
     id                String  @id @default(cuid())
-    userId            String
     type              String
     provider          String
-    providerAccountId String
+    providerAccountId String  @map("provider_account_id")
     refresh_token     String?
     access_token      String?
     expires_at        Int?
@@ -35,6 +119,7 @@ model Account {
     id_token          String?
     session_state     String?
     user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId            String  @map("user_id")
 
     @@unique([provider, providerAccountId])
 }
@@ -48,13 +133,31 @@ model Session {
 }
 
 model User {
-    id            String    @id @default(cuid())
-    name          String?
-    email         String?   @unique
-    emailVerified DateTime?
-    image         String?
-    accounts      Account[]
-    sessions      Session[]
+    id                             String                           @id @default(cuid())
+    first_name                     String
+    last_name                      String
+    is_provider                    Boolean?                         @default(true)
+    is_purchaser                   Boolean?                         @default(true)
+    is_home_service_provider       Boolean?                         @default(true)
+    email                          String?                          @unique
+    emailVerified                  DateTime?                        @map("email_verified")
+    bio                            String?
+    website_url                    String?
+    avatar                         String?
+    password                       String?
+    phone                          String?
+    adresse                        String?
+    birthdate                      DateTime?
+    sex                            Sex?                             @default(value: MALE)
+    created_at                     DateTime                         @default(now())
+    updated_at                     DateTime                         @updatedAt
+    accounts                       Account[]
+    sessions                       Session[]
+    service_requests               ServiceRequest[]
+    profile                        Profile?
+    services                       Service[]
+    skills                         Skill[]
+    ProviderServiceRequestResponse ProviderServiceRequestResponse[]
 }
 
 model VerificationToken {
@@ -63,4 +166,14 @@ model VerificationToken {
     expires    DateTime
 
     @@unique([identifier, token])
+}
+
+enum Sex {
+    MALE
+    FEMALE
+}
+
+enum ServiceRequestStatus {
+    OPEN
+    CLOSED
 }

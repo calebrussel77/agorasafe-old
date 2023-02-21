@@ -21,9 +21,11 @@ module.exports = {
   importOrder: [
     '^@components/(.*)$',
     '^@pages/(.*)$',
-    '^@lib/(.*)$',
+    '^@api-providers/(.*)$',
     '^@helpers/(.*)$',
-    '^@services/(.*)$',
+    '^@helpers/(.*)$',
+    '^@utils/(.*)$',
+    '^@server/(.*)$',
     '^@hooks/(.*)$',
     '^@constants/(.*)$',
     '^[./]',

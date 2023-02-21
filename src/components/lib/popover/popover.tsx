@@ -64,7 +64,7 @@ export interface PopoverOptions {
  * 
  */
 export type PopoverProps = PopoverOptions &
-  AriakitPopoverOptions & {maxHeight?: number};
+  AriakitPopoverOptions & {maxHeight?: number; maxWidth?: number};
 
 export const PopoverComponent = forwardRef<HTMLDivElement, PopoverProps>(
   (
@@ -73,7 +73,8 @@ export const PopoverComponent = forwardRef<HTMLDivElement, PopoverProps>(
       onClose,
       // catch triggerMethod for it not to appear in the dom
       triggerMethod = 'click',
-      maxHeight = 320,
+      maxHeight = 520,
+      maxWidth = 420,
       className = '',
       withCloseButton = false,
       state,
@@ -87,9 +88,9 @@ export const PopoverComponent = forwardRef<HTMLDivElement, PopoverProps>(
     };
 
     const defaultCss = useCss({
-      'max-height': 'var(--popover-available-height)',
       'min-width': '180px',
       opacity: '0',
+      // transform: 'scaleY(0)',
       transition: 'opacity 150ms ease-in-out',
       '&[data-enter]': {opacity: '1'},
     });
@@ -98,24 +99,15 @@ export const PopoverComponent = forwardRef<HTMLDivElement, PopoverProps>(
       <AriakitPopover
         state={{...state, hide: closePopover}}
         ref={ref}
-        style={{maxHeight: maxHeight}}
+        style={{maxHeight: maxHeight, maxWidth: maxWidth}}
         className={clsx(
-          'bg-white scrollbar__custom focus:outline-none focus-within:outline-none py-3 border overflow-y-auto overflow-x-hidden z-[80] shadow-md',
+          'bg-white scrollbar__custom focus:outline-none focus-within:outline-none py-3 border rounded-md overflow-y-auto overflow-x-hidden z-[80] shadow-md',
           defaultCss,
           className
         )}
         {...rest}
       >
-        {/* <PopoverArrow className="arrow" /> */}
         {children}
-        {/* {withCloseButton && (
-          <button
-            onClick={closePopover}
-            className="absolute top-1 right-1 ml-1 p-1 hover:bg-gray-100 rounded cursor-pointer"
-          >
-            <RiCloseLine />
-          </button>
-        )} */}
       </AriakitPopover>
     );
   }

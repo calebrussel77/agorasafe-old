@@ -1,6 +1,7 @@
 // button.tsx
 import {type VariantProps, cva} from 'class-variance-authority';
 import React from 'react';
+import Skeleton from 'react-loading-skeleton';
 import {twMerge} from 'tailwind-merge';
 
 import {BtnSpinner, Spinner} from '../spinner/spinner';
@@ -68,7 +69,10 @@ const button = cva(
 
 export type ButtonProps = React.HTMLAttributes<HTMLButtonElement> &
   VariantProps<typeof button> &
-  React.ComponentPropsWithRef<'button'> & {loading?: boolean};
+  React.ComponentPropsWithRef<'button'> & {
+    loading?: boolean;
+    skeleton?: boolean;
+  };
 
 export const Button: React.FC<ButtonProps> = ({
   className,
@@ -76,22 +80,26 @@ export const Button: React.FC<ButtonProps> = ({
   size,
   disabled,
   shape,
+  skeleton,
   loading,
   children,
   ...props
-}) => (
-  <button
-    {...props}
-    disabled={disabled || loading}
-    className={twMerge(button({variant, size, shape}), className)}
-  >
-    {loading ? (
-      <div className="flex items-center gap-2 flex-nowrap">
-        <Spinner className="h-5 w-5 text-white" />
-        <span>{children}</span>
-      </div>
-    ) : (
-      children
-    )}
-  </button>
-);
+}) =>
+  skeleton ? (
+    <Skeleton className="min-w-[80px] h-8" />
+  ) : (
+    <button
+      {...props}
+      disabled={disabled || loading}
+      className={twMerge(button({variant, size, shape}), className)}
+    >
+      {loading ? (
+        <div className="flex items-center gap-2 flex-nowrap">
+          <Spinner className="h-5 w-5 text-white" />
+          <span>{children}</span>
+        </div>
+      ) : (
+        children
+      )}
+    </button>
+  );

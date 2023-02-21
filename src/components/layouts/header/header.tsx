@@ -1,6 +1,7 @@
 import {Popover, Transition} from '@headlessui/react';
 import Axios from 'axios';
 import clsx from 'clsx';
+import {useSession} from 'next-auth/react';
 import {useRouter} from 'next/router';
 import {Fragment, useRef} from 'react';
 import {HiOutlinePhone, HiOutlineSquares2X2} from 'react-icons/hi2';

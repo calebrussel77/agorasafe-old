@@ -1,12 +1,12 @@
 import {type VariantProps, cva} from 'class-variance-authority';
-import React, {forwardRef} from 'react';
+import React, {ReactNode, forwardRef} from 'react';
 import {twMerge} from 'tailwind-merge';
 
-const helperMessageToken = cva([''], {
+const helperMessageToken = cva(['whitespace-normal'], {
   variants: {
     size: {
       sm: ['text-xs text-gray-400'],
-      md: ['text-xs text-gray-400'],
+      md: ['text-sm text-gray-400'],
       lg: ['text-lg text-gray-400'],
       xl: ['text-xl text-gray-400'],
     },
@@ -17,8 +17,9 @@ const helperMessageToken = cva([''], {
   },
 });
 
-export type HelperMessageGlobalProps = VariantProps<typeof helperMessageToken> &
-  React.HTMLProps<HTMLDivElement>;
+export type HelperMessageGlobalProps = VariantProps<
+  typeof helperMessageToken
+> & {className?: string; children: ReactNode};
 
 export const HelperMessage = forwardRef<
   HTMLDivElement,

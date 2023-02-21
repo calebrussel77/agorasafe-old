@@ -1,5 +1,4 @@
 import {useMutation} from '@tanstack/react-query';
-import {TSubscriptionForm} from '@validations/schema/subscription-schema';
 import axios from 'axios';
 import {useRef} from 'react';
 
@@ -8,6 +7,7 @@ import {Modal} from '@components/lib/modal/modal';
 import SectionMessage from '@components/lib/section-message/section-message';
 
 import {FormSubscription} from './form-subscription/form-subscription';
+import {TSubscriptionForm} from './form-subscription/form-subscription.validation';
 
 const sendUserSubscriptionRequest = (formData: FormData) => {
   return axios.post(

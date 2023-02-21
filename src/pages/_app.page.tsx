@@ -1,11 +1,12 @@
+import {AppProviders} from '@app-providers/app-providers';
 import ProgressBar from '@badrap/bar-of-progress';
-import {AppProviders} from '@providers/app-providers';
 import type {NextPage} from 'next';
 import {type Session} from 'next-auth';
 import {SessionProvider} from 'next-auth/react';
 import {type AppType} from 'next/app';
 import {Router} from 'next/router';
 import type {ReactElement, ReactNode} from 'react';
+import 'react-loading-skeleton/dist/skeleton.css';
 import 'react-quill/dist/quill.snow.css';
 import 'swiper/css';
 import 'swiper/css/effect-cube';
@@ -51,13 +52,13 @@ const MyApp: AppType<{session: Session | null}> = ({
     (Component as NextPageWithLayout).getLayout ?? (page => page);
 
   return (
-    <SessionProvider session={session}>
-      <DefaultSeo />
-      <AppProviders>
+    <AppProviders>
+      <SessionProvider session={session}>
+        <DefaultSeo />
         {getLayout(<Component {...pageProps} />)}
         <CookieConsentBanner />
-      </AppProviders>
-    </SessionProvider>
+      </SessionProvider>
+    </AppProviders>
   );
 };
 
