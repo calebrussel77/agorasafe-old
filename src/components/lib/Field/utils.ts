@@ -1,3 +1,5 @@
+import { makeRandomId } from '@helpers/misc';
+
 /* eslint-disable no-undef */
 const TYPES: { [key: string]: string } = {
   Checkbox: 'checkbox',
@@ -33,6 +35,6 @@ export const getVariant = ({
 };
 
 export const generateRandomId = (): string =>
-  `agorasafe-field-${Math.random().toString(36).slice(2)}`;
+  `agorasafe-field-${makeRandomId()}}`;
 
 export const forwardedProps = ['disabled', 'required', 'variant'];

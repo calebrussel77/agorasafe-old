@@ -46,7 +46,7 @@ const sectionMessage = cva('w-full flex justify-center items-start gap-2', {
 
 type otherProps = {
   className?: string;
-  title: string;
+  title?: string | ReactElement;
   onClose?: React.MouseEventHandler<HTMLButtonElement>;
   actions?: Array<ReactElement<any>> | ReactElement<any>;
   hasCloseButton?: boolean;
@@ -118,25 +118,21 @@ const SectionMessage = forwardRef<HTMLDivElement, SectionMessageProps>(
           className={sectionMessage({ appareance, size, class: className })}
           {...props}
         >
-          <div className="flex items-start flex-1 w-full gap-3">
+          <div className="flex items-center gap-2">
             {<Icon className={`h-6 w-6 flex-shrink-0 ${ColorIcon}`} />}
-            <div>
-              {title && <h3 className="font-bold text-base">{title}</h3>}
-              {children && <div className="text-[13px]">{children}</div>}
-              <div className="flex items-center flex-wrap gap-1">
-                {isActionsArray
-                  ? actions?.length > 0 && (
-                      <InlineUI
-                        divider={
-                          <span className="text-blue-100">&middot;</span>
-                        }
-                        className="gap-1"
-                      >
-                        {actions}
-                      </InlineUI>
-                    )
-                  : actions}
-              </div>
+            {title && <h3 className="font-bold text-base">{title}</h3>}
+            {children && <div className="text-[13px]">{children}</div>}
+            <div className="flex items-center flex-wrap gap-1">
+              {isActionsArray
+                ? actions?.length > 0 && (
+                    <InlineUI
+                      divider={<span className="text-blue-100">&middot;</span>}
+                      className="gap-1"
+                    >
+                      {actions}
+                    </InlineUI>
+                  )
+                : actions}
             </div>
           </div>
           {hasCloseButton && (

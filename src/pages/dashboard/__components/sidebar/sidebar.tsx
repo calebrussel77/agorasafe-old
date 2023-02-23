@@ -27,7 +27,7 @@ const Sidebar = () => {
       <div className="mt-6 flex flex-col gap-3">
         {renderFilteredLinks({ isPurchaser, isProvider })?.map(item => {
           const href =
-            item?.id === 5 ? `/dashboard/u/${session?.user?.id}` : item?.href;
+            item?.id === 5 ? `/dashboard/u/${session?.user?.slug}` : item?.href;
           const isActiveLink = router?.pathname === href;
 
           return (
@@ -39,7 +39,7 @@ const Sidebar = () => {
               iconBefore={<item.Icon className="h-6 w-6 text-primary-500" />}
               description={item.description}
             >
-              <p className="text-xl font-semibold">{item.title}</p>
+              <p className="text-lg font-semibold">{item.title}</p>
             </MenuItem>
           );
         })}

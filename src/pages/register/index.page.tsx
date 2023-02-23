@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { GetServerSideProps } from 'next';
-import { getProviders, signIn } from 'next-auth/react';
-import { AppProps } from 'next/app';
+import { ClientSafeProvider, getProviders, signIn } from 'next-auth/react';
 import React, { ReactElement } from 'react';
 
 import { AuthForm } from '@components/auth-form/auth-form';
@@ -12,13 +11,13 @@ import { Layout } from '@components/layouts/layouts';
 import { Button } from '@components/lib/button/button';
 import { MiddleSeparator } from '@components/lib/middle-separator/middle-separator';
 
-import { redirectIfAuth } from '@utils/redirectIfAuth';
+import { redirectIfAuth } from '@utils/redirect-If-auth';
 
 type TRegisterPageProps = {
-  providers: AppProps;
+  googleProvider: ClientSafeProvider;
 };
 
-const RegisterPage = ({ providers }: TRegisterPageProps) => {
+const RegisterPage = ({ googleProvider }: TRegisterPageProps) => {
   return (
     <div className="isolate overflow-x-hidden">
       <HomeBackground />
@@ -37,21 +36,18 @@ const RegisterPage = ({ providers }: TRegisterPageProps) => {
           <div>
             <div>
               <div className="mt-1">
-                {Object.values(providers).map(provider => (
-                  <Button
-                    key={provider.id}
-                    onClick={() =>
-                      signIn(provider.id, {
-                        callbackUrl: `${window.location.origin}/dashboard`,
-                      })
-                    }
-                    className="w-full flex items-center justify-center"
-                    variant="subtle"
-                  >
-                    <GoogleIconSolid className="h-5 w-5" />
-                    <span>S'inscrire avec Google</span>
-                  </Button>
-                ))}
+                <Button
+                  onClick={() =>
+                    signIn(googleProvider.id, {
+                      callbackUrl: `${window.location.origin}/dashboard`,
+                    })
+                  }
+                  className="w-full flex items-center justify-center"
+                  variant="subtle"
+                >
+                  <GoogleIconSolid className="h-5 w-5" />
+                  <span>Se connecter avec Google</span>
+                </Button>
               </div>
             </div>
             <div className="mt-6 text-gray-500">
@@ -85,7 +81,7 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
     ctx,
     cb() {
       return {
-        props: { providers },
+        props: { googleProvider: providers.google || null },
       };
     },
   });

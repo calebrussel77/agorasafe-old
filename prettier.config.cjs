@@ -20,9 +20,10 @@ module.exports = {
   importOrderSortSpecifiers: true,
   importOrder: [
     '^@components/(.*)$',
+    '^@validations/(.*)$',
     '^@pages/(.*)$',
-    '^@api-providers/(.*)$',
     '^@helpers/(.*)$',
+    '^@interfaces/(.*)$',
     '^@utils/(.*)$',
     '^@server/(.*)$',
     '^@hooks/(.*)$',

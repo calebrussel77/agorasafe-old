@@ -29,7 +29,7 @@ export const MoreIndicator = forwardRef<HTMLDivElement, MoreIndicatorProps>(
         name={'button more'}
         {...buttonProps}
       >
-        +{count! > MAX_DISPLAY_COUNT ? MAX_DISPLAY_COUNT : count}
+        <>+{count! > MAX_DISPLAY_COUNT ? MAX_DISPLAY_COUNT : count}</>
       </Avatar>
     );
   }

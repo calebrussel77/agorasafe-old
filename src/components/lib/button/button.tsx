@@ -94,7 +94,7 @@ export const Button: React.FC<ButtonProps> = ({
       className={twMerge(button({ variant, size, shape }), className)}
     >
       {loading ? (
-        <div className="flex items-center gap-2 flex-nowrap">
+        <div className="flex items-center justify-center gap-2 flex-nowrap">
           <Spinner className="h-5 w-5 text-white" />
           <span>{children}</span>
         </div>

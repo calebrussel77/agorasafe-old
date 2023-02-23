@@ -67,11 +67,11 @@ const Header = () => {
           <>
             <SubscriptionModal dialog={dialog} />
             <SectionMessage
-              title="En cours de developpement"
               appareance="discovery"
-              className="border-b border-secondary-300"
+              hasCloseButton={false}
+              className="border border-secondary-300 flex justify-center items-center"
             >
-              <p className="text-sm md:text-base">
+              <p className="text-sm md:text-base font-semibold">
                 La plateforme Agorasafe est actuellement en cours de
                 developpement. si vous souhaitez être tenu informé de son
                 lancement,{' '}

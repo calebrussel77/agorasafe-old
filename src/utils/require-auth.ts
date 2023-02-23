@@ -1,5 +1,8 @@
 import { Session } from 'next-auth';
-import { getSession } from 'next-auth/react';
+
+import { getServerAuthSession } from '@server/auth';
+
+// import { getSession } from 'next-auth/react';
 
 type TRequireAuthProps = {
   ctx: any;
@@ -12,7 +15,7 @@ export const requireAuth = async ({
   redirectUrl = '/login',
   cb,
 }: TRequireAuthProps) => {
-  const session = await getSession(ctx);
+  const session = await getServerAuthSession(ctx);
 
   if (!session) {
     return {

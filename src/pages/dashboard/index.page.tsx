@@ -7,7 +7,7 @@ import { AuthLayout } from '@components/layouts/auth-layouts';
 
 import { NextPageWithLayout } from '@pages/_app.page';
 
-import { requireAuth } from '@utils/requireAuth';
+import { requireAuth } from '@utils/require-auth';
 
 import { ContentTitle } from './__components/content-title/content-title';
 import { ContentWrapper } from './__components/content-wrapper/content-wrapper';

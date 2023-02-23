@@ -10,6 +10,7 @@ declare module 'next-auth' {
       name: string;
       email: string;
       avatar: string;
+      slug: string;
       provider: string;
       is_provider: boolean;
       is_purchaser: boolean;
