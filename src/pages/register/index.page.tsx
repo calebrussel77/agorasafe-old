@@ -37,9 +37,10 @@ const RegisterPage = ({ googleProvider }: TRegisterPageProps) => {
             <div>
               <div className="mt-1">
                 <Button
-                  onClick={() =>
-                    signIn(googleProvider.id, {
+                  onClick={async () =>
+                    await signIn(googleProvider.id, {
                       callbackUrl: `${window.location.origin}/dashboard`,
+                      redirect: false,
                     })
                   }
                   className="w-full flex items-center justify-center"

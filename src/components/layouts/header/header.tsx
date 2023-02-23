@@ -69,9 +69,9 @@ const Header = () => {
             <SectionMessage
               appareance="discovery"
               hasCloseButton={false}
-              className="border border-secondary-300 flex justify-center items-center"
+              className="flex justify-center items-center"
             >
-              <p className="text-sm md:text-base font-semibold">
+              <p className="text-sm">
                 La plateforme Agorasafe est actuellement en cours de
                 developpement. si vous souhaitez être tenu informé de son
                 lancement,{' '}

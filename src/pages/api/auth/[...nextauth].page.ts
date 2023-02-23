@@ -30,11 +30,6 @@ export const authOptions: NextAuthOptions = {
       session.user = currentUser;
       return session;
     },
-    async signIn({ user, account, profile }) {
-      console.log(user, 'user From the signIn');
-      console.log(profile, 'profile From the signIn');
-      return Promise.resolve(true);
-    },
   },
   adapter: PrismaAdapter(prisma),
   // Configure one or more authentication providers
@@ -113,12 +108,17 @@ export const authOptions: NextAuthOptions = {
         } else {
           // If you return null then an error will be displayed advising the user to check their details.
           return null;
-
           // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
         }
       },
     }),
   ],
+  // pages: {
+  //   signIn: '/login',
+  //   signOut: '/login',
+  //   error: '/login', // Error code passed in query string as ?error=
+  //   verifyRequest: '/login', // (used for check email message)
+  // },
 };
 
 export default NextAuth(authOptions);

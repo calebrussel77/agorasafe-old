@@ -14,7 +14,7 @@ const MessageAction = memo(function MessageAction({
 }: MessageActionProps) {
   return onClick ? (
     <button
-      className="text-primary-600 font-semibold hover:underline"
+      className="text-yellow-500 font-semibold hover:underline"
       onClick={onClick}
     >
       {children}
@@ -22,7 +22,7 @@ const MessageAction = memo(function MessageAction({
   ) : href ? (
     <Link href={href}>
       <button
-        className="text-primary-600 font-semibold hover:underline"
+        className="text-yellow-500 font-semibold hover:underline"
         onClick={onClick}
       >
         {children}
