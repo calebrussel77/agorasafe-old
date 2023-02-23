@@ -1,7 +1,7 @@
-import {NextSeo} from 'next-seo';
-import {ReactNode} from 'react';
+import { NextSeo } from 'next-seo';
+import { ReactNode } from 'react';
 
-import {Header} from './header/header';
+import { Header } from './header/header';
 
 type TAuthLayoutProps = {
   title?: string;
@@ -27,4 +27,4 @@ const AuthLayout = ({
   );
 };
 
-export {AuthLayout};
+export { AuthLayout };

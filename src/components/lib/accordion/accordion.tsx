@@ -5,12 +5,12 @@ import {
   useDisclosureState,
 } from 'ariakit/Disclosure';
 import clsx from 'clsx';
-import React, {ReactNode, cloneElement, forwardRef} from 'react';
+import React, { ReactNode, cloneElement, forwardRef } from 'react';
 import AnimateHeight from 'react-animate-height';
-import {HiChevronRight} from 'react-icons/hi';
-import {twMerge} from 'tailwind-merge';
+import { HiChevronRight } from 'react-icons/hi';
+import { twMerge } from 'tailwind-merge';
 
-import {wrapChildren} from '@helpers/wrap-children';
+import { wrapChildren } from '@helpers/wrap-children';
 
 export interface AccordionOptions {
   title: string | JSX.Element;

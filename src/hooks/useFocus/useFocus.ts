@@ -1,4 +1,4 @@
-import {useEffect, useRef} from 'react';
+import { useEffect, useRef } from 'react';
 
 export const useFocus = (shouldFocus?: boolean) => {
   const elementRef = useRef<HTMLInputElement | HTMLTextAreaElement>(null);
@@ -9,5 +9,5 @@ export const useFocus = (shouldFocus?: boolean) => {
     }
   }, [shouldFocus]);
 
-  return {elementRef};
+  return { elementRef };
 };

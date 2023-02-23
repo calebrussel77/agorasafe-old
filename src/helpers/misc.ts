@@ -40,3 +40,5 @@ export const formatPhoneNumber = (phoneNumberString: string) => {
   }
   return phoneNumberString;
 };
+
+export const makeRandomId = (): string => Math.random().toString(36).slice(2);

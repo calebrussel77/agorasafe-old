@@ -1,4 +1,4 @@
-const GoogleIconSolid = ({className}) => {
+const GoogleIconSolid = ({ className }) => {
   return (
     <svg
       className={className}
@@ -26,4 +26,4 @@ const GoogleIconSolid = ({className}) => {
   );
 };
 
-export {GoogleIconSolid};
+export { GoogleIconSolid };

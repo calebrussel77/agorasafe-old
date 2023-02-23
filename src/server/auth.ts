@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
-import {type GetServerSidePropsContext} from 'next';
-import {unstable_getServerSession} from 'next-auth';
+import { type GetServerSidePropsContext } from 'next';
+import { unstable_getServerSession } from 'next-auth';
 
-import {authOptions} from '@pages/api/auth/[...nextauth].page';
+import { authOptions } from '@pages/api/auth/[...nextauth].page';
 
 /**
  * Wrapper for getServerSession, used in trpc createContext and the

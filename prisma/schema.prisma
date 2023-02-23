@@ -75,6 +75,7 @@ model Photo {
 model ServiceRequest {
     id                             String                           @id @default(cuid())
     title                          String
+    slug                           String                           @unique
     content                        String
     phone_to_contact               String?
     Photos                         Photo[]
@@ -134,6 +135,7 @@ model Session {
 
 model User {
     id                             String                           @id @default(cuid())
+    slug                           String                           @unique
     first_name                     String
     last_name                      String
     is_provider                    Boolean?                         @default(true)

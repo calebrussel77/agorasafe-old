@@ -1,11 +1,11 @@
-import {Session} from 'next-auth';
-import {useSession} from 'next-auth/react';
+import { Session } from 'next-auth';
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
-import {forwardRef} from 'react';
-import {HiOutlineUserGroup, HiOutlineX} from 'react-icons/hi';
+import { forwardRef } from 'react';
+import { HiOutlineUserGroup, HiOutlineX } from 'react-icons/hi';
 
-import {LogoIcon} from '@components/icons/logo-icon/logo-icon';
-import {Button} from '@components/lib/button/button';
+import { LogoIcon } from '@components/icons/logo-icon/logo-icon';
+import { Button } from '@components/lib/button/button';
 
 type navigationItem = {
   name: string;
@@ -19,8 +19,8 @@ type MobilePopoverProps = {
 };
 
 const MobilePopover = forwardRef<HTMLDivElement, MobilePopoverProps>(
-  ({navigations, onClose}, ref) => {
-    const {data: session, status} = useSession();
+  ({ navigations, onClose }, ref) => {
+    const { data: session, status } = useSession();
 
     return (
       <div className="rounded-lg bg-white shadow-md ring-1 ring-black ring-opacity-5">
@@ -79,4 +79,4 @@ const MobilePopover = forwardRef<HTMLDivElement, MobilePopoverProps>(
 );
 
 MobilePopover.displayName = 'MobilePopover';
-export {MobilePopover};
+export { MobilePopover };

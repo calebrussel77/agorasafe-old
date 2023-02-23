@@ -1,20 +1,17 @@
-import {type VariantProps, cva} from 'class-variance-authority';
-import React, {ReactElement, forwardRef} from 'react';
-import {useCallback} from 'react';
-import {useState} from 'react';
-import {HiOutlineEye, HiOutlineEyeSlash} from 'react-icons/hi2';
-import {twMerge} from 'tailwind-merge';
+import { type VariantProps, cva } from 'class-variance-authority';
+import React, { ReactElement, forwardRef } from 'react';
+import { useCallback } from 'react';
+import { useState } from 'react';
+import { HiOutlineEye, HiOutlineEyeSlash } from 'react-icons/hi2';
+import { twMerge } from 'tailwind-merge';
 
-import {VariantIcon} from '@helpers/variant-icons';
-import {Variant, getVariantBorderColor} from '@helpers/variants';
+import { VariantIcon } from '@helpers/variant-icons';
+import { Variant, getVariantBorderColor } from '@helpers/variants';
 
-import {VariantIcon} from '@helpers/variant-icons';
-import {Variant, getVariantBorderColor} from '@helpers/variants';
+import { useMergeRefs } from '@hooks/use-merge-refs/use-merge-refs';
+import { useFocus } from '@hooks/useFocus/useFocus';
 
-import {useMergeRefs} from '@hooks/use-merge-refs/use-merge-refs';
-import {useFocus} from '@hooks/useFocus/useFocus';
-
-import {BtnSpinner} from '../spinner/spinner';
+import { BtnSpinner } from '../spinner/spinner';
 
 const inputToken = cva(
   [
@@ -49,7 +46,7 @@ const inputToken = cva(
         xl: ['text-xl', 'py-2.5', 'px-4'],
       },
     },
-    compoundVariants: [{appareance: 'primary', size: 'md'}],
+    compoundVariants: [{ appareance: 'primary', size: 'md' }],
     defaultVariants: {
       appareance: 'primary',
       size: 'md',
@@ -69,7 +66,7 @@ export type InputProps = React.HTMLProps<HTMLInputElement> & {
 
 export type InputGlobalProps = VariantProps<typeof inputToken> & InputProps;
 
-const RenderAfterElement = ({loading, iconAfter}) => {
+const RenderAfterElement = ({ loading, iconAfter }) => {
   return loading ? (
     <BtnSpinner className="h-5 w-5" aria-hidden="true" />
   ) : (
@@ -131,8 +128,8 @@ export const Input = forwardRef<HTMLInputElement, InputGlobalProps>(
     ref
   ) => {
     const hasElementAfter = iconAfter || loading;
-    const {render, newType} = useTogglePasswordView(type);
-    const {elementRef} = useFocus(autoFocus);
+    const { render, newType } = useTogglePasswordView(type);
+    const { elementRef } = useFocus(autoFocus);
     const refs = useMergeRefs(elementRef, ref);
 
     const handleOnchange = (e: React.ChangeEvent<HTMLInputElement>) => {

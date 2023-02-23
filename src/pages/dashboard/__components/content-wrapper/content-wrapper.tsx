@@ -1,4 +1,4 @@
-const ContentWrapper = ({children}) => {
+const ContentWrapper = ({ children }) => {
   return (
     <div className="md:ml-[380px] my-6 flex justify-center">
       <div className="px-6 max-w-7xl w-full">{children}</div>
@@ -6,4 +6,4 @@ const ContentWrapper = ({children}) => {
   );
 };
 
-export {ContentWrapper};
+export { ContentWrapper };

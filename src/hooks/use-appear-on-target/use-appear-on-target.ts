@@ -1,4 +1,4 @@
-import {MutableRefObject, useEffect, useRef, useState} from 'react';
+import { MutableRefObject, useEffect, useRef, useState } from 'react';
 
 type IUseAppearOnTarget = {
   targetedRef?: MutableRefObject<HTMLElement>;
@@ -37,7 +37,7 @@ const useAppearOnTarget = ({
     sectionObserver?.observe(targetedElement || targetedRef?.current);
   });
 
-  return {isAppear, setIsAppear, elementRef};
+  return { isAppear, setIsAppear, elementRef };
 };
 
-export {useAppearOnTarget};
+export { useAppearOnTarget };

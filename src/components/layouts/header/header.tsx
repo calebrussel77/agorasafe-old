@@ -1,21 +1,21 @@
-import {Popover, Transition} from '@headlessui/react';
+import { Popover, Transition } from '@headlessui/react';
 import Axios from 'axios';
 import clsx from 'clsx';
-import {useSession} from 'next-auth/react';
-import {useRouter} from 'next/router';
-import {Fragment, useRef} from 'react';
-import {HiOutlinePhone, HiOutlineSquares2X2} from 'react-icons/hi2';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
+import { Fragment, useRef } from 'react';
+import { HiOutlinePhone, HiOutlineSquares2X2 } from 'react-icons/hi2';
 
-import {useModalState} from '@components/lib/modal/modal';
+import { useModalState } from '@components/lib/modal/modal';
 import SectionMessage, {
   SectionMessageAction,
 } from '@components/lib/section-message/section-message';
 
-import {useAppearOnTarget} from '@hooks/use-appear-on-target/use-appear-on-target';
+import { useAppearOnTarget } from '@hooks/use-appear-on-target/use-appear-on-target';
 
-import {SubscriptionModal} from '../../subscription-modal/subscription-modal';
-import {MobilePopover} from './mobile-popover/mobile-popover';
-import {Navbar} from './navbar/navbar';
+import { SubscriptionModal } from '../../subscription-modal/subscription-modal';
+import { MobilePopover } from './mobile-popover/mobile-popover';
+import { Navbar } from './navbar/navbar';
 
 export const headerNavigations = [
   {
@@ -62,16 +62,16 @@ const Header = () => {
         !isHomePage && classNameList
       )}
     >
-      {({close}) => {
+      {({ close }) => {
         return (
           <>
             <SubscriptionModal dialog={dialog} />
             <SectionMessage
-              title="En cours de developpement"
               appareance="discovery"
-              className="border-b border-secondary-300"
+              hasCloseButton={false}
+              className="border border-secondary-300 flex justify-center items-center"
             >
-              <p className="text-sm md:text-base">
+              <p className="text-sm md:text-base font-semibold">
                 La plateforme Agorasafe est actuellement en cours de
                 developpement. si vous souhaitez être tenu informé de son
                 lancement,{' '}
@@ -107,4 +107,4 @@ const Header = () => {
   );
 };
 
-export {Header};
+export { Header };

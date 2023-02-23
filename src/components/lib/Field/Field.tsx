@@ -1,16 +1,16 @@
 /* eslint-disable no-undef */
 import clsx from 'clsx';
-import {Fragment, forwardRef, useId} from 'react';
+import { Fragment, forwardRef, useId } from 'react';
 import React from 'react';
-import {twMerge} from 'tailwind-merge';
+import { twMerge } from 'tailwind-merge';
 
-import {wrapChildren} from '@helpers/wrap-children';
+import { wrapChildren } from '@helpers/wrap-children';
 
-import {HelperMessage} from '../helper-message/helper-message';
-import {Label} from '../label/label';
-import {RowContainer} from '../layout/row-container/row-container';
-import {VariantMessage} from '../variant-message/variant-message';
-import {getBaseType, getVariant} from './utils';
+import { HelperMessage } from '../helper-message/helper-message';
+import { Label } from '../label/label';
+import { RowContainer } from '../layout/row-container/row-container';
+import { VariantMessage } from '../variant-message/variant-message';
+import { getBaseType, getVariant } from './utils';
 
 export interface FieldOptions {
   children: JSX.Element;
@@ -73,7 +73,7 @@ export const Field = forwardRef<HTMLDivElement, FieldProps>(
     const hasVariantMessage =
       successText || warningText || errorText || infoText;
 
-    const variant = getVariant({danger, warning, success, info});
+    const variant = getVariant({ danger, warning, success, info });
 
     const child = React.cloneElement(React.Children.only(children), {
       disabled,

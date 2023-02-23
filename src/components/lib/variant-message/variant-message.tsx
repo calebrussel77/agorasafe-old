@@ -1,8 +1,8 @@
-import {type VariantProps, cva} from 'class-variance-authority';
-import React, {forwardRef} from 'react';
-import {twMerge} from 'tailwind-merge';
+import { type VariantProps, cva } from 'class-variance-authority';
+import React, { forwardRef } from 'react';
+import { twMerge } from 'tailwind-merge';
 
-import {VARIANTS_COLORS, Variant} from '@helpers/variants';
+import { VARIANTS_COLORS, Variant } from '@helpers/variants';
 
 const variantMessageToken = cva([''], {
   variants: {
@@ -13,7 +13,7 @@ const variantMessageToken = cva([''], {
       xl: ['text-xl'],
     },
   },
-  compoundVariants: [{size: 'md'}],
+  compoundVariants: [{ size: 'md' }],
   defaultVariants: {
     size: 'md',
   },
@@ -22,12 +22,12 @@ const variantMessageToken = cva([''], {
 export type VariantMessageGlobalProps = VariantProps<
   typeof variantMessageToken
 > &
-  React.HTMLProps<HTMLDivElement> & {variant?: Variant};
+  React.HTMLProps<HTMLDivElement> & { variant?: Variant };
 
 export const VariantMessage = forwardRef<
   HTMLDivElement,
   VariantMessageGlobalProps
->(({children, className, variant, size, ...props}, ref) => {
+>(({ children, className, variant, size, ...props }, ref) => {
   return (
     <div
       ref={ref}

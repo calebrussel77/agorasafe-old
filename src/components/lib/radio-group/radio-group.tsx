@@ -1,7 +1,7 @@
-import React, {forwardRef} from 'react';
+import React, { forwardRef } from 'react';
 
-import {FieldGroup} from '../field-group/field-group';
-import {Radio, RadioProps} from '../radio/radio';
+import { FieldGroup } from '../field-group/field-group';
+import { Radio, RadioProps } from '../radio/radio';
 
 export interface RadioGroupOptions {
   name?: string;

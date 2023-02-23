@@ -1,6 +1,6 @@
-import {ImageUI} from '@components/lib/image-ui/image-ui';
+import { ImageUI } from '@components/lib/image-ui/image-ui';
 
-const ServicesListItem = ({service}) => {
+const ServicesListItem = ({ service }) => {
   return (
     <div className="group relative h-80 flex flex-col overflow-hidden cursor-pointer rounded-lg shadow-md">
       <ImageUI
@@ -18,4 +18,4 @@ const ServicesListItem = ({service}) => {
   );
 };
 
-export {ServicesListItem};
+export { ServicesListItem };

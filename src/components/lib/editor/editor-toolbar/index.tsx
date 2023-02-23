@@ -1,15 +1,15 @@
-import {Quill} from 'react-quill';
-import {twMerge} from 'tailwind-merge';
+import { Quill } from 'react-quill';
+import { twMerge } from 'tailwind-merge';
 
-import {Tooltip} from '@components/lib/tooltip/tooltip';
+import { Tooltip } from '@components/lib/tooltip/tooltip';
 
 const atValues = [
-  {id: 1, value: 'Fredrik Sundqvist'},
-  {id: 2, value: 'Patrik Sjölin'},
+  { id: 1, value: 'Fredrik Sundqvist' },
+  { id: 2, value: 'Patrik Sjölin' },
 ];
 const hashValues = [
-  {id: 3, value: 'Fredrik Sundqvist 2'},
-  {id: 4, value: 'Patrik Sjölin 2'},
+  { id: 3, value: 'Fredrik Sundqvist 2' },
+  { id: 4, value: 'Patrik Sjölin 2' },
 ];
 
 // Custom Undo button icon component for Quill editor. You can import it directly

@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, {ReactNode, forwardRef} from 'react';
+import React, { ReactNode, forwardRef } from 'react';
 
 export interface FooterOptions {
   className?: string;
@@ -12,7 +12,7 @@ export type FooterProps = FooterOptions;
  * @name Dialog.Footer
  */
 export const Footer = forwardRef<HTMLDivElement, FooterProps>(
-  ({children, className, ...rest}, ref) => {
+  ({ children, className, ...rest }, ref) => {
     return (
       <div
         ref={ref}

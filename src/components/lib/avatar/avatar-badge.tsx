@@ -1,8 +1,8 @@
 /* eslint-disable no-undef */
-import {type VariantProps, cva} from 'class-variance-authority';
-import React, {ReactNode, forwardRef} from 'react';
-import {HiOutlineStar} from 'react-icons/hi';
-import {twMerge} from 'tailwind-merge';
+import { type VariantProps, cva } from 'class-variance-authority';
+import React, { ReactNode, forwardRef } from 'react';
+import { HiOutlineStar } from 'react-icons/hi';
+import { twMerge } from 'tailwind-merge';
 
 export const avatarBadge = cva(['absolute flex-shrink-0'], {
   variants: {
@@ -99,7 +99,7 @@ const RenderBadge = ({
 };
 export const AvatarBadge = forwardRef<HTMLDivElement, AvatarBadgeProps>(
   (
-    {className, isPremium, isFavorite, placement, icon, size, ...props},
+    { className, isPremium, isFavorite, placement, icon, size, ...props },
     ref
   ) => {
     return (

@@ -1,9 +1,9 @@
-import React, {JSXElementConstructor, ReactElement, ReactNode} from 'react';
+import React, { JSXElementConstructor, ReactElement, ReactNode } from 'react';
 
-import {VariantIcon} from '@helpers/variant-icons';
-import {Variant} from '@helpers/variants';
+import { VariantIcon } from '@helpers/variant-icons';
+import { Variant } from '@helpers/variants';
 
-import {Tooltip, TooltipProps} from '../tooltip/tooltip';
+import { Tooltip, TooltipProps } from '../tooltip/tooltip';
 
 type InlineMessageProps = {
   title?: string;
@@ -14,7 +14,7 @@ type InlineMessageProps = {
   className?: string;
   variant?: Variant;
   triggerBtnClassName?: string;
-  icon?: ReactElement<{open: boolean}, string | JSXElementConstructor<any>>;
+  icon?: ReactElement<{ open: boolean }, string | JSXElementConstructor<any>>;
   children: ReactElement | ReactNode;
 };
 

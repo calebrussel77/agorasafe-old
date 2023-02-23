@@ -1,47 +1,72 @@
-import {zodResolver} from '@hookform/resolvers/zod';
-import {FC} from 'react';
-import {useForm} from 'react-hook-form';
-import {z} from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { signIn } from 'next-auth/react';
+import { FC } from 'react';
+import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
-import {Field} from '@components/lib/Field/Field';
-import {Button} from '@components/lib/button/button';
-import {Checkbox} from '@components/lib/checkbox/checkbox';
-import {HelperMessage} from '@components/lib/helper-message/helper-message';
-import {Input} from '@components/lib/input/input';
-import {Label} from '@components/lib/label/label';
-import {VariantMessage} from '@components/lib/variant-message/variant-message';
+import { Field } from '@components/lib/Field/Field';
+import { Button } from '@components/lib/button/button';
+import { Checkbox } from '@components/lib/checkbox/checkbox';
+import { HelperMessage } from '@components/lib/helper-message/helper-message';
+import { Input } from '@components/lib/input/input';
+import { Label } from '@components/lib/label/label';
+import { VariantMessage } from '@components/lib/variant-message/variant-message';
 
-import {
-  loginSchema,
-  registerSchema,
-  registerSchemaValidation,
-} from './auth-form.validation';
+import { loginSchema, registerSchema } from '@validations/auth-user-schema';
+
+import { TRegister } from '@interfaces/auth-user';
 
 type TAuthFormProps = {
   mode: 'register' | 'login';
 };
 
-type TAuthForm = z.infer<typeof registerSchema> & {
-  confirm?: any;
-  desire?: any;
+type TAuthForm = TRegister & {
+  confirmError?: any;
+  desireError?: any;
 };
 
-const AuthForm: FC<TAuthFormProps> = ({mode}) => {
+const AuthForm: FC<TAuthFormProps> = ({ mode }) => {
   const isLoginPage = mode === 'login';
-  const authFormValidationSchema = isLoginPage
-    ? loginSchema
-    : registerSchemaValidation;
+  const authFormValidationSchema = isLoginPage ? loginSchema : registerSchema;
 
   const {
     register,
     handleSubmit,
-    formState: {errors, isSubmitting},
+    formState: { errors, isSubmitting },
   } = useForm<TAuthForm>({
     resolver: zodResolver(authFormValidationSchema),
   });
 
-  const onSubmit = data => {
-    console.log(data);
+  const onSubmit = async (data: TAuthForm) => {
+    const { password, email, isProvider, isCustomer, firstName, lastName } =
+      data;
+
+    if (isLoginPage) {
+      const response = await signIn('credentials', {
+        email,
+        password,
+        callbackUrl: '/dashboard',
+        redirect: false,
+      });
+
+      if (response?.error) {
+        toast.error(response?.error);
+      }
+    } else {
+      const response = await signIn('credentials', {
+        email,
+        password,
+        isProvider,
+        isCustomer,
+        firstName,
+        lastName,
+        callbackUrl: '/dashboard',
+        redirect: false,
+      });
+      if (response?.error) {
+        toast.error(response?.error);
+      }
+    }
   };
 
   return (
@@ -87,7 +112,9 @@ const AuthForm: FC<TAuthFormProps> = ({mode}) => {
       </Field>
       <Field
         required
-        error={(errors.password?.message || errors.confirm?.message) as string}
+        error={
+          (errors.password?.message || errors.confirmError?.message) as string
+        }
         label="Mot de passe"
       >
         <Input
@@ -104,7 +131,7 @@ const AuthForm: FC<TAuthFormProps> = ({mode}) => {
             required
             error={
               (errors.confirm_password?.message ||
-                errors.confirm?.message) as string
+                errors.confirmError?.message) as string
             }
             label="Confirmer le mot de passe"
           >
@@ -119,21 +146,21 @@ const AuthForm: FC<TAuthFormProps> = ({mode}) => {
           <div className="space-y-2">
             <Label
               required
-              variant={errors.desire?.message ? 'danger' : undefined}
+              variant={errors.desireError?.message ? 'danger' : undefined}
             >
               Je souhaite :
             </Label>
             <div className="flex items-center flex-wrap gap-2 justify-between">
               <Field label="Proposer mes services">
-                <Checkbox {...register('isProvider', {value: true})} />
+                <Checkbox {...register('isProvider', { value: true })} />
               </Field>
               <Field label="Demander des services">
-                <Checkbox {...register('isCustomer', {value: true})} />
+                <Checkbox {...register('isCustomer', { value: true })} />
               </Field>
             </div>
-            {errors.desire?.message && (
+            {errors.desireError?.message && (
               <VariantMessage variant="danger">
-                {errors.desire?.message as any}
+                {errors.desireError?.message as any}
               </VariantMessage>
             )}
           </div>
@@ -158,4 +185,4 @@ const AuthForm: FC<TAuthFormProps> = ({mode}) => {
   );
 };
 
-export {AuthForm};
+export { AuthForm };

@@ -1,17 +1,17 @@
 /* eslint-disable no-unused-vars */
 import clsx from 'clsx';
-import {ElementType, MouseEventHandler, ReactNode} from 'react';
-import {composeUniqueKey} from 'src/helpers/avatar';
+import { ElementType, MouseEventHandler, ReactNode } from 'react';
+import { composeUniqueKey } from 'src/helpers/avatar';
 
-import {Avatar, AvatarProps, AvatarSize} from '../avatar/avatar';
-import {Popover} from '../popover/popover';
-import {usePopoverState} from '../popover/usePopoverState';
-import {Tooltip} from '../tooltip/tooltip';
+import { Avatar, AvatarProps, AvatarSize } from '../avatar/avatar';
+import { Popover } from '../popover/popover';
+import { usePopoverState } from '../popover/usePopoverState';
+import { Tooltip } from '../tooltip/tooltip';
 import {
   AvatarGroupItem,
   AvatarGroupItemProps,
 } from './avatar-group-item/avatar-group-item';
-import {MoreIndicator} from './more-indicator/more-indicator';
+import { MoreIndicator } from './more-indicator/more-indicator';
 
 const MAX_COUNT = {
   grid: 11,
@@ -190,7 +190,7 @@ const AvatarGroup = ({
   size = 'md',
   name = 'avatar group',
 }: AvatarGroupProps) => {
-  const {popover, hide, show} = usePopoverState({placement: 'bottom-end'});
+  const { popover, hide, show } = usePopoverState({ placement: 'bottom-end' });
 
   function renderMoreDropdown(max: number, total: number) {
     if (total <= max) {
@@ -234,14 +234,14 @@ const AvatarGroup = ({
     return (
       <>
         <Popover.Trigger
-          {...{...popover, state: popover.state}}
+          {...{ ...popover, state: popover.state }}
           disclosure={renderMoreButton({
             onClick: popover.state.toggle,
             isOpen: popover.state.open,
           })}
         />
         <Popover
-          {...{...popover, state: popover.state}}
+          {...{ ...popover, state: popover.state }}
           aria-label="hover to open popover"
           portal
         >

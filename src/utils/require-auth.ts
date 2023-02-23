@@ -1,10 +1,13 @@
-import {Session} from 'next-auth';
-import {getSession} from 'next-auth/react';
+import { Session } from 'next-auth';
+
+import { getServerAuthSession } from '@server/auth';
+
+// import { getSession } from 'next-auth/react';
 
 type TRequireAuthProps = {
   ctx: any;
   redirectUrl?: string;
-  cb: ({session}: {session: Session}) => any;
+  cb: ({ session }: { session: Session }) => any;
 };
 
 export const requireAuth = async ({
@@ -12,7 +15,7 @@ export const requireAuth = async ({
   redirectUrl = '/login',
   cb,
 }: TRequireAuthProps) => {
-  const session = await getSession(ctx);
+  const session = await getServerAuthSession(ctx);
 
   if (!session) {
     return {
@@ -23,5 +26,5 @@ export const requireAuth = async ({
     };
   }
 
-  return cb({session} as any);
+  return cb({ session } as any);
 };

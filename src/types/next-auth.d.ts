@@ -1,4 +1,4 @@
-import {type DefaultSession} from 'next-auth';
+import { type DefaultSession } from 'next-auth';
 
 declare module 'next-auth' {
   /**
@@ -10,6 +10,7 @@ declare module 'next-auth' {
       name: string;
       email: string;
       avatar: string;
+      slug: string;
       provider: string;
       is_provider: boolean;
       is_purchaser: boolean;

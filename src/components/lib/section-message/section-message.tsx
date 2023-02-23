@@ -1,5 +1,5 @@
-import {type VariantProps, cva} from 'class-variance-authority';
-import React, {ReactElement, forwardRef, useState} from 'react';
+import { type VariantProps, cva } from 'class-variance-authority';
+import React, { ReactElement, forwardRef, useState } from 'react';
 import {
   HiCheckCircle,
   HiExclamationTriangle,
@@ -9,8 +9,8 @@ import {
 } from 'react-icons/hi2';
 
 import FadeAnimation from '../fade-animation/fade-animation';
-import {InlineUI} from '../inline-ui/inline-ui';
-import {MessageAction} from './section-message-action/section-message-action';
+import { InlineUI } from '../inline-ui/inline-ui';
+import { MessageAction } from './section-message-action/section-message-action';
 
 const sectionMessage = cva('w-full flex justify-center items-start gap-2', {
   variants: {
@@ -37,7 +37,7 @@ const sectionMessage = cva('w-full flex justify-center items-start gap-2', {
       large: ['text-lg', 'py-3', 'px-6'],
     },
   },
-  compoundVariants: [{appareance: 'danger', size: 'medium'}],
+  compoundVariants: [{ appareance: 'danger', size: 'medium' }],
   defaultVariants: {
     appareance: 'danger',
     size: 'medium',
@@ -46,7 +46,7 @@ const sectionMessage = cva('w-full flex justify-center items-start gap-2', {
 
 type otherProps = {
   className?: string;
-  title: string;
+  title?: string | ReactElement;
   onClose?: React.MouseEventHandler<HTMLButtonElement>;
   actions?: Array<ReactElement<any>> | ReactElement<any>;
   hasCloseButton?: boolean;
@@ -73,7 +73,7 @@ const IconAppareances = {
     icon: HiExclamationTriangle,
     color: 'text-yellow-500',
   },
-  info: {icon: HiInformationCircle, color: 'text-primary-500'},
+  info: { icon: HiInformationCircle, color: 'text-primary-500' },
 };
 
 export type SectionMessageProps = VariantProps<typeof sectionMessage> &
@@ -112,31 +112,27 @@ const SectionMessage = forwardRef<HTMLDivElement, SectionMessageProps>(
         ref={ref}
         visible={visible}
         animateEnter
-        from={{opacity: 0}}
+        from={{ opacity: 0 }}
       >
         <div
-          className={sectionMessage({appareance, size, class: className})}
+          className={sectionMessage({ appareance, size, class: className })}
           {...props}
         >
-          <div className="flex items-start flex-1 w-full gap-3">
+          <div className="flex items-center gap-2">
             {<Icon className={`h-6 w-6 flex-shrink-0 ${ColorIcon}`} />}
-            <div>
-              {title && <h3 className="font-bold text-base">{title}</h3>}
-              {children && <div className="text-[13px]">{children}</div>}
-              <div className="flex items-center flex-wrap gap-1">
-                {isActionsArray
-                  ? actions?.length > 0 && (
-                      <InlineUI
-                        divider={
-                          <span className="text-blue-100">&middot;</span>
-                        }
-                        className="gap-1"
-                      >
-                        {actions}
-                      </InlineUI>
-                    )
-                  : actions}
-              </div>
+            {title && <h3 className="font-bold text-base">{title}</h3>}
+            {children && <div className="text-[13px]">{children}</div>}
+            <div className="flex items-center flex-wrap gap-1">
+              {isActionsArray
+                ? actions?.length > 0 && (
+                    <InlineUI
+                      divider={<span className="text-blue-100">&middot;</span>}
+                      className="gap-1"
+                    >
+                      {actions}
+                    </InlineUI>
+                  )
+                : actions}
             </div>
           </div>
           {hasCloseButton && (
@@ -156,4 +152,4 @@ const SectionMessage = forwardRef<HTMLDivElement, SectionMessageProps>(
 SectionMessage.displayName = 'SectionMessage';
 
 export default SectionMessage;
-export {MessageAction as SectionMessageAction};
+export { MessageAction as SectionMessageAction };

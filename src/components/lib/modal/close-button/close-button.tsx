@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 import React from 'react';
-import {HiOutlineXMark} from 'react-icons/hi2';
+import { HiOutlineXMark } from 'react-icons/hi2';
 
-export const CloseButton: React.FC<{className?: string}> = ({
+export const CloseButton: React.FC<{ className?: string }> = ({
   className,
   ...props
 }) => {

@@ -1,32 +1,32 @@
-import {useMutation} from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
-import {useRef} from 'react';
+import { useRef } from 'react';
 
-import {Button} from '@components/lib/button/button';
-import {Modal} from '@components/lib/modal/modal';
+import { Button } from '@components/lib/button/button';
+import { Modal } from '@components/lib/modal/modal';
 import SectionMessage from '@components/lib/section-message/section-message';
 
-import {FormSubscription} from './form-subscription/form-subscription';
-import {TSubscriptionForm} from './form-subscription/form-subscription.validation';
+import { FormSubscription } from './form-subscription/form-subscription';
+import { TSubscriptionForm } from './form-subscription/form-subscription.validation';
 
 const sendUserSubscriptionRequest = (formData: FormData) => {
   return axios.post(
     'https://app.convertkit.com/forms/3997673/subscriptions',
     formData,
     {
-      headers: {'content-type': 'multipart/form-data'},
+      headers: { 'content-type': 'multipart/form-data' },
     }
   );
 };
 
-const SubscriptionModal = ({dialog}) => {
-  const {mutate, isLoading, isSuccess} = useMutation(
+const SubscriptionModal = ({ dialog }) => {
+  const { mutate, isLoading, isSuccess } = useMutation(
     sendUserSubscriptionRequest
   );
 
   const formRef = useRef<HTMLFormElement>(null);
 
-  const onSubmit = ({email, name}: TSubscriptionForm) => {
+  const onSubmit = ({ email, name }: TSubscriptionForm) => {
     let formData = new FormData();
     formData.append('email_address', email);
     formData.append('fields[first_name]', name);
@@ -80,4 +80,4 @@ const SubscriptionModal = ({dialog}) => {
   );
 };
 
-export {SubscriptionModal};
+export { SubscriptionModal };

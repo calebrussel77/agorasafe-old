@@ -1,11 +1,11 @@
 /* eslint-disable no-undef */
-import {forwardRef} from 'react';
-import {HiOutlineLockClosed} from 'react-icons/hi2';
-import {twMerge} from 'tailwind-merge';
+import { forwardRef } from 'react';
+import { HiOutlineLockClosed } from 'react-icons/hi2';
+import { twMerge } from 'tailwind-merge';
 
-import {VariantIcon} from '@helpers/variant-icons';
-import {VARIANTS_COLORS, Variant, getVariantColor} from '@helpers/variants';
-import {wrapChildren} from '@helpers/wrap-children';
+import { VariantIcon } from '@helpers/variant-icons';
+import { VARIANTS_COLORS, Variant, getVariantColor } from '@helpers/variants';
+import { wrapChildren } from '@helpers/wrap-children';
 
 export interface LabelOptions {
   checkableField?: boolean;

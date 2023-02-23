@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import React, {FC} from 'react';
+import React, { FC } from 'react';
 
-import {MenuItem} from '@components/lib/menu/menu';
+import { MenuItem } from '@components/lib/menu/menu';
 
-import {Avatar, AvatarProps} from '../../avatar/avatar';
+import { Avatar, AvatarProps } from '../../avatar/avatar';
 
 export interface AvatarGroupItemProps {
   avatar: AvatarProps;
@@ -18,7 +18,7 @@ const AvatarGroupItem: FC<AvatarGroupItemProps> = ({
   onAvatarClick,
   ...props
 }) => {
-  const {href, onClick, ref, ...rest} = avatar;
+  const { href, onClick, ref, ...rest } = avatar;
 
   const AvatarIcon = <Avatar {...rest} />;
 
@@ -46,4 +46,4 @@ const AvatarGroupItem: FC<AvatarGroupItemProps> = ({
   );
 };
 
-export {AvatarGroupItem};
+export { AvatarGroupItem };

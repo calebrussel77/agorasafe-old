@@ -1,6 +1,6 @@
-import {twMerge} from 'tailwind-merge';
+import { twMerge } from 'tailwind-merge';
 
-const RowContainer = ({className, ...props}) => {
+const RowContainer = ({ className, ...props }) => {
   return (
     <div
       className={twMerge('flex flex-row items-center', className)}
@@ -9,4 +9,4 @@ const RowContainer = ({className, ...props}) => {
   );
 };
 
-export {RowContainer};
+export { RowContainer };

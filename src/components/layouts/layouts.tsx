@@ -1,8 +1,8 @@
-import {NextSeo, NextSeoProps} from 'next-seo';
-import {ReactNode} from 'react';
+import { NextSeo, NextSeoProps } from 'next-seo';
+import { ReactNode } from 'react';
 
-import {Footer} from './footer/footer';
-import {Header} from './header/header';
+import { Footer } from './footer/footer';
+import { Header } from './header/header';
 
 type TLayoutProps = {
   title?: string;
@@ -11,7 +11,7 @@ type TLayoutProps = {
   noindex?: boolean;
 };
 
-const Layout = ({title, description, children, noindex}: TLayoutProps) => {
+const Layout = ({ title, description, children, noindex }: TLayoutProps) => {
   return (
     <>
       <NextSeo title={title} description={description} noindex={noindex} />
@@ -24,4 +24,4 @@ const Layout = ({title, description, children, noindex}: TLayoutProps) => {
   );
 };
 
-export {Layout};
+export { Layout };

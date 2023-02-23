@@ -1,6 +1,6 @@
-import {DialogHeading} from 'ariakit';
+import { DialogHeading } from 'ariakit';
 import clsx from 'clsx';
-import React, {ReactElement, ReactNode, forwardRef} from 'react';
+import React, { ReactElement, ReactNode, forwardRef } from 'react';
 
 export interface HeaderOptions {
   className?: string;
@@ -16,7 +16,7 @@ export type HeaderProps = HeaderOptions;
  * @name Modal.Header
  */
 export const Header = forwardRef<HTMLDivElement, HeaderProps>(
-  ({children, className, title, subtitle, iconBefore, ...rest}, ref) => {
+  ({ children, className, title, subtitle, iconBefore, ...rest }, ref) => {
     return (
       <div
         ref={ref}

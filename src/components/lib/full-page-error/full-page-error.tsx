@@ -1,14 +1,14 @@
 import clsx from 'clsx';
 import Link from 'next/link';
-import {useState} from 'react';
-import {HiChevronDown} from 'react-icons/hi';
+import { useState } from 'react';
+import { HiChevronDown } from 'react-icons/hi';
 
-import {LogoIcon} from '@components/icons/logo-icon/logo-icon';
+import { LogoIcon } from '@components/icons/logo-icon/logo-icon';
 
 import FadeAnimation from '../fade-animation/fade-animation';
-import {ImageUI} from '../image-ui/image-ui';
+import { ImageUI } from '../image-ui/image-ui';
 
-export default function FullPageError({error}) {
+export default function FullPageError({ error }) {
   const [viewStack, setViewStack] = useState(false);
 
   return (
@@ -45,7 +45,11 @@ export default function FullPageError({error}) {
                     )}
                   />
                 </button>
-                <FadeAnimation visible={viewStack} animateEnter from={{y: 10}}>
+                <FadeAnimation
+                  visible={viewStack}
+                  animateEnter
+                  from={{ y: 10 }}
+                >
                   <div className="p-3 rounded-md w-full max-w-xl overflow-y-auto max-h-80 text-gray-600 bg-gray-100 mt-1">
                     {error?.message}
                   </div>

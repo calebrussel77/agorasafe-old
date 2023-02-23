@@ -1,10 +1,10 @@
-import React, {FC} from 'react';
+import React, { FC } from 'react';
 
 type LogoProps = {
   className?: string;
 };
 
-const LogoIcon: FC<LogoProps> = ({className}) => {
+const LogoIcon: FC<LogoProps> = ({ className }) => {
   return (
     <svg className={className} fill="none" viewBox="0 0 182 23">
       <path
@@ -100,4 +100,4 @@ const LogoIcon: FC<LogoProps> = ({className}) => {
   );
 };
 
-export {LogoIcon};
+export { LogoIcon };

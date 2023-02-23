@@ -3,11 +3,11 @@ import {
   PopoverProps as AriakitPopoverOptions,
 } from 'ariakit/popover';
 import clsx from 'clsx';
-import React, {ReactNode, forwardRef} from 'react';
-import {useCss} from 'react-use';
+import React, { ReactNode, forwardRef } from 'react';
+import { useCss } from 'react-use';
 
-import {Trigger} from './popover-trigger/poover-trigger';
-import {UsePopoverStateReturn} from './usePopoverState';
+import { Trigger } from './popover-trigger/poover-trigger';
+import { UsePopoverStateReturn } from './usePopoverState';
 
 export interface PopoverOptions {
   /** call a function when popover closed */
@@ -64,7 +64,7 @@ export interface PopoverOptions {
  * 
  */
 export type PopoverProps = PopoverOptions &
-  AriakitPopoverOptions & {maxHeight?: number; maxWidth?: number};
+  AriakitPopoverOptions & { maxHeight?: number; maxWidth?: number };
 
 export const PopoverComponent = forwardRef<HTMLDivElement, PopoverProps>(
   (
@@ -92,14 +92,14 @@ export const PopoverComponent = forwardRef<HTMLDivElement, PopoverProps>(
       opacity: '0',
       // transform: 'scaleY(0)',
       transition: 'opacity 150ms ease-in-out',
-      '&[data-enter]': {opacity: '1'},
+      '&[data-enter]': { opacity: '1' },
     });
 
     return (
       <AriakitPopover
-        state={{...state, hide: closePopover}}
+        state={{ ...state, hide: closePopover }}
         ref={ref}
-        style={{maxHeight: maxHeight, maxWidth: maxWidth}}
+        style={{ maxHeight: maxHeight, maxWidth: maxWidth }}
         className={clsx(
           'bg-white scrollbar__custom focus:outline-none focus-within:outline-none py-3 border rounded-md overflow-y-auto overflow-x-hidden z-[80] shadow-md',
           defaultCss,
@@ -120,7 +120,7 @@ type ContentProps = {
   children?: ReactNode;
 };
 
-const Content = ({className = '', children}: ContentProps) => {
+const Content = ({ className = '', children }: ContentProps) => {
   return (
     <div
       className={clsx('w-full gap-y-1 gap-x-2 flex flex-col px-2', className)}

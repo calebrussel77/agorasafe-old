@@ -1,25 +1,23 @@
 /* eslint-disable @next/next/no-img-element */
-import {GetServerSideProps} from 'next';
-import {getProviders, getSession, signIn} from 'next-auth/react';
-import {AppProps} from 'next/app';
-import React, {ReactElement} from 'react';
+import { GetServerSideProps } from 'next';
+import { ClientSafeProvider, getProviders, signIn } from 'next-auth/react';
+import React, { ReactElement } from 'react';
 
-import {AuthForm} from '@components/auth-form/auth-form';
-import {HomeBackground} from '@components/home-background/home-background';
-import {GoogleIconSolid} from '@components/icons/GoogleIconSolid';
-import {LogoIcon} from '@components/icons/logo-icon/logo-icon';
-import {Layout} from '@components/layouts/layouts';
-import {Accordion} from '@components/lib/accordion/accordion';
-import {Button} from '@components/lib/button/button';
-import {MiddleSeparator} from '@components/lib/middle-separator/middle-separator';
+import { AuthForm } from '@components/auth-form/auth-form';
+import { HomeBackground } from '@components/home-background/home-background';
+import { GoogleIconSolid } from '@components/icons/GoogleIconSolid';
+import { LogoIcon } from '@components/icons/logo-icon/logo-icon';
+import { Layout } from '@components/layouts/layouts';
+import { Button } from '@components/lib/button/button';
+import { MiddleSeparator } from '@components/lib/middle-separator/middle-separator';
 
-import {redirectIfAuth} from '@utils/redirectIfAuth';
+import { redirectIfAuth } from '@utils/redirect-If-auth';
 
 type TLoginPageProps = {
-  providers: AppProps;
+  googleProvider: ClientSafeProvider;
 };
 
-const LoginPage = ({providers}: TLoginPageProps) => {
+const LoginPage = ({ googleProvider }: TLoginPageProps) => {
   return (
     <div className="isolate overflow-x-hidden">
       <HomeBackground />
@@ -36,21 +34,18 @@ const LoginPage = ({providers}: TLoginPageProps) => {
           <div>
             <div>
               <div className="mt-1">
-                {Object.values(providers).map(provider => (
-                  <Button
-                    key={provider.id}
-                    onClick={() =>
-                      signIn(provider.id, {
-                        callbackUrl: `${window.location.origin}/dashboard`,
-                      })
-                    }
-                    className="w-full flex items-center justify-center"
-                    variant="subtle"
-                  >
-                    <GoogleIconSolid className="h-5 w-5" />
-                    <span>Se connecter avec Google</span>
-                  </Button>
-                ))}
+                <Button
+                  onClick={() =>
+                    signIn(googleProvider.id, {
+                      callbackUrl: `${window.location.origin}/dashboard`,
+                    })
+                  }
+                  className="w-full flex items-center justify-center"
+                  variant="subtle"
+                >
+                  <GoogleIconSolid className="h-5 w-5" />
+                  <span>Se connecter avec Google</span>
+                </Button>
               </div>
             </div>
             <div className="mt-6 text-gray-500">
@@ -84,7 +79,7 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
     ctx,
     cb() {
       return {
-        props: {providers},
+        props: { googleProvider: providers.google || null },
       };
     },
   });

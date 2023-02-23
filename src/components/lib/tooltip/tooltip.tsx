@@ -1,7 +1,7 @@
-import React, {forwardRef} from 'react';
+import React, { forwardRef } from 'react';
 import Popup from 'reactjs-popup';
-import {PopupProps} from 'reactjs-popup/dist/types';
-import {twMerge} from 'tailwind-merge';
+import { PopupProps } from 'reactjs-popup/dist/types';
+import { twMerge } from 'tailwind-merge';
 
 export interface TooltipOptions {
   children: React.ReactNode;

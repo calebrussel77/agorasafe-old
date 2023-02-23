@@ -20,6 +20,7 @@
       "@components/*": ["./src/components/*"],
       "@icons/*": ["./src/components/icons/*"],
       "@utils/*": ["./src/utils/*"],
+      "@interfaces/*": ["./src/interfaces/*"],
       "@helpers/*": ["./src/helpers/*"],
       "@styles/*": ["./src/styles/*"],
       "@hooks/*": ["./src/hooks/*"],

@@ -1,16 +1,16 @@
 import clsx from 'clsx';
-import {EmojiStyle} from 'emoji-picker-react';
+import { EmojiStyle } from 'emoji-picker-react';
 import 'quill-mention';
-import {forwardRef, useEffect, useRef, useState} from 'react';
-import {BsEmojiLaughing} from 'react-icons/bs';
+import { forwardRef, useEffect, useRef, useState } from 'react';
+import { BsEmojiLaughing } from 'react-icons/bs';
 import ReactQuill from 'react-quill';
-import {twMerge} from 'tailwind-merge';
+import { twMerge } from 'tailwind-merge';
 
-import {useMergeRefs} from '@hooks/use-merge-refs/use-merge-refs';
+import { useMergeRefs } from '@hooks/use-merge-refs/use-merge-refs';
 
-import {Popover} from '../popover/popover';
-import {usePopoverState} from '../popover/usePopoverState';
-import {EditorEmoji} from './editor-emoji';
+import { Popover } from '../popover/popover';
+import { usePopoverState } from '../popover/usePopoverState';
+import { EditorEmoji } from './editor-emoji';
 import {
   EditorToolbar,
   formats as defaultFormats,
@@ -21,9 +21,9 @@ const renderImage = (url, name) =>
   `<img src="${url}" alt="emoji-icon" id="emoji-icone" />`;
 
 const EditorInstance = forwardRef<any, any>(
-  ({modules, formats, children, autoFocus, className, ...rest}, ref) => {
+  ({ modules, formats, children, autoFocus, className, ...rest }, ref) => {
     const isToolbarHidden = modules?.toolbar === false;
-    const {popover} = usePopoverState();
+    const { popover } = usePopoverState();
     const [selectedIndex, setSelectedIndex] = useState(0);
     const quillRef = useRef(null);
     const editor = quillRef.current?.getEditor();
@@ -76,7 +76,7 @@ const EditorInstance = forwardRef<any, any>(
 
         <div className="ml-2 space-x-2">
           <Popover.Trigger
-            {...{...popover, state: popover.state}}
+            {...{ ...popover, state: popover.state }}
             onClick={() =>
               setSelectedIndex(
                 quillRef.current.getEditor()?.getSelection()?.index || 0

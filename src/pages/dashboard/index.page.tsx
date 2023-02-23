@@ -1,22 +1,22 @@
-import {GetServerSideProps, InferGetServerSidePropsType} from 'next';
-import {Session} from 'next-auth';
-import {FC} from 'react';
-import {ReactElement} from 'react';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import { Session } from 'next-auth';
+import { FC } from 'react';
+import { ReactElement } from 'react';
 
-import {AuthLayout} from '@components/layouts/auth-layouts';
+import { AuthLayout } from '@components/layouts/auth-layouts';
 
-import {NextPageWithLayout} from '@pages/_app.page';
+import { NextPageWithLayout } from '@pages/_app.page';
 
-import {requireAuth} from '@utils/requireAuth';
+import { requireAuth } from '@utils/require-auth';
 
-import {ContentTitle} from './__components/content-title/content-title';
-import {ContentWrapper} from './__components/content-wrapper/content-wrapper';
-import {Sidebar} from './__components/sidebar/sidebar';
+import { ContentTitle } from './__components/content-title/content-title';
+import { ContentWrapper } from './__components/content-wrapper/content-wrapper';
+import { Sidebar } from './__components/sidebar/sidebar';
 
 type TDashboardPageProps = NextPageWithLayout &
   FC<InferGetServerSidePropsType<typeof getServerSideProps>>;
 
-const DashboardPage: TDashboardPageProps = ({data}) => {
+const DashboardPage: TDashboardPageProps = ({ data }) => {
   return (
     <ContentWrapper>
       <ContentTitle>Tableau de bord</ContentTitle>
@@ -46,9 +46,9 @@ export const getServerSideProps: GetServerSideProps<{
 }> = async ctx => {
   return requireAuth({
     ctx,
-    cb({session}) {
+    cb({ session }) {
       return {
-        props: {data: session},
+        props: { data: session },
       };
     },
   });

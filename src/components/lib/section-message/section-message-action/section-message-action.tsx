@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import React, {ReactNode, memo} from 'react';
+import React, { ReactNode, memo } from 'react';
 
 type MessageActionProps = {
   children?: ReactNode;
@@ -35,4 +35,4 @@ const MessageAction = memo(function MessageAction({
 
 MessageAction.displayName = 'MessageAction';
 
-export {MessageAction};
+export { MessageAction };

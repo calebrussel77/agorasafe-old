@@ -1,10 +1,10 @@
 import clsx from 'clsx';
 import Image from 'next/image';
-import React, {CSSProperties, forwardRef, useState} from 'react';
-import {twMerge} from 'tailwind-merge';
+import React, { CSSProperties, forwardRef, useState } from 'react';
+import { twMerge } from 'tailwind-merge';
 
-import {blurDataURL} from '@helpers/image';
-import {stringToHslColor} from '@helpers/misc';
+import { blurDataURL } from '@helpers/image';
+import { stringToHslColor } from '@helpers/misc';
 
 type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 const DEFAULT_FONT_SIZE = 16;

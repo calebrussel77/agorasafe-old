@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 import Link from 'next/link';
-import {useRouter} from 'next/router';
-import {ReactNode, useEffect, useState} from 'react';
-import React, {Children} from 'react';
-import {twMerge} from 'tailwind-merge';
+import { useRouter } from 'next/router';
+import { ReactNode, useEffect, useState } from 'react';
+import React, { Children } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 type ActiveLinkProps = {
   children?: ReactNode;
@@ -14,8 +14,12 @@ type ActiveLinkProps = {
   replace?: any;
 };
 
-const ActiveLink = ({children, activeClassName, ...props}: ActiveLinkProps) => {
-  const {asPath, isReady} = useRouter();
+const ActiveLink = ({
+  children,
+  activeClassName,
+  ...props
+}: ActiveLinkProps) => {
+  const { asPath, isReady } = useRouter();
 
   const child: any = Children.only(children);
   const childClassName = child.props.className || '';
@@ -64,4 +68,4 @@ const ActiveLink = ({children, activeClassName, ...props}: ActiveLinkProps) => {
   );
 };
 
-export {ActiveLink};
+export { ActiveLink };

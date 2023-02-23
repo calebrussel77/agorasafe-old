@@ -1,13 +1,13 @@
-import {signOut, useSession} from 'next-auth/react';
-import {FC} from 'react';
-import {AiOutlineLogout, AiOutlineUser} from 'react-icons/ai';
-import {HiOutlineCog} from 'react-icons/hi';
-import {RxDashboard} from 'react-icons/rx';
-import {TbBookmarks} from 'react-icons/tb';
+import { signOut, useSession } from 'next-auth/react';
+import { FC } from 'react';
+import { AiOutlineLogout, AiOutlineUser } from 'react-icons/ai';
+import { HiOutlineCog } from 'react-icons/hi';
+import { RxDashboard } from 'react-icons/rx';
+import { TbBookmarks } from 'react-icons/tb';
 
-import {Avatar} from '@components/lib/avatar/avatar';
-import {MenuItem} from '@components/lib/menu/menu';
-import {Popover} from '@components/lib/popover/popover';
+import { Avatar } from '@components/lib/avatar/avatar';
+import { MenuItem } from '@components/lib/menu/menu';
+import { Popover } from '@components/lib/popover/popover';
 
 type UserNotificationsMenuProps = {
   popover: any;
@@ -46,11 +46,11 @@ const UserNotificationsMenu: FC<UserNotificationsMenuProps> = ({
   popover,
   hide,
 }) => {
-  const {data: session} = useSession();
+  const { data: session } = useSession();
 
   return (
     <Popover
-      {...{...popover, state: popover.state}}
+      {...{ ...popover, state: popover.state }}
       aria-label={`Click to open ${session?.user?.name} menu options`}
     >
       <Popover.Content>
@@ -77,4 +77,4 @@ const UserNotificationsMenu: FC<UserNotificationsMenuProps> = ({
   );
 };
 
-export {UserNotificationsMenu};
+export { UserNotificationsMenu };
