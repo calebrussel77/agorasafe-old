@@ -86,7 +86,7 @@ export const Button: React.FC<ButtonProps> = ({
   ...props
 }) =>
   skeleton ? (
-    <Skeleton className="min-w-[80px] h-8" />
+    <Skeleton className="min-w-[140px] h-9" />
   ) : (
     <button
       {...props}

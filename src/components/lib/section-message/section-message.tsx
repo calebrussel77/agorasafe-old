@@ -20,7 +20,7 @@ const sectionMessage = cva('w-full flex justify-center items-start gap-2', {
         // 'border-transparent',
       ],
       discovery: [
-        'bg-secondary-50 text-secondary-800',
+        'bg-secondary-600 text-white',
         // 'border-transparent',
       ],
       success: [
@@ -63,7 +63,7 @@ const IconAppareances = {
   },
   discovery: {
     icon: HiQuestionMarkCircle,
-    color: 'text-secondary-500',
+    color: 'text-white',
   },
   system: {
     icon: HiCheckCircle,
