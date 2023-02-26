@@ -33,6 +33,9 @@ module.exports = {
           900: `rgb(var(--color-secondary-900) / <alpha-value>)`,
         },
       },
+      screens: {
+        'max-xs': { max: '440px' },
+      },
     },
   },
   plugins: [

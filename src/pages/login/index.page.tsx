@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { GetServerSideProps } from 'next';
 import { ClientSafeProvider, getProviders, signIn } from 'next-auth/react';
+import Link from 'next/link';
 import React, { ReactElement } from 'react';
 
 import { AuthForm } from '@components/auth-form/auth-form';
@@ -41,7 +42,7 @@ const LoginPage = ({ googleProvider }: TLoginPageProps) => {
                       redirect: false,
                     })
                   }
-                  className="w-full flex items-center justify-center"
+                  className="w-full flex items-center font-semibold justify-center"
                   variant="subtle"
                 >
                   <GoogleIconSolid className="h-5 w-5" />

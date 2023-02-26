@@ -1,1 +1,1 @@
-export { createUniqueSlugByName } from './auth-controller';
+export * from './auth-controller';

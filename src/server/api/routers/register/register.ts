@@ -1,24 +1,11 @@
-import { z } from 'zod';
+import { registerSchema } from '@validations/auth-user-schema';
 
-import {
-  createTRPCRouter,
-  protectedProcedure,
-  publicProcedure,
-} from '../../trpc';
-import { ZHelloInput } from './types';
+import { registerController } from '@server/api/controllers';
+
+import { createTRPCRouter, publicProcedure } from '../../trpc';
 
 export const registerRouter = createTRPCRouter({
-  hello: publicProcedure.input(ZHelloInput).query(({ input }) => {
-    return {
-      greeting: `Hello ${input.text}`,
-    };
-  }),
-
-  // getAll: publicProcedure.query(({ctx}) => {
-  //   return ctx.prisma.example.findMany();
-  // }),
-
-  getSecretMessage: protectedProcedure.query(() => {
-    return 'you can now see this secret message!';
-  }),
+  authRegister: publicProcedure
+    .input(registerSchema)
+    .mutation(({ input }) => registerController(input)),
 });

@@ -1,5 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signIn } from 'next-auth/react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
@@ -16,6 +18,8 @@ import { loginSchema, registerSchema } from '@validations/auth-user-schema';
 
 import { TRegister } from '@interfaces/auth-user';
 
+import { api } from '@utils/api';
+
 type TAuthFormProps = {
   mode: 'register' | 'login';
 };
@@ -27,7 +31,17 @@ type TAuthForm = TRegister & {
 
 const AuthForm: FC<TAuthFormProps> = ({ mode }) => {
   const isLoginPage = mode === 'login';
+  const router = useRouter();
   const authFormValidationSchema = isLoginPage ? loginSchema : registerSchema;
+  const { mutate, isLoading } = api.register.authRegister.useMutation({
+    onSuccess: data => {
+      toast.success(data?.message, { autoClose: false, delay: 400 });
+      router?.push(data?.redirect_url);
+    },
+    onError: (error, variables, context) => {
+      toast.error(error?.message);
+    },
+  });
 
   const {
     register,
@@ -37,35 +51,38 @@ const AuthForm: FC<TAuthFormProps> = ({ mode }) => {
     resolver: zodResolver(authFormValidationSchema),
   });
 
+  const onSignIn = async (data: TAuthForm) => {
+    const { password, email } = data;
+    const response = await signIn('credentials', {
+      email,
+      password,
+      redirect: false,
+      callbackUrl: '/dashboard',
+    });
+
+    console.log(response);
+
+    if (response?.error) {
+      //next-auth add `Error:` prefix on error messages.
+      const message = response?.error?.split(':')[1]?.trim();
+      toast.error(message);
+    }
+    if (response?.ok) {
+      toast.success('Nous sommes content de vous revoir !');
+      router?.push('/dashboard');
+    }
+  };
+  const onRegister = async (data: TAuthForm) => {
+    await mutate({
+      ...data,
+    });
+  };
+
   const onSubmit = async (data: TAuthForm) => {
-    const { password, email, isProvider, isCustomer, firstName, lastName } =
-      data;
-
     if (isLoginPage) {
-      const response = await signIn('credentials', {
-        email,
-        password,
-        callbackUrl: '/dashboard',
-        redirect: false,
-      });
-
-      if (response?.error) {
-        toast.error(response?.error);
-      }
+      onSignIn(data);
     } else {
-      const response = await signIn('credentials', {
-        email,
-        password,
-        isProvider,
-        isCustomer,
-        firstName,
-        lastName,
-        callbackUrl: '/dashboard',
-        redirect: false,
-      });
-      if (response?.error) {
-        toast.error(response?.error);
-      }
+      onRegister(data);
     }
   };
 
@@ -166,9 +183,36 @@ const AuthForm: FC<TAuthFormProps> = ({ mode }) => {
           </div>
         </>
       )}
-      <Button variant="primary" className="w-full" loading={isSubmitting}>
-        Connexion
+      <Button
+        variant="primary"
+        className="w-full"
+        loading={isSubmitting || isLoading}
+      >
+        {!isLoginPage ? 'Inscription' : 'Connexion'}
       </Button>
+      {!isLoginPage ? (
+        <p>
+          Déjà membre ?{' '}
+          <Link
+            passHref
+            href="/login"
+            className="font-semibold text-secondary-500 hover:underline"
+          >
+            Connectez-vous à votre compte
+          </Link>
+        </p>
+      ) : (
+        <p>
+          Pas encore membre ?{' '}
+          <Link
+            passHref
+            href="/register"
+            className="font-semibold text-secondary-500 hover:underline"
+          >
+            Créez votre compte
+          </Link>
+        </p>
+      )}
 
       {!isLoginPage && (
         <HelperMessage className="text-gray-500">
@@ -176,9 +220,10 @@ const AuthForm: FC<TAuthFormProps> = ({ mode }) => {
           politique de confidentialité
         </HelperMessage>
       )}
+
       <HelperMessage>
-        Vos données personnelles (email et nom d'utilisateur) ne sont utilisées
-        qu'à des fins d'authentification et ne sont pas partagées avec des
+        Vos données personnelles (email et mot de passe) ne seront utilisées
+        qu'à des fins d'authentification et ne seront pas partagées avec des
         tiers.
       </HelperMessage>
     </form>
