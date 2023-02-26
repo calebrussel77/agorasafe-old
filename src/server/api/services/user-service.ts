@@ -10,7 +10,7 @@ export async function getUserBySlug(slug: string) {
   return await prisma.user.findUnique({ where: { slug } });
 }
 
-export async function createUser(userInfos: User) {
+export async function createUser(userInfos: any) {
   return await prisma.user.create({
     data: {
       ...userInfos,

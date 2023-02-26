@@ -1,1 +1,1 @@
-export { createUser, getUserByEmail, getUserBySlug } from './user-service';
+export * from './user-service';

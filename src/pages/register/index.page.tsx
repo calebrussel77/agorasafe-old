@@ -43,11 +43,11 @@ const RegisterPage = ({ googleProvider }: TRegisterPageProps) => {
                       redirect: false,
                     })
                   }
-                  className="w-full flex items-center justify-center"
+                  className="w-full flex font-semibold items-center justify-center"
                   variant="subtle"
                 >
                   <GoogleIconSolid className="h-5 w-5" />
-                  <span>Se connecter avec Google</span>
+                  <span>S'inscrire avec Google</span>
                 </Button>
               </div>
             </div>

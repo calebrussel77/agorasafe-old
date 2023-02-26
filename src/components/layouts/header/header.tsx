@@ -24,13 +24,13 @@ export const headerNavigations = [
     href: '/market',
     icon: HiOutlineSquares2X2,
   },
-  {
-    name: 'Contact',
-    description: 'Read our latest news and articles',
-    icon: HiOutlinePhone,
+  // {
+  //   name: 'Contact',
+  //   description: 'Read our latest news and articles',
+  //   icon: HiOutlinePhone,
 
-    href: '/contact',
-  },
+  //   href: '/contact',
+  // },
 ];
 
 const options = {
@@ -73,7 +73,7 @@ const Header = () => {
             >
               <p className="text-sm">
                 La plateforme Agorasafe est actuellement en cours de
-                developpement. si vous souhaitez être tenu informé de son
+                developpement. si vous souhaitez être tenu informé dès son
                 lancement,{' '}
                 <SectionMessageAction onClick={dialog.show}>
                   Cliquez ici
