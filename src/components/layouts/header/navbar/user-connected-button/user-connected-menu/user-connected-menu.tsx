@@ -25,10 +25,13 @@ const UserConnectedMenu: FC<UserConnectedMenuProps> = ({ popover, hide }) => {
     <Popover
       {...{ ...popover, state: popover.state }}
       aria-label={`Click to open ${session?.user?.name} menu options`}
+      className="max-w-[310px] sm:max-w-[390px]"
+      preventBodyScroll
     >
       <Popover.Content>
         <div>
           <MenuItem
+            className="px-1"
             iconBefore={
               <Avatar
                 src={session?.user?.avatar}

@@ -4,7 +4,12 @@ import slugify from 'slugify';
 
 import { TLogin, TRegister } from '@interfaces/auth-user';
 
-import { createUser, getUserByEmail, getUserBySlug } from '../services';
+import {
+  createUser,
+  exclude,
+  getUserByEmail,
+  getUserBySlug,
+} from '../services';
 
 export const createUniqueSlugByName = async (name: string) => {
   try {
@@ -15,8 +20,12 @@ export const createUniqueSlugByName = async (name: string) => {
     }
     return uniqueSlug;
   } catch (e) {
-    console.log(e, 'From provider signIn');
-    return null;
+    console.log(e);
+    throw new TRPCError({
+      code: 'INTERNAL_SERVER_ERROR',
+      message:
+        'Une erreur inattendue est survenue, veuillez réessayer plus tard ',
+    });
   }
 };
 
@@ -24,7 +33,6 @@ export const loginController = async (loginCredentials: TLogin) => {
   const { email, password } = loginCredentials;
 
   const userFound = await getUserByEmail(email);
-  console.log(userFound);
 
   if (!userFound) {
     throw new Error('Vos identifiants sont incorrects.');
@@ -38,7 +46,7 @@ export const loginController = async (loginCredentials: TLogin) => {
     if (!match) {
       throw new Error('Identifiants incorrects. veuillez réessayer.');
     }
-    return userFound;
+    return exclude({ ...userFound, id: userFound.id }, ['password']);
   }
 };
 
@@ -56,20 +64,23 @@ export const registerController = async (registerCredentials: TRegister) => {
       const uniqueSlug = await createUniqueSlugByName(name);
 
       const userCreated = await createUser({
-        first_name: firstName,
-        last_name: lastName,
-        email: email,
-        is_provider: isProvider,
-        is_purchaser: isCustomer,
-        password: hashedPassword,
-        slug: uniqueSlug,
+        data: {
+          first_name: firstName,
+          last_name: lastName,
+          email: email,
+          is_provider: isProvider,
+          is_purchaser: isCustomer,
+          password: hashedPassword,
+          slug: uniqueSlug,
+        },
       });
+      const UserName = `${userCreated?.first_name} ${userCreated?.last_name}`;
+
       return {
-        user: userCreated,
+        user: exclude(userCreated, ['password']),
         success: true,
         redirect_url: '/login',
-        message:
-          "Votre compte a bien été créer, veuillez vous connecter afin d'accéder à votre espace personnel.",
+        message: `Votre compte a bien été crée ${UserName}, veuillez vous connecter afin d'accéder à votre espace personnel.`,
       };
     }
   } catch (e) {

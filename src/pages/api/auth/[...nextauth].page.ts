@@ -5,44 +5,60 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 import { v4 as uuidv4 } from 'uuid';
 
-import { loginSchema, registerSchema } from '@validations/auth-user-schema';
+import { loginSchema } from '@validations/auth-user-schema';
 
 import {
   createUniqueSlugByName,
   loginController,
-  registerController,
 } from '@server/api/controllers/auth-controller';
 import { prisma } from '@server/db';
 
 import { env } from '../../../env/server.mjs';
 
 export const authOptions: NextAuthOptions = {
+  adapter: PrismaAdapter(prisma),
   // Include user infos on session
   callbacks: {
-    session({ session, user }: any) {
-      const currentUser = {
-        id: user.id,
-        name: `${user.first_name} ${user.last_name}`,
-        email: user?.email,
-        slug: user?.slug,
-        is_provider: user?.is_provider,
-        is_purchaser: user.is_purchaser,
-        is_home_service_provider: user.is_home_service_provider,
-        avatar: user.avatar,
-        provider: 'google',
+    async session({ session, token, user }: any) {
+      let newSession;
+      newSession = {
+        id: token.id,
+        name: token.name,
+        email: token.email,
+        slug: token.slug,
+        is_provider: token.is_provider,
+        is_purchaser: token.is_purchaser,
+        is_home_service_provider: token.is_home_service_provider,
+        avatar: token.avatar,
+        provider: token.provider,
       };
-      session.user = currentUser;
+      session.user = newSession;
       return session;
     },
+    async jwt({ token, user, account, profile, isNewUser }: any) {
+      if (user) {
+        token.id = user.id;
+        token.name = `${user.first_name} ${user.last_name}`;
+        token.email = user?.email;
+        token.slug = user?.slug;
+        token.is_provider = user?.is_provider;
+        token.is_purchaser = user.is_purchaser;
+        token.is_home_service_provider = user.is_home_service_provider;
+        token.avatar = user.avatar;
+        token.provider = account.type;
+      }
+      return token;
+    },
   },
-  adapter: PrismaAdapter(prisma),
   providers: [
     GoogleProvider({
+      allowDangerousEmailAccountLinking: true,
       clientId: env.GOOGLE_CLIENT_ID,
       clientSecret: env.GOOGLE_CLIENT_SECRET,
       async profile(profile) {
         const name = profile?.name;
         const uniqueSlug = await createUniqueSlugByName(name);
+
         return {
           id: uuidv4(),
           first_name: profile.given_name,
@@ -68,6 +84,7 @@ export const authOptions: NextAuthOptions = {
           const user = await loginController(credentials);
           return user;
         } catch (e) {
+          console.log({ e }, 'login error login');
           throw new Error(e);
         }
       },
@@ -77,6 +94,15 @@ export const authOptions: NextAuthOptions = {
     signIn: '/login',
     error: '/login',
   },
+  debug: env.NODE_ENV === 'development',
+  session: {
+    strategy: 'jwt',
+  },
+
+  jwt: {
+    secret: env.NEXTAUTH_JWT_SECRET,
+  },
+  // secret: env.NEXTAUTH_SECRET,
 };
 
 export default NextAuth(authOptions);

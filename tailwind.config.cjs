@@ -34,7 +34,7 @@ module.exports = {
         },
       },
       screens: {
-        'max-xs': { max: '440px' },
+        'max-xs': { max: '400px' },
       },
     },
   },

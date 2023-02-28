@@ -40,6 +40,30 @@ const userConnectedLinks = [
     description: `Jean Marie vous a attribué une note de "5/5" pour le job effectué "Coursier à domicile" `,
     href: '/#',
   },
+  {
+    Icon: TbBookmarks,
+    title: `Il y'a 02 Mois`,
+    description: `Jean Marie vous a attribué une note de "5/5" pour le job effectué "Coursier à domicile" `,
+    href: '/#',
+  },
+  {
+    Icon: TbBookmarks,
+    title: `Il y'a 02 Mois`,
+    description: `Jean Marie vous a attribué une note de "5/5" pour le job effectué "Coursier à domicile" `,
+    href: '/#',
+  },
+  {
+    Icon: TbBookmarks,
+    title: `Il y'a 02 Mois`,
+    description: `Jean Marie vous a attribué une note de "5/5" pour le job effectué "Coursier à domicile" `,
+    href: '/#',
+  },
+  {
+    Icon: TbBookmarks,
+    title: `Il y'a 02 Mois`,
+    description: `Jean Marie vous a attribué une note de "5/5" pour le job effectué "Coursier à domicile" `,
+    href: '/#',
+  },
 ];
 
 const UserNotificationsMenu: FC<UserNotificationsMenuProps> = ({
@@ -52,13 +76,15 @@ const UserNotificationsMenu: FC<UserNotificationsMenuProps> = ({
     <Popover
       {...{ ...popover, state: popover.state }}
       aria-label={`Click to open ${session?.user?.name} menu options`}
+      className="max-w-[310px] sm:max-w-[390px]"
+      preventBodyScroll
     >
       <Popover.Content>
         <div>
           <MenuItem hovered={false} description="Accédez à mes notifications">
             <h3 className="font-semibold">Notifications</h3>
           </MenuItem>
-          <hr className="my-3 border-gray-200" />
+          <hr className="mb-3 border-gray-200" />
           <section className="space-y-1">
             {userConnectedLinks?.map(item => (
               <MenuItem
