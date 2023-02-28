@@ -17,22 +17,6 @@ import { SubscriptionModal } from '../../subscription-modal/subscription-modal';
 import { MobilePopover } from './mobile-popover/mobile-popover';
 import { Navbar } from './navbar/navbar';
 
-export const headerNavigations = [
-  {
-    name: 'Explorer',
-    description: 'A complete API reference for our libraries',
-    href: '/market',
-    icon: HiOutlineSquares2X2,
-  },
-  // {
-  //   name: 'Contact',
-  //   description: 'Read our latest news and articles',
-  //   icon: HiOutlinePhone,
-
-  //   href: '/contact',
-  // },
-];
-
 const options = {
   rootMargin: '-300px 0px 0px 0px',
 };
@@ -80,7 +64,7 @@ const Header = () => {
                 </SectionMessageAction>
               </p>
             </SectionMessage>
-            <Navbar navigations={headerNavigations} />
+            <Navbar />
             <Transition
               as={Fragment}
               enter="duration-150 ease-out"
@@ -94,10 +78,7 @@ const Header = () => {
                 focus
                 className="absolute z-50 inset-0 h-full w-full bg-white top-0 origin-top transform p-2 transition lg:hidden"
               >
-                <MobilePopover
-                  navigations={headerNavigations}
-                  onClose={close}
-                />
+                <MobilePopover onClose={close} />
               </Popover.Panel>
             </Transition>
           </>

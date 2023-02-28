@@ -2,7 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
@@ -12,6 +12,7 @@ import { Checkbox } from '@components/lib/checkbox/checkbox';
 import { HelperMessage } from '@components/lib/helper-message/helper-message';
 import { Input } from '@components/lib/input/input';
 import { Label } from '@components/lib/label/label';
+import { Spinner } from '@components/lib/spinner/spinner';
 import { VariantMessage } from '@components/lib/variant-message/variant-message';
 
 import { loginSchema, registerSchema } from '@validations/auth-user-schema';
@@ -33,12 +34,14 @@ const AuthForm: FC<TAuthFormProps> = ({ mode }) => {
   const isLoginPage = mode === 'login';
   const router = useRouter();
   const authFormValidationSchema = isLoginPage ? loginSchema : registerSchema;
+  const [loading, setLoading] = useState(false);
   const { mutate, isLoading } = api.register.authRegister.useMutation({
     onSuccess: data => {
-      toast.success(data?.message, { autoClose: false, delay: 400 });
+      toast.success(data?.message, { autoClose: false, delay: 700 });
       router?.push(data?.redirect_url);
     },
     onError: (error, variables, context) => {
+      console.log(error);
       toast.error(error?.message);
     },
   });
@@ -53,6 +56,7 @@ const AuthForm: FC<TAuthFormProps> = ({ mode }) => {
 
   const onSignIn = async (data: TAuthForm) => {
     const { password, email } = data;
+    setLoading(true);
     const response = await signIn('credentials', {
       email,
       password,
@@ -60,18 +64,22 @@ const AuthForm: FC<TAuthFormProps> = ({ mode }) => {
       callbackUrl: '/dashboard',
     });
 
-    console.log(response);
-
     if (response?.error) {
       //next-auth add `Error:` prefix on error messages.
       const message = response?.error?.split(':')[1]?.trim();
       toast.error(message);
+      setLoading(false);
     }
     if (response?.ok) {
-      toast.success('Nous sommes content de vous revoir !');
       router?.push('/dashboard');
+      setLoading(false);
+      toast.success('Nous sommes content de vous revoir !', {
+        delay: 800,
+        autoClose: false,
+      });
     }
   };
+
   const onRegister = async (data: TAuthForm) => {
     await mutate({
       ...data,
@@ -88,6 +96,8 @@ const AuthForm: FC<TAuthFormProps> = ({ mode }) => {
 
   return (
     <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+      {loading && <LoadingPagePlaceholder />}
+
       {!isLoginPage && (
         <div className="grid gap-y-6 lg:grid-cols-2 lg:gap-x-3">
           <Field
@@ -231,3 +241,11 @@ const AuthForm: FC<TAuthFormProps> = ({ mode }) => {
 };
 
 export { AuthForm };
+
+const LoadingPagePlaceholder = () => {
+  return (
+    <div className="fixed inset-0 z-50 flex h-full w-full items-center justify-center bg-gray-900 bg-opacity-50 backdrop-blur-sm backdrop-filter transition-all duration-200 ease-in-out">
+      <Spinner className="relative h-12 w-12" />
+    </div>
+  );
+};

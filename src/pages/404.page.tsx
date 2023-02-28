@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import { FaChevronRight } from 'react-icons/fa';
-import { FaChartArea, FaInbox, FaPenSquare, FaTrash } from 'react-icons/fa';
 
 import { LogoIcon } from '@components/icons/logo-icon/logo-icon';
-import { headerNavigations } from '@components/layouts/header/header';
+
+import { headerLeftNavigations } from '@constants/index';
 
 import { HomeBackground } from '../components/home-background/home-background';
 
@@ -100,7 +100,7 @@ export default function Example() {
               role="list"
               className="mt-4 divide-y divide-gray-200 border-t border-b border-gray-200"
             >
-              {headerNavigations.map((link, linkIdx) => (
+              {headerLeftNavigations.map((link, linkIdx) => (
                 <li
                   key={linkIdx}
                   className="relative flex items-start space-x-4 py-6"

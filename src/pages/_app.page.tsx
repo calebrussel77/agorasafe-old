@@ -56,8 +56,8 @@ const MyApp: AppType<{ session: Session | null }> = ({
   return (
     <AppProviders>
       <ToastContainer
-        position="top-right"
-        autoClose={5000}
+        position="bottom-right"
+        autoClose={6000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -65,7 +65,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="dark"
+        theme="light"
       />
       <SessionProvider session={session}>
         <DefaultSeo />

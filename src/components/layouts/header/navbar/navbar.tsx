@@ -2,45 +2,28 @@ import { Popover } from '@headlessui/react';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { FC, useRef } from 'react';
-import { HiOutlineMenuAlt1, HiOutlinePlus } from 'react-icons/hi';
+import { HiOutlineMenu, HiOutlinePlus } from 'react-icons/hi';
 import { Else, If, Then } from 'react-if';
 import Skeleton from 'react-loading-skeleton';
 
 import { GlobalSearchModal } from '@components/global-search-modal/global-search-modal';
 import { LogoIcon } from '@components/icons/logo-icon/logo-icon';
+import { LogoSymbolIcon } from '@components/icons/logo-symbol-icon/logo-symbol-icon';
 import { ActiveLink } from '@components/lib/active-link/active-link';
 import { Button } from '@components/lib/button/button';
 import { useModalState } from '@components/lib/modal/modal';
 
+import {
+  headerLeftNavigations,
+  headerRightNavigations,
+} from '@constants/index';
+
 import { UserConnectedButton } from './user-connected-button/user-connected-button';
 import { UserNotificationsButton } from './user-notifications-button/user-notifications-button';
 
-type navigationItem = {
-  name: string;
-  href: string;
-  icon?: any;
-};
+type NavbarProps = {};
 
-type NavbarProps = {
-  navigations: navigationItem[];
-};
-
-export const rightSideLinks = [
-  {
-    title: 'Proposer mes services',
-    href: '/become-provider',
-  },
-  {
-    title: 'Connexion',
-    href: '/login',
-  },
-  // {
-  //   title: 'Inscription',
-  //   href: '/register',
-  // },
-];
-
-const Navbar: FC<NavbarProps> = ({ navigations }) => {
+const Navbar: FC<NavbarProps> = () => {
   const dialog = useModalState();
   const initialFocusRef = useRef<any>(null);
   const { data: session, status } = useSession();
@@ -57,17 +40,20 @@ const Navbar: FC<NavbarProps> = ({ navigations }) => {
             {isLoadingSession ? (
               <Skeleton className="h-8 w-16" />
             ) : (
-              <LogoIcon className="h-4 md:h-5 w-auto" />
+              <>
+                <LogoIcon className="max-xs:hidden flex h-4 md:h-5 w-auto" />
+                <LogoSymbolIcon className="max-xs:flex max-xs:h-8 w-auto hidden" />
+              </>
             )}
             <span className="sr-only">Agorasafe</span>
           </Link>
         </div>
         <div className="hidden gap-6 md:ml-3 md:flex items-center">
           {isLoadingSession
-            ? navigations.map(item => (
+            ? headerLeftNavigations.map(item => (
                 <Skeleton key={item?.name} className="h-8 w-12" />
               ))
-            : navigations.map(item => (
+            : headerLeftNavigations.map(item => (
                 <Link
                   key={item.name}
                   href={item.href}
@@ -96,9 +82,9 @@ const Navbar: FC<NavbarProps> = ({ navigations }) => {
           onCloseDialog={() => {}}
         />
       </div>
-      <div className="flex justify-end items-center gap-4 max-xs:w-auto">
+      <div className="flex justify-end items-center gap-4 max-xs:w-1/3">
         {isLoadingSession ? (
-          rightSideLinks.map(element => (
+          headerRightNavigations.map(element => (
             <Skeleton key={element?.title} className="h-8 w-12" />
           ))
         ) : (
@@ -117,12 +103,12 @@ const Navbar: FC<NavbarProps> = ({ navigations }) => {
                   {isLoadingSession ? (
                     <Skeleton className="h-8 w-8" />
                   ) : (
-                    <HiOutlineMenuAlt1 className="h-8 w-8" aria-hidden="true" />
+                    <HiOutlineMenu className="h-8 w-8" aria-hidden="true" />
                   )}
                 </Popover.Button>
               </div>
               <div className="hidden md:flex">
-                {rightSideLinks?.map(element => (
+                {headerRightNavigations?.map(element => (
                   <ActiveLink
                     activeClassName="text-primary-500 bg-primary-100 "
                     href={element?.href}

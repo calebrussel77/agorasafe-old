@@ -1,5 +1,5 @@
 // @ts-check
-import {z} from 'zod';
+import { z } from 'zod';
 
 /**
  * Specify your server-side environment variables schema here.
@@ -21,6 +21,7 @@ export const serverSchema = z.object({
   ),
   GOOGLE_CLIENT_ID: z.string(),
   GOOGLE_CLIENT_SECRET: z.string(),
+  NEXTAUTH_JWT_SECRET: z.string(),
 });
 
 /**
@@ -35,6 +36,7 @@ export const serverEnv = {
   NEXTAUTH_URL: process.env.NEXTAUTH_URL,
   GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
   GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
+  NEXTAUTH_JWT_SECRET: process.env.NEXTAUTH_JWT_SECRET,
 };
 
 /**
