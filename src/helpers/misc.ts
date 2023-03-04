@@ -9,7 +9,7 @@ export const randomBetween = (min: number, max: number) => {
  * @param l the lightness (l) of returned color(a number between 0 and 100)
  * @returns the hsl pastel color of the string passed
  */
-export function stringToHslColor(str = 'random name', s = 30, l = 80) {
+export function stringToHslColor(str = 'random name', s = 90, l = 30) {
   var hash = 0;
   for (var i = 0; i < str?.length; i++) {
     hash = str?.charCodeAt(i) + ((hash << 5) - hash);

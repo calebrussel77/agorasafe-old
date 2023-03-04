@@ -2,8 +2,11 @@ import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { Session } from 'next-auth';
 import { FC } from 'react';
 import { ReactElement } from 'react';
+import { toast } from 'react-toastify';
 
 import { AuthLayout } from '@components/layouts/auth-layouts';
+import { Button } from '@components/lib/button/button';
+import { Notification, NotificationAction } from '@components/lib/notification';
 
 import { NextPageWithLayout } from '@pages/_app.page';
 
@@ -17,10 +20,28 @@ type TDashboardPageProps = NextPageWithLayout &
   FC<InferGetServerSidePropsType<typeof getServerSideProps>>;
 
 const DashboardPage: TDashboardPageProps = ({ data }) => {
+  const displayToast = () => {
+    toast(
+      <Notification
+        variant="success"
+        title="Nous sommes content de vous revoir !"
+        description="Béneficier d'un large éventail de catalogue mis à votre disposition sur agorasafe et toute la plateforme du monde entier"
+        actions={[
+          <NotificationAction key={1} onClick={() => {}} isPrimary>
+            View more
+          </NotificationAction>,
+          <NotificationAction key={2} onClick={() => {}}>
+            Undo
+          </NotificationAction>,
+        ]}
+      />
+    );
+  };
   return (
     <ContentWrapper>
       <ContentTitle>Tableau de bord</ContentTitle>
-      <div className="mt-3">
+      <div className="mt-6">
+        <Button onClick={displayToast}>Je suis un toast</Button>
         <p>
           Je suis les settings. Lorem ipsum dolor sit amet consectetur
           adipisicing elit. Sit sapiente.

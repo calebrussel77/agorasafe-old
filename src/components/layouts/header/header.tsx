@@ -59,7 +59,7 @@ const Header = () => {
                 La plateforme Agorasafe est actuellement en cours de
                 developpement. si vous souhaitez être tenu informé dès son
                 lancement,{' '}
-                <SectionMessageAction onClick={dialog.show}>
+                <SectionMessageAction onClick={dialog.show} isPrimary>
                   Cliquez ici
                 </SectionMessageAction>
               </p>

@@ -2,13 +2,17 @@ import { type VariantProps, cva } from 'class-variance-authority';
 import React, { forwardRef } from 'react';
 import { twMerge } from 'tailwind-merge';
 
-import { Variant, getVariantColor } from '@helpers/variants';
+import {
+  Variant,
+  getVariantBorderColor,
+  getVariantColor,
+} from '@helpers/variants';
 
 import { useMergeRefs } from '@hooks/use-merge-refs/use-merge-refs';
 import { useFocus } from '@hooks/useFocus/useFocus';
 
 const checkboxToken = cva(
-  'rounded border-gray-300 disabled:bg-gray-300 disabled:cursor-not-allowed',
+  'rounded border border-gray-300 disabled:bg-gray-300 disabled:cursor-not-allowed',
   {
     variants: {
       appareance: {
@@ -58,21 +62,22 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxGlobalProps>(
   ) => {
     const { elementRef } = useFocus(autoFocus);
     const refs = useMergeRefs(elementRef, ref);
-
+    const hasError = variant === 'danger';
     return (
       <input
         ref={refs}
         disabled={disabled || loading}
         autoFocus={autoFocus}
+        style={{ borderColor: hasError && 'red' }}
         type="checkbox"
-        aria-invalid={variant === 'danger' ? 'true' : 'false'}
+        aria-invalid={hasError ? 'true' : 'false'}
         className={twMerge(
           checkboxToken({
             appareance,
             size,
           }),
           className,
-          variant && getVariantColor(variant)
+          getVariantBorderColor(variant)
         )}
         {...props}
       />

@@ -153,7 +153,6 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
             flexDirection: 'columns',
             flexShrink: '0',
             fontSize: avatarFontSize,
-            fontWeight: 'bold',
             borderRadius:
               shape === 'circle'
                 ? '9999px'
@@ -184,7 +183,9 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
             />
           )}
           {(!src || error) && (
-            <h3 className="uppercase text-center">{getInitials(name)}</h3>
+            <h3 className="uppercase text-center text-white">
+              {getInitials(name)}
+            </h3>
           )}
         </Component>
         {children && children}

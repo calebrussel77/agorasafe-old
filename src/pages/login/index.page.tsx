@@ -14,6 +14,8 @@ import { MiddleSeparator } from '@components/lib/middle-separator/middle-separat
 
 import { redirectIfAuth } from '@utils/redirect-If-auth';
 
+import { LoginForm } from './__components/login-form/login-form';
+
 type TLoginPageProps = {
   googleProvider: ClientSafeProvider;
 };
@@ -55,7 +57,7 @@ const LoginPage = ({ googleProvider }: TLoginPageProps) => {
             </div>
           </div>
           <div className="mt-6">
-            <AuthForm mode="login" />
+            <LoginForm />
           </div>
         </div>
       </div>

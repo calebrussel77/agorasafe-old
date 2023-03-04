@@ -7,6 +7,7 @@
 @import '../components/lib/label/label.style.css';
 @import './custom_scrollbar.css';
 @import './input_reset.css';
+@import './react_toastify.css';
 
 :root {
   /* #354cd0 => blue */

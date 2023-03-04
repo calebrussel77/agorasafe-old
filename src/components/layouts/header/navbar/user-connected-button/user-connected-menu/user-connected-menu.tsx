@@ -50,9 +50,7 @@ const UserConnectedMenu: FC<UserConnectedMenuProps> = ({ popover, hide }) => {
               .filter(el => el.id !== 3)
               ?.map(item => {
                 const href =
-                  item?.id === 5
-                    ? `/dashboard/u/${session?.user?.slug}`
-                    : item?.href;
+                  item?.id === 5 ? `/u/${session?.user?.slug}` : item?.href;
                 const isActiveLink = router?.pathname === href;
 
                 return (

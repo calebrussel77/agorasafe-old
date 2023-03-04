@@ -12,6 +12,7 @@ import { requireAuth } from '@utils/require-auth';
 import { ContentTitle } from '../__components/content-title/content-title';
 import { ContentWrapper } from '../__components/content-wrapper/content-wrapper';
 import { Sidebar } from '../__components/sidebar/sidebar';
+import UpdateInfos from './__components/personal-infos-form/personal-infos-form';
 
 type TNotificationsPageProps = NextPageWithLayout &
   FC<InferGetServerSidePropsType<typeof getServerSideProps>>;
@@ -19,12 +20,17 @@ type TNotificationsPageProps = NextPageWithLayout &
 const NotificationsPage: TNotificationsPageProps = ({ data }) => {
   return (
     <ContentWrapper>
-      <ContentTitle>Settings</ContentTitle>
-      <div className="mt-3">
-        <p>
-          Je suis les settings. Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Sit sapiente.
-        </p>
+      <ContentTitle
+        description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa nesciunt
+      reprehenderit placeat cupiditate earum neque aliquid exercitationem
+      recusandae? Quae maiores laboriosam, impedit ullam quidem unde animi sequi
+      voluptates sapiente optio."
+      >
+        Paramètres
+      </ContentTitle>
+
+      <div className="mt-6">
+        <UpdateInfos />
       </div>
     </ContentWrapper>
   );

@@ -9,13 +9,13 @@ const Spinner = forwardRef<HTMLDivElement, { className?: string }>(
 
 Spinner.displayName = 'Spinner';
 
-function FullSpinner({ className = 'w-9 h-9' }) {
+const FullSpinner = () => {
   return (
-    <div className="fixed inset-0 flex z-10 justify-center items-center">
-      <div className={clsx('loader relative z-30', className)} />
+    <div className="fixed inset-0 z-50 flex h-full w-full items-center justify-center bg-gray-900 bg-opacity-50 backdrop-blur-sm backdrop-filter transition-all duration-200 ease-in-out">
+      <Spinner className="relative h-12 w-12" />
     </div>
   );
-}
+};
 
 const BtnSpinner = ({ className = '' }) => (
   <svg
