@@ -3,7 +3,6 @@ import { GetServerSideProps } from 'next';
 import { ClientSafeProvider, getProviders, signIn } from 'next-auth/react';
 import React, { ReactElement } from 'react';
 
-import { AuthForm } from '@components/auth-form/auth-form';
 import { HomeBackground } from '@components/home-background/home-background';
 import { GoogleIconSolid } from '@components/icons/GoogleIconSolid';
 import { LogoIcon } from '@components/icons/logo-icon/logo-icon';
@@ -12,6 +11,8 @@ import { Button } from '@components/lib/button/button';
 import { MiddleSeparator } from '@components/lib/middle-separator/middle-separator';
 
 import { redirectIfAuth } from '@utils/redirect-If-auth';
+
+import { RegisterForm } from './__components/register-form/register-form';
 
 type TRegisterPageProps = {
   googleProvider: ClientSafeProvider;
@@ -57,7 +58,7 @@ const RegisterPage = ({ googleProvider }: TRegisterPageProps) => {
           </div>
 
           <div className="mt-6">
-            <AuthForm mode="register" />
+            <RegisterForm />
           </div>
         </div>
       </div>

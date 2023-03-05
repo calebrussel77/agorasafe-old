@@ -20,12 +20,7 @@ export const createUniqueSlugByName = async (name: string) => {
     }
     return uniqueSlug;
   } catch (e) {
-    console.log(e);
-    throw new TRPCError({
-      code: 'INTERNAL_SERVER_ERROR',
-      message:
-        'Une erreur inattendue est survenue, veuillez réessayer plus tard ',
-    });
+    throw new TRPCError(e);
   }
 };
 
@@ -57,7 +52,10 @@ export const registerController = async (registerCredentials: TRegister) => {
   try {
     const userFound = await getUserByEmail(email);
     if (userFound) {
-      throw new Error('Cet utilisateur existe déjà. Veuillez vous connecter.');
+      throw new TRPCError({
+        code: 'FORBIDDEN',
+        message: 'Cet utilisateur existe déjà. Veuillez vous connecter. ',
+      });
     } else {
       const name = `${firstName} ${lastName}`;
       const hashedPassword = await bcrypt.hash(password, 10);
@@ -84,12 +82,6 @@ export const registerController = async (registerCredentials: TRegister) => {
       };
     }
   } catch (e) {
-    console.log(e);
-    // throw new TRPCError({ code: 'UNAUTHORIZED' });
-    throw new TRPCError({
-      code: 'INTERNAL_SERVER_ERROR',
-      message:
-        'Une erreur inattendue est survenue, veuillez réessayer plus tard ',
-    });
+    throw new TRPCError(e);
   }
 };

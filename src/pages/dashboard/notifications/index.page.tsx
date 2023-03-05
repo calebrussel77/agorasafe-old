@@ -20,7 +20,7 @@ const NotificationsPage: TNotificationsPageProps = ({ data }) => {
   return (
     <ContentWrapper>
       <ContentTitle>Notifications</ContentTitle>
-      <div className="mt-3">
+      <div className="mt-6">
         <p>
           Je suis les notifications. Lorem ipsum dolor sit amet consectetur
           adipisicing elit. Sit sapiente.

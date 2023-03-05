@@ -1,4 +1,5 @@
 import React, { forwardRef } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 import { FieldGroup } from '../field-group/field-group';
 import { Radio, RadioProps } from '../radio/radio';
@@ -8,12 +9,14 @@ export interface RadioGroupOptions {
   flexDirection?: string;
   options?: {
     label: string | number;
-    value: string | number;
+    value: string | number | boolean;
     hint?: string;
   }[];
   renderOption?: React.ElementType;
+  controlled?: boolean;
   value?: string;
 }
+
 export type RadioGroupProps = React.HTMLProps<HTMLInputElement> &
   RadioGroupOptions &
   RadioProps;
@@ -28,7 +31,9 @@ export const RadioGroup = forwardRef<HTMLInputElement, RadioGroupProps>(
       maxWidth,
       renderOption: Component = Radio,
       required,
+      className,
       value,
+      controlled,
       ...rest
     },
     ref
@@ -39,12 +44,12 @@ export const RadioGroup = forwardRef<HTMLInputElement, RadioGroupProps>(
         : 'flex flex-row gap-4';
 
     return (
-      <FieldGroup label={label} required={required}>
-        <div className={wrappperClassName}>
+      <FieldGroup className="w-full" label={label} required={required}>
+        <div className={twMerge(wrappperClassName, className)}>
           {options.map(option => (
             <Component
               ref={ref}
-              // checked={option.value === value}
+              checked={controlled ? option.value === value : undefined}
               hint={option.hint}
               id={`${name}.${option.value}`}
               key={option.value}

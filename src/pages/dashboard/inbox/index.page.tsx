@@ -20,7 +20,7 @@ const InboxPage: TInboxPageProps = ({ data }) => {
   return (
     <ContentWrapper>
       <ContentTitle>Messages</ContentTitle>
-      <div className="mt-3">
+      <div className="mt-6">
         <p>
           Je suis mes messages. Lorem ipsum dolor sit amet consectetur
           adipisicing elit. Sit sapiente.

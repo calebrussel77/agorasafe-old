@@ -2,6 +2,7 @@
 import clsx from 'clsx';
 import { Fragment, forwardRef, useId } from 'react';
 import React from 'react';
+import { useFormContext } from 'react-hook-form';
 import { twMerge } from 'tailwind-merge';
 
 import { wrapChildren } from '@helpers/wrap-children';
@@ -48,6 +49,8 @@ export const Field = forwardRef<HTMLDivElement, FieldProps>(
     ref
   ) => {
     const generatedId = useId();
+    const form = useFormContext();
+    const state = form?.getFieldState(children.props.name, form.formState);
 
     const baseType = getBaseType(
       children.props.type || children.type.displayName
@@ -70,16 +73,19 @@ export const Field = forwardRef<HTMLDivElement, FieldProps>(
     const warningText = warning && wrapChildren(warning);
     const successText = success && wrapChildren(success);
 
+    const hasError = errorText || state?.error;
+    const combinedErrorText = errorText || state?.error?.message;
+
     const hasVariantMessage =
-      successText || warningText || errorText || infoText;
+      successText || warningText || combinedErrorText || infoText;
 
     const variant = getVariant({ danger, warning, success, info });
 
     const child = React.cloneElement(React.Children.only(children), {
       disabled,
       id: htmlFor,
-      // required,
-      variant,
+      required,
+      variant: hasError ? 'danger' : variant,
       loading,
     });
 
@@ -91,7 +97,7 @@ export const Field = forwardRef<HTMLDivElement, FieldProps>(
               <Label
                 disabled={disabled}
                 disabledIcon={disabledIcon}
-                variant={variant}
+                variant={hasError ? 'danger' : variant}
                 htmlFor={htmlFor}
                 required={required}
                 withDisabledIcon={!isCheckable}
@@ -113,8 +119,10 @@ export const Field = forwardRef<HTMLDivElement, FieldProps>(
               {successText as any}
             </VariantMessage>
           )}
-          {errorText && (
-            <VariantMessage variant="danger">{errorText as any}</VariantMessage>
+          {hasError && (
+            <VariantMessage variant="danger">
+              {combinedErrorText as any}
+            </VariantMessage>
           )}
           {infoText && (
             <VariantMessage variant="info">{infoText as any}</VariantMessage>

@@ -12,25 +12,28 @@ import { requireAuth } from '@utils/require-auth';
 import { ContentTitle } from '../__components/content-title/content-title';
 import { ContentWrapper } from '../__components/content-wrapper/content-wrapper';
 import { Sidebar } from '../__components/sidebar/sidebar';
+import { PersonalInfosForm } from './__components/personal-infos-form/personal-infos-form';
+import { ProfileInfosForm } from './__components/profile-infos-form/profile-infos-form';
 
-type TNotificationsPageProps = NextPageWithLayout &
+type TSettingsPageProps = NextPageWithLayout &
   FC<InferGetServerSidePropsType<typeof getServerSideProps>>;
 
-const NotificationsPage: TNotificationsPageProps = ({ data }) => {
+const SettingsPage: TSettingsPageProps = ({ data }) => {
   return (
     <ContentWrapper>
-      <ContentTitle>Settings</ContentTitle>
-      <div className="mt-3">
-        <p>
-          Je suis les settings. Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Sit sapiente.
-        </p>
+      <ContentTitle description="Configurer aisément vos différents réglagles liés à votre utilisation d'agorasafe ainsi que de vos données.  ">
+        Paramètres
+      </ContentTitle>
+
+      <div className="mt-6 space-y-9">
+        <PersonalInfosForm />
+        <ProfileInfosForm />
       </div>
     </ContentWrapper>
   );
 };
 
-NotificationsPage.getLayout = function getLayout(page: ReactElement) {
+SettingsPage.getLayout = function getLayout(page: ReactElement) {
   const session: Session = page?.props?.data;
   const pageTitle = `Settings - ${session?.user?.name}`;
   return (
@@ -54,4 +57,4 @@ export const getServerSideProps: GetServerSideProps<{
   });
 };
 
-export default NotificationsPage;
+export default SettingsPage;

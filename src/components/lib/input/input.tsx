@@ -15,7 +15,7 @@ import { BtnSpinner } from '../spinner/spinner';
 
 const inputToken = cva(
   [
-    'w-full rounded',
+    'w-full rounded border',
     'disabled:opacity-70 disabled:cursor-not-allowed',
     'transition duration-300 ease-in-out',
   ],
@@ -131,6 +131,7 @@ export const Input = forwardRef<HTMLInputElement, InputGlobalProps>(
     const { render, newType } = useTogglePasswordView(type);
     const { elementRef } = useFocus(autoFocus);
     const refs = useMergeRefs(elementRef, ref);
+    const hasError = variant === 'danger';
 
     const handleOnchange = (e: React.ChangeEvent<HTMLInputElement>) => {
       setParentValue && setParentValue(e.target.value);
@@ -145,11 +146,12 @@ export const Input = forwardRef<HTMLInputElement, InputGlobalProps>(
         )}
         <input
           ref={refs}
+          style={{ borderColor: hasError && 'red' }}
           autoFocus={autoFocus}
           type={newType}
           disabled={disabled || loading}
           onChange={handleOnchange}
-          aria-invalid={variant === 'danger' ? 'true' : 'false'}
+          aria-invalid={hasError ? 'true' : 'false'}
           className={twMerge(
             inputToken({
               appareance,

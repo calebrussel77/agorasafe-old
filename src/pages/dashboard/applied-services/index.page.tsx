@@ -20,7 +20,7 @@ const MyRequestsPage: TMyRequestsPageProps = ({ data }) => {
   return (
     <ContentWrapper>
       <ContentTitle>Services postulés</ContentTitle>
-      <div className="mt-3">
+      <div className="mt-6">
         <p>
           Je suis mes messages. Lorem ipsum dolor sit amet consectetur
           adipisicing elit. Sit sapiente.
