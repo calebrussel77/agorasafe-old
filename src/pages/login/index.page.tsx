@@ -1,10 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import { GetServerSideProps } from 'next';
 import { ClientSafeProvider, getProviders, signIn } from 'next-auth/react';
-import Link from 'next/link';
 import React, { ReactElement } from 'react';
 
-import { AuthForm } from '@components/auth-form/auth-form';
 import { HomeBackground } from '@components/home-background/home-background';
 import { GoogleIconSolid } from '@components/icons/GoogleIconSolid';
 import { LogoIcon } from '@components/icons/logo-icon/logo-icon';

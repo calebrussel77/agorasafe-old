@@ -14,9 +14,9 @@ const textarea = cva(
     variants: {
       variant: {
         default: [
-          'border-2 border-gray-300 placeholder:text-[#9ca3af]',
+          'border-[1.5px] border-gray-300 placeholder:text-[#9ca3af]',
           'hover:bg-gray-100 disabled:hover:bg-gray-200',
-          'required:border-red-500 focus:bg-transparent focus:ring-2 focus:ring-primary-500 focus:border-primary-500',
+          'required:border-red-500 focus:bg-transparent focus:ring-1 focus:ring-primary-500 focus:border-primary-500',
         ],
         subtle: [
           'bg-transparent border-none border-0 placeholder:text-[#9ca3af]',

@@ -6,9 +6,9 @@ const helperMessageToken = cva(['whitespace-normal'], {
   variants: {
     size: {
       sm: ['text-xs text-gray-400'],
-      md: ['text-sm text-gray-400'],
-      lg: ['text-lg text-gray-400'],
-      xl: ['text-xl text-gray-400'],
+      md: ['text-xs text-gray-400'],
+      lg: ['text-sm text-gray-400'],
+      xl: ['text-md text-gray-400'],
     },
   },
   compoundVariants: [{ size: 'md' }],

@@ -41,10 +41,10 @@ const DashboardPage: TDashboardPageProps = ({ data }) => {
     <ContentWrapper>
       <ContentTitle>Tableau de bord</ContentTitle>
       <div className="mt-6">
-        <Button onClick={displayToast}>Je suis un toast</Button>
+        {/* <Button onClick={displayToast}>Je suis un toast</Button> */}
         <p>
-          Je suis les settings. Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Sit sapiente.
+          Je suis l'accueil. Lorem ipsum dolor sit amet consectetur adipisicing
+          elit. Sit sapiente.
         </p>
       </div>
     </ContentWrapper>

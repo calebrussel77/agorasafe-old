@@ -22,7 +22,7 @@ const Sidebar = () => {
   return (
     <div
       style={{ top: `calc(${headerHeight.current} - 20px)`, position: 'fixed' }}
-      className="w-[360px] hidden md:block px-4 sm:px-8 bg-white h-full border-r border-gray-300 overflow-hidden"
+      className="w-[360px] hidden lg:block px-4 sm:px-8 bg-white h-full border-r border-gray-300 overflow-hidden"
     >
       <div className="mt-6 flex flex-col gap-3">
         {renderFilteredLinks({ isPurchaser, isProvider })?.map(item => {

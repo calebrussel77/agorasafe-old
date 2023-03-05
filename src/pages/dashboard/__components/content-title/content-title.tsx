@@ -1,7 +1,7 @@
 const ContentTitle = ({ children, description = null }) => {
   return (
     <div className="pb-3 border-b">
-      <h1 className="font-semibold text-secondary-500 text-3xl border-gray-300">
+      <h1 className="font-semibold text-primary-600 text-3xl border-gray-300">
         {children}
       </h1>
       {description && (

@@ -26,7 +26,7 @@ const button = cva(
           'disabled:opacity-60',
         ],
         subtle: [
-          'bg-white shadow-md',
+          'bg-white shadow-md border border-gray-300',
           'text-gray-900',
           'hover:bg-gray-100 focus:ring-2 focus:ring-gray-500',
           'disabled:opacity-60',

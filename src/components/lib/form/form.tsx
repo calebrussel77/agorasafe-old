@@ -62,14 +62,14 @@ export default Form;
 
 interface UseZodFormProps<S extends z.ZodSchema>
   extends Exclude<UseFormProps<z.infer<S>>, 'resolver'> {
-  schema: S;
+  schema?: S;
 }
 
 export const useZodForm = <S extends z.ZodSchema>({
-  schema,
+  schema = null,
   ...formProps
 }: UseZodFormProps<S>) =>
   useForm({
     ...formProps,
-    resolver: zodResolver(schema),
+    resolver: schema ? zodResolver(schema) : undefined,
   });

@@ -42,7 +42,7 @@ const Header = () => {
       as="header"
       ref={headerRef}
       className={clsx(
-        'sticky top-0 inset-x-0 z-20 pb-1 transition-all duration-300 ease-in-out',
+        'sticky top-0 bg-opacity-50 backdrop-blur-sm backdrop-filter inset-x-0 z-20 pb-1 transition-all duration-300 ease-in-out',
         !isHomePage && classNameList
       )}
     >
