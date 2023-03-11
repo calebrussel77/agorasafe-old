@@ -56,25 +56,24 @@ const MyApp: AppType<{ session: Session | null }> = ({
   const state = useNetworkState();
 
   useEffect(() => {
-    const id = generateRandomId();
-    if (state?.online && !state.previous) {
+    if (state?.online && state.previous === false) {
       toast(
         <Notification
           icon={<MdWifi className="h-5 w-5" />}
           variant="success"
           title="Votre connexion internet a été rétablie."
         />,
-        { containerId: id }
+        { autoClose: false }
       );
     }
-    if (!state?.online) {
+    if (state.previous && state?.online === false) {
       toast(
         <Notification
           icon={<MdWifiOff className="h-5 w-5" />}
           variant="warning"
           title="Vous êtes actuellement hors ligne."
         />,
-        { containerId: id }
+        { autoClose: false }
       );
     }
   }, [state?.online, state.previous]);
