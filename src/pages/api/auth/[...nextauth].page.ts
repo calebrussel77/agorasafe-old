@@ -75,7 +75,7 @@ export const authOptions: NextAuthOptions = {
         email: { label: 'email', type: 'text' },
         password: { label: 'password', type: 'text' },
       },
-      async authorize(credentials, req) {
+      async authorize(credentials) {
         const result: any = loginSchema.safeParse(credentials);
         if (!result.success) {
           throw new Error(result.error.issues[0]?.message);
@@ -84,12 +84,12 @@ export const authOptions: NextAuthOptions = {
           const user = await loginController(credentials);
           return user;
         } catch (e) {
-          console.log({ e }, 'login error login');
           throw new Error(e);
         }
       },
     }),
   ],
+
   pages: {
     signIn: '/login',
     error: '/login',
@@ -102,7 +102,6 @@ export const authOptions: NextAuthOptions = {
   jwt: {
     secret: env.NEXTAUTH_JWT_SECRET,
   },
-  // secret: env.NEXTAUTH_SECRET,
 };
 
 export default NextAuth(authOptions);

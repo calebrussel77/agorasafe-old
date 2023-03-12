@@ -141,7 +141,7 @@ model User {
     is_provider                    Boolean?                         @default(true)
     is_purchaser                   Boolean?                         @default(true)
     is_home_service_provider       Boolean?                         @default(true)
-    email                          String                          @unique
+    email                          String                           @unique
     emailVerified                  DateTime?                        @map("email_verified")
     bio                            String?
     website_url                    String?

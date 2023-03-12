@@ -5,21 +5,21 @@ import { type Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
 import { type AppType } from 'next/app';
 import { Router } from 'next/router';
-import { ReactElement, ReactNode, useEffect } from 'react';
+import { ReactElement, ReactNode } from 'react';
 import { MdWifi, MdWifiOff } from 'react-icons/md';
 import 'react-loading-skeleton/dist/skeleton.css';
-import 'react-quill/dist/quill.snow.css';
-import { ToastContainer, toast } from 'react-toastify';
+// import 'react-quill/dist/quill.snow.css';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useNetworkState } from 'react-use';
 import 'swiper/css';
 import 'swiper/css/effect-cube';
 import 'swiper/css/pagination';
 
 import { CookieConsentBanner } from '@components/cookie-consent-banner/cookie-consent-banner';
 import { DefaultSeo } from '@components/default-seo/default-seo';
-import { generateRandomId } from '@components/lib/Field/utils';
 import { Notification } from '@components/lib/notification';
+
+import { useNotificationNetwork } from '@hooks/use-notification-network/use-notification-network';
 
 import '../styles/globals.css';
 import { api } from '../utils/api';
@@ -53,31 +53,22 @@ const MyApp: AppType<{ session: Session | null }> = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
-  const state = useNetworkState();
-
-  useEffect(() => {
-    const id = generateRandomId();
-    if (state?.online && !state.previous) {
-      toast(
-        <Notification
-          icon={<MdWifi className="h-5 w-5" />}
-          variant="success"
-          title="Votre connexion internet a été rétablie."
-        />,
-        { containerId: id }
-      );
-    }
-    if (!state?.online) {
-      toast(
-        <Notification
-          icon={<MdWifiOff className="h-5 w-5" />}
-          variant="warning"
-          title="Vous êtes actuellement hors ligne."
-        />,
-        { containerId: id }
-      );
-    }
-  }, [state?.online, state.previous]);
+  useNotificationNetwork({
+    activeNetworkNotification: (
+      <Notification
+        icon={<MdWifi className="h-5 w-5" />}
+        variant="success"
+        title="Votre connexion internet a été rétablie."
+      />
+    ),
+    failedNetworkNotification: (
+      <Notification
+        icon={<MdWifiOff className="h-5 w-5" />}
+        variant="warning"
+        title="Vous êtes actuellement hors ligne."
+      />
+    ),
+  });
 
   // Use the layout defined at the page level, if available
   const getLayout =

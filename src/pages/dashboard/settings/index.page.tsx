@@ -7,6 +7,7 @@ import { AuthLayout } from '@components/layouts/auth-layouts';
 
 import { NextPageWithLayout } from '@pages/_app.page';
 
+import { api } from '@utils/api';
 import { requireAuth } from '@utils/require-auth';
 
 import { ContentTitle } from '../__components/content-title/content-title';
@@ -14,20 +15,23 @@ import { ContentWrapper } from '../__components/content-wrapper/content-wrapper'
 import { Sidebar } from '../__components/sidebar/sidebar';
 import { PersonalInfosForm } from './__components/personal-infos-form/personal-infos-form';
 import { ProfileInfosForm } from './__components/profile-infos-form/profile-infos-form';
+import { ShowCaseForm } from './__components/show-case-form/show-case-form';
 
 type TSettingsPageProps = NextPageWithLayout &
   FC<InferGetServerSidePropsType<typeof getServerSideProps>>;
 
-const SettingsPage: TSettingsPageProps = ({ data }) => {
+const SettingsPage: TSettingsPageProps = () => {
+  const { data, error, isLoading } = api.user.getUserMe.useQuery();
+
   return (
-    <ContentWrapper>
+    <ContentWrapper isLoading={isLoading} error={error}>
       <ContentTitle description="Configurer aisément vos différents réglagles liés à votre utilisation d'agorasafe ainsi que de vos données.  ">
         Paramètres
       </ContentTitle>
-
       <div className="mt-6 space-y-9">
-        <PersonalInfosForm />
-        <ProfileInfosForm />
+        <ShowCaseForm user={data?.user} />
+        <PersonalInfosForm user={data?.user} />
+        <ProfileInfosForm user={data?.user} />
       </div>
     </ContentWrapper>
   );

@@ -21,7 +21,9 @@ const AuthLayout = ({
       <NextSeo title={title} description={description} noindex={noindex} />
       <div className="flex h-full min-h-screen flex-col">
         <Header />
-        <main className="mb-auto flex h-full flex-1 flex-col">{children}</main>
+        <main className="mb-auto flex h-full flex-1 flex-col pb-16 lg:pb-0">
+          {children}
+        </main>
       </div>
     </>
   );

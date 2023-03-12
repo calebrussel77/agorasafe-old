@@ -50,7 +50,7 @@ const RegisterForm = () => {
 
   const {
     register,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = form;
 
   const onRegister = async (data: TRegisterForm) => {
@@ -112,8 +112,8 @@ const RegisterForm = () => {
         label="Confirmer le mot de passe"
       >
         <Input
-          {...register('confirm_password')}
-          id="confirm_password"
+          {...register('confirmPassword')}
+          id="confirmPassword"
           shouldViewPasswordIcon
           type="password"
           placeholder="Confirmez votre mot de passe"

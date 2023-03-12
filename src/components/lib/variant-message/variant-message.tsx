@@ -31,6 +31,7 @@ export const VariantMessage = forwardRef<
   return (
     <div
       ref={ref}
+      role={variant === 'danger' ? 'alert' : undefined}
       className={variantMessageToken({
         size,
         class: twMerge(className, VARIANTS_COLORS[variant]),

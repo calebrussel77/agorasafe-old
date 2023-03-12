@@ -24,6 +24,20 @@ export const VARIANTS_BORDER_COLORS: Record<Variant, string> = {
   system: 'border-secondary-500',
 };
 
+export const VARIANTS_CSS_COLORS: Record<Variant, string> = {
+  danger: 'rgb(239 68 68 / var(--tw-text-opacity))',
+  focused: 'text-primary-500',
+  info: 'blue',
+  success: 'green',
+  warning: 'yellow',
+  system: 'blue',
+};
+
+export const getVariantCssColor = (variant: Variant): string => {
+  const key = VARIANTS_COLORS[variant];
+  return key ? key : null;
+};
+
 export const getVariantColor = (variant: Variant): string => {
   const key = VARIANTS_COLORS[variant];
   return key ? key : null;

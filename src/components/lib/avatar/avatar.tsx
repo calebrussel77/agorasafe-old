@@ -31,11 +31,12 @@ const sizes = {
 };
 
 const sizesText = {
-  sm: 'h-5 w-5',
-  md: 'h-7 w-7',
-  lg: 'h-8 w-8',
-  xl: 'h-10 w-10',
-  xxl: 'h-12 w-12',
+  xs: 'h-4 w-4',
+  sm: 'h-6 w-6',
+  md: 'h-8 w-8',
+  lg: 'h-12 w-12',
+  xl: 'h-16 w-16',
+  xxl: 'h-24 w-24',
 };
 
 const statusText = {

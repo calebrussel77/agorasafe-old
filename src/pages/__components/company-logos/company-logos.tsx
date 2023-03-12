@@ -6,7 +6,6 @@ const CompanyLogos = () => {
       <div className="col-span-1">
         <ImageUI
           className="h-6 w-full"
-          noNeedApiPrefix
           src="https://tailwindui.com/img/logos/tuple-logo-gray-400.svg"
           name="Tuple"
           alt="Tuple"
@@ -15,7 +14,6 @@ const CompanyLogos = () => {
       <div className="col-span-1">
         <ImageUI
           className="h-6 w-full"
-          noNeedApiPrefix
           src="https://tailwindui.com/img/logos/mirage-logo-gray-400.svg"
           name="Mirage"
           alt="Mirage"
@@ -24,7 +22,6 @@ const CompanyLogos = () => {
       <div className="col-span-1">
         <ImageUI
           className="h-6 w-full"
-          noNeedApiPrefix
           src="https://tailwindui.com/img/logos/statickit-logo-gray-400.svg"
           name="StaticKit"
           alt="StaticKit"
@@ -33,7 +30,6 @@ const CompanyLogos = () => {
       <div className="col-span-1">
         <ImageUI
           className="h-6 w-full"
-          noNeedApiPrefix
           src="https://tailwindui.com/img/logos/transistor-logo-gray-400.svg"
           name="Transistor"
           alt="Transistor"

@@ -4,7 +4,7 @@ import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { twMerge } from 'tailwind-merge';
 
-import { BtnSpinner, Spinner } from '../spinner/spinner';
+import { Spinner } from '../spinner/spinner';
 
 const button = cva(
   'gap-2 disabled:cursor-not-allowed transition ease-in-out duration-300',

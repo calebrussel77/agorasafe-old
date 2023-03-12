@@ -11,7 +11,7 @@ import { Variant, getVariantBorderColor } from '@helpers/variants';
 import { useMergeRefs } from '@hooks/use-merge-refs/use-merge-refs';
 import { useFocus } from '@hooks/useFocus/useFocus';
 
-import { BtnSpinner } from '../spinner/spinner';
+import { Spinner } from '../spinner/spinner';
 
 const inputToken = cva(
   [
@@ -68,7 +68,7 @@ export type InputGlobalProps = VariantProps<typeof inputToken> & InputProps;
 
 const RenderAfterElement = ({ loading, iconAfter }) => {
   return loading ? (
-    <BtnSpinner className="h-5 w-5" aria-hidden="true" />
+    <Spinner className="h-5 w-5" aria-hidden="true" />
   ) : (
     <VariantIcon icon={iconAfter} />
   );

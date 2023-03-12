@@ -71,7 +71,7 @@ const LoginForm = () => {
 
   return (
     <Form form={form} onSubmit={onSubmit}>
-      {/* {loading && <FullSpinner />} */}
+      {loading && <FullSpinner />}
 
       <Field required label="Adresse email">
         <Input

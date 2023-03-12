@@ -19,10 +19,10 @@ type TInboxPageProps = NextPageWithLayout &
 const InboxPage: TInboxPageProps = ({ data }) => {
   return (
     <ContentWrapper>
-      <ContentTitle>Messages</ContentTitle>
+      <ContentTitle>Conversations</ContentTitle>
       <div className="mt-6">
         <p>
-          Je suis mes messages. Lorem ipsum dolor sit amet consectetur
+          Je suis mes conversations. Lorem ipsum dolor sit amet consectetur
           adipisicing elit. Sit sapiente.
         </p>
       </div>

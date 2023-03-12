@@ -1,17 +1,23 @@
+import { User } from '@prisma/client';
+import { useEffect } from 'react';
+import { HiOutlineTrash } from 'react-icons/hi';
+import { HiOutlinePencil } from 'react-icons/hi2';
+
 import { Field } from '@components/lib/Field/Field';
 import { Avatar } from '@components/lib/avatar/avatar';
 import { Button } from '@components/lib/button/button';
 import { Checkbox } from '@components/lib/checkbox/checkbox';
 import Form, { useZodForm } from '@components/lib/form/form';
+import ImageWithElementsOnTop from '@components/lib/image-with-elements-on-top/image-with-elements-on-top';
 import { Input } from '@components/lib/input/input';
 import { Label } from '@components/lib/label/label';
-import { Notification } from '@components/lib/notification/notification';
-import { RadioGroup } from '@components/lib/radio-group/radio-group';
 import { Textarea } from '@components/lib/textarea/textarea';
 import {
   FileUpload,
   FileWithPreview,
 } from '@components/lib/upload/file-upload';
+
+import { profilSchema } from '@validations/user-infos-schema';
 
 import { FormCardContainer } from '@pages/dashboard/__components/form-card-container/form-card-container';
 
@@ -24,24 +30,49 @@ type TProfileInfosForm = TRegister & {
   desireError?: any;
 };
 
-const ProfileInfosForm = () => {
-  const form = useZodForm({});
+const ProfileInfosForm = ({ user }: { user: Omit<User, 'password'> }) => {
+  const form = useZodForm({
+    schema: profilSchema,
+  });
   const {
     register,
     setValue,
     watch,
+    reset,
     formState: { errors, isSubmitting },
   } = form;
+  const {
+    avatar,
+    website_url,
+    bio,
+    is_purchaser,
+    is_provider,
+    is_home_service_provider,
+  } = user;
 
-  const watchFile = watch('profile_pic', []);
+  const watchFile = watch('avatar', []);
 
   const handleChangeFile = file => {
-    setValue('profile_pic', file);
+    setValue('avatar', file);
   };
 
   const onSubmit = async (data: TProfileInfosForm) => {
     console.log(data);
   };
+
+  useEffect(() => {
+    if (user) {
+      reset({
+        avatar,
+        website_url,
+        is_purchaser,
+        is_provider,
+        is_home_service_provider,
+        bio,
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [reset, user]);
 
   return (
     <div>
@@ -69,22 +100,44 @@ const ProfileInfosForm = () => {
               <div className="grid grid-cols-6 gap-6">
                 {/* File Upload */}
                 <div className="col-span-6">
-                  <Field label="Photo">
+                  <Field
+                    label="Photo"
+                    hint="La taille maximale de photo à uploader est de 2MB"
+                  >
                     <FileUpload
                       accept={EXTENSION_IMAGES_ALLOWED}
                       handleAddFile={handleChangeFile}
                       handleRemoveFile={handleChangeFile}
                       value={watchFile}
                       preview={null}
-                      {...(register('profile_pic') as any)}
+                      {...(register('avatar') as any)}
                     >
                       {({ openFile, files, onRemoveFile }) => {
                         const hasName = (files as FileWithPreview[])[0]?.name;
                         return (
                           <>
                             <div className="flex items-center gap-3">
-                              {!hasName ? (
-                                <Avatar size="xxl" name="Caleb Russel" />
+                              {files.map((file: any, idx) => (
+                                <ImageWithElementsOnTop
+                                  key={idx}
+                                  size="xl"
+                                  src={file.preview || (file as string)}
+                                  name={file.name}
+                                  className="h-24 w-24"
+                                  imageClassName="h-24 w-24"
+                                >
+                                  <button
+                                    type="button"
+                                    title="Changez la photo"
+                                    className="p-1"
+                                    onClick={openFile}
+                                  >
+                                    <HiOutlinePencil className="h-5 w-5 text-white" />
+                                  </button>
+                                </ImageWithElementsOnTop>
+                              ))}
+                              {/* {!hasName ? (
+                                <Avatar size="xl" name="Caleb Russel" />
                               ) : (
                                 <div>
                                   {files.map((file: FileWithPreview) => (
@@ -92,17 +145,20 @@ const ProfileInfosForm = () => {
                                       key={file.preview}
                                       type="button"
                                       onClick={() => onRemoveFile(file)}
-                                      className="group hover:opacity-70"
+                                      className="relative z-10 group"
                                     >
                                       <Avatar
-                                        size="xxl"
+                                        size="xl"
                                         src={file.preview}
                                         name={file.name}
                                       />
+                                      <div className="absolute inset-0 flex justify-center opacity-100 lg:group-hover:opacity-100 lg:opacity-0 items-center bg-gray-800 rounded-full">
+                                        <HiOutlineTrash className="h-6 w-6 text-white" />
+                                      </div>
                                     </button>
                                   ))}
                                 </div>
-                              )}
+                              )} */}
                               <Button
                                 variant="subtle"
                                 type="button"
@@ -128,7 +184,7 @@ const ProfileInfosForm = () => {
                     <Input
                       {...register('website_url')}
                       iconBefore={
-                        <span className="inline-flex items-center text-sm text-gray-600">
+                        <span className="inline-flex items-center text-sm text-gray-800">
                           http://
                         </span>
                       }
@@ -152,7 +208,7 @@ const ProfileInfosForm = () => {
                       cols={6}
                       rows={6}
                       type="text"
-                      placeholder="Doe"
+                      placeholder="Ecrivez ce qui vous caractérise et vous distingue le plus des autres..."
                     ></Textarea>
                   </Field>
                 </div>
@@ -170,14 +226,10 @@ const ProfileInfosForm = () => {
                     </Label>
                     <div className="flex flex-col gap-3">
                       <Field label="Proposer mes services">
-                        <Checkbox
-                          {...register('isProvider', { value: true })}
-                        />
+                        <Checkbox {...register('is_provider')} />
                       </Field>
                       <Field label="Demander des services">
-                        <Checkbox
-                          {...register('isCustomer', { value: true })}
-                        />
+                        <Checkbox {...register('is_purchaser')} />
                       </Field>
                     </div>
                   </div>
@@ -196,10 +248,10 @@ const ProfileInfosForm = () => {
                     </Label>
                     <div className="flex flex-col gap-3">
                       <Field label="Domicile">
-                        <Checkbox {...register('isOnsite', { value: true })} />
+                        <Checkbox {...register('is_home_service_provider')} />
                       </Field>
                       <Field label="Distance">
-                        <Checkbox {...register('isRemote', { value: true })} />
+                        <Checkbox {...register('is_remote_service_provider')} />
                       </Field>
                     </div>
                   </div>

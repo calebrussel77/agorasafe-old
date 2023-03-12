@@ -18,7 +18,7 @@ const UserConnectedButton = ({ session }) => {
           <button title={`Click to open menu options`}>
             <Avatar
               src={session?.user?.avatar}
-              size="lg"
+              size="md"
               name={session?.user?.name}
             />
           </button>

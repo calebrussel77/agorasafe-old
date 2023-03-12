@@ -6,9 +6,9 @@ import { TLogin, TRegister } from '@interfaces/auth-user';
 
 import {
   createUser,
-  exclude,
   getUserByEmail,
   getUserBySlug,
+  getUserWithoutPassword,
 } from '../services';
 
 export const createUniqueSlugByName = async (name: string) => {
@@ -41,7 +41,7 @@ export const loginController = async (loginCredentials: TLogin) => {
     if (!match) {
       throw new Error('Identifiants incorrects. veuillez réessayer.');
     }
-    return exclude({ ...userFound, id: userFound.id }, ['password']);
+    return getUserWithoutPassword({ ...userFound, id: userFound.id });
   }
 };
 
@@ -75,7 +75,7 @@ export const registerController = async (registerCredentials: TRegister) => {
       const UserName = `${userCreated?.first_name} ${userCreated?.last_name}`;
 
       return {
-        user: exclude(userCreated, ['password']),
+        user: getUserWithoutPassword(userCreated),
         success: true,
         redirect_url: '/login',
         message: `Votre compte a bien été crée ${UserName}, veuillez vous connecter afin d'accéder à votre espace personnel.`,

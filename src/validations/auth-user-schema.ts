@@ -16,14 +16,14 @@ export const registerSchema = loginSchema
   .extend({
     firstName: z.string().min(2, { message: 'Votre nom est requis' }).trim(),
     lastName: z.string().min(2, { message: 'Votre prénom est requis' }).trim(),
-    confirm_password: z
+    confirmPassword: z
       .string()
       .min(6, 'Veuillez ressaisir votre mot de passe')
       .trim(),
     isProvider: z.boolean(),
     isCustomer: z.boolean(),
   })
-  .refine(data => data.password === data.confirm_password, {
+  .refine(data => data.password === data.confirmPassword, {
     message: 'Les mots de passe ne correspondent pas',
     path: ['confirmError'], // path of error
   })

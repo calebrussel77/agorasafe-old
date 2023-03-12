@@ -36,7 +36,7 @@ const UserConnectedMenu: FC<UserConnectedMenuProps> = ({ popover, hide }) => {
               <Avatar
                 src={session?.user?.avatar}
                 name={session?.user?.name}
-                size="xxl"
+                size="lg"
               />
             }
             hovered={false}

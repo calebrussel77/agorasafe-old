@@ -1,12 +1,13 @@
-import { Checkbox } from 'ariakit';
+import { Sex, User } from '@prisma/client';
+import { useEffect } from 'react';
 
 import { Field } from '@components/lib/Field/Field';
 import { Button } from '@components/lib/button/button';
 import Form, { useZodForm } from '@components/lib/form/form';
-import { HelperMessage } from '@components/lib/helper-message/helper-message';
 import { Input } from '@components/lib/input/input';
-import { Notification } from '@components/lib/notification/notification';
 import { RadioGroup } from '@components/lib/radio-group/radio-group';
+
+import { personalInfosSchema } from '@validations/user-infos-schema';
 
 import { FormCardContainer } from '@pages/dashboard/__components/form-card-container/form-card-container';
 
@@ -17,17 +18,38 @@ type TPersonalInfosForm = TRegister & {
   desireError?: any;
 };
 
-const PersonalInfosForm = () => {
-  const form = useZodForm({});
+const PersonalInfosForm = ({ user }: { user: Omit<User, 'password'> }) => {
+  const form = useZodForm({
+    schema: personalInfosSchema,
+    defaultValues: {
+      sex: Sex.MALE,
+    },
+  });
 
   const {
     register,
+    reset,
     formState: { errors, isSubmitting },
   } = form;
+  const { first_name, last_name, sex, email, phone, adresse, birthdate } = user;
 
   const onSubmit = async (data: TPersonalInfosForm) => {
     console.log(data);
   };
+
+  useEffect(() => {
+    if (user) {
+      reset({
+        first_name,
+        last_name,
+        phone,
+        adresse,
+        birthdate,
+        sex,
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [reset, user]);
 
   return (
     <div>
@@ -35,7 +57,7 @@ const PersonalInfosForm = () => {
         <div className="md:col-span-1">
           <div className="px-4 sm:px-0">
             <h3 className="text-base font-semibold leading-6 text-gray-900">
-              Informations peronnelles
+              Informations personnelles
             </h3>
             <p className="mt-1 text-sm text-gray-600">
               Gérer vos infos personnelles tout ayant le contrôle sur leur
@@ -79,9 +101,8 @@ const PersonalInfosForm = () => {
                 <div className="col-span-6 sm:col-span-3">
                   <Field label="Adresse email" required disabled>
                     <Input
-                      {...register('email')}
                       type="email"
-                      value="calebrussel77@gmail.com"
+                      value={email}
                       placeholder="johndoe@example.com"
                     />
                   </Field>
@@ -106,7 +127,7 @@ const PersonalInfosForm = () => {
                     hint="Champs utile pour la pertinence de votre profil au sein des résultats de recherche"
                   >
                     <Input
-                      {...register('localisation')}
+                      {...register('adresse')}
                       type="text"
                       placeholder="Bonaberie Douala, cameroun"
                     />
@@ -128,10 +149,10 @@ const PersonalInfosForm = () => {
                 <div className="col-span-6 sm:col-span-3">
                   <Field label="Sexe">
                     <RadioGroup
-                      {...register('work_routine')}
+                      {...register('sex')}
                       options={[
-                        { label: 'Homme', value: 'isFullTime' },
-                        { label: 'Femme', value: 'isPartTime' },
+                        { label: 'Homme', value: Sex.MALE },
+                        { label: 'Femme', value: Sex.FEMALE },
                       ]}
                     />
                   </Field>

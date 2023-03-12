@@ -13,12 +13,14 @@ import { twMerge } from 'tailwind-merge';
 export interface AccordionOptions {
   title: string | JSX.Element;
   icon?: JSX.Element;
+  buttonClassName?: string;
   elementAfter?: JSX.Element | ReactNode;
   defaultOpen?: boolean;
   open?: boolean;
 }
 
-type AccordionProps = React.HTMLProps<HTMLDivElement> & AccordionOptions;
+type AccordionProps = Omit<React.ComponentProps<'div'>, 'title'> &
+  AccordionOptions;
 
 export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
   (
@@ -28,6 +30,7 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
       title,
       className,
       elementAfter,
+      buttonClassName,
       defaultOpen = false,
       open,
       ...rest
@@ -46,7 +49,10 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
         <div>
           <Disclosure
             state={disclosure}
-            className="w-full flex-1 flex items-center justify-between gap-2"
+            className={twMerge(
+              'w-full flex-1 flex items-center justify-between gap-2',
+              buttonClassName
+            )}
           >
             {title}
             {cloneElement(icon, {
