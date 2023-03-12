@@ -42,7 +42,10 @@ export interface ImageUIOptions {
   position?: 'top' | 'center' | 'bottom';
 }
 
-type ImageUIProps = Omit<React.HTMLProps<HTMLDivElement>, 'size' | 'sizes'> &
+export type ImageUIProps = Omit<
+  React.HTMLProps<HTMLDivElement>,
+  'size' | 'sizes'
+> &
   ImageUIOptions;
 
 export const ImageUI = forwardRef<HTMLDivElement, ImageUIProps>(
@@ -56,7 +59,7 @@ export const ImageUI = forwardRef<HTMLDivElement, ImageUIProps>(
       position = 'center',
       src,
       className,
-      noNeedApiPrefix = false,
+      noNeedApiPrefix = true,
       ...rest
     },
     ref
@@ -75,9 +78,8 @@ export const ImageUI = forwardRef<HTMLDivElement, ImageUIProps>(
     const imageFontSize = fontSize || `calc(${imageSize} / 2.5)`;
     const [error, setError] = useState(false);
     const hasImage = src && !error;
-    const imageSrc = noNeedApiPrefix
-      ? src
-      : `${process.env.NEXT_PUBLIC_BASE_UPLOAD_URL}/${src}`;
+    const imageSrc = src;
+
     const classes = twMerge(
       clsx(
         'absolute inset-0 object-cover',
@@ -110,7 +112,7 @@ export const ImageUI = forwardRef<HTMLDivElement, ImageUIProps>(
         }}
         ref={ref}
         role="img"
-        className={clsx(className, `flex overflow-hidden`)}
+        className={twMerge(className, `flex overflow-hidden`)}
         {...rest}
       >
         {hasImage && (

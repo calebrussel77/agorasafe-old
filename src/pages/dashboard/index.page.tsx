@@ -20,28 +20,11 @@ type TDashboardPageProps = NextPageWithLayout &
   FC<InferGetServerSidePropsType<typeof getServerSideProps>>;
 
 const DashboardPage: TDashboardPageProps = ({ data }) => {
-  const displayToast = () => {
-    toast(
-      <Notification
-        variant="success"
-        title="Nous sommes content de vous revoir !"
-        description="Béneficier d'un large éventail de catalogue mis à votre disposition sur agorasafe et toute la plateforme du monde entier"
-        actions={[
-          <NotificationAction key={1} onClick={() => {}} isPrimary>
-            View more
-          </NotificationAction>,
-          <NotificationAction key={2} onClick={() => {}}>
-            Undo
-          </NotificationAction>,
-        ]}
-      />
-    );
-  };
   return (
     <ContentWrapper>
       <ContentTitle>Tableau de bord</ContentTitle>
       <div className="mt-6">
-        {/* <Button onClick={displayToast}>Je suis un toast</Button> */}
+        <Button>Je suis un toast</Button>
         <p>
           Je suis l'accueil. Lorem ipsum dolor sit amet consectetur adipisicing
           elit. Sit sapiente.

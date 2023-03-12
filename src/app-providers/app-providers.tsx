@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 
-import FullPageError from '@components/lib/full-page-error/full-page-error';
+import FullPageError from '@components/lib/error/full-page-error/full-page-error';
 
 type TAppProviderProps = {
   children: React.ReactNode;

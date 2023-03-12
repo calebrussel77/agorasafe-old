@@ -5,8 +5,8 @@
 @import '../components/lib/spinner/spinner.style.css';
 @import '../components/lib/modal/modal.style.css';
 @import '../components/lib/label/label.style.css';
+@import '../components/lib/select/select.style.css';
 @import './custom_scrollbar.css';
-@import './input_reset.css';
 @import './react_toastify.css';
 
 :root {
@@ -33,6 +33,11 @@
   --color-secondary-700: 140 63 137;
   --color-secondary-800: 115 53 112;
   --color-secondary-900: 95 48 92;
+}
+
+/* To blur the background of an element */
+.bg__blurred {
+  @apply bg-opacity-80 backdrop-blur-sm backdrop-filter;
 }
 
 .tapestry__theme {

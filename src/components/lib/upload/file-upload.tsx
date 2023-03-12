@@ -8,13 +8,18 @@ import React, {
 } from 'react';
 import { HiUpload } from 'react-icons/hi';
 
+import {
+  EXTENSION_IMAGES_ALLOWED,
+  MAX_IMAGE_UPLOAD_SIZE,
+} from '@constants/index';
+
 import { Button } from '../button/button';
 import { createEvent } from './create-event';
 // FileUpload
 import { Preview as DefaultPreview } from './preview';
 
-const DEFAULT_MAX_FILE_SIZE = 200 * 10 * 1000;
-const DEFAULT_FILE_TYPES = '*/*';
+const DEFAULT_MAX_FILE_SIZE = MAX_IMAGE_UPLOAD_SIZE; // 5Mb
+const DEFAULT_FILE_TYPES = EXTENSION_IMAGES_ALLOWED;
 
 export interface FileWithPreview extends File {
   preview?: string;

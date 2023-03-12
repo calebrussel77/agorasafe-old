@@ -1,0 +1,14 @@
+/* 
+* React-select styles 
+* 
+*/
+
+/* Remove Tailwind forms plugins box-shadow  for react-select */
+.agorasafe__select__input {
+  @apply caret-primary-500 focus:shadow-none focus:ring-0 focus:ring-transparent !important;
+}
+
+/* 
+  * End React-select styles 
+  * 
+  */

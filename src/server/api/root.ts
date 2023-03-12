@@ -1,4 +1,4 @@
-import { registerRouter } from './routers/register/register';
+import { registerRouter, userRouter } from './routers';
 import { createTRPCRouter } from './trpc';
 
 /**
@@ -8,6 +8,7 @@ import { createTRPCRouter } from './trpc';
  */
 export const appRouter = createTRPCRouter({
   register: registerRouter,
+  user: userRouter,
 });
 
 // export type definition of API

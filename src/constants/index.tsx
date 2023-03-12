@@ -1,8 +1,13 @@
 import { HiLogin, HiOutlineUserGroup } from 'react-icons/hi';
 import { HiOutlineSquares2X2 } from 'react-icons/hi2';
 
-export const MAX_FILES_UPLOAD_SIZE = 10; //10mb
-export const MAX_IMAGE_UPLOAD_SIZE = 1301072; //octets => 1mb
+export const DEBOUNCE_QUERIES_MS = 600;
+
+export const MAX_FILES_UPLOAD_SIZE = 2 * 1000 * 1000; // 2mb
+export const MAX_IMAGE_UPLOAD_SIZE = 2 * 1000 * 1000; // 2mb
+
+export const EXTENDED_MAX_IMAGE_UPLOAD_SIZE = 5 * 1000 * 1000; // 5mb
+
 export const EXTENSION_FILES_ALLOWED = '.pdf,.PDF,.PPT,.PPTX,.DOC,.DOCX';
 export const EXTENSION_IMAGES_ALLOWED =
   'image/png, image/jpeg, image/jpg, image/JPEG, image/JPG, image/PNG';

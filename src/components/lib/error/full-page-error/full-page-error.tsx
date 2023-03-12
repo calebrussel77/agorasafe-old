@@ -5,12 +5,10 @@ import { HiChevronDown } from 'react-icons/hi';
 
 import { LogoIcon } from '@components/icons/logo-icon/logo-icon';
 
-import FadeAnimation from '../fade-animation/fade-animation';
-import { ImageUI } from '../image-ui/image-ui';
+import { Accordion } from '../../accordion/accordion';
+import { ImageUI } from '../../image-ui/image-ui';
 
 export default function FullPageError({ error }) {
-  const [viewStack, setViewStack] = useState(false);
-
   return (
     <>
       <div className="grid min-h-full sm:grid-cols-2 bg-white h-screen">
@@ -33,27 +31,16 @@ export default function FullPageError({ error }) {
                   précédente action, nous travaillons dessus pour un retour à la
                   normale le plus vite possible.
                 </p>
-                <button
-                  onClick={() => setViewStack(!viewStack)}
-                  className="mt-2 text-base italic flex items-center gap-1"
-                >
-                  <span>Developer stack</span>
-                  <HiChevronDown
-                    className={clsx(
-                      'h-5 w-5 transform transition duration-300',
-                      viewStack && 'rotate-180'
-                    )}
-                  />
-                </button>
-                <FadeAnimation
-                  visible={viewStack}
-                  animateEnter
-                  from={{ y: 10 }}
+                <Accordion
+                  className="max-w-md w-full"
+                  buttonClassName="p-2 bg-gray-100 rounded-md mt-3"
+                  title={<span className="italic">Developer stack</span>}
                 >
                   <div className="p-3 rounded-md w-full max-w-xl overflow-y-auto max-h-80 text-gray-600 bg-gray-100 mt-1">
                     {error?.message}
                   </div>
-                </FadeAnimation>
+                </Accordion>
+
                 <div className="mt-6">
                   <Link
                     passHref

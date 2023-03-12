@@ -2,7 +2,7 @@ import { registerSchema } from '@validations/auth-user-schema';
 
 import { registerController } from '@server/api/controllers';
 
-import { createTRPCRouter, publicProcedure } from '../../trpc';
+import { createTRPCRouter, publicProcedure } from '../trpc';
 
 export const registerRouter = createTRPCRouter({
   authRegister: publicProcedure
