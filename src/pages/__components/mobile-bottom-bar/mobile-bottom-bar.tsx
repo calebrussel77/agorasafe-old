@@ -13,7 +13,7 @@ const MobileBottomBar = ({ session }) => {
     <nav
       role="naviagtion"
       aria-label="Principal"
-      className="bg__blurred fixed z-30 border-t border-gray-300 bottom-0 inset-x-0 px-2 lg:hidden block"
+      className="bg__blurred fixed z-30 border-t bg-white bg-opacity-60 border-gray-300 bottom-0 inset-x-0 px-2 md:hidden block"
     >
       <ul className="flex items-center justify-between -mx-2">
         {renderFilteredLinks({ isPurchaser, isProvider })
@@ -28,13 +28,13 @@ const MobileBottomBar = ({ session }) => {
                   <button
                     title={item?.title}
                     className={twMerge(
-                      'flex flex-col items-center py-3 px-2',
+                      'flex flex-col text-gray-700 items-center py-3 px-2',
                       isActiveLink &&
                         'text-primary-600 border-t-2 border-primary-500'
                     )}
                   >
-                    <item.Icon className="h-5 w-5" />
-                    <span className="text-xs text-center font-semibold line-clamp-1">
+                    <item.Icon className="h-5 w-5 sm:h-6 sm:w-6" />
+                    <span className="text-xs sm:text-sm text-center font-semibold line-clamp-1">
                       {item.mobileTitle}
                     </span>
                   </button>

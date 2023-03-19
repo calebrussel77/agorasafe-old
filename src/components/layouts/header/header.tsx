@@ -25,7 +25,7 @@ const classNameList = [
   'border-b',
   'border-gray-300',
   'bg-white',
-  'bg-opacity-50',
+  'bg-opacity-60',
 ];
 
 const Header = () => {
@@ -95,7 +95,7 @@ const Header = () => {
           );
         }}
       </Popover>
-      <MobileBottomBar session={session} />
+      {session && <MobileBottomBar session={session} />}
     </>
   );
 };
