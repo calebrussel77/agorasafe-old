@@ -1,10 +1,14 @@
 import React, { FC } from 'react';
 
+import { generateRandomId } from '@components/lib/Field/utils';
+
 type LogoProps = {
   className?: string;
 };
 
 const LogoIcon: FC<LogoProps> = ({ className }) => {
+  const id = generateRandomId();
+
   return (
     <svg className={className} fill="none" viewBox="0 0 182 23">
       <path
@@ -47,7 +51,7 @@ const LogoIcon: FC<LogoProps> = ({ className }) => {
         d="M99.73 1l9.833 20.666M72.157 12.463h11a4 4 0 004-4V5a4 4 0 00-4-4h-11M83.242 13.094L86.822 22M72.657 12.463v9.379"
       ></path>
       <path
-        fill="url(#paint0_linear_8_1812)"
+        fill={`url(#${id})`}
         fillRule="evenodd"
         d="M65.094 16.009C63.327 19.55 59.54 22 55.157 22c-6.075 0-11-4.701-11-10.5 0-1.349.266-2.638.752-3.823L46.633 9.1a5.604 5.604 0 011.946 3.24c.623 3.164 3.24 5.593 6.558 6.087l1.271.19a10.31 10.31 0 007.308-1.67l1.377-.938zm.956-3.038l-3.5 2.386a8.183 8.183 0 01-5.8 1.325l-1.271-.19c-2.476-.369-4.428-2.18-4.893-4.54a7.512 7.512 0 00-2.609-4.343l-.768-.634.506.14a7.076 7.076 0 013.382 2.094 9.093 9.093 0 006.45 3.005l.256.009a10.04 10.04 0 006.42-2.033l1.612-1.22a10.069 10.069 0 01.215 4zM55.157 1c-3.388 0-6.418 1.462-8.436 3.761l1.566.435a9.04 9.04 0 014.321 2.675 7.117 7.117 0 005.049 2.352l.255.01a7.993 7.993 0 005.111-1.62l2.09-1.582C63.356 3.467 59.559 1 55.158 1z"
         clipRule="evenodd"
@@ -85,7 +89,7 @@ const LogoIcon: FC<LogoProps> = ({ className }) => {
       ></path>
       <defs>
         <linearGradient
-          id="paint0_linear_8_1812"
+          id={id}
           x1="55.157"
           x2="55.157"
           y1="1"

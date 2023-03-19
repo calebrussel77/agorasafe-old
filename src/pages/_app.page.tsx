@@ -82,7 +82,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
         closeButton={false}
         className="bg-transparent sm:max-w-sm px-3 w-full"
         hideProgressBar={true}
-        newestOnTop={false}
+        newestOnTop={true}
         closeOnClick={false}
         rtl={false}
         pauseOnFocusLoss
