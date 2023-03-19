@@ -25,8 +25,8 @@ Spinner.displayName = 'Spinner';
 
 const FullSpinner = () => {
   return (
-    <div className="fixed inset-0 z-50 flex h-full w-full items-center justify-center bg-gray-900 bg-opacity-50 backdrop-blur-sm backdrop-filter transition-all duration-200 ease-in-out">
-      <Spinner className="relative h-12 w-12" />
+    <div className="fixed z-40 inset-0 h-full w-full flex items-center justify-center bg-gray-900 bg-opacity-50 backdrop-blur-sm backdrop-filter transition-all duration-200 ease-in-out">
+      <Spinner className="relative h-12 w-12 z-20" />
     </div>
   );
 };

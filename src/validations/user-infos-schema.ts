@@ -5,25 +5,55 @@ import { MAX_IMAGE_UPLOAD_SIZE } from '@constants/index';
 
 import { dateSchema } from './shared';
 
+export const showCaseSchema = z.object({
+  photos: z
+    .array(
+      z.object({
+        name: z.string().nullish().optional(),
+        description: z.string().nullish().optional(),
+        file: z
+          .any()
+          .refine(files => {
+            const file = Array.isArray(files) ? files?.[0] : files;
+            if (file) {
+              return file?.size < MAX_IMAGE_UPLOAD_SIZE;
+            }
+            return true;
+          }, `Le poids max. de la photo est de 2MB.`)
+          .optional(),
+      })
+    )
+    .max(3)
+    .optional(),
+
+  skills: z
+    .array(
+      z.object({
+        label: z.string().optional(),
+        value: z.string().optional(),
+      })
+    )
+    .optional(),
+});
+
 export const profilSchema = z.object({
   avatar: z
     .any()
-    .or(z.string())
     .refine(files => {
       const file = Array.isArray(files) ? files?.[0] : files;
       if (file) {
         return file?.size < MAX_IMAGE_UPLOAD_SIZE;
       }
       return true;
-    }, `La taille maximale d'upload de photo est de 2MB.`)
+    }, `Le poids max. de l'avatar est de 2MB.`)
     .optional(),
   // .refine(files => Boolean(files?.name), 'Image is required.'),
-  website_url: z.string().optional(),
-  bio: z.string().optional(),
-  is_provider: z.boolean(),
-  is_purchaser: z.boolean(),
-  is_home_service_provider: z.boolean(),
-  is_remote_service_provider: z.boolean(),
+  website_url: z.string().nullish().optional(),
+  bio: z.string().nullish().optional(),
+  is_provider: z.boolean().optional(),
+  is_purchaser: z.boolean().optional(),
+  is_home_service_provider: z.boolean().optional(),
+  is_remote_service_provider: z.boolean().optional(),
 });
 
 export const personalInfosSchema = z.object({

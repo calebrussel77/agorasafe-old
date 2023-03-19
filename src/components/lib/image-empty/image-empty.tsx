@@ -16,7 +16,11 @@ const ImageEmpty: FC<TImageEmptyProps> = ({ className, children, ...rest }) => {
       )}
       {...rest}
     >
-      {children ? children : <HiPhoto className="h-10 w-10 m-auto" />}
+      {children ? (
+        children
+      ) : (
+        <HiPhoto className=" flex-shrink-0 h-10 w-10 m-auto" />
+      )}
     </button>
   );
 };

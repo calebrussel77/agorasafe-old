@@ -15,14 +15,12 @@ datasource db {
 }
 
 model Skill {
-    id      String @id @default(cuid())
-    name    String @unique
-    slug    String
-    User    User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
-    user_id String @unique
-
+    id         String   @id @default(cuid())
+    name       String   @unique
+    slug       String
     created_at DateTime @default(now())
     updated_at DateTime @updatedAt
+    users      User[]
 }
 
 model Profile {
@@ -62,14 +60,17 @@ model CategoryService {
 }
 
 model Photo {
-    id                 String         @id @default(cuid())
-    name               String         @unique
-    slug               String?        @unique
+    id                 String          @id @default(cuid())
+    slug               String?         @unique
+    name               String
+    url                String
     description        String?
-    created_at         DateTime       @default(now())
-    updated_at         DateTime       @updatedAt
-    ServiceRequest     ServiceRequest @relation(fields: [service_request_id], references: [id], onDelete: Cascade)
-    service_request_id String
+    created_at         DateTime        @default(now())
+    updated_at         DateTime        @updatedAt
+    ServiceRequest     ServiceRequest? @relation(fields: [service_request_id], references: [id], onDelete: Cascade)
+    service_request_id String?
+    User               User?           @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId             String?
 }
 
 model ServiceRequest {
@@ -141,6 +142,7 @@ model User {
     is_provider                    Boolean?                         @default(true)
     is_purchaser                   Boolean?                         @default(true)
     is_home_service_provider       Boolean?                         @default(true)
+    is_remote_service_provider     Boolean?                         @default(true)
     email                          String                           @unique
     emailVerified                  DateTime?                        @map("email_verified")
     bio                            String?
@@ -159,6 +161,7 @@ model User {
     profile                        Profile?
     services                       Service[]
     skills                         Skill[]
+    show_case_photos               Photo[]
     ProviderServiceRequestResponse ProviderServiceRequestResponse[]
 }
 

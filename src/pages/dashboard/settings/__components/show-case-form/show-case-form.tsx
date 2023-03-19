@@ -1,73 +1,107 @@
-import { User } from '@prisma/client';
-import { useFieldArray } from 'react-hook-form';
+import { Photo, Skill, User } from '@prisma/client';
+import clsx from 'clsx';
+import { useCallback, useEffect } from 'react';
+import { Controller, useFieldArray } from 'react-hook-form';
 import { HiOutlinePencil } from 'react-icons/hi';
 import { HiOutlineTrash } from 'react-icons/hi2';
 
 import { Field } from '@components/lib/Field/Field';
+import { ActionOnTop } from '@components/lib/action-on-top/action-on-top';
 import { Button } from '@components/lib/button/button';
 import Form, { useZodForm } from '@components/lib/form/form';
 import ImageEmpty from '@components/lib/image-empty/image-empty';
-import ImageWithElementsOnTop from '@components/lib/image-with-elements-on-top/image-with-elements-on-top';
+import { ImageUI } from '@components/lib/image-ui/image-ui';
 import { Label } from '@components/lib/label/label';
-import { AsyncCreatableSelectUI } from '@components/lib/select';
+import { AsyncCreatableSelectUI, SelectUI } from '@components/lib/select';
 import {
   FileUpload,
   FileWithPreview,
 } from '@components/lib/upload/file-upload';
+import { VariantMessage } from '@components/lib/variant-message/variant-message';
+
+import { showCaseSchema } from '@validations/user-infos-schema';
 
 import { FormCardContainer } from '@pages/dashboard/__components/form-card-container/form-card-container';
 
-import { TRegister } from '@interfaces/auth-user';
+import { TUserMeInfos } from '@interfaces/user-infos';
+
+import { api } from '@utils/api';
 
 import { EXTENSION_IMAGES_ALLOWED } from '@constants/index';
 
-type TShowCaseForm = TRegister & {
-  confirmError?: any;
-  desireError?: any;
-};
-
-const ShowCaseForm = ({ user }: { user: Omit<User, 'password'> }) => {
+const ShowCaseForm = ({ user }: { user: TUserMeInfos }) => {
   const form = useZodForm({
+    schema: showCaseSchema,
     defaultValues: {
       photos: [
         {
-          content: '',
+          name: '',
           file: [],
+          description: '',
         },
         {
-          content: '',
+          name: '',
           file: [],
+          description: '',
         },
         {
-          content: '',
+          name: '',
           file: [],
+          description: '',
         },
       ],
     },
   });
 
+  const { data, refetch, isLoading, error } = api.skill.getSkills.useQuery();
+
   const {
     register,
     setValue,
     control,
+    reset,
     watch,
     formState: { errors, isSubmitting },
   } = form;
 
-  const { fields, append, remove } = useFieldArray({
+  const { fields } = useFieldArray({
     control, // control props comes from useForm (optional: if you are using FormContext)
     name: 'photos', // unique name for your Field Array
   });
 
-  const watchFile = idx => watch(`photos.${idx}.file`, []);
+  const watchFile = useCallback(idx => watch(`photos.${idx}.file`, []), []);
+  const hasPhotoErrors = errors?.photos?.length > 0;
+  const photoMessage = errors?.photos?.map(photo => photo.file?.message)?.[0];
 
   const handleChangeFile = (file, idx) => {
     setValue(`photos.${idx}.file`, file);
   };
 
-  const onSubmit = async (data: TShowCaseForm) => {
+  console.log(errors);
+
+  const onSubmit = async data => {
     console.log(data);
   };
+
+  // useEffect(() => {
+  //   if (user) {
+  //     const fieldPhotos = user?.show_case_photos?.map(photo => ({
+  //       file: photo?.url,
+  //       description: photo?.description,
+  //       name: photo?.name,
+  //     }));
+
+  //     const skills = user?.skills?.map(skill => ({
+  //       label: skill?.name,
+  //       value: skill?.id,
+  //     }));
+
+  //     reset({
+  //       // photos: fieldPhotos,
+  //       skills,
+  //     });
+  //   }
+  // }, [reset, user]);
 
   return (
     <div>
@@ -84,7 +118,7 @@ const ShowCaseForm = ({ user }: { user: Omit<User, 'password'> }) => {
           </div>
         </div>
         <div className="mt-5 md:col-span-2 md:mt-0">
-          <Form form={form} onSubmit={data => console.log(data)}>
+          <Form form={form} onSubmit={onSubmit}>
             <FormCardContainer
               footer={
                 <div className="flex justify-end">
@@ -93,29 +127,30 @@ const ShowCaseForm = ({ user }: { user: Omit<User, 'password'> }) => {
               }
             >
               <div className="grid grid-cols-6 gap-6">
-                {/* Nom */}
                 <div className="col-span-6">
                   <div>
-                    <Label className="font-semibold" required>
-                      Photos à la une
-                    </Label>
-                    <div className="grid md:grid-cols-3 gap-3">
-                      {fields.map((field, idx) => (
-                        <FileUpload
-                          key={field.id}
-                          accept={EXTENSION_IMAGES_ALLOWED}
-                          handleAddFile={file => handleChangeFile(file, idx)}
-                          handleRemoveFile={file => handleChangeFile(file, idx)}
-                          value={watchFile(idx)}
-                          preview={null}
-                          {...(register(`photos.${idx}.file`) as any)}
-                        >
-                          {({ openFile, files, onRemoveFile }) => {
-                            const hasName = (files as FileWithPreview[])[0]
-                              ?.name;
-                            return (
-                              <>
-                                <div className="w-full flex items-center gap-3">
+                    <Field
+                      error={hasPhotoErrors && (photoMessage as string)}
+                      label="Photos à la une"
+                    >
+                      <div className="grid md:grid-cols-3 gap-3">
+                        {fields.map((field, idx) => (
+                          <FileUpload
+                            key={field.id}
+                            accept={EXTENSION_IMAGES_ALLOWED}
+                            handleAddFile={file => handleChangeFile(file, idx)}
+                            handleRemoveFile={file =>
+                              handleChangeFile(file, idx)
+                            }
+                            value={watchFile(idx)}
+                            preview={null}
+                            {...(register(`photos.${idx}.file`) as any)}
+                          >
+                            {({ openFile, files, onRemoveFile }) => {
+                              const hasName = (files as FileWithPreview[])[0]
+                                ?.name;
+                              return (
+                                <>
                                   {!hasName ? (
                                     <ImageEmpty
                                       title="Choisissez une photo"
@@ -125,62 +160,77 @@ const ShowCaseForm = ({ user }: { user: Omit<User, 'password'> }) => {
                                   ) : (
                                     <div className="w-full flex gap-3">
                                       {files.map((file: FileWithPreview) => (
-                                        <ImageWithElementsOnTop
-                                          key={file.preview}
-                                          shape="rounded"
-                                          imageClassName="h-52 w-full"
-                                          size="xl"
-                                          src={file.preview}
-                                          name={file.name}
+                                        <ActionOnTop
+                                          key={file?.name}
+                                          className={clsx(
+                                            'rounded-md h-52 w-full',
+                                            hasPhotoErrors &&
+                                              errors?.photos[idx]?.file
+                                                ?.message &&
+                                              'border-2 border-red-500'
+                                          )}
+                                          viewActionMode="hover"
+                                          bgElement={
+                                            <ImageUI
+                                              title="Choisissez une photo"
+                                              className="h-52 w-full"
+                                              src={file?.preview}
+                                              name={file?.name}
+                                            />
+                                          }
                                         >
-                                          <div className="flex items-center gap-3 text-white">
+                                          <div className="flex justify-center items-center gap-3 w-full">
                                             <Button
-                                              type="button"
-                                              title="Changez la photo"
-                                              variant="subtle"
+                                              title="Changez l'image"
                                               onClick={openFile}
+                                              type="button"
+                                              variant="light"
+                                              className="p-1 bg-transparent"
                                             >
-                                              <HiOutlinePencil />
+                                              <HiOutlinePencil className="h-6 w-6" />
                                             </Button>
                                             <Button
-                                              type="button"
-                                              title="Supprimez la photo"
-                                              variant="subtle"
+                                              title="Supprimez l'image"
                                               onClick={() => onRemoveFile(file)}
+                                              type="button"
+                                              variant="light"
+                                              className="p-1 bg-transparent"
                                             >
-                                              <HiOutlineTrash />
+                                              <HiOutlineTrash className="h-6 w-6" />
                                             </Button>
                                           </div>
-                                        </ImageWithElementsOnTop>
+                                        </ActionOnTop>
                                       ))}
                                     </div>
                                   )}
-                                </div>
-                              </>
-                            );
-                          }}
-                        </FileUpload>
-                      ))}
-                    </div>
+                                </>
+                              );
+                            }}
+                          </FileUpload>
+                        ))}
+                      </div>
+                    </Field>
                   </div>
                 </div>
 
                 {/* Compétences */}
-                <div className="col-span-6 sm:col-span-3">
-                  <Field label="Mes compétences / atouts" required>
-                    <AsyncCreatableSelectUI
-                      isMulti
-                      onSearch={() => Promise.resolve([])}
-                      defaultOptions={[
-                        {
-                          label: 'salut',
-                          value: 'ss',
-                        },
-                        {
-                          lavel: 'Jerome',
-                          value: 'sssa',
-                        },
-                      ]}
+                <div className="col-span-6 sm:col-span-4">
+                  <Field label="Mes compétences / atouts">
+                    <Controller
+                      name="skills"
+                      control={control}
+                      rules={{ required: true }}
+                      render={({ field, fieldState }) => (
+                        <SelectUI
+                          isMulti
+                          {...field}
+                          inputId="skills"
+                          options={data?.skills?.map(skill => ({
+                            label: skill?.name,
+                            value: skill?.id,
+                          }))}
+                        />
+                      )}
                     />
                   </Field>
                 </div>

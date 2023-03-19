@@ -51,9 +51,7 @@ const HeroCarousselImages = () => {
           return (
             <SwiperSlide key={idx}>
               <ImageUI
-                noNeedApiPrefix
                 src={image?.src}
-                alt={image?.alt}
                 name={image?.name}
                 shape="rounded"
                 className="h-[400px] w-full object-cover"

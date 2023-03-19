@@ -1,48 +1,30 @@
-import { User } from '@prisma/client';
-import { useEffect } from 'react';
-import { HiOutlineTrash } from 'react-icons/hi';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { HiOutlinePencil } from 'react-icons/hi2';
 
 import { Field } from '@components/lib/Field/Field';
+import { ActionOnTop } from '@components/lib/action-on-top/action-on-top';
 import { Avatar } from '@components/lib/avatar/avatar';
 import { Button } from '@components/lib/button/button';
 import { Checkbox } from '@components/lib/checkbox/checkbox';
 import Form, { useZodForm } from '@components/lib/form/form';
-import ImageWithElementsOnTop from '@components/lib/image-with-elements-on-top/image-with-elements-on-top';
 import { Input } from '@components/lib/input/input';
 import { Label } from '@components/lib/label/label';
 import { Textarea } from '@components/lib/textarea/textarea';
-import {
-  FileUpload,
-  FileWithPreview,
-} from '@components/lib/upload/file-upload';
+import { FileUpload } from '@components/lib/upload/file-upload';
 
 import { profilSchema } from '@validations/user-infos-schema';
 
 import { FormCardContainer } from '@pages/dashboard/__components/form-card-container/form-card-container';
 
-import { TRegister } from '@interfaces/auth-user';
+import { TUserMeInfos } from '@interfaces/user-infos';
 
 import { EXTENSION_IMAGES_ALLOWED } from '@constants/index';
 
-type TProfileInfosForm = TRegister & {
-  confirmError?: any;
-  desireError?: any;
-};
-
-const ProfileInfosForm = ({ user }: { user: Omit<User, 'password'> }) => {
-  const form = useZodForm({
-    schema: profilSchema,
-  });
-  const {
-    register,
-    setValue,
-    watch,
-    reset,
-    formState: { errors, isSubmitting },
-  } = form;
+const ProfileInfosForm = ({ user }: { user: TUserMeInfos }) => {
   const {
     avatar,
+    first_name,
+    last_name,
     website_url,
     bio,
     is_purchaser,
@@ -50,20 +32,30 @@ const ProfileInfosForm = ({ user }: { user: Omit<User, 'password'> }) => {
     is_home_service_provider,
   } = user;
 
-  const watchFile = watch('avatar', []);
+  const [value, setValue] = useState(avatar);
 
-  const handleChangeFile = file => {
-    setValue('avatar', file);
+  const form = useZodForm({
+    schema: profilSchema,
+  });
+
+  const {
+    register,
+    reset,
+    formState: { errors },
+  } = form;
+
+  const onSubmit = async data => {
+    console.log(data);
   };
 
-  const onSubmit = async (data: TProfileInfosForm) => {
-    console.log(data);
+  const onAddFile = file => {
+    setValue(file);
   };
 
   useEffect(() => {
     if (user) {
       reset({
-        avatar,
+        // avatar,
         website_url,
         is_purchaser,
         is_provider,
@@ -73,6 +65,8 @@ const ProfileInfosForm = ({ user }: { user: Omit<User, 'password'> }) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [reset, user]);
+
+  console.log({ value });
 
   return (
     <div>
@@ -89,7 +83,7 @@ const ProfileInfosForm = ({ user }: { user: Omit<User, 'password'> }) => {
           </div>
         </div>
         <div className="mt-5 md:col-span-2 md:mt-0">
-          <Form form={form} onSubmit={data => console.log(data)}>
+          <Form form={form} onSubmit={onSubmit}>
             <FormCardContainer
               footer={
                 <div className="flex justify-end">
@@ -102,73 +96,44 @@ const ProfileInfosForm = ({ user }: { user: Omit<User, 'password'> }) => {
                 <div className="col-span-6">
                   <Field
                     label="Photo"
-                    hint="La taille maximale de photo à uploader est de 2MB"
+                    hint="Le poids max. de l'avatar est de 2MB"
                   >
                     <FileUpload
                       accept={EXTENSION_IMAGES_ALLOWED}
-                      handleAddFile={handleChangeFile}
-                      handleRemoveFile={handleChangeFile}
-                      value={watchFile}
                       preview={null}
-                      {...(register('avatar') as any)}
+                      name="avatar"
+                      handleAddFile={onAddFile}
+                      value={value}
+                      {...(register('avatar', { value: value }) as any)}
                     >
-                      {({ openFile, files, onRemoveFile }) => {
-                        const hasName = (files as FileWithPreview[])[0]?.name;
+                      {({ openFile, files }) => {
+                        const file = files[0] as any;
+                        const name = `${first_name} ${last_name}`;
                         return (
-                          <>
-                            <div className="flex items-center gap-3">
-                              {files.map((file: any, idx) => (
-                                <ImageWithElementsOnTop
-                                  key={idx}
-                                  size="xl"
-                                  src={file.preview || (file as string)}
-                                  name={file.name}
-                                  className="h-24 w-24"
-                                  imageClassName="h-24 w-24"
-                                >
-                                  <button
-                                    type="button"
-                                    title="Changez la photo"
-                                    className="p-1"
-                                    onClick={openFile}
-                                  >
-                                    <HiOutlinePencil className="h-5 w-5 text-white" />
-                                  </button>
-                                </ImageWithElementsOnTop>
-                              ))}
-                              {/* {!hasName ? (
-                                <Avatar size="xl" name="Caleb Russel" />
-                              ) : (
-                                <div>
-                                  {files.map((file: FileWithPreview) => (
-                                    <button
-                                      key={file.preview}
-                                      type="button"
-                                      onClick={() => onRemoveFile(file)}
-                                      className="relative z-10 group"
-                                    >
-                                      <Avatar
-                                        size="xl"
-                                        src={file.preview}
-                                        name={file.name}
-                                      />
-                                      <div className="absolute inset-0 flex justify-center opacity-100 lg:group-hover:opacity-100 lg:opacity-0 items-center bg-gray-800 rounded-full">
-                                        <HiOutlineTrash className="h-6 w-6 text-white" />
-                                      </div>
-                                    </button>
-                                  ))}
-                                </div>
-                              )} */}
+                          <ActionOnTop
+                            className="rounded-full"
+                            viewActionMode="now"
+                            bgElement={
+                              <Avatar
+                                src={file?.preview || file}
+                                fontSize={16}
+                                className="h-16 w-16"
+                                name={file?.name || name}
+                              />
+                            }
+                          >
+                            <div className="flex justify-center items-center w-full">
                               <Button
-                                variant="subtle"
-                                type="button"
-                                size="sm"
+                                title="Changez votre avatar"
                                 onClick={openFile}
+                                type="button"
+                                variant="light"
+                                className="p-1 bg-transparent"
                               >
-                                Changer la photo
+                                <HiOutlinePencil className="h-5 w-5" />
                               </Button>
                             </div>
-                          </>
+                          </ActionOnTop>
                         );
                       }}
                     </FileUpload>

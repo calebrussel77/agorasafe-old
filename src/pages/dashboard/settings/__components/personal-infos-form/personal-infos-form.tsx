@@ -12,13 +12,14 @@ import { personalInfosSchema } from '@validations/user-infos-schema';
 import { FormCardContainer } from '@pages/dashboard/__components/form-card-container/form-card-container';
 
 import { TRegister } from '@interfaces/auth-user';
+import { TUserMeInfos } from '@interfaces/user-infos';
 
 type TPersonalInfosForm = TRegister & {
   confirmError?: any;
   desireError?: any;
 };
 
-const PersonalInfosForm = ({ user }: { user: Omit<User, 'password'> }) => {
+const PersonalInfosForm = ({ user }: { user: TUserMeInfos }) => {
   const form = useZodForm({
     schema: personalInfosSchema,
     defaultValues: {

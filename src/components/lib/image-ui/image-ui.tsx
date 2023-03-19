@@ -1,6 +1,9 @@
+/* eslint-disable @next/next/no-img-element */
 import clsx from 'clsx';
+import { ImageProps } from 'next/dist/client/image';
 import Image from 'next/image';
 import React, { CSSProperties, forwardRef, useState } from 'react';
+import { HiPhoto } from 'react-icons/hi2';
 import { twMerge } from 'tailwind-merge';
 
 import { blurDataURL } from '@helpers/image';
@@ -42,11 +45,7 @@ export interface ImageUIOptions {
   position?: 'top' | 'center' | 'bottom';
 }
 
-export type ImageUIProps = Omit<
-  React.HTMLProps<HTMLDivElement>,
-  'size' | 'sizes'
-> &
-  ImageUIOptions;
+export type ImageUIProps = Omit<ImageProps, 'alt'> & ImageUIOptions;
 
 export const ImageUI = forwardRef<HTMLDivElement, ImageUIProps>(
   (
@@ -79,6 +78,8 @@ export const ImageUI = forwardRef<HTMLDivElement, ImageUIProps>(
     const [error, setError] = useState(false);
     const hasImage = src && !error;
     const imageSrc = src;
+    const isBlobSrc = src?.startsWith('blob:');
+    const isEmpty = error || !src;
 
     const classes = twMerge(
       clsx(
@@ -95,7 +96,6 @@ export const ImageUI = forwardRef<HTMLDivElement, ImageUIProps>(
       <div
         aria-label={name}
         style={{
-          background: hasImage ? 'transparent' : backgroundColor,
           alignItems: 'center',
           justifyContent: 'center',
           position: 'relative',
@@ -112,10 +112,14 @@ export const ImageUI = forwardRef<HTMLDivElement, ImageUIProps>(
         }}
         ref={ref}
         role="img"
-        className={twMerge(className, `flex overflow-hidden`)}
+        className={twMerge(
+          className,
+          `flex overflow-hidden`,
+          isEmpty && 'bg-gray-100'
+        )}
         {...rest}
       >
-        {hasImage && (
+        {!isBlobSrc && !isEmpty && (
           <Image
             alt={name}
             src={imageSrc}
@@ -134,10 +138,17 @@ export const ImageUI = forwardRef<HTMLDivElement, ImageUIProps>(
             className={classes}
           />
         )}
-        {(error || !src) && (
-          <h3 className="line-clamp-3 text-center m-1">
-            Failed to load this image
-          </h3>
+        {isBlobSrc && !isEmpty && (
+          <img
+            alt={name}
+            src={imageSrc}
+            onError={() => setError(true)}
+            className={classes}
+          />
+        )}
+
+        {isEmpty && (
+          <HiPhoto className=" text-gray-400 flex-shrink-0 h-10 w-10 m-auto" />
         )}
       </div>
     );

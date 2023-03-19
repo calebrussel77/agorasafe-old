@@ -38,6 +38,10 @@ export const defaultStyles: (
       return {
         ...baseStyles,
         backgroundColor: 'rgb(229 231 235)',
+        borderRadius: '0.25rem',
+        display: 'flex',
+        alignItems: 'center',
+        justifyItems: 'center',
       };
     },
     multiValueLabel: (baseStyles, state) => ({
@@ -92,9 +96,3 @@ export const defaultTheme = theme => {
     },
   };
 };
-
-export * from '../async-creatable-select/async-creatable-select-ui';
-
-export * from '../async-select/async-select-ui';
-
-export * from '../default-select/default-select';

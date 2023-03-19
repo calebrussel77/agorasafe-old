@@ -2,6 +2,8 @@ import { type VariantProps, cva } from 'class-variance-authority';
 import clsx from 'clsx';
 import React, { ReactElement, forwardRef } from 'react';
 
+import { Variant } from '@helpers/variants';
+
 import { Spinner } from '../spinner/spinner';
 
 const textarea = cva(
@@ -12,29 +14,34 @@ const textarea = cva(
   ],
   {
     variants: {
-      variant: {
-        default: [
+      appareance: {
+        primary: [
           'border-[1.5px] border-gray-300 placeholder:text-[#9ca3af]',
-          'hover:bg-gray-100 disabled:hover:bg-gray-200',
-          'required:border-red-500 focus:bg-transparent focus:ring-1 focus:ring-primary-500 focus:border-primary-500',
+          'hover:bg-gray-100 disabled:hover:bg-gray-200 disabled:bg-gray-200',
+          'focus:outline-none focus:caret-primary-500 focus:bg-transparent focus:ring-1 focus:ring-primary-500 focus:border-primary-500',
+        ],
+        secondary: [
+          'border-[1.5px] border-gray-300 placeholder:text-[#9ca3af]',
+          'hover:bg-gray-100 disabled:hover:bg-gray-200 disabled:bg-gray-200',
+          'focus:outline-none focus:caret-secondary-500 focus:bg-transparent focus:ring-1 focus:ring-secondary-500 focus:border-secondary-500',
         ],
         subtle: [
           'bg-transparent border-none border-0 placeholder:text-[#9ca3af]',
           'hover:bg-slate-50 disabled:hover:bg-transparent',
-          'required:border-red-500 focus:border-0 focus:ring-0 focus-within:border-0',
+          'focus:outline-none focus:border-0 focus:ring-0 focus-within:border-0',
         ],
       },
       size: {
         xs: ['text-xs', 'py-1', 'px-2'],
         sm: ['text-sm', 'py-1.5', 'px-2'],
-        md: ['text-base', 'py-1.5', 'px-2'],
-        lg: ['text-lg', 'py-3', 'px-4'],
-        xl: ['text-xl', 'py-3', 'px-4'],
+        md: ['text-sm', 'py-2', 'px-3'],
+        lg: ['text-lg', 'py-2', 'px-4'],
+        xl: ['text-xl', 'py-2.5', 'px-4'],
       },
     },
-    compoundVariants: [{ variant: 'default', size: 'md' }],
+    compoundVariants: [{ appareance: 'primary', size: 'md' }],
     defaultVariants: {
-      variant: 'default',
+      appareance: 'primary',
       size: 'md',
     },
   }
@@ -45,6 +52,7 @@ export type InputProps = React.HTMLProps<HTMLTextAreaElement> & {
   iconBefore?: ReactElement;
   isLoding?: boolean;
   iconAfter?: ReactElement;
+  variant?: Variant;
 };
 
 export type TextareaProps = React.HTMLAttributes<HTMLButtonElement> &
@@ -58,6 +66,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       className,
       setParentValue,
       iconBefore,
+      appareance,
       iconAfter,
       isLoding,
       variant,
@@ -66,6 +75,8 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     },
     ref
   ) => {
+    const hasError = variant === 'danger';
+
     const handleOnchange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
       setParentValue && setParentValue(e.target.value);
     };
@@ -81,10 +92,11 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           ref={ref}
           rows={3}
           cols={3}
+          style={{ borderColor: hasError && 'red' }}
           value={props.value}
           onChange={handleOnchange}
           className={textarea({
-            variant,
+            appareance,
             size,
             class: clsx(
               iconBefore && 'pl-10',

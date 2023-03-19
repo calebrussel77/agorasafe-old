@@ -70,52 +70,54 @@ const LoginForm = () => {
   };
 
   return (
-    <Form form={form} onSubmit={onSubmit}>
+    <>
       {loading && <FullSpinner />}
 
-      <Field required label="Adresse email">
-        <Input
-          {...register('email')}
-          autoFocus={true}
-          type="email"
-          placeholder="Entrez votre adresse email"
-        />
-      </Field>
-      <Field
-        required
-        error={(errors as any)?.confirmError?.message}
-        label="Mot de passe"
-      >
-        <Input
-          {...register('password')}
-          shouldViewPasswordIcon
-          id="password"
-          type="password"
-          placeholder="Entrez votre mot de passe"
-        />
-      </Field>
-
-      <Button variant="primary" className="w-full" loading={isSubmitting}>
-        Connexion
-      </Button>
-
-      <p>
-        Pas encore membre ?{' '}
-        <Link
-          passHref
-          href="/register"
-          className="font-semibold text-secondary-500 hover:underline"
+      <Form form={form} onSubmit={onSubmit}>
+        <Field required label="Adresse email">
+          <Input
+            {...register('email')}
+            autoFocus={true}
+            type="email"
+            placeholder="Entrez votre adresse email"
+          />
+        </Field>
+        <Field
+          required
+          error={(errors as any)?.confirmError?.message}
+          label="Mot de passe"
         >
-          Créez votre compte
-        </Link>
-      </p>
+          <Input
+            {...register('password')}
+            shouldViewPasswordIcon
+            id="password"
+            type="password"
+            placeholder="Entrez votre mot de passe"
+          />
+        </Field>
 
-      <HelperMessage>
-        Vos données personnelles (email et mot de passe) ne seront utilisées
-        qu'à des fins d'authentification et ne seront pas partagées avec des
-        tiers.
-      </HelperMessage>
-    </Form>
+        <Button variant="primary" className="w-full" loading={isSubmitting}>
+          Connexion
+        </Button>
+
+        <p>
+          Pas encore membre ?{' '}
+          <Link
+            passHref
+            href="/register"
+            className="font-semibold text-secondary-500 hover:underline"
+          >
+            Créez votre compte
+          </Link>
+        </p>
+
+        <HelperMessage>
+          Vos données personnelles (email et mot de passe) ne seront utilisées
+          qu'à des fins d'authentification et ne seront pas partagées avec des
+          tiers.
+        </HelperMessage>
+      </Form>
+    </>
   );
 };
 

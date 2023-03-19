@@ -4,12 +4,8 @@ import slugify from 'slugify';
 
 import { TLogin, TRegister } from '@interfaces/auth-user';
 
-import {
-  createUser,
-  getUserByEmail,
-  getUserBySlug,
-  getUserWithoutPassword,
-} from '../services';
+import { createUser, getUserByEmail, getUserBySlug } from '../services';
+import { getUserWithoutPassword } from './utils';
 
 export const createUniqueSlugByName = async (name: string) => {
   try {

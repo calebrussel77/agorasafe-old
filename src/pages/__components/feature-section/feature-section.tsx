@@ -168,7 +168,6 @@ export function FeatureSection() {
               noNeedApiPrefix
               className="relative shadow-md mx-auto h-[480px] w-[430px]"
               src="/images/maman-africaine-phone.jpg"
-              alt=""
               name="Mama africaine"
               shape="rounded"
             />
@@ -278,7 +277,6 @@ export function FeatureSection() {
                 noNeedApiPrefix
                 className="relative shadow-md mx-auto h-[480px] w-[430px]"
                 src="/images/femme-menage.jpg"
-                alt=""
                 name="femme menage"
                 shape="rounded"
               />

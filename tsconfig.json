@@ -33,6 +33,6 @@
       "@api-providers/*": ["./src/api-providers/*"],
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.cjs", "**/*.mjs"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.cjs", "**/*.mjs", "prisma/**/*.js"],
   "exclude": ["node_modules", ".history"]
 }
