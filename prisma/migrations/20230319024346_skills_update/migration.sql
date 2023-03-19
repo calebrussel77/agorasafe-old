@@ -9,7 +9,6 @@ CREATE TABLE "Skill" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "slug" TEXT NOT NULL,
-    "user_id" TEXT NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
 
@@ -57,12 +56,14 @@ CREATE TABLE "CategoryService" (
 -- CreateTable
 CREATE TABLE "Photo" (
     "id" TEXT NOT NULL,
-    "name" TEXT NOT NULL,
     "slug" TEXT,
+    "name" TEXT NOT NULL,
+    "url" TEXT NOT NULL,
     "description" TEXT,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
-    "service_request_id" TEXT NOT NULL,
+    "service_request_id" TEXT,
+    "userId" TEXT,
 
     CONSTRAINT "Photo_pkey" PRIMARY KEY ("id")
 );
@@ -71,6 +72,7 @@ CREATE TABLE "Photo" (
 CREATE TABLE "ServiceRequest" (
     "id" TEXT NOT NULL,
     "title" TEXT NOT NULL,
+    "slug" TEXT NOT NULL,
     "content" TEXT NOT NULL,
     "phone_to_contact" TEXT,
     "number_of_provider_needed" INTEGER NOT NULL,
@@ -131,12 +133,14 @@ CREATE TABLE "Session" (
 -- CreateTable
 CREATE TABLE "User" (
     "id" TEXT NOT NULL,
+    "slug" TEXT NOT NULL,
     "first_name" TEXT NOT NULL,
     "last_name" TEXT NOT NULL,
     "is_provider" BOOLEAN DEFAULT true,
     "is_purchaser" BOOLEAN DEFAULT true,
     "is_home_service_provider" BOOLEAN DEFAULT true,
-    "email" TEXT,
+    "is_remote_service_provider" BOOLEAN DEFAULT true,
+    "email" TEXT NOT NULL,
     "email_verified" TIMESTAMP(3),
     "bio" TEXT,
     "website_url" TEXT,
@@ -160,6 +164,12 @@ CREATE TABLE "VerificationToken" (
 );
 
 -- CreateTable
+CREATE TABLE "_SkillToUser" (
+    "A" TEXT NOT NULL,
+    "B" TEXT NOT NULL
+);
+
+-- CreateTable
 CREATE TABLE "_ServiceToUser" (
     "A" TEXT NOT NULL,
     "B" TEXT NOT NULL
@@ -167,9 +177,6 @@ CREATE TABLE "_ServiceToUser" (
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Skill_name_key" ON "Skill"("name");
-
--- CreateIndex
-CREATE UNIQUE INDEX "Skill_user_id_key" ON "Skill"("user_id");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Profile_name_key" ON "Profile"("name");
@@ -190,16 +197,19 @@ CREATE UNIQUE INDEX "CategoryService_name_key" ON "CategoryService"("name");
 CREATE UNIQUE INDEX "CategoryService_slug_key" ON "CategoryService"("slug");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Photo_name_key" ON "Photo"("name");
+CREATE UNIQUE INDEX "Photo_slug_key" ON "Photo"("slug");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Photo_slug_key" ON "Photo"("slug");
+CREATE UNIQUE INDEX "ServiceRequest_slug_key" ON "ServiceRequest"("slug");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Account_provider_provider_account_id_key" ON "Account"("provider", "provider_account_id");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Session_sessionToken_key" ON "Session"("sessionToken");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_slug_key" ON "User"("slug");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
@@ -211,13 +221,16 @@ CREATE UNIQUE INDEX "VerificationToken_token_key" ON "VerificationToken"("token"
 CREATE UNIQUE INDEX "VerificationToken_identifier_token_key" ON "VerificationToken"("identifier", "token");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "_SkillToUser_AB_unique" ON "_SkillToUser"("A", "B");
+
+-- CreateIndex
+CREATE INDEX "_SkillToUser_B_index" ON "_SkillToUser"("B");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "_ServiceToUser_AB_unique" ON "_ServiceToUser"("A", "B");
 
 -- CreateIndex
 CREATE INDEX "_ServiceToUser_B_index" ON "_ServiceToUser"("B");
-
--- AddForeignKey
-ALTER TABLE "Skill" ADD CONSTRAINT "Skill_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Profile" ADD CONSTRAINT "Profile_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
@@ -227,6 +240,9 @@ ALTER TABLE "Service" ADD CONSTRAINT "Service_category_service_id_fkey" FOREIGN 
 
 -- AddForeignKey
 ALTER TABLE "Photo" ADD CONSTRAINT "Photo_service_request_id_fkey" FOREIGN KEY ("service_request_id") REFERENCES "ServiceRequest"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Photo" ADD CONSTRAINT "Photo_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "ServiceRequest" ADD CONSTRAINT "ServiceRequest_author_id_fkey" FOREIGN KEY ("author_id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -245,6 +261,12 @@ ALTER TABLE "Account" ADD CONSTRAINT "Account_user_id_fkey" FOREIGN KEY ("user_i
 
 -- AddForeignKey
 ALTER TABLE "Session" ADD CONSTRAINT "Session_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_SkillToUser" ADD CONSTRAINT "_SkillToUser_A_fkey" FOREIGN KEY ("A") REFERENCES "Skill"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_SkillToUser" ADD CONSTRAINT "_SkillToUser_B_fkey" FOREIGN KEY ("B") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "_ServiceToUser" ADD CONSTRAINT "_ServiceToUser_A_fkey" FOREIGN KEY ("A") REFERENCES "Service"("id") ON DELETE CASCADE ON UPDATE CASCADE;

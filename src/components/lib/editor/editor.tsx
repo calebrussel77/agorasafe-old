@@ -1,11 +1,10 @@
 import dynamic from 'next/dynamic';
-import ReactQuill from 'react-quill';
+import { Editor as DraftEditor } from 'react-draft-wysiwyg';
 
 import { Spinner } from '../spinner/spinner';
 
-export type TEditorProps = React.ComponentPropsWithRef<typeof ReactQuill> & {
+export type TEditorProps = React.ComponentPropsWithRef<typeof DraftEditor> & {
   className?: string;
-  autoFocus?: boolean;
 };
 
 const Editor = dynamic<TEditorProps>(() => import('./editor-instance') as any, {

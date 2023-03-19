@@ -3,7 +3,8 @@ import { Session } from 'next-auth';
 
 import { TUserInfosUpdate } from '@interfaces/user-infos';
 
-import { getUserById, getUserWithoutPassword, updateUser } from '../services';
+import { getUserById, updateUser } from '../services';
+import { getUserWithoutPassword } from './utils';
 
 export const updateUserInfosController = async (
   updateDataCredentials: TUserInfosUpdate,
@@ -44,6 +45,8 @@ export const updateUserInfosController = async (
           last_name: last_name || userFound.last_name,
           is_provider: is_provider || userFound.is_provider,
           is_purchaser: is_purchaser || userFound.is_purchaser,
+          is_remote_service_provider:
+            is_remote_service_provider || userFound.is_remote_service_provider,
           bio: bio || userFound.bio,
           birthdate: birthdate || userFound.birthdate,
           is_home_service_provider:

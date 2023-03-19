@@ -56,19 +56,19 @@
 .ql-container {
   @apply border-none p-0 font-sans !important;
 }
-.ql-editor {
+.rdw-editor-main {
   @apply max-h-96 min-h-0 py-0 pl-3 pr-0 text-base leading-snug !important;
 }
-.ql-editor.ql-blank::before {
+.rdw-editor-main.ql-blank::before {
   @apply text-gray-500 !important;
 }
 /* Scroll apect of the container */
-.ql-editor::-webkit-scrollbar {
+.rdw-editor-main::-webkit-scrollbar {
   @apply w-1 !important;
 }
-.ql-editor::-webkit-scrollbar-track {
+.rdw-editor-main::-webkit-scrollbar-track {
   @apply rounded-lg bg-gray-100 !important;
 }
-.ql-editor::-webkit-scrollbar-thumb {
+.rdw-editor-main::-webkit-scrollbar-thumb {
   @apply rounded-lg bg-gray-900 bg-opacity-30 !important;
 }

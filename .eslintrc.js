@@ -27,12 +27,12 @@ module.exports = {
       extends: ['plugin:testing-library/react'],
     },
   ],
-  ignorePatterns: ['.eslintrc.js', '**/*.config.js'],
+  ignorePatterns: ['.eslintrc.js', '**/*.config.js', 'prisma/**/*.js'],
   plugins: ['react', '@typescript-eslint'],
   rules: {
     '@typescript-eslint/no-unsafe-assignment': 'off',
     'react/no-unknown-property': 0,
-    'no-unused-vars': [1, {args: 'after-used', varsIgnorePattern: '^_'}],
+    'no-unused-vars': [1, { args: 'after-used', varsIgnorePattern: '^_' }],
     'react/no-unescaped-entities': 0,
     // "linebreak-style": ["error", "unix"],
     // "semi": ["error", "always"],
@@ -42,7 +42,7 @@ module.exports = {
     '@typescript-eslint/no-unsafe-call': 'off',
     'testing-library/no-render-in-setup': [
       'error',
-      {allowTestingFrameworkSetupHook: 'beforeEach'},
+      { allowTestingFrameworkSetupHook: 'beforeEach' },
     ],
   },
 };

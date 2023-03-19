@@ -6,40 +6,35 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { HiUpload } from 'react-icons/hi';
+import { HiCloudUpload } from 'react-icons/hi';
 
-import {
-  EXTENSION_IMAGES_ALLOWED,
-  MAX_IMAGE_UPLOAD_SIZE,
-} from '@constants/index';
+import { useMergeRefs } from '@hooks/use-merge-refs/use-merge-refs';
 
 import { Button } from '../button/button';
 import { createEvent } from './create-event';
 // FileUpload
 import { Preview as DefaultPreview } from './preview';
 
-const DEFAULT_MAX_FILE_SIZE = MAX_IMAGE_UPLOAD_SIZE; // 5Mb
-const DEFAULT_FILE_TYPES = EXTENSION_IMAGES_ALLOWED;
+const DEFAULT_MAX_FILE_SIZE = 200 * 10 * 1000;
+const DEFAULT_FILE_TYPES = '*/*';
 
 export interface FileWithPreview extends File {
   preview?: string;
 }
 
-type FileWithPreviewType = FileWithPreview | string;
+export type FileWithPreviewType = FileWithPreview | string;
 
 type HandleRemoveType = (file: FileWithPreviewType) => void;
 
 export interface FileUploadOptions {
   /** Pass a comma-separated string of file types e.g. "image/png" or "image/png,image/jpeg" */
   accept?: string;
+  dataTestId?: string;
   maxSize?: number;
-  label?: string | ReactElement;
-  iconBefore?: ReactElement;
   handleAddFile?: (files: FileWithPreviewType[] | FileWithPreviewType) => void;
   handleRemoveFile?: HandleRemoveType;
   preview?: typeof DefaultPreview;
   onBlur?: () => void;
-  dataTestId?: string;
   onChange?: (event: ReturnType<typeof createEvent>) => void;
   children?: (props: {
     openFile: () => void;
@@ -73,7 +68,6 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(
       maxSize = DEFAULT_MAX_FILE_SIZE,
       multiple,
       name,
-      iconBefore,
       label = 'Uplaod a file',
       handleAddFile,
       onBlur,
@@ -91,10 +85,14 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(
     );
     const inputRef = useRef<HTMLInputElement>();
 
+    const refs = useMergeRefs(inputRef, ref);
+
     // Ensure component is controlled
-    useEffect(() => {
-      setFiles(ensureArray(value));
-    }, [value]);
+    // useEffect(() => {
+    //   if (value) {
+    //     setFiles(ensureArray(value));
+    //   }
+    // }, [value]);
 
     // Clean up URL on unmount
     useEffect(() => {
@@ -120,8 +118,8 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(
       }
 
       const event = createEvent({ name, value: newFiles });
-      onChange && onChange(event);
       handleAddFile && handleAddFile(newFiles);
+      onChange && onChange(event);
       // onBlur && onBlur();
     };
 
@@ -156,15 +154,15 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(
             onRemoveFile: handleRemove,
           })
         ) : (
-          <Button
+          <button
             type="button"
-            variant="subtle"
             disabled={disabled}
             onClick={handleClick}
+            className="border hover:bg-gray-100 bg-gray-50 transition duration-200 border-dashed min-w-[300px] w-full min-h-[120px] disabled:bg-gray-300 disabled:cursor-not-allowed border-gray-400 p-2 flex justify-center gap-3 items-center"
           >
-            {iconBefore ? iconBefore : <HiUpload className="h-6 w-6" />}
+            {<HiCloudUpload className="h-6 w-6" />}
             {label}
-          </Button>
+          </button>
         )}
         <input
           accept={accept}
@@ -176,18 +174,9 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(
           multiple={multiple}
           name={name}
           onBlur={onBlur}
-          onChange={handleChange}
-          ref={(instance: HTMLInputElement) => {
-            // for internal use only
-            inputRef.current = instance;
-            // for external use
-            if (typeof ref === 'function') {
-              ref(instance);
-            } else if (ref?.current) {
-              ref.current = instance;
-            }
-          }}
+          ref={refs}
           {...rest}
+          onChange={handleChange}
           type="file"
         />
         {Preview && (

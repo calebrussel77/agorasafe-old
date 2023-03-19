@@ -11,6 +11,13 @@ const button = cva(
   {
     variants: {
       variant: {
+        light: [
+          'bg-gray-100/40 shadow-md',
+          'text-white',
+          'border-transparent',
+          'hover:bg-gray-100/60 focus:outline-none focus:ring-2 focus:ring-gray-500',
+          'disabled:opacity-60',
+        ],
         primary: [
           'bg-primary-600 shadow-primary-600/20 shadow-md',
           'text-white',
@@ -53,7 +60,7 @@ const button = cva(
         xl: ['text-xl', 'py-3', 'px-5'],
       },
       shape: {
-        pill: ['rounded-full'],
+        circle: ['rounded-full'],
         rounded: ['rounded-md'],
         square: ['rounded-none'],
       },

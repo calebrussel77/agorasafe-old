@@ -1,24 +1,19 @@
-import { Prisma, User } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 
 import { prisma } from '@server/db';
-
-// Exclude keys from user
-export function exclude<User, Key extends keyof User>(
-  user: User,
-  keys: Key[]
-): Omit<User, Key> {
-  for (let key of keys) {
-    delete user[key];
-  }
-  return user;
-}
 
 export async function getUserByEmail(email: string) {
   return await prisma.user.findUnique({ where: { email } });
 }
 
 export async function getUserById(id: string) {
-  return await prisma.user.findUnique({ where: { id } });
+  return await prisma.user.findUnique({
+    where: { id },
+    include: {
+      skills: true,
+      show_case_photos: true,
+    },
+  });
 }
 
 export async function getUserBySlug(slug: string) {
@@ -32,6 +27,3 @@ export async function createUser(createArgs: Prisma.UserCreateArgs) {
 export async function updateUser(updateArgs: Prisma.UserUpdateArgs) {
   return await prisma.user.update(updateArgs);
 }
-
-export const getUserWithoutPassword = (userData: User) =>
-  exclude(userData, ['password']);
