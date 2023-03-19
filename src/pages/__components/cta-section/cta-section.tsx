@@ -28,7 +28,6 @@ export function CtaSection() {
             shape="rounded"
             className="w-full hidden lg:block h-[420px] transform translate-x-16 translate-y-16"
             src="/images/jeune-homme-joyeux.png"
-            alt="App screenshot"
             name="App screenshot"
           />
         </div>

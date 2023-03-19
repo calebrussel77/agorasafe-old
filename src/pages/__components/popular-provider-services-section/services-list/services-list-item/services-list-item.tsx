@@ -16,7 +16,6 @@ const ServicesListItem = ({ service }) => {
         name={service?.title}
         className="h-48 w-full object-cover"
         src={service.imageUrl}
-        alt={service?.title}
       />
       <div className="flex flex-1 flex-col justify-between bg-white p-6">
         <div className="flex-1">
@@ -44,7 +43,6 @@ const ServicesListItem = ({ service }) => {
                 shape="circle"
                 className="h-10 w-10 rounded-full"
                 src={service.author.imageUrl}
-                alt=""
               />
             </Link>
           </div>

@@ -93,7 +93,11 @@ export interface AvatarOptions {
   isPremium?: boolean;
 }
 
-export type AvatarProps = AvatarOptions & Omit<ImageProps, 'alt'>;
+export type AvatarProps = Omit<
+  React.HTMLProps<HTMLDivElement>,
+  'size' | 'sizes'
+> &
+  AvatarOptions;
 
 export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
   (
@@ -115,6 +119,7 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
       badgeSize,
       badgeShape,
       badgeIcon,
+      alt,
       style: externalStyle,
       noNeedApiPrefix = true,
       children,
@@ -173,23 +178,23 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
             avatarStatusText,
             className
           )}
+          {...rest}
         >
           {(!isBlobSrc || error) && (
             <Image
-              alt={name}
+              alt={name || alt}
               fill
               src={src ? src : avatarErrorSrc}
               blurDataURL={blurDataURL()}
               placeholder="blur"
               onError={() => setError(true)}
               className={classes}
-              {...rest}
             />
           )}
 
           {isBlobSrc && (
             <img
-              alt={name}
+              alt={name || alt}
               src={src ? src : avatarErrorSrc}
               onError={() => setError(true)}
               className={classes}

@@ -7,7 +7,6 @@ const ServicesListItem = ({ service }) => {
         className="absolute h-full inset-0 object-cover"
         noNeedApiPrefix
         src={service?.imageUrl}
-        alt={service?.title}
         name={service?.title}
       />
       <div className="absolute inset-0 group-hover:opacity-100 opacity-50 transition duration-300 bg-gradient-to-t from-gray-900/60 " />
