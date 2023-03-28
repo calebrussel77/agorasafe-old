@@ -8,7 +8,7 @@ import { Spinner } from '../spinner/spinner';
 
 const textarea = cva(
   [
-    'w-full focus:caret-primary-500 focus:outline-none rounded-md focus:border-0 disabled:cursor-not-allowed disabled:bg-gray-200',
+    'w-full rounded border',
     'disabled:opacity-70 disabled:cursor-not-allowed',
     'transition duration-300 ease-in-out',
   ],

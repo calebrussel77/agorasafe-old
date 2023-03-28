@@ -4,9 +4,9 @@ import { ImageProps } from 'next/dist/client/image';
 import Image from 'next/image';
 import React, { CSSProperties, forwardRef, useState } from 'react';
 import { HiPhoto } from 'react-icons/hi2';
-import { twMerge } from 'tailwind-merge';
 
 import { blurDataURL } from '@helpers/image';
+import { cn } from '@helpers/misc';
 import { stringToHslColor } from '@helpers/misc';
 
 type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
@@ -76,12 +76,10 @@ export const ImageUI = forwardRef<HTMLDivElement, ImageUIProps>(
     const imageSize = sizes[size];
     const imageFontSize = fontSize || `calc(${imageSize} / 2.5)`;
     const [error, setError] = useState(false);
-    const hasImage = src && !error;
     const imageSrc = src;
-    const isBlobSrc = src?.startsWith('blob:');
     const isEmpty = error || !src;
 
-    const classes = twMerge(
+    const classes = cn(
       clsx(
         'absolute inset-0 object-cover',
         position === 'top'
@@ -112,14 +110,14 @@ export const ImageUI = forwardRef<HTMLDivElement, ImageUIProps>(
         }}
         ref={ref}
         role="img"
-        className={twMerge(
+        className={cn(
           className,
           `flex overflow-hidden`,
           isEmpty && 'bg-gray-100'
         )}
         {...rest}
       >
-        {!isBlobSrc && !isEmpty && (
+        {!isEmpty && (
           <Image
             alt={name}
             src={imageSrc}
@@ -134,14 +132,6 @@ export const ImageUI = forwardRef<HTMLDivElement, ImageUIProps>(
                   : '0.375rem',
             }}
             placeholder="blur"
-            onError={() => setError(true)}
-            className={classes}
-          />
-        )}
-        {isBlobSrc && !isEmpty && (
-          <img
-            alt={name}
-            src={imageSrc}
             onError={() => setError(true)}
             className={classes}
           />

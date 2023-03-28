@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
-import { twMerge } from 'tailwind-merge';
+
+import { cn } from '@helpers/misc';
 
 import { FieldGroup } from '../field-group/field-group';
 import { Radio, RadioProps } from '../radio/radio';
@@ -45,7 +46,7 @@ export const RadioGroup = forwardRef<HTMLInputElement, RadioGroupProps>(
 
     return (
       <FieldGroup className="w-full" label={label} required={required}>
-        <div className={twMerge(wrappperClassName, className)}>
+        <div className={cn(wrappperClassName, className)}>
           {options.map(option => (
             <Component
               ref={ref}

@@ -1,6 +1,6 @@
 import { Photo, Skill, User } from '@prisma/client';
 import clsx from 'clsx';
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 import { Controller, useFieldArray } from 'react-hook-form';
 import { HiOutlinePencil } from 'react-icons/hi';
 import { HiOutlineTrash } from 'react-icons/hi2';
@@ -11,13 +11,11 @@ import { Button } from '@components/lib/button/button';
 import Form, { useZodForm } from '@components/lib/form/form';
 import ImageEmpty from '@components/lib/image-empty/image-empty';
 import { ImageUI } from '@components/lib/image-ui/image-ui';
-import { Label } from '@components/lib/label/label';
-import { AsyncCreatableSelectUI, SelectUI } from '@components/lib/select';
+import { SelectUI } from '@components/lib/select';
 import {
   FileUpload,
   FileWithPreview,
 } from '@components/lib/upload/file-upload';
-import { VariantMessage } from '@components/lib/variant-message/variant-message';
 
 import { showCaseSchema } from '@validations/user-infos-schema';
 
@@ -30,6 +28,8 @@ import { api } from '@utils/api';
 import { EXTENSION_IMAGES_ALLOWED } from '@constants/index';
 
 const ShowCaseForm = ({ user }: { user: TUserMeInfos }) => {
+  const { data, isLoading: isLoadingSkills } = api.skill.getSkills.useQuery();
+
   const form = useZodForm({
     schema: showCaseSchema,
     defaultValues: {
@@ -52,32 +52,29 @@ const ShowCaseForm = ({ user }: { user: TUserMeInfos }) => {
       ],
     },
   });
-
-  const { data, refetch, isLoading, error } = api.skill.getSkills.useQuery();
-
   const {
     register,
     setValue,
     control,
     reset,
     watch,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = form;
 
   const { fields } = useFieldArray({
-    control, // control props comes from useForm (optional: if you are using FormContext)
-    name: 'photos', // unique name for your Field Array
+    control,
+    name: 'photos',
   });
 
   const watchFile = useCallback(idx => watch(`photos.${idx}.file`, []), []);
   const hasPhotoErrors = errors?.photos?.length > 0;
-  const photoMessage = errors?.photos?.map(photo => photo.file?.message)?.[0];
+  const photoMessage = errors?.photos
+    ?.filter(el => !!el.file?.message)
+    ?.map(photo => photo.file?.message)?.[0];
 
   const handleChangeFile = (file, idx) => {
     setValue(`photos.${idx}.file`, file);
   };
-
-  console.log(errors);
 
   const onSubmit = async data => {
     console.log(data);
@@ -174,7 +171,7 @@ const ShowCaseForm = ({ user }: { user: TUserMeInfos }) => {
                                             <ImageUI
                                               title="Choisissez une photo"
                                               className="h-52 w-full"
-                                              src={file?.preview}
+                                              src={file?.preview as string}
                                               name={file?.name}
                                             />
                                           }
@@ -224,6 +221,7 @@ const ShowCaseForm = ({ user }: { user: TUserMeInfos }) => {
                         <SelectUI
                           isMulti
                           {...field}
+                          isLoading={isLoadingSkills}
                           inputId="skills"
                           options={data?.skills?.map(skill => ({
                             label: skill?.name,

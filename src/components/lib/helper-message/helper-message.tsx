@@ -1,6 +1,7 @@
 import { type VariantProps, cva } from 'class-variance-authority';
 import React, { ReactNode, forwardRef } from 'react';
-import { twMerge } from 'tailwind-merge';
+
+import { cn } from '@helpers/misc';
 
 const helperMessageToken = cva(['whitespace-normal'], {
   variants: {
@@ -28,7 +29,7 @@ export const HelperMessage = forwardRef<
   return (
     <div
       ref={ref}
-      className={twMerge(
+      className={cn(
         helperMessageToken({
           size,
         }),

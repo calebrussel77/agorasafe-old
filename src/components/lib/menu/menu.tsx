@@ -29,7 +29,8 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import { ReactElement, ReactNode, forwardRef } from 'react';
 import Skeleton from 'react-loading-skeleton';
-import { twMerge } from 'tailwind-merge';
+
+import { cn } from '@helpers/misc';
 
 type MenuItemProps = {
   iconBefore?: ReactElement;
@@ -104,7 +105,7 @@ const MenuItem = forwardRef<HTMLButtonElement, MenuItemProps>(
       <button
         ref={ref}
         onClick={onClick}
-        className={twMerge(
+        className={cn(
           clsx(
             'w-full text-left flex justify-between rounded-md transition-all duration-200 overflow-hidden',
             hovered && !loading

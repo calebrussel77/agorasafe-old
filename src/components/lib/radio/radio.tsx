@@ -1,7 +1,7 @@
 import { VariantProps, cva } from 'class-variance-authority';
 import React, { forwardRef } from 'react';
-import { twMerge } from 'tailwind-merge';
 
+import { cn } from '@helpers/misc';
 import { getVariantBorderColor, getVariantColor } from '@helpers/variants';
 
 import { HelperMessage } from '../helper-message/helper-message';
@@ -105,7 +105,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
         disabledIcon={disabledIcon}
         onClick={handleClick}
         variant={variant}
-        className={twMerge(
+        className={cn(
           maxWidthClassNames[maxWidth],
           'flex flex-col items-start flex-1 '
         )}
@@ -116,7 +116,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
             ref={ref}
             data-testid={dataTestId}
             disabled={disabled}
-            className={twMerge(
+            className={cn(
               inputRadioToken({
                 appareance,
                 size,

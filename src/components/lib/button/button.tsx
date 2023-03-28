@@ -2,7 +2,8 @@
 import { type VariantProps, cva } from 'class-variance-authority';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
-import { twMerge } from 'tailwind-merge';
+
+import { cn } from '@helpers/misc';
 
 import { Spinner } from '../spinner/spinner';
 
@@ -98,7 +99,7 @@ export const Button: React.FC<ButtonProps> = ({
     <button
       {...props}
       disabled={disabled || loading}
-      className={twMerge(button({ variant, size, shape }), className)}
+      className={cn(button({ variant, size, shape }), className)}
     >
       {loading ? (
         <div className="flex items-center justify-center gap-2 flex-nowrap">

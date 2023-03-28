@@ -1,29 +1,25 @@
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import { useEffect, useRef } from 'react';
 
 import { MenuItem } from '@components/lib/menu/menu';
 
 import { renderFilteredLinks } from '@utils/user-connected-links';
 
+import { useHeaderHeight } from '@hooks/use-header-height/use-header-height';
+
 const Sidebar = () => {
-  const headerHeight = useRef(null);
+  const { height } = useHeaderHeight();
   const router = useRouter();
   const { data: session, status } = useSession();
   const isPurchaser = session?.user?.is_purchaser;
   const isProvider = session?.user?.is_provider;
   const isSessionLoading = status === 'loading';
 
-  useEffect(() => {
-    const headerElement = document?.querySelector('header');
-    headerHeight.current = headerElement?.clientHeight || 120;
-  });
-
   return (
     <>
       <div
         style={{
-          top: `calc(${headerHeight.current} - 20px)`,
+          top: `calc(${height} - 20px)`,
           position: 'fixed',
         }}
         className="w-[360px] hidden lg:block px-4 sm:px-8 bg-white h-full border-r border-gray-300 overflow-hidden"

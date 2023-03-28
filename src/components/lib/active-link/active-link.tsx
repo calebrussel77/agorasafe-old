@@ -3,7 +3,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ReactNode, useEffect, useState } from 'react';
 import React, { Children } from 'react';
-import { twMerge } from 'tailwind-merge';
+
+import { cn } from '@helpers/misc';
 
 type ActiveLinkProps = {
   children?: ReactNode;
@@ -36,7 +37,7 @@ const ActiveLink = ({
       // Using URL().pathname to get rid of query and hash
       const activePathname = new URL(asPath, location.href).pathname;
 
-      const newClassName = twMerge(
+      const newClassName = cn(
         childClassName,
         linkPathname === activePathname && activeClassName
         // linkPathname.includes(props.href || props.href) && activeClassName

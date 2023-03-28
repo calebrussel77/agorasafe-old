@@ -1,7 +1,8 @@
 import { EditorState } from 'draft-js';
 import { forwardRef, useState } from 'react';
 import { Editor as DraftEditor } from 'react-draft-wysiwyg';
-import { twMerge } from 'tailwind-merge';
+
+import { cn } from '@helpers/misc';
 
 const EditorInstance = forwardRef<any, any>(({ className, ...rest }, ref) => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
@@ -15,10 +16,7 @@ const EditorInstance = forwardRef<any, any>(({ className, ...rest }, ref) => {
     <div
       ref={ref}
       {...rest}
-      className={twMerge(
-        'border border-gray-200 rounded-xl bg-white',
-        className
-      )}
+      className={cn('border border-gray-200 rounded-xl bg-white', className)}
     >
       <DraftEditor
         editorState={editorState}

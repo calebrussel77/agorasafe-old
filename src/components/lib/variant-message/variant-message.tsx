@@ -1,7 +1,7 @@
 import { type VariantProps, cva } from 'class-variance-authority';
 import React, { forwardRef } from 'react';
-import { twMerge } from 'tailwind-merge';
 
+import { cn } from '@helpers/misc';
 import { VARIANTS_COLORS, Variant } from '@helpers/variants';
 
 const variantMessageToken = cva([''], {
@@ -34,7 +34,7 @@ export const VariantMessage = forwardRef<
       role={variant === 'danger' ? 'alert' : undefined}
       className={variantMessageToken({
         size,
-        class: twMerge(className, VARIANTS_COLORS[variant]),
+        class: cn(className, VARIANTS_COLORS[variant]),
       })}
       {...props}
     >

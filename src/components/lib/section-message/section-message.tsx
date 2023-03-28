@@ -33,7 +33,7 @@ const sectionMessage = cva('w-full flex justify-center items-start gap-2', {
     },
     size: {
       small: ['text-sm', 'py-1.5', 'px-4'],
-      medium: ['text-base', 'py-2', 'px-4 sm:px-8'],
+      medium: ['text-base', 'py-2', 'px-4'],
       large: ['text-lg', 'py-3', 'px-6'],
     },
   },
@@ -118,9 +118,9 @@ const SectionMessage = forwardRef<HTMLDivElement, SectionMessageProps>(
           className={sectionMessage({ appareance, size, class: className })}
           {...props}
         >
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-1">
             {<Icon className={`h-6 w-6 flex-shrink-0 ${ColorIcon}`} />}
-            {title && <h3 className="font-bold text-base">{title}</h3>}
+            {title && <h3 className="font-semibold text-base">{title}</h3>}
             {children && <div className="text-[13px]">{children}</div>}
             <div className="flex items-center flex-wrap gap-1">
               {isActionsArray
@@ -137,6 +137,7 @@ const SectionMessage = forwardRef<HTMLDivElement, SectionMessageProps>(
           </div>
           {hasCloseButton && (
             <button
+              type="button"
               onClick={onClose || toggleVisible}
               className="p-1 transform hover:scale-105 transition duration-150"
             >

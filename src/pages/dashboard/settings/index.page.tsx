@@ -1,3 +1,4 @@
+import { useMe } from '@api-providers/users';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { Session } from 'next-auth';
 import { FC } from 'react';
@@ -20,8 +21,10 @@ import { ShowCaseForm } from './__components/show-case-form/show-case-form';
 type TSettingsPageProps = NextPageWithLayout &
   FC<InferGetServerSidePropsType<typeof getServerSideProps>>;
 
-const SettingsPage: TSettingsPageProps = () => {
-  const { data, error, isLoading } = api.user.getUserMe.useQuery();
+const SettingsPage: TSettingsPageProps = ({ data: userData }) => {
+  const id = userData?.user?.id;
+
+  const { data, error, isLoading } = useMe(id);
 
   return (
     <ContentWrapper isLoading={isLoading} error={error}>

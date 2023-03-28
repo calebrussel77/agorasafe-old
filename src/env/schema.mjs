@@ -22,6 +22,9 @@ export const serverSchema = z.object({
   GOOGLE_CLIENT_ID: z.string(),
   GOOGLE_CLIENT_SECRET: z.string(),
   NEXTAUTH_JWT_SECRET: z.string(),
+  CLOUDINARY_NAME: z.string(),
+  CLOUDINARY_API_KEY: z.string(),
+  CLOUDINARY_SECRET: z.string(),
 });
 
 /**
@@ -37,6 +40,9 @@ export const serverEnv = {
   GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
   GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
   NEXTAUTH_JWT_SECRET: process.env.NEXTAUTH_JWT_SECRET,
+  CLOUDINARY_NAME: process.env.CLOUDINARY_NAME,
+  CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY,
+  CLOUDINARY_SECRET: process.env.CLOUDINARY_SECRET,
 };
 
 /**

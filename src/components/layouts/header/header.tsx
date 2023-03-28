@@ -3,7 +3,6 @@ import clsx from 'clsx';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { Fragment, useRef } from 'react';
-import { twMerge } from 'tailwind-merge';
 
 import { useModalState } from '@components/lib/modal/modal';
 import SectionMessage, {
@@ -11,6 +10,8 @@ import SectionMessage, {
 } from '@components/lib/section-message/section-message';
 
 import { MobileBottomBar } from '@pages/__components/mobile-bottom-bar/mobile-bottom-bar';
+
+import { cn } from '@helpers/misc';
 
 import { useAppearOnTarget } from '@hooks/use-appear-on-target/use-appear-on-target';
 
@@ -51,7 +52,7 @@ const Header = () => {
       <Popover
         as="header"
         ref={headerRef}
-        className={twMerge(
+        className={cn(
           'sticky top-0 bg__blurred inset-x-0 z-20 pb-1 transition-all duration-300 ease-in-out',
           !isHomePage && classNameList
         )}

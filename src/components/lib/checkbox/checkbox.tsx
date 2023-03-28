@@ -1,7 +1,7 @@
 import { type VariantProps, cva } from 'class-variance-authority';
 import React, { forwardRef } from 'react';
-import { twMerge } from 'tailwind-merge';
 
+import { cn } from '@helpers/misc';
 import {
   Variant,
   getVariantBorderColor,
@@ -71,7 +71,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxGlobalProps>(
         style={{ borderColor: hasError && 'red' }}
         type="checkbox"
         aria-invalid={hasError ? 'true' : 'false'}
-        className={twMerge(
+        className={cn(
           checkboxToken({
             appareance,
             size,

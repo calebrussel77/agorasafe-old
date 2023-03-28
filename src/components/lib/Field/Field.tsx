@@ -3,8 +3,8 @@ import clsx from 'clsx';
 import { Fragment, forwardRef, useId } from 'react';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
-import { twMerge } from 'tailwind-merge';
 
+import { cn } from '@helpers/misc';
 import { wrapChildren } from '@helpers/wrap-children';
 
 import { HelperMessage } from '../helper-message/helper-message';
@@ -90,7 +90,7 @@ export const Field = forwardRef<HTMLDivElement, FieldProps>(
     });
 
     return (
-      <div ref={ref} className={twMerge('flex flex-col gap-0.5', className)}>
+      <div ref={ref} className={cn('flex flex-col gap-0.5', className)}>
         <>
           <Container>
             {label && (

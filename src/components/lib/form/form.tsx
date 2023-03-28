@@ -18,7 +18,7 @@ interface Props<T extends FieldValues>
   onSubmit: SubmitHandler<T>;
 }
 
-const formToken = cva([''], {
+const formToken = cva(['disabled:opacity-70 disabled:cursor-not-allowed'], {
   variants: {
     gap: {
       sm: ['space-y-3'],
@@ -44,7 +44,7 @@ const Form = <T extends FieldValues>({
   <FormProvider {...form}>
     <form onSubmit={form.handleSubmit(onSubmit)} {...props}>
       {/* <fieldset> passes the form's 'disabled' state to all of its elements,
-            allowing us to handle disabled style variants with just css */}
+            allowing us to handle disabled style variants with just className */}
       <fieldset
         disabled={form?.formState?.isSubmitting}
         className={formToken({

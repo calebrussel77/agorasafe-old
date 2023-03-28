@@ -1,5 +1,6 @@
 // Prisma adapter for NextAuth, optional and can be removed
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
+import { GetServerSidePropsContext } from 'next';
 import NextAuth, { type NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
@@ -7,6 +8,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { loginSchema } from '@validations/auth-user-schema';
 
+import { getUserMeController } from '@server/api/controllers';
 import {
   createUniqueSlugByName,
   loginController,
@@ -15,7 +17,9 @@ import { prisma } from '@server/db';
 
 import { env } from '../../../env/server.mjs';
 
-export const authOptions: NextAuthOptions = {
+export const createOptions: (
+  req: GetServerSidePropsContext['req']
+) => NextAuthOptions = req => ({
   adapter: PrismaAdapter(prisma),
   // Include user infos on session
   callbacks: {
@@ -29,6 +33,7 @@ export const authOptions: NextAuthOptions = {
         is_provider: token.is_provider,
         is_purchaser: token.is_purchaser,
         is_home_service_provider: token.is_home_service_provider,
+        is_remote_service_provider: token.is_remote_service_provider,
         avatar: token.avatar,
         provider: token.provider,
       };
@@ -44,6 +49,7 @@ export const authOptions: NextAuthOptions = {
         token.is_provider = user?.is_provider;
         token.is_purchaser = user.is_purchaser;
         token.is_home_service_provider = user.is_home_service_provider;
+        token.is_remote_service_provider = user.is_remote_service_provider;
         token.avatar = user.avatar;
         token.provider = account.type;
       }
@@ -102,6 +108,10 @@ export const authOptions: NextAuthOptions = {
   jwt: {
     secret: env.NEXTAUTH_JWT_SECRET,
   },
+});
+
+const handler = async (req, res) => {
+  return NextAuth(req, res, createOptions(req));
 };
 
-export default NextAuth(authOptions);
+export default handler;

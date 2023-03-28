@@ -1,8 +1,8 @@
 /* eslint-disable no-undef */
 import { forwardRef } from 'react';
 import { HiOutlineLockClosed } from 'react-icons/hi2';
-import { twMerge } from 'tailwind-merge';
 
+import { cn } from '@helpers/misc';
 import { VariantIcon } from '@helpers/variant-icons';
 import { Variant, getVariantColor } from '@helpers/variants';
 import { wrapChildren } from '@helpers/wrap-children';
@@ -42,7 +42,7 @@ export const Label = forwardRef<HTMLLabelElement, LabelProps>(
 
     return (
       <label
-        className={twMerge(
+        className={cn(
           'relative flex flex-shrink-0 max-w-full items-center select-none',
           required &&
             "after:content-['*'] after:text-red-500 after:font-bold after:ml-1",

@@ -13,6 +13,6 @@ export const userRouter = createTRPCRouter({
       updateUserInfosController(input, ctx?.session)
     ),
   getUserMe: protectedProcedure.query(({ ctx }) =>
-    getUserMeController(ctx?.session)
+    getUserMeController(ctx?.session?.user?.id)
   ),
 });

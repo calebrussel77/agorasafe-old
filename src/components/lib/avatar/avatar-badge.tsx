@@ -2,7 +2,8 @@
 import { type VariantProps, cva } from 'class-variance-authority';
 import React, { ReactNode, forwardRef } from 'react';
 import { HiOutlineStar } from 'react-icons/hi';
-import { twMerge } from 'tailwind-merge';
+
+import { cn } from '@helpers/misc';
 
 export const avatarBadge = cva(['absolute flex-shrink-0'], {
   variants: {
@@ -70,7 +71,7 @@ const RenderBadge = ({
   switch (true) {
     case !!icon:
       return React.cloneElement(icon as any, {
-        className: twMerge(
+        className: cn(
           avatarBadge({
             placement,
             size,
@@ -82,7 +83,7 @@ const RenderBadge = ({
       return (
         <span
           ref={ref}
-          className={twMerge(
+          className={cn(
             avatarBadge({
               placement,
               size,

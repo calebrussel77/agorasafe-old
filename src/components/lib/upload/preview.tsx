@@ -1,6 +1,7 @@
 import React from 'react';
 import { HiOutlineX } from 'react-icons/hi';
-import { twMerge } from 'tailwind-merge';
+
+import { cn } from '@helpers/misc';
 
 import { FileType, getFileIcon, getFileName, getFileSize } from './utils/files';
 
@@ -22,7 +23,7 @@ export const Preview: React.FC<PreviewProps> = ({
   return name ? (
     <div
       data-testid={name}
-      className={twMerge(
+      className={cn(
         'flex gap-1 w-fit items-center text-gray-600 max-w-sm hover:bg-gray-100 transition duration-200 p-1.5 rounded-full cursor-pointer text-sm bg-white border border-gray-300 shadow',
         className
       )}

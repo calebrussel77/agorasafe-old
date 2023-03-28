@@ -1,7 +1,7 @@
 import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import { toast } from 'react-toastify';
 
 import { Field } from '@components/lib/Field/Field';
@@ -21,8 +21,9 @@ type TLoginForm = TRegister & {
   desireError?: any;
 };
 
-const LoginForm = () => {
+const LoginForm: FC<{ redirectUri?: string }> = ({ redirectUri }) => {
   const router = useRouter();
+
   const [loading, setLoading] = useState(false);
 
   const form = useZodForm({
@@ -34,6 +35,20 @@ const LoginForm = () => {
     formState: { errors, isSubmitting },
   } = form;
 
+  const onSuccessResponse = () => {
+    router?.push(redirectUri);
+    toast(
+      <Notification
+        variant="success"
+        title="Nous sommes content de vous revoir !"
+      />,
+      {
+        delay: 800,
+        autoClose: false,
+      }
+    );
+  };
+
   const onSignIn = async (data: TLoginForm) => {
     const { password, email } = data;
     setLoading(true);
@@ -41,7 +56,7 @@ const LoginForm = () => {
       email,
       password,
       redirect: false,
-      callbackUrl: '/dashboard',
+      callbackUrl: redirectUri,
     });
     if (response?.error) {
       //next-auth add `Error:` prefix on error messages.
@@ -50,18 +65,8 @@ const LoginForm = () => {
       setLoading(false);
     }
     if (response?.ok) {
-      router?.push('/dashboard');
       setLoading(false);
-      toast(
-        <Notification
-          variant="success"
-          title="Nous sommes content de vous revoir !"
-        />,
-        {
-          delay: 800,
-          autoClose: false,
-        }
-      );
+      onSuccessResponse();
     }
   };
 
@@ -104,7 +109,10 @@ const LoginForm = () => {
           Pas encore membre ?{' '}
           <Link
             passHref
-            href="/register"
+            href={{
+              pathname: '/register',
+              query: router.query,
+            }}
             className="font-semibold text-secondary-500 hover:underline"
           >
             Créez votre compte
