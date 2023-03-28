@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { twMerge } from 'tailwind-merge';
+
+import { cn } from '@helpers/misc';
 
 import { renderFilteredLinks } from '@utils/user-connected-links';
 
@@ -27,7 +28,7 @@ const MobileBottomBar = ({ session }) => {
                 <Link href={href} passHref>
                   <button
                     title={item?.title}
-                    className={twMerge(
+                    className={cn(
                       'flex flex-col text-gray-700 items-center py-3 px-2',
                       isActiveLink &&
                         'text-primary-600 border-t-2 border-primary-500'

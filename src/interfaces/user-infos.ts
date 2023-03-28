@@ -4,13 +4,18 @@ import { z } from 'zod';
 import {
   personalInfosSchema,
   profilSchema,
+  showCaseSchema,
 } from '@validations/user-infos-schema';
 
 export type TPersonalInfosSchema = z.infer<typeof personalInfosSchema>;
 
 export type TProfilSchema = z.infer<typeof profilSchema>;
 
-export type TUserInfosUpdate = Partial<TPersonalInfosSchema & TProfilSchema>;
+export type TShowCaseSchema = z.infer<typeof showCaseSchema>;
+
+export type TUserInfosUpdate = Partial<
+  TPersonalInfosSchema & TProfilSchema & TShowCaseSchema
+>;
 
 export type TUserMeInfos = Omit<
   User & {

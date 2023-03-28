@@ -8,7 +8,8 @@ import clsx from 'clsx';
 import React, { ReactNode, cloneElement, forwardRef } from 'react';
 import AnimateHeight from 'react-animate-height';
 import { HiChevronRight } from 'react-icons/hi';
-import { twMerge } from 'tailwind-merge';
+
+import { cn } from '@helpers/misc';
 
 export interface AccordionOptions {
   title: string | JSX.Element;
@@ -45,11 +46,11 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
     const isVisible = disclosure.open;
 
     return (
-      <div ref={ref} className={twMerge('w-full', className)} {...rest}>
+      <div ref={ref} className={cn('w-full', className)} {...rest}>
         <div>
           <Disclosure
             state={disclosure}
-            className={twMerge(
+            className={cn(
               'w-full flex-1 flex items-center justify-between gap-2',
               buttonClassName
             )}

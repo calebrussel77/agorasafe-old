@@ -8,6 +8,9 @@ export const MAX_IMAGE_UPLOAD_SIZE = 2 * 1000 * 1000; // 2mb
 
 export const EXTENDED_MAX_IMAGE_UPLOAD_SIZE = 5 * 1000 * 1000; // 5mb
 
+export const ME_ERROR_MESSAGE =
+  "Vous n'avez pas le droit d'effectuer cette action";
+
 export const EXTENSION_FILES_ALLOWED = '.pdf,.PDF,.PPT,.PPTX,.DOC,.DOCX';
 export const EXTENSION_IMAGES_ALLOWED =
   'image/png, image/jpeg, image/jpg, image/JPEG, image/JPG, image/PNG';

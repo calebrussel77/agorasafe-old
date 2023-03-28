@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import { Children, Fragment, ReactElement, ReactNode, forwardRef } from 'react';
-import { twMerge } from 'tailwind-merge';
+
+import { cn } from '@helpers/misc';
 
 /**
  * Example
@@ -50,7 +51,7 @@ const InlineUI = forwardRef<HTMLDivElement, InlineUIProps>(
       typeof divider === 'string' ? <span>{divider}</span> : divider;
 
     return (
-      <div className={twMerge(clsx('flex items-center'), className)} ref={ref}>
+      <div className={cn(clsx('flex items-center'), className)} ref={ref}>
         {Children.map(children, (child, index) => {
           return (
             <Fragment>

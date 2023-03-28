@@ -1,7 +1,8 @@
 import React, { forwardRef } from 'react';
 import Popup from 'reactjs-popup';
 import { PopupProps } from 'reactjs-popup/dist/types';
-import { twMerge } from 'tailwind-merge';
+
+import { cn } from '@helpers/misc';
 
 export interface TooltipOptions {
   children: React.ReactNode;
@@ -40,7 +41,7 @@ export const Tooltip = forwardRef<any, TooltipProps>(
       >
         <div
           style={style}
-          className={twMerge(
+          className={cn(
             'border shadow-md bg-gray-700 px-2 py-1 max-w-[200px] text-white text-xs',
             className
           )}

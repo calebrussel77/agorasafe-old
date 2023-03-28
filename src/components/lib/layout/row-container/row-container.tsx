@@ -1,11 +1,8 @@
-import { twMerge } from 'tailwind-merge';
+import { cn } from '@helpers/misc';
 
 const RowContainer = ({ className, ...props }) => {
   return (
-    <div
-      className={twMerge('flex flex-row items-center', className)}
-      {...props}
-    />
+    <div className={cn('flex flex-row items-center', className)} {...props} />
   );
 };
 

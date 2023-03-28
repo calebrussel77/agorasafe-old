@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import React, { ReactNode, memo } from 'react';
-import { twMerge } from 'tailwind-merge';
+
+import { cn } from '@helpers/misc';
 
 type MessageActionProps = {
   children?: ReactNode;
@@ -13,7 +14,7 @@ type MessageActionProps = {
 const ButtonAction = ({ className, isPrimary, onClick, children }) => {
   return (
     <button
-      className={twMerge(
+      className={cn(
         'font-semibold hover:underline',
         isPrimary && 'text-yellow-500',
         className

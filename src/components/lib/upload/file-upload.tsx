@@ -19,7 +19,7 @@ const DEFAULT_MAX_FILE_SIZE = 200 * 10 * 1000;
 const DEFAULT_FILE_TYPES = '*/*';
 
 export interface FileWithPreview extends File {
-  preview?: string;
+  preview?: string | ArrayBuffer;
 }
 
 export type FileWithPreviewType = FileWithPreview | string;
@@ -99,7 +99,9 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(
       return () => {
         files &&
           files.map(file =>
-            file instanceof File ? URL.revokeObjectURL(file.preview) : file
+            file instanceof File
+              ? URL.revokeObjectURL(file.preview as string)
+              : file
           );
       };
     }, [files]);
@@ -108,7 +110,12 @@ export const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(
       let newFiles: FileWithPreview[] | FileWithPreview = Array.from(
         e.target.files
       ).map((file: FileWithPreview) => {
-        file.preview = URL.createObjectURL(file);
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+          file.preview = reader.result;
+        };
+        // file.preview = URL.createObjectURL(file);
         return file;
       });
       setFiles(newFiles);

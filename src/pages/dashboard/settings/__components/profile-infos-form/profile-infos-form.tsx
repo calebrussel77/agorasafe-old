@@ -1,5 +1,9 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useUpdateUser } from '@api-providers/users';
+import axios from 'axios';
+import { getSession, signIn, useSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
 import { HiOutlinePencil } from 'react-icons/hi2';
+import { toast } from 'react-toastify';
 
 import { Field } from '@components/lib/Field/Field';
 import { ActionOnTop } from '@components/lib/action-on-top/action-on-top';
@@ -9,6 +13,8 @@ import { Checkbox } from '@components/lib/checkbox/checkbox';
 import Form, { useZodForm } from '@components/lib/form/form';
 import { Input } from '@components/lib/input/input';
 import { Label } from '@components/lib/label/label';
+import { Notification } from '@components/lib/notification';
+import SectionMessage from '@components/lib/section-message/section-message';
 import { Textarea } from '@components/lib/textarea/textarea';
 import { FileUpload } from '@components/lib/upload/file-upload';
 
@@ -20,20 +26,13 @@ import { TUserMeInfos } from '@interfaces/user-infos';
 
 import { EXTENSION_IMAGES_ALLOWED } from '@constants/index';
 
+const updateSessionRequest = () => {
+  return axios.get('/api/auth/session?update', {
+    headers: { 'content-type': 'multipart/form-data' },
+  });
+};
+
 const ProfileInfosForm = ({ user }: { user: TUserMeInfos }) => {
-  const {
-    avatar,
-    first_name,
-    last_name,
-    website_url,
-    bio,
-    is_purchaser,
-    is_provider,
-    is_home_service_provider,
-  } = user;
-
-  const [value, setValue] = useState(avatar);
-
   const form = useZodForm({
     schema: profilSchema,
   });
@@ -44,8 +43,35 @@ const ProfileInfosForm = ({ user }: { user: TUserMeInfos }) => {
     formState: { errors },
   } = form;
 
+  const {
+    avatar,
+    first_name,
+    last_name,
+    website_url,
+    bio,
+    is_purchaser,
+    is_provider,
+    is_home_service_provider,
+    is_remote_service_provider,
+  } = user;
+
+  const [value, setValue] = useState(avatar);
+
+  const { updateUser, isLoading, error, isError } = useUpdateUser({
+    onSuccess: async data => {
+      await signIn('google', {
+        callbackUrl: window.location.href,
+        redirect: false,
+      });
+      toast(<Notification variant="success" title={data?.message} />);
+    },
+  });
+
   const onSubmit = async data => {
-    console.log(data);
+    updateUser({
+      ...data,
+      avatar: value,
+    });
   };
 
   const onAddFile = file => {
@@ -55,18 +81,16 @@ const ProfileInfosForm = ({ user }: { user: TUserMeInfos }) => {
   useEffect(() => {
     if (user) {
       reset({
-        // avatar,
         website_url,
         is_purchaser,
         is_provider,
         is_home_service_provider,
+        is_remote_service_provider,
         bio,
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [reset, user]);
-
-  console.log({ value });
 
   return (
     <div>
@@ -87,10 +111,23 @@ const ProfileInfosForm = ({ user }: { user: TUserMeInfos }) => {
             <FormCardContainer
               footer={
                 <div className="flex justify-end">
-                  <Button variant="primary">Enregistrer</Button>
+                  <Button
+                    variant="primary"
+                    disabled={isLoading}
+                    loading={isLoading}
+                  >
+                    Enregistrer
+                  </Button>
                 </div>
               }
             >
+              {isError && (
+                <SectionMessage
+                  className="mb-3"
+                  appareance="danger"
+                  title={error?.message}
+                />
+              )}
               <div className="grid grid-cols-6 gap-6">
                 {/* File Upload */}
                 <div className="col-span-6">
@@ -104,7 +141,7 @@ const ProfileInfosForm = ({ user }: { user: TUserMeInfos }) => {
                       name="avatar"
                       handleAddFile={onAddFile}
                       value={value}
-                      {...(register('avatar', { value: value }) as any)}
+                      {...(register('avatar') as any)}
                     >
                       {({ openFile, files }) => {
                         const file = files[0] as any;

@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { GetServerSideProps } from 'next';
 import { ClientSafeProvider, getProviders, signIn } from 'next-auth/react';
+import { useRouter } from 'next/router';
 import React, { ReactElement } from 'react';
 
 import { HomeBackground } from '@components/home-background/home-background';
@@ -19,6 +20,10 @@ type TLoginPageProps = {
 };
 
 const LoginPage = ({ googleProvider }: TLoginPageProps) => {
+  const router = useRouter();
+  const redirectUri = router?.query?.source as string;
+  const hrefRedirect = redirectUri || `/dashboard`;
+
   return (
     <div className="isolate overflow-x-hidden">
       <HomeBackground />
@@ -36,12 +41,12 @@ const LoginPage = ({ googleProvider }: TLoginPageProps) => {
             <div>
               <div className="mt-1">
                 <Button
-                  onClick={async () =>
-                    await signIn(googleProvider.id, {
-                      callbackUrl: `${window.location.origin}/dashboard`,
+                  onClick={async () => {
+                    return await signIn(googleProvider.id, {
+                      callbackUrl: hrefRedirect,
                       redirect: false,
-                    })
-                  }
+                    });
+                  }}
                   className="w-full flex items-center font-semibold justify-center"
                   variant="subtle"
                 >
@@ -55,7 +60,7 @@ const LoginPage = ({ googleProvider }: TLoginPageProps) => {
             </div>
           </div>
           <div className="mt-6">
-            <LoginForm />
+            <LoginForm redirectUri={hrefRedirect} />
           </div>
         </div>
       </div>

@@ -39,17 +39,17 @@ export const showCaseSchema = z.object({
 export const profilSchema = z.object({
   avatar: z
     .any()
+    .optional()
     .refine(files => {
       const file = Array.isArray(files) ? files?.[0] : files;
-      if (file) {
+      if (file && file?.size) {
         return file?.size < MAX_IMAGE_UPLOAD_SIZE;
       }
       return true;
-    }, `Le poids max. de l'avatar est de 2MB.`)
-    .optional(),
+    }, `Le poids max. de l'avatar est de 2MB.`),
   // .refine(files => Boolean(files?.name), 'Image is required.'),
-  website_url: z.string().nullish().optional(),
-  bio: z.string().nullish().optional(),
+  website_url: z.string().trim().nullish().optional(),
+  bio: z.string().trim().nullish().optional(),
   is_provider: z.boolean().optional(),
   is_purchaser: z.boolean().optional(),
   is_home_service_provider: z.boolean().optional(),
@@ -57,17 +57,14 @@ export const profilSchema = z.object({
 });
 
 export const personalInfosSchema = z.object({
-  first_name: z.string().min(2, { message: 'Votre nom est requis' }).trim(),
-  last_name: z.string().min(2, { message: 'Votre prénom est requis' }).trim(),
-  phone: z.string().optional(),
-  adresse: z
-    .string()
-    .min(2, { message: 'Votre adresse de localisation est requise' })
-    .trim(),
+  first_name: z.string().trim().nullish().optional(),
+  last_name: z.string().trim().nullish().optional(),
+  phone: z.string().trim().nullish().optional(),
+  adresse: z.string().trim().nullish().optional(),
   birthdate: dateSchema
     .max(new Date(), 'Insérez une date antérieure à la date du jour.')
     .or(z.string().length(0).optional())
     .nullish()
     .optional(),
-  sex: z.nativeEnum(Sex),
+  sex: z.nativeEnum(Sex).nullish().optional(),
 });

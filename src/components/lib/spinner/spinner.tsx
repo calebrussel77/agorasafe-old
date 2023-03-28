@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
-import { twMerge } from 'tailwind-merge';
+
+import { cn } from '@helpers/misc';
 
 const SpinnerClasses = {
   default: 'border-l-white',
@@ -14,10 +15,7 @@ const Spinner = forwardRef<
   const classNameVariants = SpinnerClasses[variant];
 
   return (
-    <div
-      ref={ref}
-      className={twMerge('loader', classNameVariants, className)}
-    />
+    <div ref={ref} className={cn('loader', classNameVariants, className)} />
   );
 });
 

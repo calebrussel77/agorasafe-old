@@ -1,9 +1,7 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { signIn } from 'next-auth/react';
+import { useRegister } from '@api-providers/auth-register';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { FC, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { FC } from 'react';
 import { toast } from 'react-toastify';
 
 import { Field } from '@components/lib/Field/Field';
@@ -14,32 +12,29 @@ import { HelperMessage } from '@components/lib/helper-message/helper-message';
 import { Input } from '@components/lib/input/input';
 import { Label } from '@components/lib/label/label';
 import { Notification } from '@components/lib/notification/notification';
-import { FullSpinner, Spinner } from '@components/lib/spinner/spinner';
 import { VariantMessage } from '@components/lib/variant-message/variant-message';
 
-import { loginSchema, registerSchema } from '@validations/auth-user-schema';
+import { registerSchema } from '@validations/auth-user-schema';
 
 import { TRegister } from '@interfaces/auth-user';
-
-import { api } from '@utils/api';
 
 type TRegisterForm = TRegister & {
   confirmError?: any;
   desireError?: any;
 };
 
-const RegisterForm = () => {
+const RegisterForm: FC<{ redirectUri?: string }> = ({ redirectUri }) => {
   const router = useRouter();
-  const { mutate, isLoading } = api.register.authRegister.useMutation({
+
+  const { register: authRegister, isLoading } = useRegister({
     onSuccess: data => {
-      router?.push(data?.redirect_url);
+      router?.push(redirectUri);
       toast(<Notification variant="success" title={data?.message} />, {
         autoClose: false,
         delay: 700,
       });
     },
     onError: error => {
-      console.log({ error });
       toast(<Notification variant="danger" title={error?.message} />);
     },
   });
@@ -54,7 +49,7 @@ const RegisterForm = () => {
   } = form;
 
   const onRegister = async (data: TRegisterForm) => {
-    await mutate({
+    await authRegister({
       ...data,
     });
   };
@@ -65,8 +60,6 @@ const RegisterForm = () => {
 
   return (
     <Form form={form} onSubmit={onSubmit}>
-      {/* {isSubmitting && <FullSpinner />} */}
-
       <div className="grid gap-y-6 lg:grid-cols-2 lg:gap-x-3">
         <Field required label="Nom">
           <Input
@@ -150,7 +143,10 @@ const RegisterForm = () => {
         Déjà membre ?{' '}
         <Link
           passHref
-          href="/login"
+          href={{
+            pathname: '/login',
+            query: router.query,
+          }}
           className="font-semibold text-secondary-500 hover:underline"
         >
           Connectez-vous à votre compte

@@ -1,9 +1,9 @@
-import { twMerge } from 'tailwind-merge';
+import { cn } from '@helpers/misc';
 
 const ColContainer = ({ className, ...props }) => {
   return (
     <div
-      className={twMerge(
+      className={cn(
         'flex flex-col items-center justify-start gap-1',
         className
       )}

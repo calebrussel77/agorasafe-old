@@ -3,8 +3,8 @@ import React, { ReactElement, forwardRef } from 'react';
 import { useCallback } from 'react';
 import { useState } from 'react';
 import { HiOutlineEye, HiOutlineEyeSlash } from 'react-icons/hi2';
-import { twMerge } from 'tailwind-merge';
 
+import { cn } from '@helpers/misc';
 import { VariantIcon } from '@helpers/variant-icons';
 import { Variant, getVariantBorderColor } from '@helpers/variants';
 
@@ -152,7 +152,7 @@ export const Input = forwardRef<HTMLInputElement, InputGlobalProps>(
           disabled={disabled || loading}
           onChange={handleOnchange}
           aria-invalid={hasError ? 'true' : 'false'}
-          className={twMerge(
+          className={cn(
             inputToken({
               appareance,
               size,

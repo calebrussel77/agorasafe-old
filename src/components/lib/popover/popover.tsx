@@ -5,7 +5,8 @@ import {
 import clsx from 'clsx';
 import React, { ReactNode, forwardRef } from 'react';
 import { useCss } from 'react-use';
-import { twMerge } from 'tailwind-merge';
+
+import { cn } from '@helpers/misc';
 
 import { Trigger } from './popover-trigger/poover-trigger';
 import { UsePopoverStateReturn } from './usePopoverState';
@@ -101,7 +102,7 @@ export const PopoverComponent = forwardRef<HTMLDivElement, PopoverProps>(
       <AriakitPopover
         state={{ ...state, hide: closePopover }}
         ref={ref}
-        className={twMerge(
+        className={cn(
           'bg-white outline-none scrollbar__custom min-w-[120px] max-w-[390px] max-h-[510px] lg:min-w-[180px] focus:outline-none focus-within:outline-none py-3 border rounded-md overflow-y-auto overflow-x-hidden z-[80] shadow-md',
           defaultCss,
           className
@@ -123,12 +124,7 @@ type ContentProps = {
 
 const Content = ({ className = '', children }: ContentProps) => {
   return (
-    <div
-      className={twMerge(
-        'w-full gap-y-1 gap-x-2 flex flex-col px-2',
-        className
-      )}
-    >
+    <div className={cn('w-full gap-y-1 gap-x-2 flex flex-col px-2', className)}>
       {children}
     </div>
   );

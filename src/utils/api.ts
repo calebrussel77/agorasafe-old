@@ -7,6 +7,7 @@
  */
 import { httpBatchLink, loggerLink } from '@trpc/client';
 import { createTRPCNext } from '@trpc/next';
+import { inferReactQueryProcedureOptions } from '@trpc/react-query';
 import { type inferRouterInputs, type inferRouterOutputs } from '@trpc/server';
 import superjson from 'superjson';
 
@@ -19,7 +20,7 @@ const getBaseUrl = () => {
 };
 
 /**
- * A set of typesafe react-query hooks for your tRPC API
+ * A set of typesafe  hooks for your tRPC API
  */
 export const api = createTRPCNext<AppRouter>({
   config() {
@@ -63,3 +64,10 @@ export type RouterInputs = inferRouterInputs<AppRouter>;
  * @example type HelloOutput = RouterOutputs['example']['hello']
  **/
 export type RouterOutputs = inferRouterOutputs<AppRouter>;
+
+/**
+ * Create type for React query options
+ *
+ * @see https://trpc.io/docs/server/infer-types#inference-helpers
+ */
+export type ReactQueryOptions = inferReactQueryProcedureOptions<AppRouter>;

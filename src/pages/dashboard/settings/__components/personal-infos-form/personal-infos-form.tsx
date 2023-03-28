@@ -1,23 +1,25 @@
+import { useUpdateUser } from '@api-providers/users';
 import { Sex, User } from '@prisma/client';
+import { format } from 'date-fns';
+import { signIn } from 'next-auth/react';
 import { useEffect } from 'react';
+import { toast } from 'react-toastify';
 
 import { Field } from '@components/lib/Field/Field';
 import { Button } from '@components/lib/button/button';
 import Form, { useZodForm } from '@components/lib/form/form';
 import { Input } from '@components/lib/input/input';
+import { Notification } from '@components/lib/notification';
 import { RadioGroup } from '@components/lib/radio-group/radio-group';
+import SectionMessage from '@components/lib/section-message/section-message';
 
 import { personalInfosSchema } from '@validations/user-infos-schema';
 
 import { FormCardContainer } from '@pages/dashboard/__components/form-card-container/form-card-container';
 
-import { TRegister } from '@interfaces/auth-user';
-import { TUserMeInfos } from '@interfaces/user-infos';
+import { formatDateToString } from '@helpers/misc';
 
-type TPersonalInfosForm = TRegister & {
-  confirmError?: any;
-  desireError?: any;
-};
+import { TUserMeInfos } from '@interfaces/user-infos';
 
 const PersonalInfosForm = ({ user }: { user: TUserMeInfos }) => {
   const form = useZodForm({
@@ -27,15 +29,27 @@ const PersonalInfosForm = ({ user }: { user: TUserMeInfos }) => {
     },
   });
 
-  const {
-    register,
-    reset,
-    formState: { errors, isSubmitting },
-  } = form;
+  const { updateUser, isLoading, error, isError } = useUpdateUser({
+    onSuccess: async data => {
+      await signIn('google', {
+        callbackUrl: window.location.href,
+        redirect: false,
+      });
+      toast(<Notification variant="success" title={data?.message} />);
+    },
+  });
+
+  const { register, reset } = form;
   const { first_name, last_name, sex, email, phone, adresse, birthdate } = user;
 
-  const onSubmit = async (data: TPersonalInfosForm) => {
-    console.log(data);
+  console.log(birthdate);
+
+  const onSubmit = async data => {
+    const birthdate = formatDateToString(data?.birthdate);
+    updateUser({
+      ...data,
+      birthdate,
+    });
   };
 
   useEffect(() => {
@@ -67,14 +81,27 @@ const PersonalInfosForm = ({ user }: { user: TUserMeInfos }) => {
           </div>
         </div>
         <div className="mt-5 md:col-span-2 md:mt-0">
-          <Form form={form} onSubmit={data => console.log(data)}>
+          <Form form={form} onSubmit={onSubmit}>
             <FormCardContainer
               footer={
                 <div className="flex justify-end">
-                  <Button variant="primary">Enregistrer</Button>
+                  <Button
+                    variant="primary"
+                    disabled={isLoading}
+                    loading={isLoading}
+                  >
+                    Enregistrer
+                  </Button>
                 </div>
               }
             >
+              {isError && (
+                <SectionMessage
+                  className="mb-3"
+                  appareance="danger"
+                  title={error?.message}
+                />
+              )}
               <div className="grid grid-cols-6 gap-6">
                 {/* Nom */}
                 <div className="col-span-6 sm:col-span-3">

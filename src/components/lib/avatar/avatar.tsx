@@ -11,9 +11,9 @@ import React, {
   forwardRef,
   useState,
 } from 'react';
-import { twMerge } from 'tailwind-merge';
 
 import { blurDataURL } from '@helpers/image';
+import { cn } from '@helpers/misc';
 import {
   getNameInitials as defaultGetInitials,
   stringToHslColor,
@@ -127,17 +127,14 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
     },
     ref
   ) => {
-    const backgroundColor = color || stringToHslColor(name);
-
     const avatarSize = sizes[size];
     const avatarSizeText = sizesText[size];
     const avatarStatusText = statusText[status];
     const avatarFontSize = fontSize || `calc(${avatarSize} / 2.5)`;
     const [error, setError] = useState(false);
-    const avatarErrorSrc = `/images/default-avatar.png`;
-    const isBlobSrc = typeof src === 'string' && src?.startsWith('blob:');
+    const defaultAvatarSrc = `/images/default-avatar.png`;
 
-    const classes = twMerge(
+    const classes = cn(
       clsx(
         'absolute inset-0 object-cover',
         position === 'top'
@@ -150,7 +147,7 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
     );
 
     return (
-      <div className={twMerge('relative w-fit')}>
+      <div className={cn('relative w-fit')}>
         <Component
           aria-label={name}
           style={{
@@ -172,7 +169,7 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
           }}
           ref={ref}
           role="img"
-          className={twMerge(
+          className={cn(
             'flex flex-col items-center justify-center',
             avatarSizeText,
             avatarStatusText,
@@ -180,32 +177,15 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
           )}
           {...rest}
         >
-          {(!isBlobSrc || error) && (
-            <Image
-              alt={name || alt}
-              fill
-              src={src ? src : avatarErrorSrc}
-              blurDataURL={blurDataURL()}
-              placeholder="blur"
-              onError={() => setError(true)}
-              className={classes}
-            />
-          )}
-
-          {isBlobSrc && (
-            <img
-              alt={name || alt}
-              src={src ? src : avatarErrorSrc}
-              onError={() => setError(true)}
-              className={classes}
-            />
-          )}
-
-          {/* {!src && (
-            <h3 className="uppercase text-center text-white">
-              {defaultGetInitials(name)}
-            </h3>
-          )} */}
+          <Image
+            alt={name || alt}
+            fill
+            src={src || defaultAvatarSrc}
+            blurDataURL={blurDataURL()}
+            placeholder="blur"
+            onError={e => setError(true)}
+            className={classes}
+          />
         </Component>
         {children && children}
         {status && (

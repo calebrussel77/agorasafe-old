@@ -7,8 +7,8 @@ import React, {
   forwardRef,
 } from 'react';
 import { HiXMark } from 'react-icons/hi2';
-import { twMerge } from 'tailwind-merge';
 
+import { cn } from '@helpers/misc';
 import { VariantIcon } from '@helpers/variant-icons';
 import { VARIANTS_COLORS, Variant } from '@helpers/variants';
 
@@ -113,7 +113,7 @@ export const Notification = forwardRef<HTMLDivElement, NotificationGlobalProps>(
         ref={ref}
         className={notificationToken({
           size,
-          class: twMerge(className),
+          class: cn(className),
         })}
         {...props}
       >

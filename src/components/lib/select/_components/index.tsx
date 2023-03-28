@@ -5,9 +5,10 @@ import { HiChevronDown, HiX } from 'react-icons/hi';
 import { GroupBase, components } from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { SelectComponents } from 'react-select/dist/declarations/src/components';
-import { twMerge } from 'tailwind-merge';
 
 import { Spinner } from '@components/lib/spinner/spinner';
+
+import { cn } from '@helpers/misc';
 
 const DefaultLoadingIndicator = props => {
   return <Spinner className="h-5 w-5" variant="primary" {...props} />;
@@ -15,7 +16,7 @@ const DefaultLoadingIndicator = props => {
 
 const DefaultClearIndicator = props => {
   return (
-    <components.ClearIndicator {...props} className={twMerge('!p-0')}>
+    <components.ClearIndicator {...props} className={cn('!p-0')}>
       <span className="p-0.5 rounded-full bg-gray-500 bg-opacity-40 text-white hover:bg-opacity-70 cursor-pointer transition duration-200">
         <HiX className="h-3 w-3" />
       </span>
@@ -25,7 +26,7 @@ const DefaultClearIndicator = props => {
 
 const DefaultDropdownIndicator = props => {
   return (
-    <components.DropdownIndicator {...props} className={twMerge('!p-0 !mr-2')}>
+    <components.DropdownIndicator {...props} className={cn('!p-0 !mr-2')}>
       <span className="text-slate-500 hover:text-slate-600 transition duration-200">
         <HiChevronDown className="h-4 w-4" />
       </span>

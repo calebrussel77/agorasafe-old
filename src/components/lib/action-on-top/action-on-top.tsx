@@ -1,5 +1,6 @@
 import { ComponentProps, FC, ReactElement, ReactNode } from 'react';
-import { twMerge } from 'tailwind-merge';
+
+import { cn } from '@helpers/misc';
 
 type TImageEmptyProps = ComponentProps<'div'> & {
   className?: string;
@@ -20,7 +21,7 @@ const ActionOnTop: FC<TImageEmptyProps> = ({
 
   return (
     <div
-      className={twMerge(
+      className={cn(
         'relative w-fit h-fit group overflow-hidden transition duration-300',
         className
       )}
@@ -28,7 +29,7 @@ const ActionOnTop: FC<TImageEmptyProps> = ({
     >
       {bgElement}
       <div
-        className={twMerge(
+        className={cn(
           'absolute z-10 inset-0 flex justify-center items-center bg-opacity-60 bg-gray-800',
           isHoverMode ? 'lg:opacity-0 lg:group-hover:opacity-100' : ''
         )}
